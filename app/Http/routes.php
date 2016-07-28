@@ -16,6 +16,17 @@ Route::get('/', function () {
 });
 
 
+Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
+    Route::group(['prefix' => 'register'], function () {
+        Route::get('/create', 'RegisterController@create');
+        Route::post('/store', 'RegisterController@store');
+        Route::get('/sms', 'RegisterController@sms');
+        Route::get('/error', 'RegisterController@error');
+        Route::get('/success', 'RegisterController@success');
+    });
+});
+
+
 Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], function() {
     Route::group(['prefix' => 'sign-up'], function () {
         Route::get('/create', 'SignUpController@create');
@@ -23,3 +34,4 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
         Route::get('/sms', 'SignUpController@sms');
     });
 });
+
