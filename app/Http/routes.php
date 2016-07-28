@@ -28,10 +28,24 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
 
 
 Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], function() {
+
+    Route::get('/index', 'ThyroidClassController@index');
+
     Route::group(['prefix' => 'sign-up'], function () {
         Route::get('/create', 'SignUpController@create');
         Route::post('/store', 'SignUpController@store');
         Route::get('/sms', 'SignUpController@sms');
+        Route::get('/error', 'SignUpController@error');
+        Route::get('/success', 'SignUpController@success');
     });
+
+    Route::group(['prefix' => 'phase'], function() {
+        Route::get('/view', 'PhaseController@view');
+    });
+
+    Route::group(['prefix' => 'course'], function() {
+        Route::get('/view', 'CourseController@view');
+    });
+
 });
 

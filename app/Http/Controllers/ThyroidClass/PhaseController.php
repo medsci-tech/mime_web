@@ -10,4 +10,8 @@ use App\Http\Controllers\Controller;
 class PhaseController extends Controller
 {
     //
+    public function view(Request $request)
+    {
+
+    }
 }

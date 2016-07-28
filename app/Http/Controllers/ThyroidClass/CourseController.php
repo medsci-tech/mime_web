@@ -10,4 +10,8 @@ use App\Http\Controllers\Controller;
 class CourseController extends Controller
 {
     //
+    public function view(Request $request)
+    {
+
+    }
 }

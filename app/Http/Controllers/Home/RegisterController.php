@@ -12,7 +12,7 @@ class RegisterController extends Controller
     //
     public function create(Request $request)
     {
-
+        return view('home.register.create');
     }
 
     public function store(Request $request)
@@ -23,6 +23,16 @@ class RegisterController extends Controller
     public function sms(Request $request)
     {
 
+    }
+
+    public function error(Request $request)
+    {
+        return view('home.register.error');
+    }
+
+    public function success(Request $request)
+    {
+        return view('home.register.success');
     }
 
 }
