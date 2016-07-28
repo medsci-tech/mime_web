@@ -16,8 +16,8 @@ class CreateThyroidClassTeachersTable extends Migration
         Schema::create('thyroid_class_teachers', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('teacher_id')->unsigned()->comment('学生ID');
-            $table->foreign('teacher_id')->references('id')->on('students');
+            $table->integer('teacher_id')->unsigned()->comment('老师ID');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
 
             $table->timestamps();
         });
