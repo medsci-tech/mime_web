@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], function() {
+    Route::group(['prefix' => 'register'], function () {
+        Route::get('/create', 'RegisterController@create');
+        Route::post('/store', 'RegisterController@store');
+        Route::get('/sms', 'RegisterController@sms');
+    });
+});
