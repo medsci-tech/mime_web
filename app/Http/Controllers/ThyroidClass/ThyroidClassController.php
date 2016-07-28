@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 class ThyroidClassController extends Controller
 {
+    
     //
     public function index(Request $request)
     {
