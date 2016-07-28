@@ -19,9 +19,5 @@ class SignUpController extends Controller
     {
 
     }
-
-    public function sms(Request $request)
-    {
-
-    }
+    
 }

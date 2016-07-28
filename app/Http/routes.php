@@ -17,30 +17,33 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
+
     Route::group(['prefix' => 'register'], function () {
         Route::get('/create', 'RegisterController@create');
         Route::post('/store', 'RegisterController@store');
         Route::get('/sms', 'RegisterController@sms');
-        Route::get('/error', 'RegisterController@error');
-        Route::get('/success', 'RegisterController@success');
     });
+
+    Route::group(['prefix' => 'replenish'], function () {
+        Route::get('/create', 'ReplenishController@create');
+        Route::post('/store', 'ReplenishController@store');
+    });
+
 });
 
 
 Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], function() {
 
     Route::get('/index', 'ThyroidClassController@index');
+    Route::get('/teachers', 'ThyroidClassController@teachers');
+    Route::get('/questions', 'ThyroidClassController@questions');
+    Route::get('/phases', 'PhaseController@index');
 
     Route::group(['prefix' => 'sign-up'], function () {
         Route::get('/create', 'SignUpController@create');
         Route::post('/store', 'SignUpController@store');
-        Route::get('/sms', 'SignUpController@sms');
         Route::get('/error', 'SignUpController@error');
         Route::get('/success', 'SignUpController@success');
-    });
-
-    Route::group(['prefix' => 'phase'], function() {
-        Route::get('/view', 'PhaseController@view');
     });
 
     Route::group(['prefix' => 'course'], function() {

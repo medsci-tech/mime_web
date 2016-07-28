@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class RegisterController extends Controller
+class ReplenishController extends Controller
 {
     //
     public function create(Request $request)
     {
-        return view('home.register.create');
+        return view('home.replenish.create');
     }
 
     public function store(Request $request)
@@ -20,9 +20,4 @@ class RegisterController extends Controller
 
     }
 
-    public function sms(Request $request)
-    {
-
-    }
-    
 }
