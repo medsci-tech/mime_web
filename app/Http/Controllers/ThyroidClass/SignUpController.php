@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class RegisterController extends Controller
+class SignUpController extends Controller
 {
     //
-
     public function create(Request $request)
     {
 
@@ -25,6 +24,4 @@ class RegisterController extends Controller
     {
 
     }
-
-
 }
