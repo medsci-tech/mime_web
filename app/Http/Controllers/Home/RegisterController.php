@@ -17,6 +17,17 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        $validator = \Validator::make($request->all(), [
+            'phone'     => 'required|digits:11|unique:students,phone,',
+            'password'  => 'required',
+            'auth_code' => 'required|digits:6',
+        ]);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } /*if>*/
+
+        
 
     }
 
