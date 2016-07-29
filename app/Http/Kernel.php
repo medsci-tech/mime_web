@@ -53,7 +53,5 @@ class Kernel extends HttpKernel
         'login' => \App\Http\Middleware\LoginMiddleware::class,
         'replenish' => \App\Http\Middleware\ReplenishMiddleware::class,
         'ThyroidClassSignInMiddleware' => \App\Http\Middleware\ThyroidClassSignInMiddleware::class,
-        
-
     ];
 }

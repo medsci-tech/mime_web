@@ -22,7 +22,6 @@ class CreateStudentsTable extends Migration
             $table->string('headimgurl')->nullable()->comment('wechat headimgurl');
 
             $table->string('phone', 11)->comment('手机号码');
-            $table->string('auth_code', 6)->comment('sms auth code');
             $table->string('password')->comment('密码');
 
             $table->string('name')->nullable()->comment('名字');
