@@ -31,6 +31,7 @@ class CreateStudentsTable extends Migration
 
             $table->string('province')->nullable()->comment('省');
             $table->string('city')->nullable()->comment('市');
+            $table->string('area')->nullable()->comment('区');
             $table->string('hospital_level')->nullable()->comment('医院等级');
             $table->string('hospital_name')->nullable()->comment('医院名称');
 
