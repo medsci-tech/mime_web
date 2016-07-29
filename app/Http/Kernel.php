@@ -50,6 +50,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
+        'register' => \App\Http\Middleware\RegisterMiddleware::class,
         'replenish' => \App\Http\Middleware\ReplenishMiddleware::class,
         'ThyroidClassSignInMiddleware' => \App\Http\Middleware\ThyroidClassSignInMiddleware::class,
         
