@@ -22,6 +22,7 @@ class CreateTeachersTable extends Migration
             $table->string('headimgurl')->nullable()->comment('wechat headimgurl');
 
             $table->string('name')->comment('名字');
+            $table->string('sex')->comment('性别');
             $table->string('photo_url')->comment('宣传照');
             $table->string('phone', 11)->comment('手机号码');
             $table->string('password')->comment('密码');
