@@ -30,6 +30,8 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
     Route::group(['prefix' => 'replenish'], function () {
         Route::get('/create', 'ReplenishController@create');
         Route::post('/store', 'ReplenishController@store');
+        Route::post('/success', 'ReplenishController@success');
+        Route::post('/error', 'ReplenishController@error');
     });
 
 });
