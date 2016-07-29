@@ -23,6 +23,8 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
         Route::get('/create', 'RegisterController@create');
         Route::post('/store', 'RegisterController@store');
         Route::get('/sms', 'RegisterController@sms');
+        Route::get('/success', 'RegisterController@success');
+        Route::get('/error', 'RegisterController@error');
     });
 
     Route::group(['prefix' => 'replenish'], function () {
@@ -47,6 +49,7 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
 
     Route::group(['prefix' => 'course'], function() {
         Route::get('/view', 'CourseController@view');
+        Route::post('/timer', 'CourseController@timer');
     });
 
 });
