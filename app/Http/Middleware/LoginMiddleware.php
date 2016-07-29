@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class RegisterMiddleware
+class LoginMiddleware
 {
     /**
      * Handle an incoming request.
