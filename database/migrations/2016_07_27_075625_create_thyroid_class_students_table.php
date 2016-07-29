@@ -34,7 +34,6 @@ class CreateThyroidClassStudentsTable extends Migration
     {
         //
         Schema::table('thyroid_class_students', function (Blueprint $table) {
-            $table->dropUnique('number');
             $table->dropForeign('thyroid_class_students_student_id_foreign');
         });
         Schema::drop('thyroid_class_students');
