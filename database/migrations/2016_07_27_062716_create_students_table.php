@@ -26,6 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('password')->comment('密码');
 
             $table->string('name')->nullable()->comment('名字');
+            $table->string('sex')->comment('性别');
             $table->string('office')->nullable()->comment('科室');
             $table->string('title')->nullable()->comment('职称');
 

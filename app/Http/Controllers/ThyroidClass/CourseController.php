@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
-    
+
     //
     public function __construct()
     {
@@ -17,6 +17,11 @@ class CourseController extends Controller
     }
 
     public function view(Request $request)
+    {
+
+    }
+
+    public function timer(Request $request)
     {
 
     }

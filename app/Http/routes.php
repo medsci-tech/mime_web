@@ -47,6 +47,7 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
 
     Route::group(['prefix' => 'course'], function() {
         Route::get('/view', 'CourseController@view');
+        Route::post('/timer', 'CourseController@timer');
     });
 
 });
