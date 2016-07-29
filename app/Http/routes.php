@@ -34,6 +34,9 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
         Route::post('/error', 'ReplenishController@error');
     });
 
+    Route::get('/login', 'LoginController@showLoginForm');
+    Route::post('/login', 'LoginController@login');
+
 });
 
 
