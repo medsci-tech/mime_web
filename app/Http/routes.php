@@ -17,7 +17,15 @@ Route::get('/', function () {
 
 
 //test
-Route::get('/',function(){
-   return view('');
-});
+$pages = [
+  'layouts.test'=>'/test',
+  'open-course.index'=>'/open-course/index',
+  'open-course.video-playing'=>'/open-course/video-playing'
+];
+
+foreach ($pages as $page=>$href) {
+  Route::get($href,function() use($page) {
+    return view($page);
+  });
+}
 //test
