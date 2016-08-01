@@ -6,7 +6,7 @@ use App\Models\MessageVerify;
 
 /**
  * Class Message
- * @package App\BasicShop\Message
+ * @package App\Helpers\Message
  */
 class Message
 {

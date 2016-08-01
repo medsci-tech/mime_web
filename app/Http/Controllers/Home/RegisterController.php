@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Helpers\Message\Facades\Message;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Models\MessageVerify;
 use App\Models\Student;
 
 class RegisterController extends Controller
 {
     //
-    public function create(Request $request)
+    public function create()
     {
         return view('home.register.create');
     }
@@ -56,7 +55,20 @@ class RegisterController extends Controller
 
     public function sms(Request $request)
     {
+        $validator = \Validator::make($request->all(), [
+            'phone' => 'required|digits:11|unique:students,phone,'
+        ]);
 
+        if ($validator->fails())
+        {
+            return response()->json(['success' => false, 'error_message' => $validator->errors()->getMessages()]);
+        } /*if>*/
+
+        if (\Message::createVerify($request->input('phone'))) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 
     public function success()
