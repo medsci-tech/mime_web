@@ -28,7 +28,8 @@
         pages: {
           '公开课': '/open-course/index',
           '课程点播': '/open-course/video-playing',
-          '登录': '/login/login'
+          '登录': '/login/login',
+          '注册': '/login/sign-up'
         }
       }
     });
