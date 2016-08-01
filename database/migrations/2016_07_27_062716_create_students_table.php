@@ -21,15 +21,17 @@ class CreateStudentsTable extends Migration
             $table->string('nickname')->nullable()->comment('wechat nick name');
             $table->string('headimgurl')->nullable()->comment('wechat headimgurl');
 
-            $table->string('name')->comment('名字');
             $table->string('phone', 11)->comment('手机号码');
             $table->string('password')->comment('密码');
 
+            $table->string('name')->nullable()->comment('名字');
+            $table->string('sex')->nullable()->comment('性别');
             $table->string('office')->nullable()->comment('科室');
             $table->string('title')->nullable()->comment('职称');
 
             $table->string('province')->nullable()->comment('省');
             $table->string('city')->nullable()->comment('市');
+            $table->string('area')->nullable()->comment('区');
             $table->string('hospital_level')->nullable()->comment('医院等级');
             $table->string('hospital_name')->nullable()->comment('医院名称');
 
