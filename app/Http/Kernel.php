@@ -49,5 +49,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        'login' => \App\Http\Middleware\LoginMiddleware::class,
+        'replenish' => \App\Http\Middleware\ReplenishMiddleware::class,
+        'ThyroidClassSignInMiddleware' => \App\Http\Middleware\ThyroidClassSignInMiddleware::class,
     ];
 }

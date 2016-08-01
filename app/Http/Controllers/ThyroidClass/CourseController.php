@@ -9,5 +9,21 @@ use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
+
     //
+    public function __construct()
+    {
+        $this->middleware('replenish', ['only' => ['view', ]]);
+    }
+
+    public function view(Request $request)
+    {
+
+    }
+
+    public function timer(Request $request)
+    {
+
+    }
+
 }
