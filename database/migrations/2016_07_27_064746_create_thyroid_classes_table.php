@@ -32,7 +32,7 @@ class CreateThyroidClassesTable extends Migration
 
             $table->unsignedInteger('latest_unit_num')->default(0)->comment('当前学期');
             $table->unsignedInteger('latest_course_num')->default(0)->comment('当前课程');
-            $table->date('latest_update_at')->default(0)->comment('最近更新时间');
+            $table->date('latest_update_at')->comment('最近更新时间');
 
             $table->timestamps();
 
