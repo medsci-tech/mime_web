@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Helpers\Message\Facades\Message;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;

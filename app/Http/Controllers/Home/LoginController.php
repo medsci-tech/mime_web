@@ -11,7 +11,7 @@ use App\Models\Student;
 class LoginController extends Controller
 {
     //
-    public function showLoginForm(Request $request)
+    public function showLoginForm()
     {
         return view('home.login');
     }
