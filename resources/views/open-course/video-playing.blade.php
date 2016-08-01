@@ -7,6 +7,7 @@
 @section('css')
   <link rel="stylesheet" href="/vendor/foundation-6.2.3-complete/css/foundation.min.css">
   <link rel="stylesheet" href="/vendor/font-awesome-4.6.2/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/vendor/video.js/dist/video-js.min.css">
   <link rel="stylesheet" href="/vendor/swiper/swiper-3.3.0.min.css">
   <style>
     .swiper-slide img {
@@ -53,8 +54,13 @@
   </div>
   <br>
   <div class="row">
-    <div class="media-7 small-12 columns">
-
+    <div class="medium-7 small-12">
+      <video id="example_video_1" class="video-js vjs-default-skin"
+             controls preload="auto" style="width: 100%;height: 500px"
+             poster=""
+             data-setup='{"example_option":true}'>
+        <source type="video/mp4" src="http://7xrlyr.com1.z0.glb.clouddn.com/%E4%BD%A0%E4%BC%9A%E7%9B%91%E6%B5%8B%E8%A1%80%E7%B3%96%E5%90%97%EF%BC%9F.mp4">
+      </video>
     </div>
   </div>
 
@@ -63,6 +69,7 @@
 
 @section('js')
   <script src="/vendor/swiper/swiper-3.3.0.min.js"></script>
+  <script src="/vendor/video.js/dist/video.min.js"></script>
   <script>
     vm = new Vue({
       el: '#open_course',
