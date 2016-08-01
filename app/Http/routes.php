@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,7 +21,7 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
     Route::group(['prefix' => 'register'], function () {
         Route::get('/create', 'RegisterController@create');
         Route::post('/store', 'RegisterController@store');
-        Route::get('/sms', 'RegisterController@sms');
+        Route::any('/sms', 'RegisterController@sms');
         Route::get('/success', 'RegisterController@success');
         Route::get('/error', 'RegisterController@error');
     });
@@ -58,4 +57,3 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
     });
 
 });
-
