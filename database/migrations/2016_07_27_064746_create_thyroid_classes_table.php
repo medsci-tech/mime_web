@@ -28,7 +28,7 @@ class CreateThyroidClassesTable extends Migration
             $table->unsignedInteger('question_count')->default(0)->comment('提问数合计');
 
             $table->date('begin_at')->nullable()->comment('项目开始时间');
-            $table->date('end_at')->nullable()->comment('l项目结束时间');
+            $table->date('end_at')->nullable()->comment('项目结束时间');
 
             $table->unsignedInteger('latest_unit_num')->default(0)->comment('当前学期');
             $table->unsignedInteger('latest_course_num')->default(0)->comment('当前课程');
