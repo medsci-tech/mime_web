@@ -5,48 +5,29 @@
 @section('page_id','open_course')
 
 @section('css')
-  <link rel="stylesheet" href="/vendor/foundation-6.2.3-complete/css/foundation.min.css">
-  <link rel="stylesheet" href="/vendor/font-awesome-4.6.2/css/font-awesome.min.css">
   <link rel="stylesheet" href="/vendor/swiper/swiper-3.3.0.min.css">
-  <style>
-    .swiper-slide img {
-      width: 100%;
-    }
-
-    .media-object img {
-      width: 100%;
-    }
-
-    .media-object > div > p {
-      border-bottom: 1px dashed #000;
-    }
-
-    .information span {
-      padding-right: 30px;
-    }
-
-    .information span:first-child {
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/thyroid-class.css">
 @endsection
 
 @section('content')
-  <div class="top-bar hide-for-small-only">
-    <div>
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text">mime</li>
-          <li v-for="left in top_bar_left"><a href="@{{left.href}}">@{{left.name}}</a></li>
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li v-for="right in top_bar_right"><a href="@{{right.href}}">@{{right.name}}</a></li>
-        </ul>
+  <div class="row">
+    <div class="top-bar hide-for-small-only">
+      <div>
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li><img src="/image/logo.jpg" alt=""></li>
+            <li v-for="left in top_bar_left"><a href="@{{left.href}}">@{{left.name}}</a></li>
+          </ul>
+        </div>
+        <div class="top-bar-right">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li v-for="right in top_bar_right"><a href="@{{right.href}}">@{{right.name}}</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="swiper-container">
       <div class="swiper-wrapper">
@@ -60,9 +41,11 @@
   </div>
   <br>
   <div class="row information">
-    <span v-for="header in main_class.header">@{{ header }}</span>
+    <div class="header">
+      <div></div>
+      <span v-for="header in main_class.header">@{{ header }}</span>
+    </div>
 
-    <hr>
     <div class="media-object">
       <div class="media-object-section medium-6 small-12 columns">
         <img class="thumbnail" :src="main_class.body.image" alt="@{{ main_class.body.title }}">
@@ -71,7 +54,7 @@
         <h4>@{{ main_class.body.title }}</h4>
         <p>@{{ main_class.body.paragraph }}<br><br></p>
         <div class="medium-6 small-12 columns" v-for=" footer in main_class.footer">
-          <p><i class="fa fa-@{{ footer.fa }}"></i>@{{ footer.title }}：@{{ footer.content }}</p>
+          <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
         </div>
         <div class="medium-6 small-12 columns">
           <button type="button" class="expanded button">课程注册</button>
@@ -82,19 +65,21 @@
       </div>
     </div>
   </div>
+  <br>
   <div class="row collapse">
     <ul class="tabs" data-tabs id="example-tabs">
-      <li class="tabs-title" v-for="tab in tabs"><a href="#panel@{{ $index }}">@{{ tab.name }}</a></li>
+      <li class="tabs-title" v-for="tab in tabs"><a href="@{{'#panel'+$index }}">@{{ tab.name }}</a></li>
     </ul>
     <div class="tabs-content" data-tabs-content="example-tabs">
-      <div class="tabs-panel is-active" id="panel1">
+      <div class="tabs-panel is-active" id="panel0">
         <div class="row" v-for="row in tabs[0].content">
           <div class="medium-4 small-12 columns">
             <div class="small-12">
               <img :src="row.teacher.image" alt="">
             </div>
             <div class="small-12">
-              <p>讲师：@{{ row.teacher.title }}</p>
+              <p></p>
+              <p>讲师：@{{ row.teacher.teacher_name }}</p>
               <p>课程简介：@{{ row.teacher.brief }}</p>
             </div>
           </div>
@@ -104,11 +89,9 @@
                 <img :src="course.image" alt="">
               </div>
               <div class="small-12">
-                <p>@{{ course.title }}</p>
-                <p>
-                <div class="columns" v-for="span in course.information"><i
-                    class="fa fa-@{{ span.fa }}"></i><span>@{{ span.title }}：@{{ span.content }}</span></div>
-                </p>
+                <div>@{{ course.title }}</div>
+                <div class="span" v-for="span in course.information"><i
+                    class="fa fa-@{{ span.fa }}"></i>&nbsp;<span>@{{ span.title }}：@{{ span.content }}</span></div>
               </div>
             </div>
           </div>
@@ -119,6 +102,25 @@
       </div>
       <div class="tabs-panel" id="panel3">
         8798
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="row">
+      <div class="small-8 columns">
+        <dl class="">
+          <dd>&emsp;</dd>
+          <dd>关于我们丨全科医学协作平台简介丨联系方式丨相关法律</dd>
+          <dd>&emsp;</dd>
+          <dd>Copyright © 2016 Phoenix New Media Limited All Rights Reserved.</dd>
+          <dd>空中课堂所有学习视频课适用于《中华人民共和国著作权法》</dd>
+          <dd>空中课堂所有学习视频课经授课专家许可使用，Mime、Itangyi、空课APP经版权方可使用。</dd>
+          <dd>除非另有声明，本平台其他视频作品采用知识共享署名-非商业性使用-相同方式共享。</dd>
+        </dl>
+      </div>
+      <div class="small-4 columns">
+        <img src="/image/全科医学协作平台.jpg" alt="">
       </div>
     </div>
   </div>
@@ -213,7 +215,7 @@
             content: [{
               teacher: {
                 title: '甲亢专题',
-                image: '',
+                image: '/image/test.jpg',
                 teacher_name: '施秉银',
                 brief: '啊可是觉得哈看几乎是看，到阿克苏可千万模拟器。比我年轻比我们那边全面把握强化可惜很快就这款车I我IU去I，请和我快回去看见我会看败。',
               },
@@ -234,8 +236,10 @@
                   ]
                 }
               ]
-            }
-            ]
+            }]
+          },
+          {
+            name: '213123'
           }
         ]
       }
