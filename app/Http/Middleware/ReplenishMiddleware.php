@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Student;
 use Closure;
 
 class ReplenishMiddleware
@@ -15,6 +16,12 @@ class ReplenishMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $student = Student::find(\Session::get('studentId'));
+
+        if($student->name && $student->sex && $student->office && $student->title && $student->province && $student->city && $student->area && $student->hospital_level && $student->hospital_name) {
+            return $next($request);
+        } else {
+            return redirect('/home/replenish/create');
+        }
     }
 }

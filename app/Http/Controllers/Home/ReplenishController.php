@@ -17,7 +17,7 @@ class ReplenishController extends Controller
         parent::__construct();
     }
 
-    public function create(Request $request)
+    public function create()
     {
         if (!$this->studentId)
         {
