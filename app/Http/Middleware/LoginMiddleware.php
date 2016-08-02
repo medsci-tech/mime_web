@@ -15,6 +15,10 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(\Session::has('studentId')) {
+            return $next($request);
+        } else {
+            return redirect('/home/login');
+        }
     }
 }
