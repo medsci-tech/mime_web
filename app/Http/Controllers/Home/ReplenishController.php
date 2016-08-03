@@ -49,6 +49,8 @@ class ReplenishController extends Controller
         $validator = \Validator::make($request->all(), [
             'name'      => 'required',
             'sex'       => 'required',
+            'email'     => 'required',
+            'birthday'  => 'required',
             'office'    => 'required',
             'title'     => 'required',
             'province'  => 'required',
@@ -65,6 +67,8 @@ class ReplenishController extends Controller
         $student->update([
             'name'      => $request->input('name'),
             'sex'       => $request->input('sex'),
+            'email'     => $request->input('email'),
+            'birthday'  => $request->input('birthday'),
             'office'    => $request->input('office'),
             'title'     => $request->input('title'),
             'province'  => $request->input('province'),

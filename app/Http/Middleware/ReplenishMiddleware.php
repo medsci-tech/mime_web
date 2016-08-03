@@ -18,7 +18,17 @@ class ReplenishMiddleware
     {
         $student = Student::find(\Session::get('studentId'));
 
-        if($student->name && $student->sex && $student->office && $student->title && $student->province && $student->city && $student->area && $student->hospital_level && $student->hospital_name) {
+        if($student->name
+            && $student->sex
+            && $student->email
+            && $student->birthday
+            && $student->office
+            && $student->title
+            && $student->province
+            && $student->city
+            && $student->area
+            && $student->hospital_level
+            && $student->hospital_name) {
             return $next($request);
         } else {
             return redirect('/home/replenish/create');
