@@ -74,7 +74,7 @@
     </ul>
     <div class="tabs-content" data-tabs-content="example-tabs">
       <div class="tabs-panel is-active" id="panel0">
-        <div v-for="row in tabs[0].content">
+        <div class="row column" v-for="row in tabs[0].content">
           <div class="medium-4 small-12 columns">
             <div class="small-12">
               <img :src="row.teacher.image" alt="">
@@ -263,46 +263,6 @@
                 ]
               },
                 @endforeach
-              {
-                teacher: {
-                  title: '123123123',
-                  image: '/image/test.jpg',
-                  teacher_name: '12312323',
-                  brief: '12312321'
-                },
-                courses: [
-                  {
-                    title: '412432423',
-                    image: '/image/test.jpg',
-                    information: [
-                      {
-                        title: '学习',
-                        fa: 'youtube-play',
-                        content: '2689人'
-                      }, {
-                        title: '',
-                        fa: 'comment',
-                        content: '4条问题'
-                      }
-                    ]
-                  },
-                  {
-                    title: '第1期：甲亢临床治疗的回顾',
-                    image: '/image/test.jpg',
-                    information: [
-                      {
-                        title: '学习',
-                        fa: 'youtube-play',
-                        content: '2689人'
-                      }, {
-                        title: '',
-                        fa: 'comment',
-                        content: '4条问题'
-                      }
-                    ]
-                  }
-                ]
-              },
             ]
           },
           {
@@ -322,7 +282,7 @@
     $(function () {
       $('.tabs-title').eq(0).addClass('is-active');
       $('.tabs-title').eq(0).children('a').attr('aria-selected', "true");
-      $('#panel0>div>div>.medium-4:last').addClass('end')
+      $('#panel0>div>div').find('.medium-4:last').addClass('end')
     })
 
   </script>
