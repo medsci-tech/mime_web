@@ -12,29 +12,31 @@
   }
 }
 
-.information {
-  .header {
-    max-width: 75rem;
-    margin-left: auto;
-    margin-right: auto;
-    position: absolute;
-    z-index: 10000;
-    margin-top: -4.5rem;
-    width: 100%;
-    height: 3rem;
-    background-color: #fbfbfb;
-    border-radius: 3rem 3rem 0 0;
-    box-shadow: 0 -.5rem .5rem #eee inset;
+@media(width>766px) {
+  .information {
+    .header {
+      max-width: 75rem;
+      margin-left: auto;
+      margin-right: auto;
+      position: absolute;
+      z-index: 10000;
+      margin-top: -4.5rem;
+      width: 100%;
+      height: 3rem;
+      background-color: #fbfbfb;
+      border-radius: 3rem 3rem 0 0;
+      box-shadow: 0 -.5rem .5rem #eee inset;
 
-    div {
-      height: .5rem;
-    }
-
-    span {
-      &:nth-child(2) {
-        font-weight: bold;
+      div {
+        height: .5rem;
       }
-      padding-left: 3rem;
+
+      span {
+        &:nth-child(2) {
+          font-weight: bold;
+        }
+        padding-left: 3rem;
+      }
     }
   }
 }
@@ -50,8 +52,6 @@
 .media-object {
   font-size: 90%;
   .columns {
-    padding-left: 0;
-
     &:last-child {
       margin-top: .5rem;
     }
@@ -70,7 +70,7 @@
 .button {
   border-radius: .2rem;
   background-color: #6a8b66;
-  &:hover,&:focus {
+  &:hover, &:focus {
     background-color: #507a55;
   }
 }
@@ -82,8 +82,8 @@
     li {
       background-color: #6a8b66;
     }
-    .tabs-title>a {
-      &:focus,&:hover,&[aria-selected=true] {
+    .tabs-title > a {
+      &:focus, &:hover, &[aria-selected=true] {
         background-color: #507a55;
       }
       padding: .8rem 1.5rem;
@@ -96,8 +96,8 @@
     .tabs-panel {
       padding: 0;
 
-      .row {
-        padding:2rem 0 1rem 0;
+      > div {
+        padding: 2rem 0 1rem 0;
         border-bottom: 1px dashed #555;
         &:last-child {
           border: none;
@@ -116,8 +116,5 @@
   background-color: #f1f1f1;
   img {
     margin-top: 4rem;
-  }
-  .columns {
-    padding-left: 0;
   }
 }

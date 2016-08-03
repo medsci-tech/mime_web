@@ -74,7 +74,7 @@
         </ul>
         <div class="tabs-content" data-tabs-content="example-tabs">
             <div class="tabs-panel is-active" id="panel0">
-                <div class="row" v-for="row in tabs[0].content">
+                <div v-for="row in tabs[0].content">
                     <div class="medium-4 small-12 columns">
                         <div class="small-12">
                             <img :src="row.teacher.image" alt="">
