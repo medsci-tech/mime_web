@@ -24,6 +24,7 @@
             <br>
 
             <form action="/home/replenish/store" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="row column log-in-form">
                     <h4 class="text-center">个人信息完善</h4>
 
@@ -42,10 +43,10 @@
                     <div style="font-size: .875rem">
                         <div class="small-2 columns" style="padding-left: 0;">性别</div>
                         <label class="small-5 columns">
-                            <input required v-model="sex" type="radio" value="1" name="sex">男
+                            <input v-model="sex" type="radio" value="1" name="sex">男
                         </label>
                         <label class="small-5 columns">
-                            <input required v-model="sex" type="radio" value="0" name=sex">女
+                            <input v-model="sex" type="radio" value="0" name=sex">女
                         </label>
                     </div>
                     <p id="error_sex" class="help-text hide">请输入</p>
@@ -100,7 +101,7 @@
 
                     <p id="error_email" class="help-text hide">请输入</p>
 
-                    <p><a type="submit" class="button expanded">确&emsp;认</a></p>
+                    <p><button type="submit" class="button expanded">确&emsp;认</button></p>
                 </div>
             </form>
         </div>
