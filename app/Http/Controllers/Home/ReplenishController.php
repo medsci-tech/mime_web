@@ -40,7 +40,7 @@ class ReplenishController extends Controller
             return redirect('home/replenish/error');
         } /*if>*/
 
-        $student = Student::where('id', '=', $this->studentId)->first();
+        $student = Student::find($this->studentId);
         if (!$student)
         {
             return redirect('home/replenish/error');
@@ -56,14 +56,12 @@ class ReplenishController extends Controller
             'province'  => 'required',
             'city'      => 'required',
             'area'      => 'required',
-            'hospital_level' => 'required',
             'hospital_name'  => 'required',
         ]);
         if ($validator->fails())
         {
             return redirect()->back()->withErrors($validator)->withInput();
         } /*if>*/
-
         $student->update([
             'name'      => $request->input('name'),
             'sex'       => $request->input('sex'),
