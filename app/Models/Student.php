@@ -15,9 +15,36 @@ class Student extends Model
     protected $table = 'students';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'sex',
+        'email',
+        'birthday',
+        'office',
+        'title',
+        'province',
+        'city',
+        'area',
+        'hospital_level',
+        'hospital_name'
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function thyroidClassStudent() {
-        return $this->has(ThyroidClassStudent::class);
+        return $this->hasOne(ThyroidClassStudent::class);
+    }
+
+    /**
+     * @return $this
+     */
+    public function enter() {
+        $this->thyroidClassStudent()->save(thyroidClassStudent::create());
+        return $this;
     }
 }
