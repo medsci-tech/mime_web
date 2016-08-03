@@ -2,6 +2,11 @@
   display: none; }
 
 body, h1, h2, h3, h4, h5, h6 {
-  font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fbfbfb; }
+
+a, a:focus, a:hover {
+  text-decoration: none;
+  color: inherit; }
 
 /*# sourceMappingURL=main.css.map */

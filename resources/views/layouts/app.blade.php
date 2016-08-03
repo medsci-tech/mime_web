@@ -20,12 +20,12 @@
 
 <script src="/vendor/jQuery/jQuery-2.1.4.min.js"></script>
 <script src="/vendor/foundation-6.2.3-complete/js/vendor/foundation.min.js"></script>
-<script>
-  $(document).foundation();
-</script>
+
 <script src="/vendor/vuejs/vue.js"></script>
 
 @yield('js')
-
+<script>
+  $(document).foundation();
+</script>
 </body>
 </html>
