@@ -26,7 +26,6 @@ class CreateThyroidClassesTable extends Migration
             $table->unsignedInteger('student_count')->default(0)->comment('学生数');
             $table->unsignedInteger('play_count')->default(0)->comment('播放次数合计');
             $table->unsignedInteger('question_count')->default(0)->comment('提问数合计');
-
             $table->timestamp('begin_at')->nullable()->comment('项目开始时间');
             $table->timestamp('end_at')->nullable()->comment('l项目结束时间');
 

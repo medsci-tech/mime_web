@@ -22,7 +22,8 @@ class LoginController extends Controller
             'phone'     => 'required|digits:11|unique:students,phone,',
             'password'  => 'required'
         ]);
-        if ($validator->fails()) {
+        if ($validator->fails())
+        {
             return redirect()->back()->withErrors($validator)->withInput();
         } /*if>*/
 

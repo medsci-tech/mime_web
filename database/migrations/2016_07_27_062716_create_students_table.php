@@ -26,14 +26,18 @@ class CreateStudentsTable extends Migration
 
             $table->string('name')->nullable()->comment('名字');
             $table->string('sex')->nullable()->comment('性别');
-            $table->string('office')->nullable()->comment('科室');
-            $table->string('title')->nullable()->comment('职称');
+            $table->string('email')->nullable()->comment('邮箱');
+
+            $table->date('birthday')->nullable()->comment('生日');
 
             $table->string('province')->nullable()->comment('省');
             $table->string('city')->nullable()->comment('市');
             $table->string('area')->nullable()->comment('区');
+
             $table->string('hospital_level')->nullable()->comment('医院等级');
             $table->string('hospital_name')->nullable()->comment('医院名称');
+            $table->string('office')->nullable()->comment('科室');
+            $table->string('title')->nullable()->comment('职称');
 
             $table->unique('phone');
             $table->index('phone');
