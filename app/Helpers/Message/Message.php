@@ -40,8 +40,8 @@ class Message
             $messageVerify = new MessageVerify();
             $messageVerify->phone = $phone;
             $messageVerify->code = $messageVerifyNumber;
-            $messageVerify->save();
-            return $messageVerify->id;
+            $result = $messageVerify->save();
+            return $result;
         } else {
             return false;
         }
