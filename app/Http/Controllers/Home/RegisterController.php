@@ -39,7 +39,7 @@ class RegisterController extends Controller
             return redirect()->back()->with('error_message', '电话号码错误')->withInput();
         } /*if>*/
 
-        if ($messageVerify->code != $request->input('code'))
+        if ($messageVerify->code != $request->input('auth_code'))
         {
             return redirect()->back()->with('error_message', '验证码错误')->withInput();
         } /*if>*/
