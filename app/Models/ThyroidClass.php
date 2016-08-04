@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\ThyroidClass\ThyroidClassPhase;
 use Illuminate\Database\Eloquent\Model;
 
 /**

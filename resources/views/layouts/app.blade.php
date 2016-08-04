@@ -14,7 +14,7 @@
 
 </head>
 
-<body id="@yield('page_id')">
+<body id="@yield('page_id')" v-cloak>
 
 @yield('content')
 

@@ -15,14 +15,14 @@ class ThyroidClassCourse extends Model
     /**
      * @var string
      */
-    protected $table = 'thyroid_class_course';
+    protected $table = 'thyroid_class_courses';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function thyroidClassPhase()
     {
-        return $this->belongsTo(ThyroidClassPhase::class);
+        return $this->belongsTo(ThyroidClassPhase::class, 'phase_id');
     }
 
     /**

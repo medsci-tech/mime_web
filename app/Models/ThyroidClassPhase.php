@@ -23,13 +23,13 @@ class ThyroidClassPhase extends Model
      */
     public function thyroidClassCourses()
     {
-        return $this->hasMany(ThyroidClassCourse::class);
+        return $this->hasMany(ThyroidClassCourse::class, 'phase_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function teacher() {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class, 'main_teacher_id');
     }
 }

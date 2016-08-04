@@ -11,7 +11,7 @@
 
 @section('content')
   <div class="row">
-    <div class="top-bar hide-for-small-only">
+    <div class="top-bar">
       <div>
         <div class="top-bar-left">
           <ul class="dropdown menu" data-dropdown-menu>
@@ -41,7 +41,7 @@
   </div>
   <br>
   <div class="row information">
-    <div class="header">
+    <div class="header hide-for-small-only">
       <div></div>
       <span v-for="header in main_class.header">@{{ header }}</span>
     </div>
@@ -52,7 +52,9 @@
       </div>
       <div class="media-object-section medium-6 small-12 columns">
         <h4>@{{ main_class.body.title }}</h4>
+
         <p>@{{ main_class.body.paragraph }}<br><br></p>
+
         <div class="medium-6 small-12 columns" v-for=" footer in main_class.footer">
           <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
         </div>
@@ -72,26 +74,32 @@
     </ul>
     <div class="tabs-content" data-tabs-content="example-tabs">
       <div class="tabs-panel is-active" id="panel0">
-        <div class="row" v-for="row in tabs[0].content">
+        <div class="row column" v-for="row in tabs[0].content">
           <div class="medium-4 small-12 columns">
             <div class="small-12">
               <img :src="row.teacher.image" alt="">
             </div>
             <div class="small-12">
               <p></p>
+
               <p>讲师：@{{ row.teacher.teacher_name }}</p>
+
               <p>课程简介：@{{ row.teacher.brief }}</p>
             </div>
           </div>
           <div class="medium-8 small-12 columns">
             <div class="medium-4 small-6 columns" v-for="course in row.courses">
               <div class="small-12">
-                <img :src="course.image" alt="">
+                <a href="@{{ course.href }}">
+                  <img :src="course.image" alt="">
+                </a>
               </div>
               <div class="small-12">
                 <div>@{{ course.title }}</div>
                 <div class="span" v-for="span in course.information"><i
-                    class="fa fa-@{{ span.fa }}"></i>&nbsp;<span>@{{ span.title }}：@{{ span.content }}</span></div>
+                    class="fa fa-@{{ span.fa }}"></i>&nbsp;<span>@{{ span.title }}
+                    <template v-if="span.title != ''&&span.title != null">：</template>@{{ span.content }}</span>&emsp;
+                </div>
               </div>
             </div>
           </div>
@@ -212,31 +220,53 @@
         tabs: [
           {
             name: '课程内容',
-            content: [{
-              teacher: {
-                title: '甲亢专题',
-                image: '/image/test.jpg',
-                teacher_name: '施秉银',
-                brief: '啊可是觉得哈看几乎是看，到阿克苏可千万模拟器。比我年轻比我们那边全面把握强化可惜很快就这款车I我IU去I，请和我快回去看见我会看败。',
+            content: [
+                @foreach($thyroidClassPhases as $thyroidClassPhase)
+              {
+                teacher: {
+                  title: '{{$thyroidClassPhase->title}}',
+                  image: '{{$thyroidClassPhase->teacher->headimgurl}}',
+                  teacher_name: '{{$thyroidClassPhase->teacher->name}}',
+                  brief: '{{$thyroidClassPhase->comment}}'
+                },
+                courses: [
+                    @foreach($thyroidClassPhase->thyroidClassCourses as $thyroidClassCourse)
+                  {
+                    title: '{{$thyroidClassCourse->title}}',
+                    image: '{{$thyroidClassCourse->logo_url}}',
+                    href: '/thyroid-class/course/view?course_id={{$thyroidClassCourse->id}}',
+                    information: [
+                      {
+                        title: '学习',
+                        fa: 'youtube-play',
+                        content: '2689人'
+                      }, {
+                        title: '',
+                        fa: 'comment',
+                        content: '4条问题'
+                      }
+                    ]
+                  },
+                    @endforeach
+                  {
+                    title: '第1期：甲亢临床治疗的回顾',
+                    image: '/image/test.jpg',
+                    information: [
+                      {
+                        title: '学习',
+                        fa: 'youtube-play',
+                        content: '2689人'
+                      }, {
+                        title: '',
+                        fa: 'comment',
+                        content: '4条问题'
+                      }
+                    ]
+                  }
+                ]
               },
-              courses: [
-                {
-                  title: '第1期：甲亢临床治疗的回顾',
-                  image: '/image/test.jpg',
-                  information: [
-                    {
-                      title: '学习',
-                      fa: 'youtube-play',
-                      content: '2689人'
-                    }, {
-                      title: '',
-                      fa: 'comment',
-                      content: '4条问题'
-                    }
-                  ]
-                }
-              ]
-            }]
+                @endforeach
+            ]
           },
           {
             name: '213123'
@@ -255,6 +285,7 @@
     $(function () {
       $('.tabs-title').eq(0).addClass('is-active');
       $('.tabs-title').eq(0).children('a').attr('aria-selected', "true");
+      $('#panel0>div>div').find('.medium-4:last').addClass('end')
     })
 
   </script>
