@@ -116,7 +116,7 @@
 
   <div class="footer">
     <div class="row">
-      <div class="small-8 columns">
+      <div class="medium-8 small-12 columns">
         <dl class="">
           <dd>&emsp;</dd>
           <dd>关于我们丨全科医学协作平台简介丨联系方式丨相关法律</dd>
@@ -127,11 +127,13 @@
           <dd>除非另有声明，本平台其他视频作品采用知识共享署名-非商业性使用-相同方式共享。</dd>
         </dl>
       </div>
-      <div class="small-4 columns">
+      <div class="medium-8 small-12 columns">
         <img src="/image/全科医学协作平台.jpg" alt="">
       </div>
     </div>
   </div>
+
+  @extends('home.login-modal')
 
 @endsection
 
@@ -164,10 +166,10 @@
         top_bar_right: [
           {
             name: '登录',
-            href: '#'
+            href: '/home/login'
           }, {
             name: '注册',
-            href: '#'
+            href: '/home/register/create'
           }
         ],
 
@@ -285,7 +287,12 @@
     $(function () {
       $('.tabs-title').eq(0).addClass('is-active');
       $('.tabs-title').eq(0).children('a').attr('aria-selected', "true");
-      $('#panel0>div>div').find('.medium-4:last').addClass('end')
+      $('#panel0>div>div').find('.medium-4:last').addClass('end');
+      $("a[href='/home/login'],button[href='/home/login']").attr({
+        'href':'#',
+        'data-open':'exampleModal1'
+      });
+
     })
 
   </script>

@@ -74,7 +74,7 @@
 
           var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
           if (myreg.test(vm.phone)) {
-            $.post('/home/register/sms', vm.phone, function (data) {
+            $.get('/home/register/sms', {phone:vm.phone}, function (data) {
                 if (data.success) {
                 } else {
                   $('#error_phone').text('手机号已被注册');
