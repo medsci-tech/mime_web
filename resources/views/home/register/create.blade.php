@@ -21,6 +21,7 @@
       overflow-y: auto;
       cursor: inherit;
       background-color: #fefefe;
+      font-size: 90%;
     }
   </style>
 @endsection
@@ -160,10 +161,12 @@
 9.3 您点击本协议上方的“同意以下协议，提交”按钮即视为您完全接受本协议，在点击之前请您再次确认已知悉并完全理解本协议的全部内容。
             </textarea>
           </div>
+          <input v-model="agree" id="agree" type="checkbox"><label for="agree">同意用户协议</label>
 
           <br>
           <p>
-            <button type="submit" class="button expanded">注&emsp;册</button>
+            <button v-show="agree" type="submit" class="button expanded">注&emsp;册</button>
+            <button v-show="!agree" type="button" class="button expanded disabled">注&emsp;册</button>
           </p>
           <p class="text-center"><a href="/home/login">已有账号?点击登录</a></p>
         </div>
@@ -182,7 +185,8 @@
         phone: '',
         sms: '',
         password: '',
-        password2: ''
+        password2: '',
+        agree: true
       },
       methods: {
         get_auth_code: function () {
