@@ -132,7 +132,7 @@
           }
         ],
 
-        course_list:[
+        course_list: [
           {
             subject: '甲亢专题',
             courses: [
@@ -179,9 +179,30 @@
         "height": 600
       };
       /*调用播放器进行播放*/
-      new qcVideo.Player(/*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/ "id_video_container", option);
+      var func = {
+        'playStatus': function (playing) {
+          var i = 30;
+          timer();
+          function timer() {
+            i--;
+            if (i == 0) {
+              $.post('/thyroid-class/course/timer', '', function (data) {
+                if (data) {
+                  $.post('/thyroid-class/course/timer', '', function (data) {
+                  });
+                }
+                i = 30;
+              });
+              i = 30;
+            } else {
+              setTimeout(timer, 1000);
+            }
+          }
+        }
+      };
+      new qcVideo.Player(/*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/ "id_video_container", option, func);
     })()
 
-    $('.video-list').css('height',$('.video-list').prev().height());
+    $('.video-list').css('height', $('.video-list').prev().height());
   </script>
 @endsection
