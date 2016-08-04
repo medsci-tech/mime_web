@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/index', 'ThyroidClass/ThyroidClassController@index');
 
 
 Route::group(['prefix' => 'home', 'namespace' => 'Home'], function () {
