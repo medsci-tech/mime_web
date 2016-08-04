@@ -164,10 +164,10 @@
         top_bar_right: [
           {
             name: '登录',
-            href: '#'
+            href: '/home/login'
           }, {
             name: '注册',
-            href: '#'
+            href: '/home/register/create'
           }
         ],
 
