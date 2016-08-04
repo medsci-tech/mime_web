@@ -6,12 +6,18 @@
 .media-object > div > p {
   border-bottom: 1px dashed #000; }
 
+.reveal {
+  background-color: #fbfbfb; }
+
+.help-text {
+  color: #ec5840; }
+
 .information .header {
   max-width: 75rem;
   margin-left: auto;
   margin-right: auto;
   position: absolute;
-  z-index: 10000;
+  z-index: 2;
   margin-top: -4.5rem;
   width: 100%;
   height: 3rem;
@@ -76,7 +82,7 @@
 .footer {
   background-color: #f1f1f1; }
   .footer img {
-    margin-top: 4rem; }
+    width: 100%; }
 
 .video {
   background-color: #555;
