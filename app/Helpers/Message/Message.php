@@ -36,7 +36,6 @@ class Message
         $res = $this->sendMessageCode($phone, $message);
         //$res = '{"error":0,"msg":"ok"}';
         $res = json_decode($res);
-        dd($res);
         if ($res->error == 0) {
             $messageVerify = new MessageVerify();
             $messageVerify->phone = $phone;
