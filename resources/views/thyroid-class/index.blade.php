@@ -234,7 +234,7 @@
                   {
                     title: '{{$thyroidClassCourse->title}}',
                     image: '{{$thyroidClassCourse->logo_url}}',
-                    href: '',
+                    href: '/thyroid-class/course/view?course_id={{$thyroidClassCourse->id}}',
                     information: [
                       {
                         title: '学习',
