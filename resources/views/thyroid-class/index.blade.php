@@ -137,7 +137,7 @@
 
 
 @section('js')
-  @extends('home.login-modal')
+  @include('home.login-modal')
   <script src="/vendor/swiper/swiper-3.3.0.min.js"></script>
   <script>
     vm = new Vue({

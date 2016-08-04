@@ -19,7 +19,6 @@
     <br>
   </div>
 </div>
-
 <script>
   login = new Vue({
     el: '.reveal',
