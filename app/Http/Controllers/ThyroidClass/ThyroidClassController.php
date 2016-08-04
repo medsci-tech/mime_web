@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 
 /**
  * Class ThyroidClassController
@@ -59,7 +58,9 @@ class ThyroidClassController extends Controller
      */
     public function enter()
     {
-        $this->middleware('walker_token');
+        $this->middleware('login');
+        $this->middleware('replenish');
+
         $student = Student::find(\Session::get('studentId'));
         if ($student->thyroidClassStudent) {
             return response()->json(['success' => false, ['error_message' => '已报名']]);
