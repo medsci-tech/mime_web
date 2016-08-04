@@ -46,7 +46,7 @@
           </label>
           <p id="error_passord" class="help-text hide">两次输入的密码不一致</p>
           <br>
-          <p><a type="submit" class="button expanded">注&emsp;册</a></p>
+          <p><button type="submit" class="button expanded">注&emsp;册</button></p>
           <p class="text-center"><a href="/home/login">已有账号?点击登录</a></p>
         </div>
       </form>
