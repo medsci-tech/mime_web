@@ -63,7 +63,8 @@ class RegisterController extends Controller
             return response()->json(['success' => false, 'error_message' => $validator->errors()->getMessages()]);
         } /*if>*/
 
-        if (\Message::createVerify($request->input('phone'))) {
+        $result = \Message::createVerify($request->input('phone'));
+        if ($result) {
             return response()->json(['success' => true]);
         } else {
             return response()->json(['success' => false]);
