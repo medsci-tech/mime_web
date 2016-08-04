@@ -171,6 +171,9 @@
   </script>
   <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
   <script type="text/javascript"> (function () {
+
+      var interval;
+
       var option = {
         "auto_play": "0",
         "file_id": "14651978969263009936",
@@ -180,28 +183,38 @@
       };
       /*调用播放器进行播放*/
       var func = {
-        'playStatus': function (playing) {
-          var i = 30;
-          timer();
+        'playStatus': function (status) {
+
           function timer() {
-            i--;
-            if (i == 0) {
-              $.post('/thyroid-class/course/timer', '', function (data) {
-                if (data) {
-                  $.post('/thyroid-class/course/timer', '', function (data) {
-                  });
-                }
-                i = 30;
-              });
-              i = 30;
-            } else {
-              setTimeout(timer, 1000);
-            }
+
+            $.post('/thyroid-class/course/timer', '', function (data) {
+              if (data){
+                console.log('OK');
+              } else {
+                $.post('/thyroid-class/course/timer', '', function (data) {
+                  if(data){
+                    console.log('OK');
+                  }else{
+                    console.log('not OK');
+                  }
+                });
+              }
+            });
+
           }
+
+          if (status == 'playing') {
+            interval = setInterval(timer, 30000);
+          }
+
+          if (status == 'suspended' || status == 'playEnd' || status == 'stop') {
+            clearInterval(interval);
+          }
+
         }
       };
       new qcVideo.Player(/*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/ "id_video_container", option, func);
-    })()
+    })();
 
     $('.video-list').css('height', $('.video-list').prev().height());
   </script>
