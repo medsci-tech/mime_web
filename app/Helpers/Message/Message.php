@@ -20,7 +20,7 @@ class Message
      */
     public function __construct()
     {
-        $this->_apiKey = '';
+        $this->_apiKey = env('LUOSIMAO_API_KEY');
     }
 
     /**
@@ -32,7 +32,7 @@ class Message
     public function createVerify($phone)
     {
         $messageVerifyNumber = mt_rand(100000, 999999);
-        $message = '验证码：' . $messageVerifyNumber .'【】';
+        $message = '验证码：' . $messageVerifyNumber;
         $res = $this->sendMessageCode($phone, $message);
         //$res = '{"error":0,"msg":"ok"}';
         $res = json_decode($res);
