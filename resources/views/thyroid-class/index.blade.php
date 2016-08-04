@@ -90,7 +90,9 @@
           <div class="medium-8 small-12 columns">
             <div class="medium-4 small-6 columns" v-for="course in row.courses">
               <div class="small-12">
-                <img :src="course.image" alt="">
+                <a href="@{{ course.href }}">
+                  <img :src="course.image" alt="">
+                </a>
               </div>
               <div class="small-12">
                 <div>@{{ course.title }}</div>
@@ -232,6 +234,7 @@
                   {
                     title: '{{$thyroidClassCourse->title}}',
                     image: '{{$thyroidClassCourse->logo_url}}',
+                    href: '',
                     information: [
                       {
                         title: '学习',
