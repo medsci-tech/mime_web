@@ -23,6 +23,7 @@
     <div class="medium-6 medium-centered large-4 large-centered columns">
       <br>
       <form method="post" action="/home/register/store">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="row column log-in-form">
           <h4 class="text-center">Mime账号注册</h4>
           <label>手机号
