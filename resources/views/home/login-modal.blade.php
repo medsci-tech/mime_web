@@ -1,4 +1,4 @@
-<div class="tiny reveal" id="exampleModal1" data-reveal style="z-index: 10005;">
+<div class="tiny reveal" id="exampleModal1" data-reveal style="border: none;">
   <div class="row column">
     <br>
     <form action="/home/login" method="post">
