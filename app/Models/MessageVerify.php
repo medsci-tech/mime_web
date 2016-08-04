@@ -14,5 +14,5 @@ class MessageVerify extends Model
     /**
      * @var string
      */
-    protected $table = 'MessageVerifies';
+    protected $table = 'message_verifies';
 }
