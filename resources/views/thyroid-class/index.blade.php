@@ -133,12 +133,11 @@
     </div>
   </div>
 
-  @extends('home.login-modal')
-
 @endsection
 
 
 @section('js')
+  @extends('home.login-modal')
   <script src="/vendor/swiper/swiper-3.3.0.min.js"></script>
   <script>
     vm = new Vue({
