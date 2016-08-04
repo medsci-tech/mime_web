@@ -20,11 +20,12 @@ class RegisterController extends Controller
     {
         $messages = [
             'phone.required' => '手机号未填写',
-            'password.required' => '密码未填写',
-            'auth_code.required' => '验证码未填写',
             'phone.digits' => '收获格式不正确',
             'phone.unique' => '手机号已注册',
-            'auth_code.digits' => '验证码格式不正确'
+            'auth_code.required' => '验证码未填写',
+            'auth_code.digits' => '验证码格式不正确',
+            'password.required' => '密码未填写',
+            'password.confirmed' => '两次密码不一致'
         ];
 
         $rules = [
@@ -65,12 +66,18 @@ class RegisterController extends Controller
 
     public function sms(Request $request)
     {
+        $messages = [
+            'phone.required' => '手机号未填写',
+            'phone.digits' => '收获格式不正确',
+            'phone.unique' => '手机号已注册'
+        ];
+
         $validator = \Validator::make($request->all(), [
             'phone' => 'required|digits:11|unique:students,phone,'
-        ]);
+        ], $messages);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error_message' => $validator->errors()->getMessages()]);
+            return response()->json(['success' => false, 'error_message' => $validator->errors()->first()]);
         } /*if>*/
 
         $result = \Message::createVerify($request->input('phone'));
