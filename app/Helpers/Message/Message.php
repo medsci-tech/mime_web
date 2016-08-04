@@ -32,7 +32,7 @@ class Message
     public function createVerify($phone)
     {
         $messageVerifyNumber = mt_rand(100000, 999999);
-        $message = '验证码：' . $messageVerifyNumber."【迈德科技】";
+        $message = '验证码：尊敬的用户您好！获取的验证码为：'.$messageVerifyNumber.'如非本人操作请忽略本条短信【迈德科技】';
         $res = $this->sendMessageCode($phone, $message);
         //$res = '{"error":0,"msg":"ok"}';
         $res = json_decode($res);
