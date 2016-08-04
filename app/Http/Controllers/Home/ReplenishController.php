@@ -9,14 +9,25 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Student;
 
+/**
+ * Class ReplenishController
+ * @package App\Http\Controllers\Home
+ */
 class ReplenishController extends Controller
 {
-    //
+
+    /**
+     *
+     */
     public function __construct()
     {
+        $this->middleware('login');
         parent::__construct();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create()
     {
         if (!$this->studentId)
@@ -33,6 +44,10 @@ class ReplenishController extends Controller
         return view('home.replenish.create', ['student' => $student]);
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Request $request)
     {
         if (!$this->studentId)
@@ -78,13 +93,19 @@ class ReplenishController extends Controller
 
         return redirect('home/replenish/success');
     }
-    
-    public function success() 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function success()
     {
         return view('home.replenish.success');
     }
-    
-    public function error() 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function error()
     {
         return view('home.replenish.error');
     }

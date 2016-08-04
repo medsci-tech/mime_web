@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
+Route::group(['prefix' => 'home', 'namespace' => 'Home'], function () {
 
     Route::group(['prefix' => 'register'], function () {
         Route::get('/create', 'RegisterController@create');
@@ -39,7 +39,7 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function() {
 });
 
 
-Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], function() {
+Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], function () {
 
     Route::get('/index', 'ThyroidClassController@index');
     Route::get('/phases', 'ThyroidClassController@phases');
@@ -51,9 +51,9 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
         Route::post('/store', 'SignUpController@store');
     });
 
-    Route::group(['prefix' => 'course'], function() {
+    Route::group(['prefix' => 'course'], function () {
         Route::get('/view', 'CourseController@view');
-        Route::post('/timer', 'CourseController@timer');
+        Route::any('/timer', 'CourseController@timer');
     });
 
 });
