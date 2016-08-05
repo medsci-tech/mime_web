@@ -63,7 +63,7 @@ class ThyroidClassController extends Controller
 
         $student = Student::find(\Session::get('studentId'));
         if ($student->thyroidClassStudent) {
-            return response()->json(['success' => false, ['error_message' => '已报名']]);
+            return response()->json(['success' => false, 'error_message' => '已报名']);
         } else {
             $student->enter();
             return response()->json(['success' => true]);
