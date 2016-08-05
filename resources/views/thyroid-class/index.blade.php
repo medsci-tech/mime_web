@@ -411,7 +411,7 @@
                 name: '{{$teacher->name}}',
                 title: '{{$teacher->title}}',
                 office: '{{$teacher->office}}',
-                bref: '{!! $teacher->introduction !!}}'
+                bref: '{!! $teacher->introduction !!}'
               },
               @endforeach
             ]
