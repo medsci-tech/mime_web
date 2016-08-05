@@ -25,6 +25,7 @@
 
             <form action="/home/login" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+
                 <div class="row column log-in-form">
                     <h4 class="text-center">Mime账号登录</h4>
                     <label>手机号

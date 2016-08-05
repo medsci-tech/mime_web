@@ -55,14 +55,27 @@ class LoginController extends Controller
         } /*if>*/
 
         \Session::set('studentId', $student->id);
-
+        if ($student->name
+            && $student->sex
+            && $student->email
+            && $student->birthday
+            && $student->office
+            && $student->title
+            && $student->province
+            && $student->city
+            && $student->area
+            && $student->hospital_name
+        ) {
+            \Session::set('replenished', true);
+        }
         return redirect('/');
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function logout() {
+    public function logout()
+    {
         \Session::clear();
         return redirect('/');
     }

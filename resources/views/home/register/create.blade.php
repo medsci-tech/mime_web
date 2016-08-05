@@ -40,7 +40,7 @@
             <input v-model="phone" type="number" placeholder="请输入您的手机号" name="phone">
           </label>
           <p id="error_phone" class="help-text hide">手机号已被注册</p>
-        @if($errors->has('phone'))
+          @if($errors->has('phone'))
             <p class="help-text">{{ $errors->first('phone')}}</p>
           @endif
           <label>验证码
