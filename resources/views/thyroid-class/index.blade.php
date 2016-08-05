@@ -136,11 +136,11 @@
                   <img src="/image/test.jpg" alt="">
                 </div>
               <div class="medium-9 small-12 columns">
-                <div class="row">
+                <div style="display: inline">
                   <div><strong>施秉银  教授</strong></div>
                   <div style="color: #555;">西安交通大学医学院第一附属医院院长，博士研究生导师</div>
                 </div>
-                <div class="row">
+                <div>
                   <p style="color: #555;">导师简介：</p>
                   <p>现为中华医学会内分泌学分会常委暨甲状腺专业学组副组长
                     中国医师协会内分泌代谢分会常委

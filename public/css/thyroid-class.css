@@ -69,12 +69,12 @@ img {
 .collapse .tabs-content {
   background-color: inherit;
   border: none; }
-  .collapse .tabs-content .tabs-panel {
+  .collapse .tabs-content #panel0 {
     padding: 0; }
-    .collapse .tabs-content .tabs-panel > div {
+    .collapse .tabs-content #panel0 > div {
       padding: 2rem 0 1rem 0;
       border-bottom: 1px dashed #555; }
-      .collapse .tabs-content .tabs-panel > div:last-child {
+      .collapse .tabs-content #panel0 > div:last-child {
         border: none; }
   .collapse .tabs-content .span {
     display: inline-block;
