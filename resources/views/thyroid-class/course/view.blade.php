@@ -90,7 +90,7 @@
                 top_bar_left: [
                     {
                         name: '首页',
-                        href: 'index'
+                        href: '/'
                     }, {
                         name: '课程',
                         href: '#'
