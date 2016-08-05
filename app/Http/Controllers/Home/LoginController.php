@@ -55,19 +55,7 @@ class LoginController extends Controller
         } /*if>*/
 
         \Session::set('studentId', $student->id);
-        if ($student->name
-            && $student->sex
-            && $student->email
-            && $student->birthday
-            && $student->office
-            && $student->title
-            && $student->province
-            && $student->city
-            && $student->area
-            && $student->hospital_name
-        ) {
-            \Session::set('replenished', true);
-        }
+        $this->middleware('replenish');
         return redirect('/');
     }
 
