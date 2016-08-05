@@ -46,9 +46,8 @@
       <span v-for="header in main_class.header">@{{ header }}</span>
     </div>
 
-    <div class="media-object">
+    <div class="row">
       <div class="medium-6 small-12 columns">
-        <div class="row">
           <div id="id_video_container" style="width:100%;"></div>
           <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
           <script type="text/javascript">
@@ -68,10 +67,8 @@
               );
             })()
           </script>
-        </div>
-
       </div>
-      <div class="media-object-section medium-6 small-12 columns">
+      <div class="medium-6 small-12 columns">
         <h4>@{{ main_class.body.title }}</h4>
 
         <p>@{{ main_class.body.paragraph }}<br><br></p>
