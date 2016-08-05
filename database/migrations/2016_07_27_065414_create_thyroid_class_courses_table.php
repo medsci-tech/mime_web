@@ -35,6 +35,9 @@ class CreateThyroidClassCoursesTable extends Migration
 
             $table->unique('number');
 
+            $table->string('qcloud_file_id')->comment('腾讯云 file_id');
+            $table->string('qcloud_app_id')->comment('腾讯云 app_id');
+
             $table->timestamps();
         });
 
