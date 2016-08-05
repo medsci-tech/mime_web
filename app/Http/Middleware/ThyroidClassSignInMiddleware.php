@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Student;
 use Closure;
 
 class ThyroidClassSignInMiddleware
@@ -15,6 +16,12 @@ class ThyroidClassSignInMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $student = Student::find(\Session::get('studentId'));
+        if ($student->thyroidClassStudent) {
+            return $next($request);
+        } else {
+            return redirect('/');
+        }
+
     }
 }
