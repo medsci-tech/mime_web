@@ -60,5 +60,6 @@ class CreateStudentsTable extends Migration
             $table->dropUnique('phone');
             $table->dropIndex('phone');
         });
+        Schema::drop('students');
     }
 }

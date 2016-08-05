@@ -45,7 +45,6 @@ class CreateThyroidClassPhasesTable extends Migration
     {
         //
         Schema::table('thyroid_class_phases', function (Blueprint $table) {
-            $table->dropUnique('number');
             $table->dropForeign('thyroid_class_phases_main_teacher_id_foreign');
         });
         Schema::drop('thyroid_class_phases');
