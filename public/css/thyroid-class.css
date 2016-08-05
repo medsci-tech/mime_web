@@ -91,6 +91,11 @@ img {
     color: #aaa; }
   .collapse #panel1 > div:last-child {
     border-bottom: none; }
+.collapse #panel2 .question-title {
+  background-color: #eee;
+  padding: .5rem; }
+.collapse #panel2 p {
+  padding: .5rem; }
 
 .footer {
   background-color: #f1f1f1; }

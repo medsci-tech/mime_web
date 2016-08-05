@@ -144,7 +144,13 @@ img {
   }
 
   #panel2 {
-
+    .question-title {
+      background-color: #eee;
+      padding: .5rem;
+    }
+    p {
+      padding: .5rem;
+    }
   }
 
 }
