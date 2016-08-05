@@ -23,7 +23,7 @@ class ThyroidClassPhase extends Model
      */
     public function thyroidClassCourses()
     {
-        return $this->hasMany(ThyroidClassCourse::class, 'phase_id')->where('is_show', 1);
+        return $this->hasMany(ThyroidClassCourse::class)->where('is_show', 1);
     }
 
     /**
