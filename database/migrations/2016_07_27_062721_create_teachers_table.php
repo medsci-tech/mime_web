@@ -38,6 +38,8 @@ class CreateTeachersTable extends Migration
             $table->unique('phone');
             $table->index('phone');
 
+            $table->text('introduction')->nullable()->comment('介绍');
+
             $table->timestamps();
         });
     }
