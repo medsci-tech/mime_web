@@ -48,7 +48,25 @@
 
     <div class="media-object">
       <div class="media-object-section medium-6 small-12 columns">
-        <img class="thumbnail" :src="main_class.body.image" alt="@{{ main_class.body.title }}">
+        <div id="id_video_container" style="width:100%;height: auto;"></div>
+        <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
+        <script type="text/javascript">
+          (function () {
+            var option = {
+              "auto_play": "0",
+              "file_id": "14651978969263309496",
+              "app_id": "1252490301",
+              "width": 1280,
+              "height": 720
+            };
+            /*调用播放器进行播放*/
+            new qcVideo.Player(
+              /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
+              "id_video_container",
+              option
+            );
+          })()
+        </script>
       </div>
       <div class="media-object-section medium-6 small-12 columns">
         <h4>@{{ main_class.body.title }}</h4>
@@ -149,7 +167,68 @@
         </div>
       </div>
       <div class="tabs-panel" id="panel2">
-
+        <div class="row column">
+          <br>
+          <div class="row">
+            <div class="question-title"><strong>2016甲状腺公开课是什么样的课程？</strong></div>
+            <div class="question-text">
+              <p>2016甲状腺公开课是针对甲状腺领域疾病感兴趣的医护工作者，邀请国内资深医学专家，通过免费接听语音电话或登录网络直播的形式，为甲状腺疾病相关领域的内分泌科、外科、核医学科等医生，分享最新规范化诊疗经验的系统课程。</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="question-title"><strong>2016甲状腺公开课的课程安排是什么样的？</strong></div>
+            <div class="question-text">
+              <p>2016年4月，甲状腺公开课已正式上线，期待您的加入</p>
+              <p>起止时间：2016年4月—2016年12月</p>
+              <p>课程安排：总课时21期，由甲亢、甲减、妊娠甲状腺疾病、甲状腺炎和甲状腺癌五大专题组成，其中15节为理论课，6节为答疑课</p>
+              <p>播出时间：每周更新一期课程内容，首播时间为周四下午16：00起</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="question-title"><strong>2016甲状腺公开课的学习方式是怎样的？</strong></div>
+            <div class="question-text">
+              <p>理论课学习方式：</p>
+              <br>
+              <p style="margin-left:30px;">微信学习</p>
+              <p style="margin-left:60px;">第一步：关注医师助手DocMate微信号</p>
+              <p style="margin-left:60px;">第二步：在右上角公众号信息中点击"查看历史消息"</p>
+              <p style="margin-left:60px;">第三步：找到想要学习的课程，点击学习</p>
+              <br>
+              <p style="margin-left:30px;">网页学习</p>
+              <p style="margin-left:60px;">第一步：登录网址www.mime.org.cn</p>
+              <p style="margin-left:60px;">第二步：点击公开课专题目录，学习课程</p>
+              <br>
+              <p>直播答疑课参与方式：</p>
+              <br>
+              <p style="margin-left:30px;">参与方式1：接听外呼电话</p>
+              <p style="margin-left:60px;">课前外呼接听来自（归属地：北京）的外呼电话</p>
+              <p style="margin-left:60px;">▲(如您接听语音电话中途掉线，可拨打：400-810-8811 参会密码课前短信通知)</p>
+              <br>
+              <p style="margin-left:30px;">参与方式2.登陆网络直播直播室</p>
+              <br>
+              <p style="margin-left:60px;">如您正在电脑前，你可以：</p>
+              <p style="margin-left:60px;">打开网络直播网址：www.mime.org.cn（课前30分钟开始登陆）</p>
+              <p style="margin-left:60px;">用户名：填写您的报名手机号，点击"观看"即可进入直播室</p>
+              <p style="margin-left:60px;">您可以直接点上方"观看直播"按钮直接进入直播室</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="question-title"><strong>2016甲状腺公开课如何报名？</strong></div>
+            <div class="question-text">
+              <p>报名需从微信端入口报名：微信扫描右侧二维码--填写报名资料-报名成功</p>
+              <p>参照报名成功页面内容：1.确保关注甲状腺公开课唯一微信公众号--医师助手DocMate</p>
+            </div>
+            <img src="images/tu5.png"></div>
+          <div class="row">
+            <div class="question-title"><strong>2016甲状腺公开课的咨询有哪些？</strong></div>
+            <div class="question-text">
+              <p>咨询热线：400-864-8883</p>
+              <p>课程QQ群：364666518</p>
+              <p>官方微信：医师助手DocMate</p>
+              <p>官方网站：www.mime.org.cn</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -318,15 +397,19 @@
             name: '授课老师',
             content: [
                 @foreach($teachers as $teacher)
-                {
-                    headimg: '{{$teacher->headimgurl}}',
-                    name:'{{$teacher->name}}',
-                    title:'{{$teacher->title}}',
-                    office:'{{$teacher->office}}',
-                    bref:'{{$teacher->introduction}}'
-                },
-                @endforeach
+              {
+                headimg: '{{$teacher->headimgurl}}',
+                name: '{{$teacher->name}}',
+                title: '{{$teacher->title}}',
+                office: '{{$teacher->office}}',
+                bref: '{{$teacher->introduction}}'
+              },
+              @endforeach
             ]
+          },
+          {
+            name: '常见问题',
+            content: []
           }
         ]
       },
