@@ -28,15 +28,15 @@
     </div>
   </div>
 
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="slide in swiper_pictures">
-          <a href="@{{slide.href}}">
-            <img :src="slide.image" alt="@{{slide.name}}">
-          </a>
-        </div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="slide in swiper_pictures">
+        <a href="@{{slide.href}}">
+          <img :src="slide.image" alt="@{{slide.name}}">
+        </a>
       </div>
     </div>
+  </div>
 
   <br>
   <div class="row information">
@@ -47,7 +47,7 @@
 
     <div class="row">
       <div class="medium-6 small-12 columns">
-          <div id="id_video_container" style="width:100%;"></div>
+        <div id="id_video_container" style="width:100%;"></div>
       </div>
       <div class="medium-6 small-12 columns">
         <h4>@{{ main_class.body.title }}</h4>
@@ -219,12 +219,13 @@
           </div>
           <div>
             <div class="question-title"><strong>2016甲状腺公开课如何报名？</strong></div>
+            <img style="width: 150px;float: right;" src="/image/qrcode.png">
             <div class="question-text">
               <p>报名需从微信端入口报名：微信扫描右侧二维码--填写报名资料-报名成功</p>
 
               <p>参照报名成功页面内容：1.确保关注甲状腺公开课唯一微信公众号--医师助手DocMate</p>
             </div>
-            <img src="/image/qrcode.png"></div>
+          </div>
           <div>
             <div class="question-title"><strong>2016甲状腺公开课的咨询有哪些？</strong></div>
             <div class="question-text">
