@@ -59,7 +59,21 @@
                     <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
                 </div>
                 <div class="medium-6 small-12 columns">
-                    <button type="button" class="expanded button">课程注册</button>
+                    @if(\Session::has('studentId'))
+                        @if(\Session::has('replenished') && \Session::get('replenished'))
+                            <button type="button" class="expanded button">
+                                课程注册
+                            </button>
+                        @else
+                            <button type="button" class="expanded button">
+                                完善资料后后即可课程注册
+                            </button>
+                        @endif
+                    @else
+                        <button type="button" class="expanded button">
+                            登陆后即可课程注册
+                        </button>
+                    @endif
                 </div>
                 <div class="medium-6 small-12 columns">
                     <p>@{{ main_class.other_information }}</p>
