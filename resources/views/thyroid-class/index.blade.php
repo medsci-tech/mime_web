@@ -132,16 +132,18 @@
                 </div>
             </div>
             <div class="tabs-panel" id="panel1">
+              <div class="row">
                 <div class="medium-3 small-12 columns">
                   <img src="/image/test.jpg" alt="">
                 </div>
-              <div class="medium-9 small-12 columns">
-                <div style="display: inline">
-                  <div><strong>施秉银  教授</strong></div>
-                  <div style="color: #555;">西安交通大学医学院第一附属医院院长，博士研究生导师</div>
+                <div class="medium-9 small-12 columns">
                 </div>
                 <div>
-                  <p style="color: #555;">导师简介：</p>
+                  <strong>施秉银  教授</strong>&emsp;<span style="color: #555;">西安交通大学医学院第一附属医院院长，博士研究生导师</span>
+                </div>
+                <br>
+                <div>
+                  <div style="color: #555;">导师简介：</div>
                   <p>现为中华医学会内分泌学分会常委暨甲状腺专业学组副组长
                     中国医师协会内分泌代谢分会常委
                     美国《Thyroid》杂志及《中华内科杂志》、《中华内分泌代谢杂志》、《中华糖尿病杂志》、《中国糖尿病杂志》、《中国实用内科杂志》、《国际内分泌代谢杂志》编委</p>
