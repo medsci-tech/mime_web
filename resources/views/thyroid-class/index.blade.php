@@ -47,7 +47,7 @@
     </div>
 
     <div class="media-object">
-      <div class="media-object-section medium-6 small-12 columns">
+      <div class="medium-6 small-12 columns">
         <div id="id_video_container" style="width:100%;"></div>
         <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
         <script type="text/javascript">
