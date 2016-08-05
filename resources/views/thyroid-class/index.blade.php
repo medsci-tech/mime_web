@@ -55,11 +55,14 @@
 
                 <p>@{{ main_class.body.paragraph }}<br><br></p>
 
+              <div class="row align-top">
                 <div class="medium-6 small-12 columns" v-for=" footer in main_class.footer">
-                    <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
+                  <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
                 </div>
+              </div>
 
-                <div class="row column">
+
+                <div class="row">
                     <div class="medium-6 small-12 columns">
                         @if(\Session::has('studentId'))
                             @if(\App\Models\Student::find(\Session::get('studentId'))->thyroidClassStudent)
@@ -109,8 +112,8 @@
                             <p>课程简介：@{{{ row.teacher.brief }}}</p>
                         </div>
                     </div>
-                    <div class="medium-8 small-12 columns">
-                        <div class="medium-4 small-6 columns" v-for="course in row.courses">
+                    <div class="medium-8 small-12 columns align-top">
+                        <div class="medium-4 small-6 columns" style="padding-bottom: 1rem" v-for="course in row.courses">
                             <div class="small-12">
                                 <a href="@{{ course.href }}">
                                     <img :src="course.image" alt="">
