@@ -105,7 +105,8 @@ img {
 .footer {
   background-color: #f1f1f1; }
   .footer img {
-    width: 100%; }
+    width: 100%;
+    padding: 2rem; }
 
 .video {
   background-color: #555;
