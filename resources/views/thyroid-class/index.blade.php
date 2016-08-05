@@ -139,7 +139,7 @@
           <div class="medium-9 small-12 columns">
           </div>
           <div>
-            <strong>@{{ teacher.name }}&emsp;@{{ title }}</strong>&emsp;<span class="gray">@{{ office }}</span>
+            <strong>@{{ teacher.name }}&emsp;@{{ teacher.title }}</strong>&emsp;<span class="gray">@{{ teacher.office }}</span>
           </div>
           <br>
           <div>
