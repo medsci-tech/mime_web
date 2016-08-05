@@ -138,7 +138,7 @@
 
 
 @section('js')
-    @include('home.login-modal')
+{{--    @include('home.login-modal')--}}
     <script src="/vendor/swiper/swiper-3.3.0.min.js"></script>
     <script>
         vm = new Vue({
@@ -310,10 +310,10 @@
             $('.tabs-title').eq(0).addClass('is-active');
             $('.tabs-title').eq(0).children('a').attr('aria-selected', "true");
             $('#panel0>div>div').find('.medium-4:last').addClass('end');
-            $("a[href='/home/login'],button[href='/home/login']").attr({
-                'href': '#',
-                'data-open': 'exampleModal1'
-            });
+//            $("a[href='/home/login'],button[href='/home/login']").attr({
+//                'href': '#',
+//                'data-open': 'exampleModal1'
+//            });
 
         })
 
