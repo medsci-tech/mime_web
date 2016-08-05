@@ -122,7 +122,12 @@ img {
 
   #panel1 {
     >div {
+      padding-top: 1rem;
       border-bottom: 1px solid #aaa;
+
+      .medium-3 {
+        padding: 0 2rem 2rem;
+      }
 
       .gray {
         color: #aaa;
@@ -133,6 +138,11 @@ img {
       }
     }
   }
+
+  #panel2{
+
+  }
+
 }
 
 .footer {
