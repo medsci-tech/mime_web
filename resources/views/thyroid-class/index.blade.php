@@ -28,7 +28,6 @@
     </div>
   </div>
 
-  <div class="row">
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="slide in swiper_pictures">
@@ -38,7 +37,7 @@
         </div>
       </div>
     </div>
-  </div>
+
   <br>
   <div class="row information">
     <div class="header hide-for-small-only">
