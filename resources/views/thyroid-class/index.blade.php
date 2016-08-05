@@ -244,7 +244,7 @@
 
               <p>参照报名成功页面内容：1.确保关注甲状腺公开课唯一微信公众号--医师助手DocMate</p>
             </div>
-            <img src="images/tu5.png"></div>
+            <img src="/image/qrcode.png"></div>
           <div class="row">
             <div class="question-title"><strong>2016甲状腺公开课的咨询有哪些？</strong></div>
             <div class="question-text">
@@ -267,16 +267,15 @@
       <div class="medium-8 small-12 columns">
         <dl class="">
           <dd>&emsp;</dd>
-          <dd>关于我们丨全科医学协作平台简介丨联系方式丨相关法律</dd>
+          <dd>Copyright © Medscience-tech.All rights reserved.鄂ICP备13013615号-1</dd>
           <dd>&emsp;</dd>
-          <dd>Copyright © 2016 Phoenix New Media Limited All Rights Reserved.</dd>
-          <dd>空中课堂所有学习视频课适用于《中华人民共和国著作权法》</dd>
-          <dd>空中课堂所有学习视频课经授课专家许可使用，Mime、Itangyi、空课APP经版权方可使用。</dd>
-          <dd>除非另有声明，本平台其他视频作品采用知识共享署名-非商业性使用-相同方式共享。</dd>
+          <dd>所有学习视频课适用于《中华人民共和国著作权法》</dd>
+          <dd>所有学习视频课经授课专家许可使用，Mime、医师助手APP经版权方可使用。</dd>
+          <dd>除非另有声明，本平台其他视频作品采用知识共享署名-非商业性使用-相同方式共享2.5中国大陆许可协议进行许可</dd>
         </dl>
       </div>
       <div class="medium-4 small-12 columns">
-        <img src="/image/全科医学协作平台.jpg" alt="">
+        <img src="/image/迈德科技.png" alt="">
       </div>
     </div>
   </div>
