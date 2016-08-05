@@ -45,7 +45,7 @@
       <span v-for="header in main_class.header">@{{ header }}</span>
     </div>
 
-    <div class="row">
+    <div>
       <div class="medium-6 small-12 columns">
         <div id="id_video_container" style="width:100%;"></div>
       </div>
