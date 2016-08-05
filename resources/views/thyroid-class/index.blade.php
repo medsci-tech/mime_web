@@ -186,36 +186,34 @@
                 ],
 
                 top_bar_right: [
-                        @if(\Session::has('studentId'))
-                        @if(\Session::has('replenished') && \Session::get('replenished'))
-                      {
-                        name: '{{\App\Models\Student::find(Session::get("studentId"))->name}}',
-                        href: '#'
-                    },
-                        @else
-                      {
-                        name: '{{\App\Models\Student::find(Session::get("studentId"))->phone}}',
-                        href: '#'
-                    },
+                @if(\Session::has('studentId'))
+                    @if(\Session::has('replenished') && \Session::get('replenished'))
+                        {
+                            name: '{{\App\Models\Student::find(Session::get("studentId"))->name}}',
+                            href: '#'
+                        },
+                    @else
+                        {
+                            name: '{{\App\Models\Student::find(Session::get("studentId"))->phone}}',
+                            href: '#'
+                        },
+                    @endif
                     {
-                        name: '完善资料',
-                        href: '/home/replenish/create'
-                    },
-                        @endif
-                      {
                         name: '退出',
                         href: '/home/logout'
                     }
-                        @else
-                      {
+
+                @else
+                    {
                         name: '登录',
                         href: '/home/login'
-                    }, {
+                    },
+                    {
                         name: '注册',
                         href: '/home/register/create'
                     }
-                    @endif
-                  ],
+                @endif
+                ],
 
                 swiper_pictures: [
                     {
