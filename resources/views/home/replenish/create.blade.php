@@ -98,7 +98,7 @@
           @endif
 
           <label>科室
-            <select required v-model="office" name="office">
+            <select required v-model="office" name="office" id="office">
               <option value="" disabled selected>请选择科室</option>
               <option v-for="option in office_array" value="@{{option}}">@{{option}}</option>
             </select>
@@ -108,7 +108,7 @@
           @endif
 
           <label>职称
-            <select required v-model="title" name="title">
+            <select required v-model="title" name="title" id="title">
               <option value="" disabled selected>请选择职称</option>
               <option v-for="option in title_array" value="@{{option}}">@{{option}}</option>
             </select>
@@ -145,7 +145,7 @@
       data: {
         name: '{{$student->name ?$student->name :null}}',
         nickname: '{{$student->nickname ?$student->nickname :null}}',
-        sex: '{{$student->sex ?$student->sex :null}}',
+        sex: '{{$student->sex ?$student->sex :1}}',
         birthday: '{{$student->birthday ?$student->birthday :null}}',
         province: '{{$student->province ?$student->province :null}}',
         city: '{{$student->city ?$student->city :null}}',
@@ -180,18 +180,27 @@
     $(function () {
       city_selector();
 
-      $('#province').val(vm.province);
-      $('#province').trigger('change');
-      $('#city').val(vm.city);
-      $('#city').trigger('change');
-      $('#area').val(vm.area);
-      $('#area').trigger('change');
-
-      $('#office').val(vm.office);
-      $('#office').trigger('change');
-
-      $('#title').val(vm.title);
-      $('#title').trigger('change');
+      if (vm.province != '') {
+        $('#province').val(vm.province);
+        $('#province').trigger('change');
+      }
+      if (vm.city != '') {
+        $('#city').val(vm.city);
+        $('#city').trigger('change');
+      }
+      if (vm.area != '') {
+        $('#area').val(vm.area);
+        $('#area').trigger('change');
+      }
+      if (vm.office != '') {
+        $('#office').val(vm.office);
+        $('#office').trigger('change');
+      }
+      if (vm.title != '') {
+        $('#title').val(vm.title);
+        $('#title').trigger('change');
+      }
+      
     });
   </script>
 @endsection
