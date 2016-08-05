@@ -131,11 +131,25 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs-panel" id="panel2">
-                234234
+            <div class="tabs-panel" id="panel1">
+                <div class="medium-3 small-12 columns">
+                  <img src="/image/test.jpg" alt="">
+                </div>
+              <div class="medium-9 small-12 columns">
+                <div class="row">
+                  <div><strong>施秉银  教授</strong></div>
+                  <div style="color: #555;">西安交通大学医学院第一附属医院院长，博士研究生导师</div>
+                </div>
+                <div class="row">
+                  <p style="color: #555;">导师简介：</p>
+                  <p>现为中华医学会内分泌学分会常委暨甲状腺专业学组副组长
+                    中国医师协会内分泌代谢分会常委
+                    美国《Thyroid》杂志及《中华内科杂志》、《中华内分泌代谢杂志》、《中华糖尿病杂志》、《中国糖尿病杂志》、《中国实用内科杂志》、《国际内分泌代谢杂志》编委</p>
+                </div>
+              </div>
             </div>
-            <div class="tabs-panel" id="panel3">
-                8798
+            <div class="tabs-panel" id="panel2">
+
             </div>
         </div>
     </div>
@@ -204,7 +218,7 @@
                       {
                         name: '退出',
                         href: '/home/logout'
-                    }
+                    },
 
                         @else
                       {
@@ -240,7 +254,7 @@
                     body: {
                         title: '课程介绍',
                         image: '/image/test.jpg',
-                        paragraph: '2016年甲状腺公开课由国内知名的移动医学教育平台迈德科技发起，邀请国内资深医学专家，通过免费接听语音电话或登陆网络直播的形式，为甲状腺疾病相关领域的内分泌、外科、核医学科等医生，分享最新规范化诊疗经验的系统课程。啊上课大家好请问I诶我空间啊和空间的贺卡上卡还是空间好卡的酒红色空间哈开始卡就是的好看。'
+                        paragraph: '{{$thyroidClass->comment}}'
                     },
 
                     footer: [{
