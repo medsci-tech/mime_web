@@ -84,9 +84,9 @@ img {
   border-bottom: 1px solid #aaa; }
   .collapse #panel1 > div .medium-3 {
     text-align: center;
-    padding-bottom: 1rem; }
+    padding-bottom: 2rem; }
     .collapse #panel1 > div .medium-3 img {
-      width: 250px; }
+      width: 200px; }
   .collapse #panel1 > div .gray {
     color: #aaa; }
   .collapse #panel1 > div:last-child {

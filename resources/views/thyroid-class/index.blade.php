@@ -154,7 +154,7 @@
         <div class="row column">
           <br>
 
-          <div class="row">
+          <div>
             <div class="question-title"><strong>2016甲状腺公开课是什么样的课程？</strong></div>
             <div class="question-text">
               <p>
@@ -162,7 +162,7 @@
               </p>
             </div>
           </div>
-          <div class="row">
+          <div>
             <div class="question-title"><strong>2016甲状腺公开课的课程安排是什么样的？</strong></div>
             <div class="question-text">
               <p>2016年4月，甲状腺公开课已正式上线，期待您的加入</p>
@@ -174,7 +174,7 @@
               <p>播出时间：每周更新一期课程内容，首播时间为周四下午16：00起</p>
             </div>
           </div>
-          <div class="row">
+          <div>
             <div class="question-title"><strong>2016甲状腺公开课的学习方式是怎样的？</strong></div>
             <div class="question-text">
               <p>理论课学习方式：</p>
@@ -218,7 +218,7 @@
               <p style="margin-left:60px;">您可以直接点上方"观看直播"按钮直接进入直播室</p>
             </div>
           </div>
-          <div class="row">
+          <div>
             <div class="question-title"><strong>2016甲状腺公开课如何报名？</strong></div>
             <div class="question-text">
               <p>报名需从微信端入口报名：微信扫描右侧二维码--填写报名资料-报名成功</p>
@@ -226,7 +226,7 @@
               <p>参照报名成功页面内容：1.确保关注甲状腺公开课唯一微信公众号--医师助手DocMate</p>
             </div>
             <img src="/image/qrcode.png"></div>
-          <div class="row">
+          <div>
             <div class="question-title"><strong>2016甲状腺公开课的咨询有哪些？</strong></div>
             <div class="question-text">
               <p>咨询热线：400-864-8883</p>
