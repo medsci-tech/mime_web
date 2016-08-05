@@ -121,12 +121,15 @@ img {
   }
 
   #panel1 {
-    >div {
+    > div {
       padding-top: 1rem;
       border-bottom: 1px solid #aaa;
 
       .medium-3 {
-        padding: 0 2rem 2rem;
+        padding: 0 4rem auto;
+        img {
+          width: 200px;
+        }
       }
 
       .gray {
@@ -139,7 +142,7 @@ img {
     }
   }
 
-  #panel2{
+  #panel2 {
 
   }
 
