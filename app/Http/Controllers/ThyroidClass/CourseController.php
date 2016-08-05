@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ThyroidClass;
 
+use App\Models\ThyroidClass;
 use App\Models\ThyroidClass\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class CourseController extends Controller
     {
         return view('thyroid-class.course.view', [
             'course' => ThyroidClassCourse::find($request->input('course_id')),
-            'phases' => ThyroidClassPhase::all()
+            'thyroidClassPhases' => ThyroidClassPhase::all()
         ]);
     }
 
