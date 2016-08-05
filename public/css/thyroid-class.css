@@ -80,7 +80,7 @@ img {
     display: inline-block;
     font-size: 90%; }
 .collapse #panel1 > div {
-  padding-top: 1rem;
+  padding-top: 2rem;
   border-bottom: 1px solid #aaa; }
   .collapse #panel1 > div .medium-3 {
     text-align: center;
@@ -91,11 +91,13 @@ img {
     color: #aaa; }
   .collapse #panel1 > div:last-child {
     border-bottom: none; }
+  .collapse #panel1 > div:first-child {
+    padding-top: 1rem; }
 .collapse #panel2 .question-title {
   background-color: #eee;
   padding: .5rem; }
 .collapse #panel2 p {
-  padding: 0 .5rem;
+  padding: 0 1rem;
   margin-bottom: 0; }
   .collapse #panel2 p:last-child {
     margin-bottom: 1rem; }
