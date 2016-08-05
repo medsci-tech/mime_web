@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,7 +41,7 @@ class ReplenishController extends Controller
         {
             return redirect('home/replenish/error');
         } /*if>*/
-        
+        $student->birthday = date('Y-m-d', strtotime($student->birthday));
         return view('home.replenish.create', ['student' => $student]);
     }
 
