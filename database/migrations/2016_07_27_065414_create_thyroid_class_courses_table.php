@@ -30,8 +30,8 @@ class CreateThyroidClassCoursesTable extends Migration
             $table->integer('teacher_id')->unsigned()->comment('教师ID');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
-            $table->integer('phase_id')->unsigned()->comment('学期ID');
-            $table->foreign('phase_id')->references('id')->on('thyroid_class_phases');
+            $table->integer('thyroid_class_phase_id')->unsigned()->comment('学期ID');
+            $table->foreign('thyroid_class_phase_id')->references('id')->on('thyroid_class_phases');
 
             $table->unique('number');
 
