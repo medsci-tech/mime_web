@@ -44,6 +44,7 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
     Route::get('/phases', 'ThyroidClassController@phases');
     Route::get('/teachers', 'ThyroidClassController@teachers');
     Route::get('/questions', 'ThyroidClassController@questions');
+    Route::get('/enter', 'ThyroidClassController@enter');
 
     Route::group(['prefix' => 'sign-up'], function () {
         Route::get('/create', 'SignUpController@create');
