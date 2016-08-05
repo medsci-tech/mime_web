@@ -3,6 +3,7 @@
 namespace App\Helpers\Statistics;
 
 use App\Models\ThyroidClass\ThyroidClassCourse;
+use App\Models\ThyroidClassPhase;
 
 /**
  * Class Statistics
@@ -19,16 +20,16 @@ class Statistics
         $course->save();
     }
 
-    protected function updatePhaseCount($course)
+    protected function updatePhaseCount($phaseId)
     {
-        $course->thyroidClassPhase->play_count += 1;
-        $course->save();
+        $phase = ThyroidClassPhase::find($phaseId)->play_count += 1;
+        $phase->save();
     }
 
     public function updateCount($courseId)
     {
         $course = ThyroidClassCourse::find($courseId);
-        $this->updatePhaseCount($course);
+        $this->updateCourseCount($course->phase_id);
         $this->updatePhaseCount($course);
     }
 } /*class*/
