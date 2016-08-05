@@ -139,7 +139,7 @@
           <div class="medium-9 small-12 columns">
           </div>
           <div>
-            <strong>@{{ teacher.name }}&emsp;@{{ nickname }}</strong>&emsp;<span class="gray">西安交通大学医学院第一附属医院院长，博士研究生导师</span>
+            <strong>@{{ teacher.name }}&emsp;@{{ title }}</strong>&emsp;<span class="gray">@{{ office }}</span>
           </div>
           <br>
           <div>
@@ -320,8 +320,8 @@
               {
                 headimg: '',
                 name:'',
-                nickname:'',
                 title:'',
+                office:'',
                 bref:''
               }
             ]
