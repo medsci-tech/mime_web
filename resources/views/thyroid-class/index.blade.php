@@ -271,7 +271,7 @@
                                     title: '{{$thyroidClassPhase->title}}',
                                     image: '{{$thyroidClassPhase->teacher->headimgurl}}',
                                     teacher_name: '{{$thyroidClassPhase->teacher->name}}',
-                                    brief: ''
+                                    brief: '{{$thyroidClassPhase->comment}}'
                                 },
                                 courses: [
                                         @foreach($thyroidClassPhase->thyroidClassCourses as $thyroidClassCourse)
