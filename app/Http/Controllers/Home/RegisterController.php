@@ -61,7 +61,9 @@ class RegisterController extends Controller
         $student->password = \Hash::make($request->input('password'));
         $student->save();
 
-        return redirect('/');
+        \Session::set('studentId', $student->id);
+
+        return redirect('/home/replenish/create');
     }
 
     public function sms(Request $request)
