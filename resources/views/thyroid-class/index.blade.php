@@ -151,8 +151,7 @@
         </div>
       </div>
       <div class="tabs-panel" id="panel2">
-        <div class="row column">
-          <br>
+        <div class="row">
 
           <div>
             <div class="question-title"><strong>2016甲状腺公开课是什么样的课程？</strong></div>
