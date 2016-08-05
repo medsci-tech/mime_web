@@ -269,8 +269,8 @@
                               {
                                 teacher: {
                                     title: '{{$thyroidClassPhase->title}}',
-                                    image: '{{$thyroidClassPhase->teacher->headimgurl}}',
-                                    teacher_name: '{{$thyroidClassPhase->logo_url}}',
+                                    image: '{{$thyroidClassPhase->logo_url}}',
+                                    teacher_name: '{{$thyroidClassPhase->teacher->name}}',
                                     brief: '{!!  $thyroidClassPhase->comment !!}'
                                 },
                                 courses: [
