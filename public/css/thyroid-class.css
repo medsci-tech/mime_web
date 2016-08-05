@@ -95,7 +95,10 @@ img {
   background-color: #eee;
   padding: .5rem; }
 .collapse #panel2 p {
-  padding: .5rem; }
+  padding: .5rem 0;
+  margin-bottom: 0; }
+  .collapse #panel2 p:last-child {
+    margin-bottom: 1rem; }
 
 .footer {
   background-color: #f1f1f1; }
