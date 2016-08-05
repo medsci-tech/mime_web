@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="medium-8 small-12 columns">
-                        <div class="medium-4 small-6 columns" v-for="course in row.courses">
+                        <div class="medium-4 small-6 columns" style="padding-bottom: 1rem" v-for="course in row.courses">
                             <div class="small-12">
                                 <a href="@{{ course.href }}">
                                     <img :src="course.image" alt="">
