@@ -156,6 +156,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\MessageServiceProvider::class,
+        App\Providers\StatisticsServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
@@ -204,8 +205,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Message' =>  App\Helpers\Message\Facades\Message::class
-
+        'Message' =>  App\Helpers\Message\Facades\Message::class,
+        'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class
     ],
 
 ];

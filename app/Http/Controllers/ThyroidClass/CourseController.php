@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ThyroidClass;
 
+use App\Helpers\Statistics\Facades\Statistics;
 use App\Models\ThyroidClass;
 use App\Models\ThyroidClass\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
@@ -28,6 +29,7 @@ class CourseController extends Controller
 
     public function view(Request $request)
     {
+        \Statistics::updateCount($request->input('course_id'));
         return view('thyroid-class.course.view', [
             'course' => ThyroidClassCourse::find($request->input('course_id')),
             'thyroidClassPhases' => ThyroidClassPhase::all()
