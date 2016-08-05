@@ -32,6 +32,7 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function () {
     });
 
     Route::get('/login', 'LoginController@showLoginForm');
+    Route::any('/logout', 'LoginController@logout');
     Route::post('/login', 'LoginController@login');
 
 });

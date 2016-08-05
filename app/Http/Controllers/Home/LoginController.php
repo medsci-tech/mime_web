@@ -59,4 +59,12 @@ class LoginController extends Controller
         return redirect('/');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logout() {
+        \Session::clear();
+        return redirect('/');
+    }
+
 } /*class*/
