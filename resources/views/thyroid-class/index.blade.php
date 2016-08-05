@@ -106,7 +106,7 @@
 
                             <p>讲师：@{{ row.teacher.teacher_name }}</p>
 
-                            <p>课程简介：@{{ row.teacher.brief }}</p>
+                            <p>课程简介：@{{{ row.teacher.brief }}}</p>
                         </div>
                     </div>
                     <div class="medium-8 small-12 columns">
