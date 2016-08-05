@@ -315,15 +315,17 @@
             ]
           },
           {
-            name: '213123',
+            name: '授课老师',
             content: [
-              {
-                headimg: '',
-                name:'',
-                title:'',
-                office:'',
-                bref:''
-              }
+                @foreach($teachers as $teacher)
+                {
+                    headimg: '{{$teacher->headimgurl}}',
+                    name:'{{$teacher->name}}',
+                    title:'{{$teacher->title}}',
+                    office:'{{$teacher->office}}',
+                    bref:'{{$teacher->introduction}}'
+                },
+                @endforeach
             ]
           }
         ]

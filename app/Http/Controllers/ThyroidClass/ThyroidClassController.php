@@ -24,7 +24,7 @@ class ThyroidClassController extends Controller
     public function index()
     {
         return view('thyroid-class.index', [
-            'teacher' => Teacher::all(),
+            'teachers' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
             'studentCount' => ThyroidClassStudent::count()
