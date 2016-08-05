@@ -55,11 +55,14 @@
 
                 <p>@{{ main_class.body.paragraph }}<br><br></p>
 
+              <div class="row">
                 <div class="medium-6 small-12 columns" v-for=" footer in main_class.footer">
-                    <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
+                  <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
                 </div>
+              </div>
 
-                <div class="row column">
+
+                <div class="row">
                     <div class="medium-6 small-12 columns">
                         @if(\Session::has('studentId'))
                             @if(\App\Models\Student::find(\Session::get('studentId'))->thyroidClassStudent)
