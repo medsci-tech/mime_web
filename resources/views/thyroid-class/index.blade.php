@@ -65,14 +65,14 @@
                                 课程注册
                             </button>
                         @else
-                            <button type="button" class="expanded button">
-                                完善资料后后即可课程注册
-                            </button>
+                            <a type="button" class="expanded button" href="/home/replenish/create">
+                                课程注册
+                            </a>
                         @endif
                     @else
-                        <button type="button" class="expanded button">
-                            登陆后即可课程注册
-                        </button>
+                        <a type="button" class="expanded button" href="/home/login">
+                            课程注册
+                        </a>
                     @endif
                 </div>
                 <div class="medium-6 small-12 columns">
