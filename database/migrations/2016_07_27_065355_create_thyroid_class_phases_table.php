@@ -19,7 +19,7 @@ class CreateThyroidClassPhasesTable extends Migration
             $table->unsignedInteger('number')->comment('学期编号');
 
             $table->string('title')->comment('学期title');
-            $table->string('comment')->comment('学期简介');
+            $table->text('comment')->comment('学期简介');
             $table->string('logo_url')->comment('logo');
 
             $table->unsignedInteger('student_count')->default(0)->comment('学生数');
