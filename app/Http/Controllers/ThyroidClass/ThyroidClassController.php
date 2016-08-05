@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ThyroidClass;
 
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\ThyroidClass\ThyroidClass;
 use App\Models\ThyroidClassPhase;
 use App\Models\ThyroidClassStudent;
@@ -23,6 +24,7 @@ class ThyroidClassController extends Controller
     public function index()
     {
         return view('thyroid-class.index', [
+            'teacher' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
             'studentCount' => ThyroidClassStudent::count()
