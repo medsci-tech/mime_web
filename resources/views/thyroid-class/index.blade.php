@@ -48,25 +48,28 @@
 
     <div class="media-object">
       <div class="medium-6 small-12 columns">
-        <div id="id_video_container" style="width:100%;"></div>
-        <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
-        <script type="text/javascript">
-          (function () {
-            var option = {
-              "auto_play": "0",
-              "file_id": "14651978969263309496",
-              "app_id": "1252490301",
-              "width": 1920,
-              "height": 1080
-            };
-            /*调用播放器进行播放*/
-            new qcVideo.Player(
-              /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
-              "id_video_container",
-              option
-            );
-          })()
-        </script>
+        <div class="row">
+          <div id="id_video_container" style="width:100%;"></div>
+          <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
+          <script type="text/javascript">
+            (function () {
+              var option = {
+                "auto_play": "0",
+                "file_id": "14651978969263309496",
+                "app_id": "1252490301",
+                "width": 1920,
+                "height": 1080
+              };
+              /*调用播放器进行播放*/
+              new qcVideo.Player(
+                /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
+                "id_video_container",
+                option
+              );
+            })()
+          </script>
+        </div>
+
       </div>
       <div class="media-object-section medium-6 small-12 columns">
         <h4>@{{ main_class.body.title }}</h4>
