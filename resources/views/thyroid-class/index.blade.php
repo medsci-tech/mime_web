@@ -55,7 +55,7 @@
 
                 <p>@{{ main_class.body.paragraph }}<br><br></p>
 
-              <div class="row">
+              <div class="row align-top">
                 <div class="medium-6 small-12 columns" v-for=" footer in main_class.footer">
                   <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
                 </div>
@@ -112,7 +112,7 @@
                             <p>课程简介：@{{{ row.teacher.brief }}}</p>
                         </div>
                     </div>
-                    <div class="medium-8 small-12 columns">
+                    <div class="medium-8 small-12 columns align-top">
                         <div class="medium-4 small-6 columns" style="padding-bottom: 1rem" v-for="course in row.courses">
                             <div class="small-12">
                                 <a href="@{{ course.href }}">
