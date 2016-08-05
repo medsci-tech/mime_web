@@ -108,11 +108,12 @@
 
                 top_bar_right: [
                     {
-                        name: '登录',
+                        name: '{{\App\Models\Student::find(Session::get("studentId"))->name}}',
                         href: '#'
-                    }, {
-                        name: '注册',
-                        href: '#'
+                    },
+                    {
+                        name: '退出',
+                        href: '/home/logout'
                     }
                 ],
 
@@ -137,31 +138,15 @@
                     {
                         subject: '{{$thyroidClassPhase->title}}',
                         courses: [
-                             @foreach($thyroidClassPhase->thyroidClassCourses as $thyroidClassCourse)
+                            @foreach($thyroidClassPhase->thyroidClassCourses as $thyroidClassCourse)
                             {
                                 name: '{{$thyroidClassCourse->title}}',
                                 href: '/thyroid-class/course/view?course_id={{$thyroidClassCourse->id}}'
                             },
                             @endforeach
-                                {
-                                name: '第二期 xxxx',
-                                href: '#'
-                            }
                         ]
                     },
                     @endforeach
-                       {
-                        subject: '甲减专题',
-                        courses: [
-                            {
-                                name: '第一期 xxxx',
-                                href: '#'
-                            }, {
-                                name: '第二期 xxxx',
-                                href: '#'
-                            }
-                        ]
-                    }
                 ]
 
             }
