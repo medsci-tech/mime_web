@@ -22,7 +22,7 @@ class ThyroidClassCourse extends Model
      */
     public function thyroidClassPhase()
     {
-        return $this->belongsTo(ThyroidClassPhase::class, 'thyroid_class_courses_phase_id_foreign');
+        return $this->belongsTo(ThyroidClassPhase::class, 'phase_id');
     }
 
     /**
