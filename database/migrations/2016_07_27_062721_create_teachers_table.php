@@ -51,12 +51,8 @@ class CreateTeachersTable extends Migration
      */
     public function down()
     {
-        //
         Schema::table('teachers', function (Blueprint $table) {
-            //
             $table->dropUnique('phone');
-            $table->dropIndex('phone');
-
         });
         Schema::drop('teachers');
     }
