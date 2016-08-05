@@ -14,22 +14,23 @@ class Statistics
     /**
      * @param $course
      */
-    protected function updateCourseCount($course)
+    protected function updateCourseCount($courseId)
     {
+        $course = ThyroidClassCourse::find($courseId);
         $course->play_count += 1;
         $course->save();
     }
 
-    protected function updatePhaseCount($phaseId)
+    protected function updatePhaseCount($courseId)
     {
-        $phase = ThyroidClassPhase::find($phaseId)->play_count += 1;
+        $course = ThyroidClassCourse::find($courseId);
+        $phase = ThyroidClassPhase::find($course->phase_id)->play_count += 1;
         $phase->save();
     }
 
     public function updateCount($courseId)
     {
-        $course = ThyroidClassCourse::find($courseId);
-        $this->updateCourseCount($course->phase_id);
-        $this->updatePhaseCount($course);
+        $this->updateCourseCount($courseId);
+        $this->updatePhaseCount($courseId);
     }
 } /*class*/
