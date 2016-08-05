@@ -79,6 +79,12 @@ img {
   .collapse .tabs-content .span {
     display: inline-block;
     font-size: 90%; }
+.collapse #panel1 > div {
+  border-bottom: 1px solid #aaa; }
+  .collapse #panel1 > div .gray {
+    color: #aaa; }
+  .collapse #panel1 > div:last-child {
+    border-bottom: none; }
 
 .footer {
   background-color: #f1f1f1; }

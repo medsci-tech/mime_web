@@ -121,7 +121,17 @@ img {
   }
 
   #panel1 {
+    >div {
+      border-bottom: 1px solid #aaa;
 
+      .gray {
+        color: #aaa;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
   }
 }
 
