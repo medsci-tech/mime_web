@@ -169,8 +169,8 @@
                 "auto_play": "0",
                 "file_id": "{{$course->qcloud_file_id}}",
                 "app_id": "{{$course->qcloud_app_id}}",
-                "width": 960,
-                "height": 600
+                "width": 1920,
+                "height": 1080
             };
             /*调用播放器进行播放*/
             var func = {
