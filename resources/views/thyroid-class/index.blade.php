@@ -58,12 +58,30 @@
         <div class="medium-6 small-12 columns" v-for=" footer in main_class.footer">
           <p><i class="fa fa-@{{ footer.fa }}"></i>&nbsp;@{{ footer.title }}：@{{ footer.content }}</p>
         </div>
-        <div class="medium-6 small-12 columns">
-          <button type="button" class="expanded button">课程注册</button>
+
+        <div class="row column">
+          <div class="medium-6 small-12 columns">
+            @if(\Session::has('studentId'))
+              @if(\Session::has('replenished') && \Session::get('replenished'))
+                <button @click="register_course" type="button" class="expanded button">
+                  课程注册
+                </button>
+              @else
+                <a type="button" class="expanded button" href="/home/replenish/create">
+                  课程注册
+                </a>
+              @endif
+            @else
+              <a type="button" class="expanded button" href="/home/login">
+                课程注册
+              </a>
+            @endif
+          </div>
+          <div class="medium-6 small-12 columns">
+            <p>@{{ main_class.other_information }}</p>
+          </div>
         </div>
-        <div class="medium-6 small-12 columns">
-          <p>@{{ main_class.other_information }}</p>
-        </div>
+
       </div>
     </div>
   </div>
@@ -98,7 +116,8 @@
                 <div>@{{ course.title }}</div>
                 <div class="span" v-for="span in course.information"><i
                     class="fa fa-@{{ span.fa }}"></i>&nbsp;<span>@{{ span.title }}
-                    <template v-if="span.title != ''&&span.title != null">：</template>@{{ span.content }}</span>&emsp;
+                    <template v-if="span.title != ''&&span.title != null">：
+                    </template>@{{ span.content }}</span>&emsp;
                 </div>
               </div>
             </div>
@@ -133,12 +152,11 @@
     </div>
   </div>
 
-  @extends('home.login-modal')
-
 @endsection
 
 
 @section('js')
+  {{--    @include('home.login-modal')--}}
   <script src="/vendor/swiper/swiper-3.3.0.min.js"></script>
   <script>
     vm = new Vue({
@@ -164,6 +182,27 @@
         ],
 
         top_bar_right: [
+            @if(\Session::has('studentId'))
+            @if(\Session::has('replenished') && \Session::get('replenished'))
+          {
+            name: '{{\App\Models\Student::find(Session::get("studentId"))->name}}',
+            href: '#'
+          },
+            @else
+          {
+            name: '{{\App\Models\Student::find(Session::get("studentId"))->phone}}',
+            href: '#'
+          },
+          {
+            name: '完善资料',
+            href: '/home/replenish/create'
+          },
+            @endif
+          {
+            name: '退出',
+            href: '/home/logout'
+          }
+            @else
           {
             name: '登录',
             href: '/home/login'
@@ -171,6 +210,7 @@
             name: '注册',
             href: '/home/register/create'
           }
+          @endif
         ],
 
         swiper_pictures: [
@@ -267,13 +307,20 @@
                   }
                 ]
               },
-                @endforeach
+              @endforeach
             ]
           },
           {
             name: '213123'
           }
         ]
+      },
+      methods:{
+        register_course : function () {
+          $.post('/thyroid-class/enter','',function (data) {
+              history.go(0);
+          })
+        }
       }
     });
 
@@ -288,10 +335,10 @@
       $('.tabs-title').eq(0).addClass('is-active');
       $('.tabs-title').eq(0).children('a').attr('aria-selected', "true");
       $('#panel0>div>div').find('.medium-4:last').addClass('end');
-      $("a[href='/home/login'],button[href='/home/login']").attr({
-        'href':'#',
-        'data-open':'exampleModal1'
-      });
+//            $("a[href='/home/login'],button[href='/home/login']").attr({
+//                'href': '#',
+//                'data-open': 'exampleModal1'
+//            });
 
     })
 

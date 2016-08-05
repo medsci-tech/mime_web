@@ -27,7 +27,6 @@ class ReplenishMiddleware
             && $student->province
             && $student->city
             && $student->area
-            && $student->hospital_level
             && $student->hospital_name) {
             return $next($request);
         } else {

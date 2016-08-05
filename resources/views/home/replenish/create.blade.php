@@ -25,6 +25,7 @@
 
       <form action="/home/replenish/store" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+
         <div class="row column log-in-form">
           <h4 class="text-center">个人信息完善</h4>
 
@@ -32,13 +33,17 @@
             <input required v-model="name" type="text" placeholder="请输入" name="name">
           </label>
 
-          <p id="error_name" class="help-text hide">请输入</p>
+          @if($errors->has('name'))
+            <p class="help-text">{{ $errors->first('name')}}</p>
+          @endif
 
           <label>昵称
             <input required v-model="nickname" type="text" placeholder="请输入" name="nickname">
           </label>
 
-          <p id="error_nickname" class="help-text hide">请输入</p>
+          @if($errors->has('nickname'))
+            <p class="help-text">{{ $errors->first('nickname')}}</p>
+          @endif
 
           <div style="font-size: .875rem">
             <div class="small-2 columns" style="padding-left: 0;">性别</div>
@@ -49,11 +54,16 @@
               <input v-model="sex" type="radio" value="0" name=sex">女
             </label>
           </div>
-          <p id="error_sex" class="help-text hide">请输入</p>
+          @if($errors->has('sex'))
+            <p class="help-text">{{ $errors->first('sex')}}</p>
+          @endif
 
           <label>出生日期
             <input required v-model="birthday" type="date" placeholder="选择出生日期" name="birthday">
           </label>
+          @if($errors->has('birthday'))
+            <p class="help-text">{{ $errors->first('birthday')}}</p>
+          @endif
 
           <div style="font-size: .875rem">地区
             <div class="row">
@@ -69,41 +79,52 @@
               </label>
             </div>
           </div>
-          <p id="error_province" class="help-text hide">请输入</p>
-
-          <p id="error_city" class="help-text hide">请输入</p>
-
-          <p id="error_area" class="help-text hide">请输入</p>
+          @if($errors->has('birthday'))
+            <p class="help-text">{{ $errors->first('province')}}</p>
+          @endif
+          @if($errors->has('birthday'))
+            <p class="help-text">{{ $errors->first('city')}}</p>
+          @endif
+          @if($errors->has('birthday'))
+            <p class="help-text">{{ $errors->first('area')}}</p>
+          @endif
 
           <label>医院
-            <input required v-model="hospital" type="text" placeholder="请输入" name="hospital_name">-
+            <input required v-model="hospital" type="text" placeholder="请输入" name="hospital_name">
           </label>
 
-          <p id="error_hospital" class="help-text hide">请输入</p>
+          @if($errors->has('hospital_name'))
+            <p class="help-text">{{ $errors->first('hospital_name')}}</p>
+          @endif
 
           <label>科室
-            <select required v-model="office" name="office">
-              <option value="" disabled selected>请选择科室</option>
+            <select required v-model="office" name="office" id="office">
+              <option value="" disabled>请选择科室</option>
               <option v-for="option in office_array" value="@{{option}}">@{{option}}</option>
             </select>
           </label>
-
-          <p id="error_office" class="help-text hide">请输入</p>
+          @if($errors->has('office'))
+            <p class="help-text">{{ $errors->first('office')}}</p>
+          @endif
 
           <label>职称
-            <select required v-model="title" name="title">
-              <option value="" disabled selected>请选择职称</option>
+            <select required v-model="title" name="title" id="title">
+              <option value="" disabled>请选择职称</option>
               <option v-for="option in title_array" value="@{{option}}">@{{option}}</option>
             </select>
           </label>
 
-          <p id="error_title" class="help-text hide">请输入</p>
+          @if($errors->has('title'))
+            <p class="help-text">{{ $errors->first('title')}}</p>
+          @endif
 
           <label>邮箱
             <input required v-model="email" type="text" placeholder="请输入" name="email">
           </label>
 
-          <p id="error_email" class="help-text hide">请输入</p>
+          @if($errors->has('email'))
+            <p class="help-text">{{ $errors->first('email')}}</p>
+          @endif
 
           <p>
             <button type="submit" class="button expanded">确&emsp;认</button>
@@ -124,7 +145,7 @@
       data: {
         name: '{{$student->name ?$student->name :null}}',
         nickname: '{{$student->nickname ?$student->nickname :null}}',
-        sex: '{{$student->sex ?$student->sex :null}}',
+        sex: '{{$student->sex ?$student->sex :1}}',
         birthday: '{{$student->birthday ?$student->birthday :null}}',
         province: '{{$student->province ?$student->province :null}}',
         city: '{{$student->city ?$student->city :null}}',
@@ -159,12 +180,27 @@
     $(function () {
       city_selector();
 
-      $('#province').val(vm.province);
-      $('#province').trigger('change');
-      $('#city').val(vm.city);
-      $('#city').trigger('change');
-      $('#area').val(vm.area);
-      $('#area').trigger('change');
+      if (vm.province != '') {
+        $('#province').val(vm.province);
+        $('#province').trigger('change');
+      }
+      if (vm.city != '') {
+        $('#city').val(vm.city);
+        $('#city').trigger('change');
+      }
+      if (vm.area != '') {
+        $('#area').val(vm.area);
+        $('#area').trigger('change');
+      }
+      if (vm.office != '') {
+        $('#office').val(vm.office);
+        $('#office').trigger('change');
+      }
+      if (vm.title != '') {
+        $('#title').val(vm.title);
+        $('#title').trigger('change');
+      }
+
     });
   </script>
 @endsection
