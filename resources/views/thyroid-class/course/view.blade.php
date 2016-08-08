@@ -174,7 +174,7 @@
 
                     function timer() {
 
-                        $.post('/thyroid-class/course/timer', '', function (data) {
+                        $.post('/thyroid-class/course/timer', {course_id: option.file_id}, function (data) {
                             if (data) {
                                 console.log('OK');
                             } else {
