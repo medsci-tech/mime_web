@@ -159,7 +159,7 @@ return [
         App\Providers\StatisticsServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -206,7 +206,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Message' =>  App\Helpers\Message\Facades\Message::class,
-        'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class
+        'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
     ],
 
 ];
