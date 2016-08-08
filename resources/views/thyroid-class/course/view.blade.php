@@ -28,18 +28,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="slide in swiper_pictures">
-                    <a href="@{{slide.href}}">
-                        <img :src="slide.image" alt="@{{slide.name}}">
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div style="background-color: #25562c;">
+        <div class="row">
+            <img src="/image/banner_top.jpg" alt="">
+        </div>   
     </div>
 
+<div style="background-color: #555;">
     <div class="row video">
 
         <div class="medium-8 small-12 columns">
@@ -57,6 +52,8 @@
             </ul>
         </div>
     </div>
+</div>
+
 
     <div class="footer">
         <div class="row">
