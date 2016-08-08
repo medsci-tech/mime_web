@@ -9,13 +9,13 @@ use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 
 /**
  * Class CourseController
  * @package App\Http\Controllers\ThyroidClass
  */
-class CourseController extends Controller
+class CourseController extends WebController
 {
     /**
      *
