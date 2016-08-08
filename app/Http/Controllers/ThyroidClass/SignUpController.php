@@ -5,9 +5,9 @@ namespace App\Http\Controllers\ThyroidClass;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 
-class SignUpController extends Controller
+class SignUpController extends WebController
 {
     //
     public function create(Request $request)
