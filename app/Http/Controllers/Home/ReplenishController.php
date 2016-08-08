@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 
 use App\Models\Student;
 
@@ -14,7 +14,7 @@ use App\Models\Student;
  * Class ReplenishController
  * @package App\Http\Controllers\Home
  */
-class ReplenishController extends Controller
+class ReplenishController extends WebController
 {
 
     /**

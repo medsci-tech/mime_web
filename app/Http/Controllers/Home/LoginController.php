@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 use App\Models\Student;
 
 /**
  * Class LoginController
  * @package App\Http\Controllers\Home
  */
-class LoginController extends Controller
+class LoginController extends WebController
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
