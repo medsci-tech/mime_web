@@ -19,7 +19,7 @@ class CreateThyroidClassPhasesTable extends Migration
             $table->unsignedInteger('number')->comment('学期编号');
 
             $table->string('title')->comment('学期title');
-            $table->string('comment')->comment('学期简介');
+            $table->text('comment')->comment('学期简介');
             $table->string('logo_url')->comment('logo');
 
             $table->unsignedInteger('student_count')->default(0)->comment('学生数');
@@ -45,7 +45,6 @@ class CreateThyroidClassPhasesTable extends Migration
     {
         //
         Schema::table('thyroid_class_phases', function (Blueprint $table) {
-            $table->dropUnique('number');
             $table->dropForeign('thyroid_class_phases_main_teacher_id_foreign');
         });
         Schema::drop('thyroid_class_phases');

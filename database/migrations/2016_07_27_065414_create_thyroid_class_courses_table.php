@@ -30,10 +30,15 @@ class CreateThyroidClassCoursesTable extends Migration
             $table->integer('teacher_id')->unsigned()->comment('教师ID');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
-            $table->integer('phase_id')->unsigned()->comment('学期ID');
-            $table->foreign('phase_id')->references('id')->on('thyroid_class_phases');
+            $table->integer('thyroid_class_phase_id')->unsigned()->comment('学期ID');
+            $table->foreign('thyroid_class_phase_id')->references('id')->on('thyroid_class_phases');
 
             $table->unique('number');
+
+            $table->string('qcloud_file_id')->comment('腾讯云 file_id');
+            $table->string('qcloud_app_id')->comment('腾讯云 app_id');
+
+            $table->tinyInteger('is_show')->default(0)->comment('是否显示');
 
             $table->timestamps();
         });
@@ -49,7 +54,6 @@ class CreateThyroidClassCoursesTable extends Migration
     {
         //
         Schema::table('thyroid_class_courses', function (Blueprint $table) {
-            $table->dropUnique('number');
             $table->dropForeign('thyroid_class_courses_teacher_id_foreign');
             $table->dropForeign('thyroid_class_courses_phase_id_foreign');
         });

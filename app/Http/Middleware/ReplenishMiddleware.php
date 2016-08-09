@@ -28,6 +28,8 @@ class ReplenishMiddleware
             && $student->city
             && $student->area
             && $student->hospital_name) {
+
+            \Session::set('replenished', true);
             return $next($request);
         } else {
             return redirect('/home/replenish/create');

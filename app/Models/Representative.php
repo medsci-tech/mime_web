@@ -11,7 +11,7 @@ class Representative extends Model
 
     public function company()
     {
-        return $this->belongsTo('App\Models\Company', 'company_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
 }

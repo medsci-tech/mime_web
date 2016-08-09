@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 use App\Models\Student;
 
 /**
  * Class LoginController
  * @package App\Http\Controllers\Home
  */
-class LoginController extends Controller
+class LoginController extends WebController
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -67,8 +67,11 @@ class LoginController extends Controller
             && $student->hospital_name
         ) {
             \Session::set('replenished', true);
+            return redirect('/');
+        } else {
+            return redirect('/home/replenish/create');
         }
-        return redirect('/');
+
     }
 
     /**

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 use App\Models\MessageVerify;
 use App\Models\Student;
 
-class RegisterController extends Controller
+class RegisterController extends WebController
 {
     //
     public function create()
@@ -61,7 +61,9 @@ class RegisterController extends Controller
         $student->password = \Hash::make($request->input('password'));
         $student->save();
 
-        return redirect('/');
+        \Session::set('studentId', $student->id);
+
+        return redirect('/home/replenish/create');
     }
 
     public function sms(Request $request)

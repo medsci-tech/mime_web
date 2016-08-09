@@ -38,6 +38,8 @@ class CreateTeachersTable extends Migration
             $table->unique('phone');
             $table->index('phone');
 
+            $table->text('introduction')->nullable()->comment('介绍');
+
             $table->timestamps();
         });
     }
@@ -49,11 +51,6 @@ class CreateTeachersTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::table('teachers', function (Blueprint $table) {
-            //
-            $table->dropUnique('phone');
-            $table->dropIndex('phone');
-        });
+        Schema::drop('teachers');
     }
 }

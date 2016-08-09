@@ -1,12 +1,12 @@
+img {
+  width: 100%;
+}
+
 .swiper-slide img {
   width: 100%;
 }
 
 .media-object {
-  img {
-    width: 100%;
-  }
-
   > div > p {
     border-bottom: 1px dashed #000;
   }
@@ -103,7 +103,7 @@
   .tabs-content {
     background-color: inherit;
     border: none;
-    .tabs-panel {
+    #panel0 {
       padding: 0;
 
       > div {
@@ -119,12 +119,57 @@
       font-size: 90%;
     }
   }
+
+  #panel1 {
+    > div {
+      padding-top: 2rem;
+      border-bottom: 1px solid #aaa;
+
+      .medium-3 {
+        text-align: center;
+        padding-bottom: 2rem;
+        img {
+          width: 200px;
+        }
+      }
+
+      .gray {
+        color: #aaa;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+      &:first-child {
+        padding-top: 1rem;
+      }
+    }
+  }
+
+  #panel2 {
+    .question-title {
+      background-color: #eee;
+      padding: .5rem;
+    }
+    p {
+      padding: 0 1rem;
+      margin-bottom: 0;
+      &:last-child {
+        margin-bottom: 1rem;
+      }
+      &:first-child {
+        margin-top: .5rem;
+      }
+    }
+  }
+
 }
 
 .footer {
   background-color: #f1f1f1;
   img {
     width: 100%;
+    padding: 2rem;
   }
 }
 
@@ -134,7 +179,7 @@
   padding-bottom: 1rem;
   color: #eee;
 
-  .video-list{
+  .video-list {
     overflow-y: auto;
     h5 {
       padding: .5rem;
@@ -150,7 +195,7 @@
       border-bottom: 1px solid #000;
     }
 
-    .is-accordion-submenu-parent>a:after,.is-accordion-submenu-parent[aria-expanded=true]>a:after {
+    .is-accordion-submenu-parent > a:after, .is-accordion-submenu-parent[aria-expanded=true] > a:after {
       border-color: #eee transparent transparent;
     }
   }

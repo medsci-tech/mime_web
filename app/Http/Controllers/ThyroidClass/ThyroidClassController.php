@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\ThyroidClass;
 
+use App\Http\Controllers\WebController;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\ThyroidClass\ThyroidClass;
 use App\Models\ThyroidClassPhase;
 use App\Models\ThyroidClassStudent;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 /**
  * Class ThyroidClassController
  * @package App\Http\Controllers\ThyroidClass
  */
-class ThyroidClassController extends Controller
+class ThyroidClassController extends WebController
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -23,6 +23,7 @@ class ThyroidClassController extends Controller
     public function index()
     {
         return view('thyroid-class.index', [
+            'teachers' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
             'studentCount' => ThyroidClassStudent::count()
