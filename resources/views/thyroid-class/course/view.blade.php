@@ -146,8 +146,8 @@
                     },
                     @endforeach
                 ],
-                currentPhase: '{{$phase->thyroidClassPhase->id}}',
-                currentCourse: '{{$phase->thyroidClassPhase->id}}'
+                currentPhase: '{{$course->thyroidClassPhase->id}}',
+                currentCourse: '{{$course->thyroidClassPhase->id}}'
             }
         });
 
