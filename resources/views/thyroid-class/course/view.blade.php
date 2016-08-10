@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="row" {{$course->qcloud_file_id}}>
         <div class="top-bar">
             <div>
                 <div class="top-bar-left">
@@ -148,7 +148,7 @@
                 ],
 
                 currentPhase: '{{$course->thyroidClassPhase->id}}',
-                currentCourse: '{{$course->thyroidClassPhase->id}}',
+                currentCourse: '{{$course->thyroidClassPhase->id}}'
             }
         });
 
