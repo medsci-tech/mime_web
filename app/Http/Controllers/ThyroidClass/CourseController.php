@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\ThyroidClass;
 
-use App\Helpers\Statistics\Facades\Statistics;
 use App\Models\ThyroidClass;
-use App\Models\ThyroidClass\ThyroidClassCourse;
+use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
 
@@ -30,10 +29,8 @@ class CourseController extends WebController
     public function view(Request $request)
     {
         \Statistics::updateCount($request->input('course_id'));
-        $course = ThyroidClassCourse::find($request->input('course_id'));
         return view('thyroid-class.course.view', [
-            'course' => $course,
-            'phase' => $course->thyroidClassPhase,
+            'course' => ThyroidClassCourse::find($request->input('course_id')),
             'thyroidClassPhases' => ThyroidClassPhase::all()
         ]);
     }
