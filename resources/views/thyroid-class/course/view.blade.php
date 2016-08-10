@@ -147,7 +147,7 @@
                     @endforeach
                 ],
                 currentPhase: '{{$course->thyroidClassPhase->id}}',
-                currentCourse: '{{$course->thyroidClassPhase->id}}'
+                currentCourse: '{{$course->id}}'
             }
         });
 
