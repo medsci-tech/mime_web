@@ -145,10 +145,10 @@
                         ]
                     },
                     @endforeach
-                ],
+                {{--],--}}
 
-                currentPhase: '{{$course->thyroidClassPhase->id}}',
-                currentCourse: '{{$course->thyroidClassPhase->id}}'
+                {{--currentPhase: '{{$course->thyroidClassPhase->id}}',--}}
+                {{--currentCourse: '{{$course->thyroidClassPhase->id}}'--}}
             }
         });
 
