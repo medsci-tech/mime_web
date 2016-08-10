@@ -30,8 +30,10 @@ class CourseController extends WebController
     public function view(Request $request)
     {
         \Statistics::updateCount($request->input('course_id'));
+        $course = ThyroidClassCourse::find($request->input('course_id'));
         return view('thyroid-class.course.view', [
-            'course' => ThyroidClassCourse::find($request->input('course_id')),
+            'course' => $course,
+            'phase' => $course->thyroidClassPhase,
             'thyroidClassPhases' => ThyroidClassPhase::all()
         ]);
     }
