@@ -20,7 +20,7 @@ class CreatePlayStatisticsTables extends Migration
             $table->foreign('student_id')->references('id')->on('students');
 
             $table->integer('teacher_id')->unsigned()->comment('讲师ID');
-            $table->foreign('teacher_id')->references('id')->on('teacher');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
 
             $table->integer('thyroid_class_phase_id')->unsigned()->comment('单元ID');
             $table->foreign('thyroid_class_phase_id')->references('id')->on('thyroid_class_phases');
