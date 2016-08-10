@@ -109,7 +109,7 @@
 
           <label>职称
             <select required v-model="title" name="title" id="title">
-              <option value="" disabled>请选择职称</option>
+              <option value="" disabled >请选择职称</option>
               <option v-for="option in title_array" value="@{{option}}">@{{option}}</option>
             </select>
           </label>
