@@ -44,9 +44,9 @@
             <h5>&nbsp;课程列表</h5>
             <ul class="vertical menu" data-accordion-menu>
                 <li v-for="subject in course_list">
-                    <a href="#">@{{ subject.subject }}</a>
+                    <a href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
                     <ul class="menu vertical nested">
-                        <li v-for="course in subject.courses"><a href="@{{ course.href }}">@{{ course.name }}</a></li>
+                        <li v-for="course in subject.courses"><a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;@{{ course.name }}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -133,10 +133,12 @@
                     @foreach($thyroidClassPhases as $thyroidClassPhase)
                     {
                         subject: '{{$thyroidClassPhase->title}}',
+                        sequence: '{{$thyroidClassPhase->sequence}}',
                         courses: [
                             @foreach($thyroidClassPhase->thyroidClassCourses as $thyroidClassCourse)
                             {
                                 name: '{{$thyroidClassCourse->title}}',
+                                sequence: '{{$thyroidClassCourse->sequence}}',
                                 href: '/thyroid-class/course/view?course_id={{$thyroidClassCourse->id}}'
                             },
                             @endforeach
