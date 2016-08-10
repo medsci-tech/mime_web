@@ -54,6 +54,21 @@ class LoginController extends WebController
             return redirect()->back()->withErrors($validator->errors())->withInput();
         } /*if>*/
 
+
+        if ($student->name
+            && $student->sex
+            && $student->email
+            && $student->birthday
+            && $student->office
+            && $student->title
+            && $student->province
+            && $student->city
+            && $student->area
+            && $student->hospital_name
+        ) {
+            \Session::set('replenished', true);
+        }
+
         \Session::set('studentId', $student->id);
         return redirect('/');
     }

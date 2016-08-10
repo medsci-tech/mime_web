@@ -61,8 +61,20 @@ class RegisterController extends WebController
         $student->password = \Hash::make($request->input('password'));
         $student->save();
 
+        if ($student->name
+            && $student->sex
+            && $student->email
+            && $student->birthday
+            && $student->office
+            && $student->title
+            && $student->province
+            && $student->city
+            && $student->area
+            && $student->hospital_name
+        ) {
+            \Session::set('replenished', true);
+        }
         \Session::set('studentId', $student->id);
-
         return redirect('/');
     }
 
