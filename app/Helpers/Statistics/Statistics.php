@@ -2,7 +2,7 @@
 
 namespace App\Helpers\Statistics;
 
-use App\Models\ThyroidClass\ThyroidClassCourse;
+use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
 
 /**
@@ -22,7 +22,7 @@ class Statistics
 
     protected function updatePhaseCount($course)
     {
-        $phase = ThyroidClassPhase::find($course->thyroid_class_phase_id);
+        $phase = $course->thyroidClassPhase;
         $phase->play_count += 1;
         $phase->save();
     }
