@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.open')
 
 @section('title','完善个人信息')
 

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.open')
 
 @section('title','公开课首页')
 
