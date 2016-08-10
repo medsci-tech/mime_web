@@ -13,10 +13,10 @@ class AddSequenceToPhasesAndCourses extends Migration
     public function up()
     {
         //
-        Schema::create('thyroid_class_phases', function (Blueprint $table) {
+        Schema::table('thyroid_class_phases', function (Blueprint $table) {
             $table->string('sequence');
         });
-        Schema::create('thyroid_class_courses', function (Blueprint $table) {
+        Schema::table('thyroid_class_courses', function (Blueprint $table) {
             $table->string('sequence');
         });
     }
@@ -29,10 +29,10 @@ class AddSequenceToPhasesAndCourses extends Migration
     public function down()
     {
         //
-        Schema::create('thyroid_class_phases', function (Blueprint $table) {
+        Schema::table('thyroid_class_phases', function (Blueprint $table) {
             $table->dropColumn('sequence');
         });
-        Schema::create('thyroid_class_courses', function (Blueprint $table) {
+        Schema::table('thyroid_class_courses', function (Blueprint $table) {
             $table->dropColumn('sequence');
         });
     }
