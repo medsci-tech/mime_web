@@ -63,7 +63,7 @@ class RegisterController extends WebController
 
         \Session::set('studentId', $student->id);
 
-        return redirect('/home/replenish/create');
+        return redirect('/');
     }
 
     public function sms(Request $request)

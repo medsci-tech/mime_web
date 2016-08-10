@@ -55,23 +55,7 @@ class LoginController extends WebController
         } /*if>*/
 
         \Session::set('studentId', $student->id);
-        if ($student->name
-            && $student->sex
-            && $student->email
-            && $student->birthday
-            && $student->office
-            && $student->title
-            && $student->province
-            && $student->city
-            && $student->area
-            && $student->hospital_name
-        ) {
-            \Session::set('replenished', true);
-            return redirect('/');
-        } else {
-            return redirect('/home/replenish/create');
-        }
-
+        return redirect('/');
     }
 
     /**
