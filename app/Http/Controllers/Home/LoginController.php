@@ -54,7 +54,7 @@ class LoginController extends WebController
             return redirect()->back()->withErrors($validator->errors())->withInput();
         } /*if>*/
 
-        \Session::set('studentId', $student->id);
+
         if ($student->name
             && $student->sex
             && $student->email
@@ -67,11 +67,10 @@ class LoginController extends WebController
             && $student->hospital_name
         ) {
             \Session::set('replenished', true);
-            return redirect('/');
-        } else {
-            return redirect('/home/replenish/create');
         }
 
+        \Session::set('studentId', $student->id);
+        return redirect('/');
     }
 
     /**
