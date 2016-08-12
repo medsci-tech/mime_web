@@ -21,24 +21,4 @@ class StudentController extends Controller
     {
         return view('admin.student.index');
     }
-
-    public function excel(Request $request)
-    {
-
-        $excel = $request->file('excel');
-        \Excel::load($excel, function ($reader) use ($excel) {
-            $excelData = \Excel::load($excel)->get()->toArray();
-            //dd($excelData);
-            foreach ($excelData as $data) {
-                $update = [
-                    'name' => $data['name'],
-                    'default_spec' => $data['default_spec'],
-                    'price' => $data['price'],
-                    'beans' => $data['price'] * 10,
-                    'is_show' => 1,
-                ];
-                Product::where('puan_id', intval($data['puan_id']))->update($update);
-            }
-        });
-    }
 }

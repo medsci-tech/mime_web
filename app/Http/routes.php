@@ -61,4 +61,10 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
 Route::auth();
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index');
+    Route::group(['prefix' => 'excel'], function () {
+        Route::get('/', 'ExcelController@excelForm');
+        Route::post('/student', 'ExcelController@student');
+        Route::post('/play-log', 'ExcelController@plaLog');
+        Route::post('/play-log-detail', 'ExcelController@plaLogDetail');
+    });
 });

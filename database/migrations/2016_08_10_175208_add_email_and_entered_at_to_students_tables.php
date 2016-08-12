@@ -14,7 +14,6 @@ class AddEmailAndEnteredAtToStudentsTables extends Migration
     {
         //
         Schema::table('students', function (Blueprint $table) {
-            $table->string('email');
             $table->timestamp('entered_at');
         });
     }
@@ -28,7 +27,6 @@ class AddEmailAndEnteredAtToStudentsTables extends Migration
     {
         //
         Schema::table('students', function (Blueprint $table) {
-            $table->dropColumn('email');
             $table->dropColumn('entered_at');
         });
     }

@@ -21,6 +21,7 @@ class Student extends Model
      */
     protected $fillable = [
         'name',
+        'phone',
         'nickname',
         'sex',
         'email',
@@ -31,7 +32,8 @@ class Student extends Model
         'city',
         'area',
         'hospital_level',
-        'hospital_name'
+        'hospital_name',
+        'entered_at'
     ];
 
     /**
