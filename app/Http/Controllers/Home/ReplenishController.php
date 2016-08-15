@@ -66,7 +66,7 @@ class ReplenishController extends WebController
         $messages = [
             'name.required' => '姓名未填写',
             'nickname.required' => '姓名未填写',
-            'sex.required' => '性别未填写',
+//            'sex.required' => '性别未填写',
             'email.required' => '邮箱未填写',
             'birthday.required' => '生日未填写',
             'office.required' => '科室未填写',
@@ -79,7 +79,7 @@ class ReplenishController extends WebController
         $rules = [
             'name'      => 'required',
             'nickname'      => 'required',
-            'sex'       => 'required',
+//            'sex'       => 'required',
             'email'     => 'required',
             'birthday'  => 'required',
             'office'    => 'required',
