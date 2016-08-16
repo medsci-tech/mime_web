@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PlayLog;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -27,18 +28,25 @@ class AdminController extends Controller
         $student = Student::where('phone', $request->input('phone'))->first();
         if($student) {
             $playLogs =  $student->playLogs;
-            foreach($playLogs as &$playLog) {
+            foreach($playLogs as $playLog) {
                 $logId =  'student_course_id:' . $playLog->student_course_id;
                 $details = \Redis::command('HGETALL', [$logId]);
-                $playLog->details = $details;
                 // update play duration
                 $playDuration = 0;
                 foreach ($details as $key => $value) {
                     $playDuration += $value;
                 }
+                if($playLog->play_duration != $playDuration) {
+                    $log = PlayLog::find($playLog->id);
+                    $log->play_duration = $playDuration;
+                    $log->save();
+                }
+            }
 
-                $playLog->play_duration = $playDuration;
-                $playLog->save();
+            $playLogs =  $student->playLogs;
+            foreach($playLogs as &$playLog) {
+                $logId =  'student_course_id:' . $playLog->student_course_id;
+                $details = \Redis::command('HGETALL', [$logId]);
                 $playLog->details = $details;
             }
             return view('admin.student.logs', [
