@@ -13,12 +13,12 @@ class AddSequenceToPhasesAndCourses extends Migration
     public function up()
     {
         //
-        Schema::table('thyroid_class_phases', function (Blueprint $table) {
-            $table->string('sequence');
-        });
-        Schema::table('thyroid_class_courses', function (Blueprint $table) {
-            $table->string('sequence');
-        });
+//        Schema::table('thyroid_class_phases', function (Blueprint $table) {
+//            $table->string('sequence');
+//        });
+//        Schema::table('thyroid_class_courses', function (Blueprint $table) {
+//            $table->string('sequence');
+//        });
     }
 
     /**
