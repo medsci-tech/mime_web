@@ -29,7 +29,17 @@ class AdminController extends Controller
             $playLogs =  $student->playLogs;
             foreach($playLogs as &$playLog) {
                 $logId =  'student_course_id:' . $playLog->student_course_id;
-                $playLog->details = \Redis::command('HGETALL', [$logId]);
+                $details = \Redis::command('HGETALL', [$logId]);
+                $playLog->details = $details;
+                // update play duration
+                $playDuration = 0;
+                foreach ($details as $key => $value) {
+                    $playDuration += $value;
+                }
+
+                $playLog->play_duration = $playDuration;
+                $playLog->save();
+                $playLog->details = $details;
             }
             return view('admin.student.logs', [
                 'student'=> $student,

@@ -58,16 +58,16 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
 
 });
 
-//Route::auth();
-//Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-//    Route::get('/', 'AdminController@index');
-//    Route::any('/student-logs', 'AdminController@studentLogs');
-//    Route::group(['prefix' => 'excel'], function () {
-//        Route::get('/', 'ExcelController@excelForm');
-//        Route::post('/student', 'ExcelController@student');
-//        Route::post('/play-log', 'ExcelController@playLog');
-//        Route::post('/play-log-detail', 'ExcelController@playLogDetail');
-//        Route::any('/test', 'ExcelController@test');
-//        Route::any('/test_log_detail', 'ExcelController@getLogDetail');
-//    });
-//});
+Route::auth();
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/', 'AdminController@index');
+    Route::any('/student-logs', 'AdminController@studentLogs');
+    Route::group(['prefix' => 'excel'], function () {
+        Route::get('/', 'ExcelController@excelForm');
+        Route::post('/student', 'ExcelController@student');
+        Route::post('/play-log', 'ExcelController@playLog');
+        Route::post('/play-log-detail', 'ExcelController@playLogDetail');
+        Route::any('/test', 'ExcelController@test');
+        Route::any('/test_log_detail', 'ExcelController@getLogDetail');
+    });
+});
