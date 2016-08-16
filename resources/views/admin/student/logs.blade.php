@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">{{$playLog->course->title}}</div>
+                        <div class="panel-heading">{{$playLog->course->sequence.$playLog->course->title}}</div>
                         <div class="panel-body">
                             @foreach($playLog->details as $key => $value)
                                 <div class="form-group">
