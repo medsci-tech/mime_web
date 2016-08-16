@@ -33,7 +33,8 @@ class Student extends Model
         'area',
         'hospital_level',
         'hospital_name',
-        'entered_at'
+        'entered_at',
+        'password'
     ];
 
     /**
