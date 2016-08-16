@@ -26,6 +26,7 @@ class ExcelController extends Controller
         \Excel::load($excel, function ($reader) use ($excel) {
             $excelData = \Excel::load($excel)->get()->toArray();
             foreach ($excelData as $data) {
+                $data['password'] = \Hash::make(substr($data['phone'],-6));
                 Student::create($data);
             }
         });
@@ -58,8 +59,7 @@ class ExcelController extends Controller
                     'thyroid_class_course_id' => $data['thyroid_class_course_id'],
                     'play_times' => $data['play_times'],
                     'play_duration' => $data['play_duration'],
-                    'student_course_id' => $studentsArray[$data['phone']].'-'.$data['thyroid_class_course_id'],
-
+                    'student_course_id' => $studentsArray[$data['phone']].'-'.$data['thyroid_class_course_id']
                 ];
                 PlayLog::create($logData);
             }
