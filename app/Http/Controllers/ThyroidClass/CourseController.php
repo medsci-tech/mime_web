@@ -28,26 +28,27 @@ class CourseController extends WebController
 
     public function view(Request $request)
     {
-        \Statistics::updateCount($request->input('course_id'));
+        $date = date('Y-m-d H:i:s');
+        \Statistics::updateCount($request->input('course_id'), $date);
         return view('thyroid-class.course.view', [
             'course' => ThyroidClassCourse::find($request->input('course_id')),
-            'thyroidClassPhases' => ThyroidClassPhase::all()
+            'thyroidClassPhases' => ThyroidClassPhase::all(),
+            'date' => $date
         ]);
     }
 
     public function timer(Request $request)
     {
-        $courseId = $request->input('courseId');
-        $date = explode('-',$request->input('date'));
+        $courseId = $request->input('course_id');
+        $date = $request->input('date');
         $logId = 'student_course_id:' . $this->studentId.'-'.$courseId;
-        if (\Redis::command('HEXISTS', $logId)) {
+        if (\Redis::command('HEXISTS', [$logId, $date])) {
             \Redis::command('HINCRBY', [$logId, $date, 30]);
             return response()->json(['success' => true]);
         } else {
             return response()->json([
-                'success' => \Redis::command('HSET', [$logId, $date,30])
+                'success' => \Redis::command('HSET', [$logId, $date, 30])
             ]);
         }
     }
-
 }

@@ -169,7 +169,9 @@
                 "file_id": "{{$course->qcloud_file_id}}",
                 "app_id": "{{$course->qcloud_app_id}}",
                 "width": 1920,
-                "height": 1080
+                "height": 1080,
+                "date": "{{$date}}",
+                "course_id": "{{$course->id}}",
             };
             /*调用播放器进行播放*/
             var func = {
@@ -177,7 +179,7 @@
 
                     function timer() {
 
-                        $.post('/thyroid-class/course/timer', {course_id: option.file_id}, function (data) {
+                        $.post('/thyroid-class/course/timer', {course_id: option.course_id, date:option.date}, function (data) {
                             if (data) {
                                 console.log('OK');
                             } else {

@@ -67,5 +67,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/play-log', 'ExcelController@playLog');
         Route::post('/play-log-detail', 'ExcelController@playLogDetail');
         Route::any('/test', 'ExcelController@test');
+        Route::any('/test_log_detail', 'ExcelController@getLogDetail');
     });
 });

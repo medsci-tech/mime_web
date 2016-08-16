@@ -30,7 +30,7 @@
           <h4 class="text-center">个人信息完善</h4>
 
           <label>姓名
-            <input required v-model="name" type="text" placeholder="请输入" name="name">
+            <input required v-model="name" type="text" placeholder="请输入" name="name" value="{{old('name')}}">
           </label>
 
           @if($errors->has('name'))
@@ -38,7 +38,7 @@
           @endif
 
           <label>昵称
-            <input required v-model="nickname" type="text" placeholder="请输入" name="nickname">
+            <input required v-model="nickname" type="text" placeholder="请输入" name="nickname" value="{{old('nickname')}}">
           </label>
 
           @if($errors->has('nickname'))
@@ -90,7 +90,7 @@
           @endif
 
           <label>医院
-            <input required v-model="hospital" type="text" placeholder="请输入" name="hospital_name">
+            <input required v-model="hospital" type="text" placeholder="请输入" name="hospital_name" value="{{old('hospital_name')}}">
           </label>
 
           @if($errors->has('hospital_name'))
@@ -119,7 +119,7 @@
           @endif
 
           <label>邮箱
-            <input required v-model="email" type="text" placeholder="请输入" name="email">
+            <input required v-model="email" type="text" placeholder="请输入" name="email" value="{{old('email')}}">
           </label>
 
           @if($errors->has('email'))

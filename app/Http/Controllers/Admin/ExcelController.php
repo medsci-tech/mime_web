@@ -139,4 +139,13 @@ class ExcelController extends Controller
             return;
         }
     }
+
+    function getLogDetail(Request $request) {
+        //'student_course_id:' . $studentsArray[$data['phone']] .'-'.$data['thyroid_class_course_id'];
+        $logId =  'student_course_id:' . $request->input('student_id').'-'.$request->input('course_id');
+        echo \Session::get('studentId');
+        dd(\Redis::command('hgetall', [$logId]));
+    }
+
+
 }
