@@ -30,6 +30,9 @@ class CreatePlayStatisticsTables extends Migration
             $table->integer('play_duration')->comment('播放总时长,单位秒');
             $table->integer('play_times')->comment('播放次数');
 
+            $table->string('student_course_id');
+            $table->unique('student_course_id');
+
             $table->timestamps();
         });
     }
