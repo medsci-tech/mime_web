@@ -64,7 +64,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::group(['prefix' => 'excel'], function () {
         Route::get('/', 'ExcelController@excelForm');
         Route::post('/student', 'ExcelController@student');
-        Route::post('/play-log', 'ExcelController@plaLog');
-        Route::post('/play-log-detail', 'ExcelController@plaLogDetail');
+        Route::post('/play-log', 'ExcelController@playLog');
+        Route::post('/play-log-detail', 'ExcelController@playLogDetail');
+        Route::any('/test', 'ExcelController@test');
     });
 });

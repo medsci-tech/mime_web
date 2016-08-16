@@ -12,6 +12,21 @@ use Illuminate\Database\Eloquent\Model;
 class PlayLog extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'student_id',
+        'teacher_id',
+        'thyroid_class_phase_id',
+        'thyroid_class_course_id',
+        'play_times',
+        'play_duration',
+        'student_course_id'
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function playCourse()
@@ -25,6 +40,14 @@ class PlayLog extends Model
     public function students()
     {
         return $this->belongsToMany(Student::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class);
     }
 
     /**

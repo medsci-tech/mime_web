@@ -35,17 +35,17 @@ class CourseController extends WebController
         ]);
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function timer()
+    public function timer(Request $request)
     {
-        if (\Redis::command('EXISTS', ['studentId:' . $this->studentId])) {
-            \Redis::command('INCRBYFLOAT', ['studentId:' . $this->studentId, 0.5]);
+        $courseId = $request->input('courseId');
+        $date = explode('-',$request->input('date'));
+        $logId = 'student_course_id:' . $this->studentId.'-'.$courseId;
+        if (\Redis::command('HEXISTS', $logId)) {
+            \Redis::command('HINCRBY', [$logId, $date, 30]);
             return response()->json(['success' => true]);
         } else {
             return response()->json([
-                'success' => \Redis::command('SET', ['studentId:' . $this->studentId, 0.5])
+                'success' => \Redis::command('HSET', [$logId, $date,30])
             ]);
         }
     }
