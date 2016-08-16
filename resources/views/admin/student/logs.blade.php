@@ -60,8 +60,7 @@
                                     <label for="entered_at" class="col-md-4 control-label">观看时间：{{$key}}</label>
 
                                     <div class="col-md-6">
-                                        <input type="text" name="excel" class="form-control" value='"观看时长：{{{
-                                        $arr = getdate($value);echo $arr[2]."小时".$arr[1]."分钟".$arry[0]."秒";}}}'
+                                        <input type="text" name="excel" class="form-control" value='"观看时长：{{gmstrftime('%H小时%M分%秒',$value)}}'
                                                readonly>
                                     </div>
                                 </div>
