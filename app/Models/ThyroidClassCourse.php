@@ -32,4 +32,12 @@ class ThyroidClassCourse extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function playLogs()
+    {
+        return $this->hasMany(PlayLog::class);
+    }
 }

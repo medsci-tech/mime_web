@@ -27,14 +27,6 @@ class PlayLog extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function playCourse()
-    {
-        return $this->belongsTo(PlayCourse::class);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function students()
@@ -51,10 +43,10 @@ class PlayLog extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function course()
     {
-        return $this->belongsToMany(ThyroidClassCourse::class);
+        return $this->belongsTo(ThyroidClassCourse::class, 'thyroid_class_course_id');
     }
 }

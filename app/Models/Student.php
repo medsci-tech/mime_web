@@ -51,4 +51,10 @@ class Student extends Model
         $this->thyroidClassStudent()->save(thyroidClassStudent::create());
         return $this;
     }
+
+
+    public function playLogs()
+    {
+        return $this->hasMany(PlayLog::class);
+    }
 }
