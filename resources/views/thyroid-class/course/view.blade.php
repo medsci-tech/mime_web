@@ -220,7 +220,7 @@
         $(document).foundation();
 
         $('#video_'+vm.currentPhase).trigger('click');
-        $('#video_'+vm.currentPhase).next().children("[href='/thyroid-class/course/view?course_id='+{{$course->id}}]").parent().addClass('active');
+        $('#video_'+vm.currentPhase).next().children("[href='/thyroid-class/course/view?course_id={{$course->id}}']").parent().addClass('active');
 
     </script>
 @endsection
