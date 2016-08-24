@@ -337,7 +337,7 @@
         ],
 
         main_class: {
-          header: ['2016年甲状腺公开课', '更新至2016-07-16期', '播放总次数：3.87万'],
+          header: ['2016年甲状腺公开课', '更新至{{$thyroidClass->latest_update_at}}期', '播放总次数{{$thyroidClass->play_count}}'],
 
           body: {
             title: '课程介绍',
@@ -363,7 +363,7 @@
             content: '已播出10期（共21期 ）'
           }],
 
-          other_information: '已有4596人注册了甲状腺公开课'
+          other_information: '已有{{$thyroidClass->student_count}}人注册了甲状腺公开课'
         },
 
         tabs: [
@@ -388,7 +388,7 @@
                       {
                         title: '学习',
                         fa: 'youtube-play',
-                        content: '2689人'
+                        content: '{{$thyroidClassCourse->play_count}}人'
                       }
                     ]
                   },
