@@ -42,8 +42,8 @@
         </div>
         <div class="medium-4 small-12 columns video-list">
             <h5>&nbsp;课程列表</h5>
-            <ul class="vertical menu" data-accordion-menu>
-                <li :class="($index+1)==currentPhase?'active':''" v-for="subject in course_list">
+            <ul class="vertical menu" data-accordion-menu id="video-accordion">
+                <li id="video_{{$index+1}}" v-for="subject in course_list">
                     <a href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
                     <ul class="menu vertical nested">
                         <li v-for="course in subject.courses"><a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;@{{ course.name }}</a></li>
@@ -147,7 +147,7 @@
                     @endforeach
                 ],
                 currentPhase: '{{$course->thyroidClassPhase->id}}',
-                currentCourse: '{{$course->id}}'
+                currentCourse: '{{$course->qcloud_file_id}}'
             }
         });
 
@@ -157,6 +157,9 @@
                 crossFade: true
             }
         });
+
+        $('#video-accordion').foundation('down', $('#video_'+vm.currentPhase), firstTime);
+        $('#video_'+vm.currentPhase).children("a[href='/thyroid-class/course/view?course_id={{$course->qcloud_file_id}}']").parent().addClass('active');
 
     </script>
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
