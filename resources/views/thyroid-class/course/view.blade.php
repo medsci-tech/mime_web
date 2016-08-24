@@ -43,7 +43,7 @@
         <div class="medium-4 small-12 columns video-list">
             <h5>&nbsp;课程列表</h5>
             <ul class="vertical menu" data-accordion-menu id="video-accordion">
-                <li id="video_{{$index+1}}" v-for="subject in course_list">
+                <li id="video_@{{$index+1}}" v-for="subject in course_list">
                     <a href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
                     <ul class="menu vertical nested">
                         <li v-for="course in subject.courses"><a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;@{{ course.name }}</a></li>
