@@ -158,7 +158,7 @@
             }
         });
 
-        $('#video-accordion').foundation('down', $('#video_'+vm.currentPhase), firstTime);
+        $('#video-accordion').foundation('down', $('#video_'+vm.currentPhase), true);
         $('#video_'+vm.currentPhase).children("a[href='/thyroid-class/course/view?course_id={{$course->qcloud_file_id}}']").parent().addClass('active');
 
     </script>
