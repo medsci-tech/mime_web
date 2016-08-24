@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        '/thyroid-class/course/timer'
+        '/thyroid-class/course/timer',
+        '/thyroid-class/course/enter'
     ];
 }

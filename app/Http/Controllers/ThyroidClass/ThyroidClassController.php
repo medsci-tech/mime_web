@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use App\Models\ThyroidClass\ThyroidClass;
 use App\Models\ThyroidClassPhase;
 use App\Models\ThyroidClassStudent;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -63,10 +64,11 @@ class ThyroidClassController extends WebController
         $this->middleware('replenish');
 
         $student = Student::find(\Session::get('studentId'));
-        if ($student->thyroidClassStudent) {
+        if ($student->entered_at) {
             return response()->json(['success' => false, 'error_message' => '已报名']);
         } else {
-            $student->enter();
+            $student->entered_at = Carbon::now();
+            $student->save();
             return response()->json(['success' => true]);
         }
     }
