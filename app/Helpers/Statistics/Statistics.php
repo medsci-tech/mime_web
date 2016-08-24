@@ -16,7 +16,8 @@ class Statistics
      */
     protected function updateCourseCount($course)
     {
-        $course->play_count += 1;
+        $course->play_count = PlayLog::where('thyroid_class_course_id', $course->id)->count() + 1;
+        //$course->play_count += 1;
         $course->save();
     }
 
