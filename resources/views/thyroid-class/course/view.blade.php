@@ -163,10 +163,7 @@
             }
         });
 
-        $('#video_1').trigger('click');
-        $('#video_1').click(function () {
-           alert(123);
-        });
+        $('#video_'+vm.currentPhase).trigger('click');
         $('#video_'+vm.currentPhase).siblings('ul').children("a[href='/thyroid-class/course/view?course_id={{$course->id}}']").parent().addClass('active');
 
     </script>

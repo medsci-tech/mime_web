@@ -23,9 +23,10 @@
 
 <script src="/vendor/vuejs/vue.js"></script>
 
-@yield('js')
 <script>
     $(document).foundation();
 </script>
+
+@yield('js')
 </body>
 </html>
