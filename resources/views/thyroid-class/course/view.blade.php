@@ -43,8 +43,8 @@
         <div class="medium-4 small-12 columns video-list">
             <h5>&nbsp;课程列表</h5>
             <ul class="vertical menu" data-accordion-menu id="video-accordion">
-                <li id="video_@{{$index+1}}" v-for="subject in course_list">
-                    <a href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
+                <li v-for="subject in course_list">
+                    <a id="video_@{{$index+1}}" href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
                     <ul class="menu vertical nested">
                         <li v-for="course in subject.courses"><a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;@{{ course.name }}</a></li>
                     </ul>
@@ -163,8 +163,8 @@
             }
         });
 
-        $('#video_1').trigger('click');
-        $('#video_1').children("a[href='/thyroid-class/course/view?course_id={{$course->qcloud_file_id}}']").parent().addClass('active');
+        $('#video_'+vm.currentPhase).trigger('click');
+        $('#video_'+vm.currentPhase).siblings('ul').children("a[href='/thyroid-class/course/view?course_id={{$course->qcloud_file_id}}']").parent().addClass('active');
 
     </script>
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
