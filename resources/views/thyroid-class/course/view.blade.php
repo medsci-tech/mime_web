@@ -46,7 +46,7 @@
                 <li v-for="subject in course_list">
                     <a id="video_@{{$index+1}}" href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
                     <ul class="menu vertical nested">
-                        <li v-for="course in subject.courses"><a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;@{{ course.name }}</a></li>
+                        <li v-for="course in subject.courses" :class="(course.id == vm.currentCourse)?active:''"><a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;@{{ course.name }}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -139,7 +139,8 @@
                             {
                                 name: '{{$thyroidClassCourse->title}}',
                                 sequence: '{{$thyroidClassCourse->sequence}}',
-                                href: '/thyroid-class/course/view?course_id={{$thyroidClassCourse->id}}'
+                                href: '/thyroid-class/course/view?course_id={{$thyroidClassCourse->id}}',
+                                id: '{{$thyroidClassCourse->id}}'
                             },
                             @endforeach
                         ]
@@ -220,7 +221,6 @@
         $(document).foundation();
 
         $('#video_'+vm.currentPhase).trigger('click');
-        $('#video_'+vm.currentPhase).next().children("[href='/thyroid-class/course/view?course_id={{$course->id}}']").parent().addClass('active');
 
     </script>
 @endsection
