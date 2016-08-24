@@ -459,4 +459,7 @@
       );
     })()
   </script>
+  <script>
+    $(document).foundation();
+  </script>
 @endsection

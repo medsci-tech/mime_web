@@ -163,9 +163,6 @@
             }
         });
 
-        $('#video_'+vm.currentPhase).trigger('click');
-        $('#video_'+vm.currentPhase).siblings('ul').children("a[href='/thyroid-class/course/view?course_id={{$course->id}}']").parent().addClass('active');
-
     </script>
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript"> (function () {
@@ -217,5 +214,13 @@
         })();
 
         $('.video-list').css('height', $('.video-list').prev().height());
+
+    </script>
+    <script>
+        $(document).foundation();
+
+        $('#video_'+vm.currentPhase).trigger('click');
+        $('#video_'+vm.currentPhase).siblings('ul').children("a[href='/thyroid-class/course/view?course_id={{$course->id}}']").parent().addClass('active');
+
     </script>
 @endsection

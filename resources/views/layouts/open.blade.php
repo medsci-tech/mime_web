@@ -23,10 +23,7 @@
 
 <script src="/vendor/vuejs/vue.js"></script>
 
-<script>
-    $(document).foundation();
-</script>
-
 @yield('js')
+
 </body>
 </html>
