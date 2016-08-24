@@ -72,6 +72,7 @@ class ThyroidClassController extends WebController
 
             $thyroidClass = ThyroidClass::all()->first();
             $thyroidClass->student_count = Student::whereNotNull('entered_at')->count();
+            $thyroidClass->save();
             return response()->json(['success' => true]);
         }
     }
