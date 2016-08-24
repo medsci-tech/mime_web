@@ -28,15 +28,18 @@
     </div>
   </div>
 
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="slide in swiper_pictures">
-        <a href="@{{slide.href}}">
-          <img :src="slide.image" alt="@{{slide.name}}">
-        </a>
+  <div class="row">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="slide in swiper_pictures">
+          <a href="@{{slide.href}}">
+            <img :src="slide.image" alt="@{{slide.name}}">
+          </a>
+        </div>
       </div>
     </div>
   </div>
+
 
   <br>
   <div class="row information">
@@ -323,15 +326,7 @@
         swiper_pictures: [
           {
             name: '',
-            image: '/image/轮播test.jpg',
-            href: '#'
-          }, {
-            name: '',
-            image: '/image/轮播test.jpg',
-            href: '#'
-          }, {
-            name: '',
-            image: '/image/轮播test.jpg',
+            image: '/image/banner.jpg',
             href: '#'
           }
         ],
@@ -429,9 +424,9 @@
 
     var swiper = new Swiper('.swiper-container', {
       autoHeight: true,
-      fade: {
-        crossFade: true
-      }
+      loop : true,
+      autoplay: 5000,
+      speed:500
     });
 
     $(function () {
