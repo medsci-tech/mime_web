@@ -454,8 +454,7 @@
         "file_id": "14651978969263309496",
         "app_id": "1252490301",
         "width": 1920,
-        "height": 1080,
-        "stretch_patch": true
+        "height": 1080
       };
       /*调用播放器进行播放*/
       new qcVideo.Player(

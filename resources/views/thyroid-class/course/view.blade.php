@@ -172,7 +172,6 @@
                 "height": 1080,
                 "date": "{{$date}}",
                 "course_id": "{{$course->id}}",
-                "stretch_patch": true
             };
             /*调用播放器进行播放*/
             var func = {
