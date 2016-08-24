@@ -148,6 +148,12 @@
                 ],
                 currentPhase: '{{$course->thyroidClassPhase->id}}',
                 currentCourse: '{{$course->qcloud_file_id}}'
+            },
+            computed: {
+                active: function () {
+                    $('#video_'+vm.currentPhase).trigger('click');
+                    $('#video_'+vm.currentPhase).children("a[href='/thyroid-class/course/view?course_id={{$course->qcloud_file_id}}']").parent().addClass('active');
+                }
             }
         });
 
@@ -158,10 +164,6 @@
             }
         });
 
-        var videoId = '#video_'+vm.currentPhase;
-
-        $(videoId ).trigger('click');
-        $(videoId ).children("a[href='/thyroid-class/course/view?course_id={{$course->qcloud_file_id}}']").parent().addClass('active');
 
     </script>
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
