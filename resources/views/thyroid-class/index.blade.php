@@ -332,7 +332,7 @@
         ],
 
         main_class: {
-          header: ['2016年甲状腺公开课', '更新至{{$thyroidClass->latest_update_at}}期', '播放总次数{{$thyroidClass->play_count}}'],
+          header: ['2016年甲状腺公开课', '更新至{{$thyroidClass->latest_update_at}}期', '播放总次数{{$playCount}}'],
 
           body: {
             title: '课程介绍',
@@ -358,7 +358,7 @@
             content: '已播出10期（共21期 ）'
           }],
 
-          other_information: '已有{{$thyroidClass->student_count}}人注册了甲状腺公开课'
+          other_information: '已有{{$studentCount}}人注册了甲状腺公开课'
         },
 
         tabs: [
