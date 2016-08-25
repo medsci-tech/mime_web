@@ -24,13 +24,13 @@ class ThyroidClassController extends WebController
      */
     public function index()
     {
-//        $coursePlayCount =
         return view('thyroid-class.index', [
             'teachers' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
             'studentCount' => \Redis::command('GET', ['enter_count']),
             'playCount' => \Redis::command('GET', ['play_count']),
+            'coursePlayCount' => \Redis::command('HGETALL', ['course_play_count'])
         ]);
     }
 

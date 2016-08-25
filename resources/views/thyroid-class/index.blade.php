@@ -332,7 +332,7 @@
         ],
 
         main_class: {
-          header: ['2016年甲状腺公开课', '更新至{{$thyroidClass->latest_update_at}}期', '播放总次数{{$playCount}}'],
+          header: ['2016年甲状腺公开课', '更新至{{date ('Y-m-d', strtotime($thyroidClass->latest_update_at))}}期', '播放总次数{{$playCount}}'],
 
           body: {
             title: '课程介绍',
@@ -383,7 +383,7 @@
                       {
                         title: '学习',
                         fa: 'youtube-play',
-                        content: '{{$thyroidClassCourse->play_count}}人'
+                        content: '{{$coursePlayCount[$thyroidClassCourse->id]}}人'
                       }
                     ]
                   },
