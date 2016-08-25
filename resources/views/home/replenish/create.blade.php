@@ -51,7 +51,7 @@
                             <input v-model="sex" type="radio" value="1" name="sex">男
                         </label>
                         <label class="small-5 columns">
-                            <input v-model="sex" type="radio" value="0" name=sex">女
+                            <input v-model="sex" type="radio" value="2" name=sex">女
                         </label>
                     </div>
                     @if($errors->has('sex'))
