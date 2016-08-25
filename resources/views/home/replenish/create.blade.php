@@ -144,9 +144,9 @@
         vm = new Vue({
             el: '#personal',
             data: {
-                name: '{{old('name') ? old('name') : $student->name ?$student->name :null}}',
+                name: '{{old('name') ? old('name') : $student->name}}',
                 nickname: '{{old('nickname') ? old('nickname') : $student->nickname}}',
-                sex: '{{$student->sex ?$student->sex :1}}',
+                sex: '{{old('sex') ? old('sex') : $student->sex}}',
                 birthday: '{{old('birthday') ? old('birthday') : $student->birthday}}',
                 province: '{{old('province') ? old('province') : $student->province}}',
                 city: '{{old('city') ? old('city') : $student->city}}',
