@@ -195,6 +195,14 @@ img {
       border-bottom: 1px solid #000;
     }
 
+    a:hover {
+      ackground-color: rgba(33,153,258,0.2);
+    }
+
+    .active {
+      background-color: rgba(33,153,258,0.5);
+    }
+
     .is-accordion-submenu-parent > a:after, .is-accordion-submenu-parent[aria-expanded=true] > a:after {
       border-color: #eee transparent transparent;
     }
