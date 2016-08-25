@@ -199,6 +199,10 @@ img {
       background-color: rgba(33,153,258,0.2);
     }
 
+    a:focus {
+      outline: 0;
+    }
+
     .active>a{
       background-color: rgba(33,153,258,0.5);
     }
