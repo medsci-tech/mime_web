@@ -37,7 +37,7 @@
         <div class="row column log-in-form">
           <h4 class="text-center">Mime账号注册</h4>
           <label>手机号
-            <input v-model="phone" type="number" placeholder="请输入您的手机号" name="phone">
+            <input required v-model="phone" type="number" placeholder="请输入您的手机号" name="phone">
           </label>
           <p id="error_phone" class="help-text hide">手机号已被注册</p>
           @if($errors->has('phone'))
@@ -45,7 +45,7 @@
           @endif
           <label>验证码
             <div class="input-group">
-              <input v-model="sms" class="input-group-field" type="text" placeholder="请输入验证码"
+              <input required v-model="sms" class="input-group-field" type="text" placeholder="请输入验证码"
                      name="auth_code">
 
               <div class="input-group-button">
@@ -58,10 +58,10 @@
             <p class="help-text">{{ $errors->first('auth_code')}}</p>
           @endif
           <label>密码
-            <input v-model="password" type="password" placeholder="请输入密码" name="password">
+            <input required v-model="password" type="password" placeholder="请输入密码" name="password">
           </label>
           <label>确认密码
-            <input v-model="password_confirmation" type="password" placeholder="请再次输入密码" name="password_confirmation">
+            <input required v-model="password_confirmation" type="password" placeholder="请再次输入密码" name="password_confirmation">
           </label>
 
           <p v-show="is_same" class="help-text">两次输入的密码不一致!</p>
@@ -241,7 +241,7 @@
       },
       computed: {
         is_same: function () {
-          return (this.password === this.password_confirmation || this.password == '' || this.password_confirmation =='')?true:false
+          return (this.password === this.password_confirmation)?true:false
         }
       }
     });
