@@ -88,7 +88,7 @@ class ThyroidClassController extends WebController
             $playCount += \Redis::command('HGET', ['course_play_count', $course->id]);
         }
 
-        \Redis::command('SET', ['play_count', $courses]);
+        \Redis::command('SET', ['play_count', $playCount]);
 
         $phases = ThyroidClassPhase::all();
         foreach ($phases as $phase) {
