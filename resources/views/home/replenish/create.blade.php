@@ -119,7 +119,7 @@
                     @endif
 
                     <label>邮箱
-                        <input required v-model="email" type="text" placeholder="请输入" name="email"
+                        <input required v-model="email" type="email" placeholder="请输入" name="email"
                                value="{{old('email')}}">
                     </label>
 

@@ -49,10 +49,6 @@ class ReplenishController extends WebController
      */
     public function store(Request $request)
     {
-        if (!$this->studentId) {
-            return redirect('home/replenish/error');
-        } /*if>*/
-
         $student = Student::find($this->studentId);
         if (!$student) {
             \Session::clear();
@@ -70,20 +66,21 @@ class ReplenishController extends WebController
             'province.required' => '省份未填写',
             'city.required' => '城市未填写',
             'hospital_name.required' => '医院名称未填写',
+            'email.email' => '邮箱格式不正确'
         ];
 
         $rules = [
             'name' => 'required',
             'nickname' => 'required',
             'sex' => 'required',
-            'email' => 'required',
+            'email' => 'required,email',
             'birthday' => 'required',
             'office' => 'required',
             'title' => 'required',
             'province' => 'required',
             'city' => 'required',
             'area' => 'required',
-            'hospital_name' => 'required',
+            'hospital_name' => 'required'
         ];
         $validator = \Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
