@@ -25,6 +25,7 @@ class ReplenishMiddleware
             && $student->title
             && $student->province
             && $student->city
+            && $student->sex
             && $student->area
             && $student->hospital_name) {
 
