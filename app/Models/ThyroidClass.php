@@ -12,6 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 class ThyroidClass extends Model
 {
     //
-    protected $table = 'thyroid_class';
+    protected $table = 'thyroid_classes';
 
 }
