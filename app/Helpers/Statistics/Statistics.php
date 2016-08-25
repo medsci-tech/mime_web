@@ -34,7 +34,7 @@ class Statistics
      */
     public function updateCount($courseId, $date)
     {
-        \Redis::command('INCRBY', 'play_count');
+        \Redis::command('INCRBY', ['play_count']);
         $course = ThyroidClassCourse::find($courseId);
         $this->updateCourseCount($course);
         $this->updatePhaseCount($course);
