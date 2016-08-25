@@ -20,7 +20,7 @@
 
 @section('content')
     <div class="row">
-        <div class="medium-10 medium-centered large-8 large-centered columns">
+        <div class="medium-6 medium-centered large-4 large-centered columns">
             <br>
 
             <form action="/home/replenish/store" method="post">
