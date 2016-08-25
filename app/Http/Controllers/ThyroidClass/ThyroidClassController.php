@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\ThyroidClass;
 
 use App\Http\Controllers\WebController;
+use App\Models\PlayLog;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\ThyroidClass\ThyroidClass;
+use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
-use App\Models\ThyroidClassStudent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -27,7 +28,8 @@ class ThyroidClassController extends WebController
             'teachers' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
-            'studentCount' => ThyroidClassStudent::count()
+            'studentCount' =>  \Redis::command('GET', 'enter_count'),
+            'playCount' =>  \Redis::command('GET', 'play_count'),
         ]);
     }
 
@@ -69,12 +71,23 @@ class ThyroidClassController extends WebController
         } else {
             $student->entered_at = Carbon::now();
             $student->save();
-
-            $thyroidClass = ThyroidClass::all()->first();
-            $thyroidClass->student_count = Student::whereNotNull('entered_at')->count();
-            $thyroidClass->save();
+            \Redis::command('INCRBY ', 'enter_count');
             return response()->json(['success' => true]);
         }
     }
 
+    function updateStatistics() {
+        \Redis::command('SET', ['enter_count', Student::whereNotNull('entered_at')->count()]);
+        \Redis::command('SET', ['student_count', Student::all()->count()]);
+        \Redis::command('SET', ['play_count', PlayLog::all()->sum('play_times')]);
+        $courses = ThyroidClassCourse::all();
+        foreach($courses as $course) {
+            \Redis::command('HSET', ['course_play_count', 'thyroid_class_course_id:'.$course->id, PlayLog::where('thyroid_class_course_id', $course->id)->sum('play_times')]);
+        }
+
+        $phases = ThyroidClassPhase::all();
+        foreach($phases as $phase) {
+            \Redis::command('HSET', ['phase_play_count', 'thyroid_class_phase_id:'.$phase->id, PlayLog::where('thyroid_class_phase_id', $phase->id)->sum('play_times')]);
+        }
+    }
 }

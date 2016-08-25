@@ -26,6 +26,10 @@ class CourseController extends WebController
         parent::__construct();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function view(Request $request)
     {
         $date = date('Y-m-d H:i:s');
@@ -37,18 +41,17 @@ class CourseController extends WebController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function timer(Request $request)
     {
         $courseId = $request->input('course_id');
         $date = $request->input('date');
-        $logId = 'student_course_id:' . $this->studentId.'-'.$courseId;
-        if (\Redis::command('HEXISTS', [$logId, $date])) {
-            \Redis::command('HINCRBY', [$logId, $date, 30]);
-            return response()->json(['success' => true]);
-        } else {
-            return response()->json([
-                'success' => \Redis::command('HSET', [$logId, $date, 30])
-            ]);
-        }
+        $logId = 'student_course_id:' . $this->studentId . '-' . $courseId;
+        return response()->json([
+            'success' => \Redis::command('HINCRBY', [$logId, $date, 30])
+        ]);
     }
 }
