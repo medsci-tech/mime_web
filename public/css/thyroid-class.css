@@ -112,9 +112,10 @@ img {
 
 .video {
   background-color: #555;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   color: #eee; }
+  .video > div {
+    margin-top: 1rem;
+    margin-bottom: 1rem; }
   .video .video-list {
     overflow-y: auto; }
     .video .video-list h5 {

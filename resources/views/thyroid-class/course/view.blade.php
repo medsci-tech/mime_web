@@ -216,7 +216,7 @@
             new qcVideo.Player(/*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/ "id_video_container", option, func);
         })();
 
-        $('.video-list').css('height', $('.video-list').prev().height());
+//        $('.video-list').css('height', $('.video-list').prev().height());
 
     </script>
     <script>
