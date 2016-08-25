@@ -127,8 +127,8 @@ img {
     .video .video-list a {
       border-bottom: 1px solid #000; }
     .video .video-list a:hover {
-      ackground-color: rgba(33, 153, 255, 0.2); }
-    .video .video-list .active {
+      background-color: rgba(33, 153, 255, 0.2); }
+    .video .video-list .active > a {
       background-color: rgba(33, 153, 255, 0.5); }
     .video .video-list .is-accordion-submenu-parent > a:after, .video .video-list .is-accordion-submenu-parent[aria-expanded=true] > a:after {
       border-color: #eee transparent transparent; }

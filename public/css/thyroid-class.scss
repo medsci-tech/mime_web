@@ -196,10 +196,10 @@ img {
     }
 
     a:hover {
-      ackground-color: rgba(33,153,258,0.2);
+      background-color: rgba(33,153,258,0.2);
     }
 
-    .active {
+    .active>a{
       background-color: rgba(33,153,258,0.5);
     }
 
