@@ -81,15 +81,23 @@ class ThyroidClassController extends WebController
     {
         \Redis::command('SET', ['enter_count', Student::whereNotNull('entered_at')->count()]);
         \Redis::command('SET', ['student_count', Student::all()->count()]);
-        \Redis::command('SET', ['play_count', PlayLog::all()->sum('play_times')]);
+
+        $playCount = 0;
         $courses = ThyroidClassCourse::all();
         foreach ($courses as $course) {
-            \Redis::command('HSET', ['course_play_count', $course->id, PlayLog::where('thyroid_class_course_id', $course->id)->sum('play_times')]);
+            $playCount += \Redis::command('HGET', ['course_play_count', $course->id]);
         }
+
+        \Redis::command('SET', ['play_count', $courses]);
 
         $phases = ThyroidClassPhase::all();
         foreach ($phases as $phase) {
-            \Redis::command('HSET', ['phase_play_count', $phase->id, PlayLog::where('thyroid_class_phase_id', $phase->id)->sum('play_times')]);
+            $coursePlayCount = 0;
+            foreach ($phase->thyroidClassCourses as $course) {
+                $coursePlayCount += \Redis::command('HGET', ['course_play_count', $course->id]);
+            }
+
+            \Redis::command('HSET', ['phase_play_count', $phase->id, $coursePlayCount]);
         }
     }
 }
