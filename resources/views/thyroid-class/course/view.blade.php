@@ -16,7 +16,7 @@
                 <div class="top-bar-left">
                     <ul class="dropdown menu" data-dropdown-menu>
                         <li><img src="/image/logo.jpg" alt=""></li>
-                        <li v-for="left in top_bar_left"><a href="@{{left.href}}">@{{left.name}}</a></li>
+                        <li v-for="left in top_bar_left" class="hide-for-small-only"><a href="@{{left.href}}">@{{left.name}}</a></li>
                     </ul>
                 </div>
                 <div class="top-bar-right">
@@ -216,7 +216,7 @@
             new qcVideo.Player(/*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/ "id_video_container", option, func);
         })();
 
-        $('.video-list').css('height', $('.video-list').prev().height());
+//        $('.video-list').css('height', $('.video-list').prev().height());
 
     </script>
     <script>
