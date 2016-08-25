@@ -71,7 +71,7 @@ class ThyroidClassController extends WebController
         } else {
             $student->entered_at = Carbon::now();
             $student->save();
-            \Redis::command('INCR ', 'enter_count');
+            \Redis::command('INCR ', ['enter_count']);
             return response()->json(['success' => true]);
         }
     }
