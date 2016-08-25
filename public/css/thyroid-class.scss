@@ -193,10 +193,11 @@ img {
 
     a {
       border-bottom: 1px solid #000;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       .over-hide {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        color: inherit;
         cursor: inherit;
         border-bottom: none;
       }
