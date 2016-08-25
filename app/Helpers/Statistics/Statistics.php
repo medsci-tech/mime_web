@@ -16,7 +16,7 @@ class Statistics
      */
     protected function updateCourseCount($course)
     {
-        \Redis::command('HINCRBY', ['course_play_count', 'thyroid_class_course_id:' . $course->id]);
+        \Redis::command('HINCRBY', ['course_play_count', 'thyroid_class_course_id:' . $course->id, 1]);
     }
 
     /**
@@ -25,7 +25,7 @@ class Statistics
     protected function updatePhaseCount($course)
     {
         $phase = $course->thyroidClassPhase;
-        \Redis::command('HINCRBY', ['phase_play_count', 'thyroid_class_phase_id:' . $phase->id]);
+        \Redis::command('HINCRBY', ['phase_play_count', 'thyroid_class_phase_id:' . $phase->id, 1]);
     }
 
     /**
@@ -34,7 +34,7 @@ class Statistics
      */
     public function updateCount($courseId, $date)
     {
-        \Redis::command('INCRBY', ['play_count']);
+        \Redis::command('INCR', ['play_count']);
         $course = ThyroidClassCourse::find($courseId);
         $this->updateCourseCount($course);
         $this->updatePhaseCount($course);
