@@ -7,7 +7,7 @@
 @section('css')
     <style>
         .log-in-form {
-            border: 1px solid #cacaca;
+            /*border: 1px solid #cacaca;*/
             padding: 1rem 1rem !important;
             border-radius: 3px;
         }
@@ -20,7 +20,7 @@
 
 @section('content')
     <div class="row">
-        <div class="medium-6 medium-centered large-4 large-centered columns">
+        <div class="medium-10 medium-centered large-8 large-centered columns">
             <br>
 
             <form action="/home/replenish/store" method="post">
