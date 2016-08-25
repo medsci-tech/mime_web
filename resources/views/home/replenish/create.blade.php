@@ -145,16 +145,16 @@
             el: '#personal',
             data: {
                 name: '{{old('name') ? old('name') : $student->name ?$student->name :null}}',
-                nickname: '{{$student->nickname ?$student->nickname :null}}',
+                nickname: '{{old('nickname') ? old('nickname') : $student->nickname}}',
                 sex: '{{$student->sex ?$student->sex :1}}',
-                birthday: '{{$student->birthday ?$student->birthday :null}}',
-                province: '{{$student->province ?$student->province :null}}',
-                city: '{{$student->city ?$student->city :null}}',
-                area: '{{$student->area ?$student->area : null}}',
-                hospital: '{{$student->hospital_name ?$student->hospital_name :null}}',
-                office: '{{$student->office ?$student->office :null}}',
-                title: '{{$student->title ?$student->title :null}}',
-                email: '{{$student->email ?$student->email :null}}',
+                birthday: '{{old('birthday') ? old('birthday') : $student->birthday}}',
+                province: '{{old('province') ? old('province') : $student->province}}',
+                city: '{{old('city') ? old('city') : $student->city}}',
+                area: '{{old('area') ? old('area') : $student->area}}',
+                hospital_name: '{{old('hospital_name') ? old('hospital_name') : $student->hospital_name}}',
+                office: '{{old('office') ? old('office') : $student->office}}',
+                title: '{{old('title') ? old('title') : $student->title}}',
+                email: '{{old('email') ? old('email') : $student->email}}',
                 office_array: [
                     '妇产科'
                     , '核医学科'
