@@ -118,6 +118,9 @@ img {
     margin-bottom: 1rem; }
   .video .video-list {
     overflow-y: auto; }
+    @media screen and (min-width: 40em) {
+      .video .video-list {
+        min-height: 550px; } }
     .video .video-list h5 {
       padding: .5rem;
       margin: 0;
