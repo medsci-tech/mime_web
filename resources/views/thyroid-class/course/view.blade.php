@@ -46,7 +46,14 @@
                 <li v-for="subject in course_list">
                     <a id="video_@{{$index+1}}" href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
                     <ul class="menu vertical nested">
-                        <li v-for="course in subject.courses" :class="(course.id == currentCourse)?'active':''"><a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;@{{ course.name }}</a></li>
+                        <li v-for="course in subject.courses" :class="(course.id == currentCourse)?'active':''">
+                            <a href="@{{ course.href }}">
+                                @{{ course.sequence }}&nbsp;
+                                <abbr class="over-hide" title="@{{ course.name }}">
+                                    @{{ course.name }}
+                                </abbr>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

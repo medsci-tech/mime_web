@@ -193,6 +193,13 @@ img {
 
     a {
       border-bottom: 1px solid #000;
+      .over-hide {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: inherit;
+        border-bottom: none;
+      }
     }
 
     a:hover {
