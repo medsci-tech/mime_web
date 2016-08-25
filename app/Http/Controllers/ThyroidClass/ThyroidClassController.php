@@ -24,12 +24,13 @@ class ThyroidClassController extends WebController
      */
     public function index()
     {
+//        $coursePlayCount =
         return view('thyroid-class.index', [
             'teachers' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
-            'studentCount' =>  \Redis::command('GET', ['enter_count']),
-            'playCount' =>  \Redis::command('GET', ['play_count']),
+            'studentCount' => \Redis::command('GET', ['enter_count']),
+            'playCount' => \Redis::command('GET', ['play_count']),
         ]);
     }
 
@@ -76,18 +77,19 @@ class ThyroidClassController extends WebController
         }
     }
 
-    function updateStatistics() {
+    function updateStatistics()
+    {
         \Redis::command('SET', ['enter_count', Student::whereNotNull('entered_at')->count()]);
         \Redis::command('SET', ['student_count', Student::all()->count()]);
         \Redis::command('SET', ['play_count', PlayLog::all()->sum('play_times')]);
         $courses = ThyroidClassCourse::all();
-        foreach($courses as $course) {
-            \Redis::command('HSET', ['course_play_count', 'thyroid_class_course_id:'.$course->id, PlayLog::where('thyroid_class_course_id', $course->id)->sum('play_times')]);
+        foreach ($courses as $course) {
+            \Redis::command('HSET', ['course_play_count', $course->id, PlayLog::where('thyroid_class_course_id', $course->id)->sum('play_times')]);
         }
 
         $phases = ThyroidClassPhase::all();
-        foreach($phases as $phase) {
-            \Redis::command('HSET', ['phase_play_count', 'thyroid_class_phase_id:'.$phase->id, PlayLog::where('thyroid_class_phase_id', $phase->id)->sum('play_times')]);
+        foreach ($phases as $phase) {
+            \Redis::command('HSET', ['phase_play_count', $phase->id, PlayLog::where('thyroid_class_phase_id', $phase->id)->sum('play_times')]);
         }
     }
 }
