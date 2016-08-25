@@ -73,7 +73,7 @@ class ReplenishController extends WebController
             'name' => 'required',
             'nickname' => 'required',
             'sex' => 'required',
-            'email' => 'required,email',
+            'email' => 'required|email',
             'birthday' => 'required',
             'office' => 'required',
             'title' => 'required',
