@@ -67,7 +67,7 @@
         <div class="row">
           <div class="medium-6 small-12 columns">
             @if(\Session::has('studentId'))
-              @if(\App\Models\Student::find(\Session::get('studentId'))->thyroidClassStudent)
+              @if(\App\Models\Student::find(\Session::get('studentId'))->entered_at)
                 <a type="button" class="expanded button" href="#">
                   已注册
                 </a>
