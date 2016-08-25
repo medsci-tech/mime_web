@@ -28,8 +28,8 @@ class ThyroidClassController extends WebController
             'teachers' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
-            'studentCount' =>  \Redis::command('GET', 'enter_count'),
-            'playCount' =>  \Redis::command('GET', 'play_count'),
+            'studentCount' =>  \Redis::command('GET', ['enter_count']),
+            'playCount' =>  \Redis::command('GET', ['play_count']),
         ]);
     }
 
