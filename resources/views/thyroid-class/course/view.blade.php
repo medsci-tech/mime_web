@@ -44,15 +44,10 @@
             <h5>&nbsp;课程列表</h5>
             <ul class="vertical menu" data-accordion-menu id="video-accordion">
                 <li v-for="subject in course_list">
-                    <a id="video_@{{$index+1}}" href="#">@{{ subject.sequence }}&nbsp;@{{ subject.subject }}</a>
+                    <a id="video_@{{$index+1}}" href="#">@{{ subject.sequence }}&nbsp;<abbr class="over-hide" title="@{{ subject.subject }}">@{{ subject.subject }}</abbr></a>
                     <ul class="menu vertical nested">
                         <li v-for="course in subject.courses" :class="(course.id == currentCourse)?'active':''">
-                            <a href="@{{ course.href }}">
-                                @{{ course.sequence }}&nbsp;
-                                <abbr class="over-hide" title="@{{ course.name }}">
-                                    @{{ course.name }}
-                                </abbr>
-                            </a>
+                            <a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;<abbr class="over-hide" title="@{{ course.name }}">@{{ course.name }}</abbr></a>
                         </li>
                     </ul>
                 </li>
