@@ -241,7 +241,7 @@
       },
       computed: {
         is_same: function () {
-          return (vm.password === vm.password_confirmation || vm.password == '' || vm.password_confirmation =='')?true:false
+          return (this.password === this.password_confirmation || this.password == '' || this.password_confirmation =='')?true:false
         }
       }
     });
