@@ -146,7 +146,7 @@
             data: {
                 name: '{{old('name') ? old('name') : $student->name}}',
                 nickname: '{{old('nickname') ? old('nickname') : $student->nickname}}',
-                sex: '{{old('sex') ? old('sex') : $student->sex}}',
+                sex: '{{old('sex') ? old('sex') : $student->sex ?$student->sex :1}}',
                 birthday: '{{old('birthday') ? old('birthday') : $student->birthday}}',
                 province: '{{old('province') ? old('province') : $student->province}}',
                 city: '{{old('city') ? old('city') : $student->city}}',
