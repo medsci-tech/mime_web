@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\ThyroidClass;
 
-use App\Models\ThyroidClass;
 use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\ThyroidClass;
 
 use App\Http\Controllers\WebController;
-use App\Models\PlayLog;
 use App\Models\Student;
 use App\Models\Teacher;
-use App\Models\ThyroidClass\ThyroidClass;
+use App\Models\ThyroidClass;
 use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
 use Carbon\Carbon;
