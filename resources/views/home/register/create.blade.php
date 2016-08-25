@@ -241,7 +241,7 @@
       },
       computed: {
         is_same: function () {
-          return (this.password === this.password_confirmation)?true:false
+          return (this.password === this.password_confirmation)?false:true
         }
       }
     });
