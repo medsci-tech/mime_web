@@ -32,7 +32,7 @@ class RegisterController extends WebController
 
         $rules = [
             'phone' => 'required|digits:11|unique:students,phone',
-            'password' => 'required|alpha_num|between:6,16',
+            'password' => 'required|alpha_num|between:6,15',
             'auth_code' => 'required|digits:6',
         ];
 
