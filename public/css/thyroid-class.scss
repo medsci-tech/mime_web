@@ -55,9 +55,11 @@ img {
     background-color: transparent;
 
     li {
-      padding: .1rem 1rem;
-      margin: .6rem 0;
-      border-left: 1px solid #ddd;
+      a {
+        padding: .1rem 1rem;
+        margin: .6rem 0;
+        border-left: 1px solid #ddd;
+      }
     }
   }
 }
