@@ -10,23 +10,8 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="top-bar">
-            <div>
-                <div class="top-bar-left">
-                    <ul class="dropdown menu" data-dropdown-menu>
-                        <li><img src="/image/logo.jpg" alt=""></li>
-                        <li v-for="left in top_bar_left" class="hide-for-small-only"><a href="@{{left.href}}">@{{left.name}}</a></li>
-                    </ul>
-                </div>
-                <div class="top-bar-right">
-                    <ul class="dropdown menu" data-dropdown-menu>
-                        <li v-for="right in top_bar_right"><a href="@{{right.href}}">@{{right.name}}</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    @include('layouts.header')
 
     <div style="background-color: #25562c;">
         <div class="row">
@@ -57,23 +42,7 @@
 </div>
 
 
-    <div class="footer">
-        <div class="row">
-            <div class="medium-8 small-12 columns">
-                <dl class="">
-                    <dd>&emsp;</dd>
-                    <dd>Copyright © Medscience-tech.All rights reserved.鄂ICP备13013615号-1</dd>
-                    <dd>&emsp;</dd>
-                    <dd>所有学习视频课适用于《中华人民共和国著作权法》</dd>
-                    <dd>所有学习视频课经授课专家许可使用，Mime、医师助手APP经版权方可使用。</dd>
-                    <dd>除非另有声明，本平台其他视频作品采用知识共享署名-非商业性使用-相同方式共享2.5中国大陆许可协议进行许可</dd>
-                </dl>
-            </div>
-            <div class="medium-4 small-12 columns">
-                <img src="/image/迈德科技.png" alt="">
-            </div>
-        </div>
-    </div>
+    @include('layouts.footer')
 
 
 @endsection
