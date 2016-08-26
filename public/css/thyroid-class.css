@@ -33,9 +33,14 @@ img {
       font-weight: bold; }
 
 .top-bar {
-  background-color: #fbfbfb; }
+  background-color: #fbfbfb;
+  box-shadow: 0 -0.8rem 1rem -0.5rem #ddd inset; }
   .top-bar ul {
-    background-color: #fbfbfb; }
+    background-color: transparent; }
+    .top-bar ul li a {
+      padding: .1rem 1rem;
+      margin: .6rem 0;
+      border-left: 1px solid #ddd; }
 
 .top-bar .top-bar-left, .top-bar .top-bar-right {
   width: auto; }
