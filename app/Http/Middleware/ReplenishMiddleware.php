@@ -33,6 +33,7 @@ class ReplenishMiddleware
             \Session::set('replenished', true);
             return $next($request);
         } else {
+            \Session::set('return_referer', $request->getRequestUri());
             return redirect('/home/replenish/create');
         }
     }

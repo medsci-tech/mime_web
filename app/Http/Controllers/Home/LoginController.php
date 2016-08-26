@@ -70,7 +70,14 @@ class LoginController extends WebController
         }
 
         \Session::set('studentId', $student->id);
-        return redirect('/');
+
+        if (\Session::has('return_referer')) {
+            $returnUrl = \Session::get('return_referer');
+            \Session::remove('return_referer');
+            return redirect($returnUrl);
+        } else {
+            return redirect('/');
+        }
     }
 
     /**

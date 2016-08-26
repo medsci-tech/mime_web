@@ -101,7 +101,14 @@ class ReplenishController extends WebController
             'hospital_name' => $request->input('hospital_name'),
         ]);
         \Session::set('replenished', true);
-        return redirect('/');
+
+        if (\Session::has('return_referer')) {
+            $returnUrl = \Session::get('return_referer');
+            \Session::remove('return_referer');
+            return redirect($returnUrl);
+        } else {
+            return redirect('/');
+        }
     }
 
     /**

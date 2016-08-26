@@ -18,6 +18,7 @@ class LoginMiddleware
         if(\Session::has('studentId')) {
             return $next($request);
         } else {
+            \Session::set('return_referer', $request->getRequestUri());
             return redirect('/home/login');
         }
     }
