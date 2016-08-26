@@ -210,9 +210,10 @@
         get_auth_code: function () {
 
           $('#error_phone').addClass('hide');
+          $('#error_phone').text('请输入正确的手机号!');
           $('.input-group-button button').attr("disabled", "disabled");
 
-          var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+          var myreg = /^(((12[0-9]{1})|(13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
           if (myreg.test(vm.phone)) {
 
             var i = 61;
@@ -248,7 +249,14 @@
           if(this.phone === ''||this.sms === ''|| this.password === ''||this.password_confirmation === ''||this.agree === false||this.password != this.password_confirmation){
             $("button[type='submit']").attr("disabled", "disabled")
           }else{
-            $("button[type='submit']").removeAttr("disabled")
+            var myreg = /^(((12[0-9]{1})|(13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            if (myreg.test(vm.phone)) {
+              $("button[type='submit']").removeAttr("disabled")
+            }
+            else {
+              $('#error_phone').text('请输入正确的手机号!');
+              $('#error_phone').removeClass('hide');
+            }
           }
           return (this.password === this.password_confirmation)?false:true
         }
