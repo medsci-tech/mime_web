@@ -10,23 +10,8 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="top-bar">
-            <div>
-                <div class="top-bar-left">
-                    <ul class="dropdown menu" data-dropdown-menu>
-                        <li><img src="/image/logo.jpg" alt=""></li>
-                        <li v-for="left in top_bar_left" class="hide-for-small-only"><a href="@{{left.href}}">@{{left.name}}</a></li>
-                    </ul>
-                </div>
-                <div class="top-bar-right">
-                    <ul class="dropdown menu" data-dropdown-menu>
-                        <li v-for="right in top_bar_right"><a href="@{{right.href}}">@{{right.name}}</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    @include('layouts.header')
 
     <div style="background-color: #25562c;">
         <div class="row">
