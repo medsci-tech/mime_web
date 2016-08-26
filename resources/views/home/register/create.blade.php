@@ -251,7 +251,8 @@
           }else{
             var myreg = /^(((12[0-9]{1})|(13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
             if (myreg.test(vm.phone)) {
-              $("button[type='submit']").removeAttr("disabled")
+              $('#error_phone').addClass('hide');
+              $("button[type='submit']").removeAttr("disabled");
             }
             else {
               $('#error_phone').text('请输入正确的手机号!');
