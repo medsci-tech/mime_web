@@ -87,7 +87,7 @@ class RegisterController extends WebController
     {
         $messages = [
             'phone.required' => '手机号未填写',
-            'phone.digits' => '收获格式不正确',
+            'phone.digits' => '手机号格式不正确',
             'phone.unique' => '手机号已注册'
         ];
 
