@@ -24,7 +24,7 @@ img {
   height: 3rem;
   background-color: #fbfbfb;
   border-radius: 3rem 3rem 0 0;
-  box-shadow: 0 -.5rem .5rem #eee inset; }
+  box-shadow: 0 -.5rem 1rem #eee inset; }
   .information .header div {
     height: .5rem; }
   .information .header span {
@@ -37,6 +37,8 @@ img {
   box-shadow: 0 -0.8rem 1rem -0.5rem #ddd inset; }
   .top-bar ul {
     background-color: transparent; }
+    .top-bar ul li:hover {
+      background-color: #eee; }
     .top-bar ul li a {
       padding: .1rem 1rem;
       margin: .6rem 0;
