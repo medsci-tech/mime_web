@@ -233,12 +233,13 @@
                 if (data.success) {
                 } else {
                   $('#error_phone').text(data.error_message);
-                  $('#error_phone').removeClass('hide')
+                  $('#error_phone').removeClass('hide');
                 }
               }
             );
           } else {
-            $('#error_phone').removeClass('hide')
+            $('#error_phone').removeClass('hide');
+            $('.input-group-button button').removeAttr("disabled");
           }
         }
       },
