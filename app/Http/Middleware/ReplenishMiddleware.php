@@ -19,13 +19,14 @@ class ReplenishMiddleware
         $student = Student::find(\Session::get('studentId'));
 
         if($student->name
+            && $student->nickname
+            && $student->sex
             && $student->email
             && $student->birthday
             && $student->office
             && $student->title
             && $student->province
             && $student->city
-            && $student->sex
             && $student->area
             && $student->hospital_name) {
 
