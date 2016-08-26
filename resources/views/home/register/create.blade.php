@@ -37,9 +37,9 @@
         <div class="row column log-in-form">
           <h4 class="text-center">Mime账号注册</h4>
           <label>手机号
-            <input required v-model="phone" type="text" placeholder="请输入您的手机号" name="phone" value="{{old('phone')}}">
+            <input required v-model="phone" type="number" placeholder="请输入您的手机号" name="phone">
           </label>
-          <p id="error_phone" class="help-text hide">手机号已被注册</p>
+          <p id="error_phone" class="help-text hide">请输入正确的手机号!</p>
           @if($errors->has('phone'))
             <p class="help-text">{{ $errors->first('phone')}}</p>
           @endif
@@ -69,7 +69,7 @@
           @if($errors->has('password_confirmation'))
             <p class="help-text">{{ $errors->first('password_confirmation')}}</p>
           @endif
-          <p v-show="is_same" class="help-text">请保持密码一致</p>
+          <p v-show="is_same" class="help-text">两次输入的密码不一致!</p>
 
 
 
@@ -244,6 +244,11 @@
       },
       computed: {
         is_same: function () {
+          if(this.phone === ''||this.sms === ''|| this.password === ''||this.password_confirmation === ''||this.agree === false){
+            $("button[type='submit']").attr("disabled", "disabled")
+          }else{
+            $("button[type='submit']").removeAttr("disabled")
+          }
           return (this.password === this.password_confirmation)?false:true
         }
       }

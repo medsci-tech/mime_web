@@ -32,7 +32,7 @@ img {
     height: 3rem;
     background-color: #fbfbfb;
     border-radius: 3rem 3rem 0 0;
-    box-shadow: 0 -.5rem .5rem #eee inset;
+    box-shadow: 0 -.5rem 1rem #eee inset;
 
     div {
       height: .5rem;
@@ -55,6 +55,9 @@ img {
     background-color: transparent;
 
     li {
+      &:hover {
+        background-color: #eee;
+      }
       a {
         padding: .1rem 1rem;
         margin: .6rem 0;
