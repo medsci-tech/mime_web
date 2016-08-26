@@ -209,7 +209,7 @@
       methods: {
         get_auth_code: function () {
 
-          $('error_phone').addClass('hide');
+          $('#error_phone').addClass('hide');
           $('.input-group-button button').attr("disabled", "disabled");
 
           var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
