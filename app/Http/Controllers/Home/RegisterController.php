@@ -25,12 +25,14 @@ class RegisterController extends WebController
             'auth_code.required' => '验证码未填写',
             'auth_code.digits' => '验证码格式不正确',
             'password.required' => '密码未填写',
-            'password.confirmed' => '两次密码不一致'
+            'password.confirmed' => '请保持密码一致',
+            'password.alpha_num' => '6-16位密码，区分大小写，不可用特殊符号',
+            'password.between' => '6-16位密码，区分大小写，不可用特殊符号'
         ];
 
         $rules = [
-            'phone' => 'required|digits:11|unique:students,phone,',
-            'password' => 'required',
+            'phone' => 'required|digits:11|unique:students,phone',
+            'password' => 'required|alpha_num|between:6,16',
             'auth_code' => 'required|digits:6',
         ];
 
