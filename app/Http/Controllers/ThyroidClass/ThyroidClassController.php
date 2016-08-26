@@ -62,9 +62,6 @@ class ThyroidClassController extends WebController
      */
     public function enter()
     {
-        $this->middleware('login');
-        $this->middleware('replenish');
-
         $student = Student::find(\Session::get('studentId'));
         if ($student->entered_at) {
             return response()->json(['success' => false, 'error_message' => '已报名']);
