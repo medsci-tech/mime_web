@@ -58,7 +58,7 @@
             <p class="help-text">{{ $errors->first('auth_code')}}</p>
           @endif
           <label>密码
-            <input required v-model="password" type="password" placeholder="请输入密码" name="password">
+            <input required v-model="password" type="password" placeholder="6-16位，区分大小写，不可用特殊符号" name="password">
           </label>
           @if($errors->has('password'))
             <p class="help-text">{{ $errors->first('password')}}</p>
