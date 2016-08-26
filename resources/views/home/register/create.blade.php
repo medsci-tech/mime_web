@@ -214,6 +214,21 @@
 
           var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
           if (myreg.test(vm.phone)) {
+
+            var i = 61;
+            timer();
+            function timer() {
+              i--;
+              $('.input-group-button button').text(i + '秒后重发');
+              if (i == 0) {
+                clearTimeout(timer);
+                $('.input-group-button button').removeAttr("disabled");
+                $('.input-group-button button').text('重新发送');
+              } else {
+                setTimeout(timer, 1000);
+              }
+            }
+
             $.get('/home/register/sms', {phone: vm.phone}, function (data) {
                 if (data.success) {
                 } else {
@@ -224,21 +239,6 @@
             );
           } else {
             $('#error_phone').removeClass('hide')
-          }
-
-
-          var i = 61;
-          timer();
-          function timer() {
-            i--;
-            $('.input-group-button button').text(i + '秒后重发');
-            if (i == 0) {
-              clearTimeout(timer);
-              $('.input-group-button button').removeAttr("disabled");
-              $('.input-group-button button').text('重新发送');
-            } else {
-              setTimeout(timer, 1000);
-            }
           }
         }
       },
