@@ -42,7 +42,7 @@ class RegisterController extends WebController
             return redirect()->back()->withErrors($validator->errors())->withInput();
         } /*if>*/
 
-        $messageVerify = MessageVerify::where('phone', '=', $request->input('phone'))->orderBy('created_at', 'desc')->first();
+        $messageVerify = MessageVerify::where('phone', $request->input('phone'))->where('status', 0)->first();
         if (!$messageVerify) {
             $validator->errors()->add('phone', '电话号码错误');
             return redirect()->back()->withErrors($validator->errors())->withInput();
@@ -62,6 +62,9 @@ class RegisterController extends WebController
         $student->phone = $request->input('phone');
         $student->password = \Hash::make($request->input('password'));
         $student->save();
+
+        $messageVerify->status = 1;
+        $messageVerify->save();
 
         if ($student->name
             && $student->sex
