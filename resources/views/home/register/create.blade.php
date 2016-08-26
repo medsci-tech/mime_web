@@ -69,7 +69,7 @@
           @if($errors->has('password_confirmation'))
             <p class="help-text">{{ $errors->first('password_confirmation')}}</p>
           @endif
-          <p v-show="is_same" class="help-text">两次输入的密码不一致!</p>
+          <p v-show="is_same" class="help-text">请保持密码一致</p>
 
 
 
