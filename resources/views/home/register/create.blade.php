@@ -60,15 +60,18 @@
           <label>密码
             <input required v-model="password" type="password" placeholder="请输入密码" name="password">
           </label>
-          <label>确认密码
-            <input required v-model="password_confirmation" type="password" placeholder="请再次输入密码" name="password_confirmation">
-          </label>
-
-          <p v-show="is_same" class="help-text">两次输入的密码不一致!</p>
-
           @if($errors->has('password'))
             <p class="help-text">{{ $errors->first('password')}}</p>
           @endif
+          <label>确认密码
+            <input required v-model="password_confirmation" type="password" placeholder="请再次输入密码" name="password_confirmation">
+          </label>
+          @if($errors->has('password_confirmation'))
+            <p class="help-text">{{ $errors->first('password_confirmation')}}</p>
+          @endif
+          <p v-show="is_same" class="help-text">两次输入的密码不一致!</p>
+
+
 
           <div style="font-size: .875rem">用户协议
             <textarea disabled>
