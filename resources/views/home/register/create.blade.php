@@ -37,7 +37,7 @@
         <div class="row column log-in-form">
           <h4 class="text-center">Mime账号注册</h4>
           <label>手机号
-            <input required v-model="phone" type="number" placeholder="请输入您的手机号" name="phone">
+            <input required v-model="phone" type="text" value="{{ old('phone') }}" placeholder="请输入您的手机号" name="phone">
           </label>
           <p id="error_phone" class="help-text hide">请输入正确的手机号!</p>
           @if($errors->has('phone'))
