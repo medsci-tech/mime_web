@@ -244,7 +244,7 @@
       },
       computed: {
         is_same: function () {
-          if(this.phone === ''||this.sms === ''|| this.password === ''||this.password_confirmation === ''||this.agree === false){
+          if(this.phone === ''||this.sms === ''|| this.password === ''||this.password_confirmation === ''||this.agree === false||this.password != this.password_confirmation){
             $("button[type='submit']").attr("disabled", "disabled")
           }else{
             $("button[type='submit']").removeAttr("disabled")
