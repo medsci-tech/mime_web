@@ -257,6 +257,7 @@
             else {
               $('#error_phone').text('请输入正确的手机号!');
               $('#error_phone').removeClass('hide');
+              $("button[type='submit']").attr("disabled", "disabled");
             }
           }
           return (this.password === this.password_confirmation)?false:true
