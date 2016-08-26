@@ -90,7 +90,7 @@
                     @endif
 
                     <label>医院
-                        <input required v-model="hospital" type="text" placeholder="请输入" name="hospital_name">
+                        <input required v-model="hospital_name" type="text" placeholder="请输入" name="hospital_name">
                     </label>
 
                     @if($errors->has('hospital_name'))
