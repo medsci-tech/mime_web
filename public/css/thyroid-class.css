@@ -119,12 +119,11 @@ img {
 
 .video {
   background-color: #555;
-  color: #eee;
+  color: #ddd;
   padding-bottom: 1rem; }
   .video > div {
     margin-top: 1rem; }
   .video .video-list {
-    color: #eee;
     overflow-y: auto; }
     @media screen and (min-width: 40em) {
       .video .video-list {
