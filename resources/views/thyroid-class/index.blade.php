@@ -53,9 +53,9 @@
           <div class="medium-6 small-12 columns">
             @if(\Session::has('studentId'))
               @if(\App\Models\Student::find(\Session::get('studentId'))->entered_at)
-                <a type="button" class="expanded button" href="#">
+                <button type="button" class="expanded button" disabled>
                   已注册
-                </a>
+                </button>
               @elseif(\Session::has('replenished') && \Session::get('replenished'))
                 <button @click="register_course" type="button" class="expanded button">
                 课程注册
