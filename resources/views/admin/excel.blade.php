@@ -143,5 +143,30 @@
             </div>
         </div>
 
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">table</div>
+                    {{--<div class="panel-body"></div>--}}
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>标题1</th>
+                            <th>标题2</th>
+                            <th>标题3</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>内容1</td>
+                            <td>内容2</td>
+                            <td>内容3</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection
