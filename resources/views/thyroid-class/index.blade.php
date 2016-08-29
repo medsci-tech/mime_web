@@ -394,7 +394,6 @@
     var swiper = new Swiper('.swiper-container', {
       autoHeight: true,
       loop : true,
-      autoplay: 5000,
       autoplayDisableOnInteraction : false,
       speed: 800
     });
