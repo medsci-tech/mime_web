@@ -21,7 +21,7 @@ class CourseController extends WebController
     public function __construct()
     {
         $this->middleware('login');
-        $this->middleware('replenish');
+        //$this->middleware('replenish');
         parent::__construct();
     }
 
