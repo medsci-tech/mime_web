@@ -45,16 +45,9 @@ class ExcelController extends Controller
                 $studentsArray[$student->phone] = $student->id;
             }
 
-            $phases = ThyroidClassPhase::get(['id', 'main_teacher_id']);
-            $phasesArray = array();
-            foreach($phases as $phase) {
-                $phasesArray[$phase->id] = $phase->main_teacher_id;
-            }
-
             foreach ($excelData as $data) {
                 $logData = [
                     'student_id' => $studentsArray[$data['phone']],
-                    'teacher_id' => $phasesArray[$data['thyroid_class_phase_id']],
                     'thyroid_class_phase_id' => $data['thyroid_class_phase_id'],
                     'thyroid_class_course_id' => $data['thyroid_class_course_id'],
                     'play_times' => $data['play_times'],
