@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ThyroidClass;
 
 use App\Http\Controllers\WebController;
 use App\Models\Student;
+use App\Models\PlayLog;
 use App\Models\Teacher;
 use App\Models\ThyroidClass;
 use App\Models\ThyroidClassCourse;
@@ -78,22 +79,30 @@ class ThyroidClassController extends WebController
         \Redis::command('SET', ['enter_count', Student::whereNotNull('entered_at')->count()]);
         \Redis::command('SET', ['student_count', Student::all()->count()]);
 
-        $playCount = 0;
+
         $courses = ThyroidClassCourse::all();
+
+
+        foreach ($courses as $course) {
+            $playCount = PlayLog::where('thyroid_class_course_id', $course->id)->sum('play_times');
+            \Redis::command('HSET', ['course_play_count', $course->id, $playCount]);
+        }
+
+        $playCount = 0;
         foreach ($courses as $course) {
             $playCount += \Redis::command('HGET', ['course_play_count', $course->id]);
         }
 
         \Redis::command('SET', ['play_count', $playCount]);
 
-        $phases = ThyroidClassPhase::all();
-        foreach ($phases as $phase) {
-            $coursePlayCount = 0;
-            foreach ($phase->thyroidClassCourses as $course) {
-                $coursePlayCount += \Redis::command('HGET', ['course_play_count', $course->id]);
-            }
-
-            \Redis::command('HSET', ['phase_play_count', $phase->id, $coursePlayCount]);
-        }
+//        $phases = ThyroidClassPhase::all();
+//        foreach ($phases as $phase) {
+//            $coursePlayCount = 0;
+//            foreach ($phase->thyroidClassCourses as $course) {
+//                $coursePlayCount += \Redis::command('HGET', ['course_play_count', $course->id]);
+//            }
+//
+//            \Redis::command('HSET', ['phase_play_count', $phase->id, $coursePlayCount]);
+//        }
     }
 }
