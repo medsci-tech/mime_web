@@ -26,11 +26,8 @@ class ExcelController extends Controller
         \Excel::load($excel, function ($reader) use ($excel) {
             $excelData = \Excel::load($excel)->get()->toArray();
             foreach ($excelData as $data) {
-//                $data['password'] = \Hash::make(substr($data['phone'],-6));
-//                Student::create($data);
-                $students = Student::where('phone', $data['phone'])->first();
-                $students->entered_at = $data['entered_at'];
-                $students->save();
+                $data['password'] = \Hash::make(substr($data['phone'],-6));
+                Student::create($data);
             }
         });
         return redirect('/admin/excel');
