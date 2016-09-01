@@ -396,7 +396,7 @@
     var swiper = new Swiper('.swiper-container', {
       autoHeight: true,
       loop: true,
-      autopaly: 2000,
+      autoplay: {{$thyroidClass->banner_autopaly}},
       autoplayDisableOnInteraction : false,
       speed: 800
     });
