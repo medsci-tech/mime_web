@@ -397,7 +397,7 @@
       autoHeight: true,
       loop: true,
       autopaly: {{$thyroidClass->banner_autopaly}},
-      autoplayDisableOnInteraction : false,
+      autoplayDisableOnInteraction : true,
       speed: 800
     });
 
