@@ -295,6 +295,11 @@
         swiper_pictures: [
           {
             name: '',
+            image: '/image/banner2.jpg',
+            href: 'http://www.mime.org.cn/web/def/wap/jzx-payWeixin0905.html'
+          },
+          {
+            name: '',
             image: '/image/banner.jpg',
             href: '#'
           }
@@ -393,7 +398,8 @@
 
     var swiper = new Swiper('.swiper-container', {
       autoHeight: true,
-      loop : true,
+      loop: true,
+      autopaly: 20000,
       autoplayDisableOnInteraction : false,
       speed: 800
     });
