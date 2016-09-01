@@ -31,6 +31,7 @@ class CreateThyroidClassesTable extends Migration
 
             $table->unsignedInteger('latest_unit_num')->default(0)->comment('当前学期');
             $table->unsignedInteger('latest_course_num')->default(0)->comment('当前课程');
+            $table->unsignedInteger('banner_autopaly')->default(20000)->comment('banner 滚动时间');
             $table->timestamp('latest_update_at')->comment('最近更新时间');
 
             $table->timestamps();
