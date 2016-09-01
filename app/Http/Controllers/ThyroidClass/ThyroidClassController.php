@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ThyroidClass;
 
 use App\Http\Controllers\WebController;
 use App\Models\Student;
+use App\Models\Banner;
 use App\Models\PlayLog;
 use App\Models\Teacher;
 use App\Models\ThyroidClass;
@@ -30,7 +31,8 @@ class ThyroidClassController extends WebController
             'thyroidClassPhases' => ThyroidClassPhase::all(),
             'studentCount' => \Redis::command('GET', ['enter_count']),
             'playCount' => \Redis::command('GET', ['play_count']),
-            'coursePlayCount' => \Redis::command('HGETALL', ['course_play_count'])
+            'coursePlayCount' => \Redis::command('HGETALL', ['course_play_count']),
+            'banners' => Banner::where('page', 'index')->orderBy('weight', 'desc')->get()
         ]);
     }
 
@@ -38,6 +40,11 @@ class ThyroidClassController extends WebController
      * @param Request $request
      */
     public function teachers(Request $request)
+
+
+
+
+
     {
 
     }

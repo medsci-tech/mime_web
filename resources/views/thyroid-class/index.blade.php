@@ -293,16 +293,13 @@
         ],
 
         swiper_pictures: [
+          @foreach($banners as $banner)
           {
             name: '',
-            image: '/image/banner2.jpg',
-            href: 'http://www.mime.org.cn/web/def/wap/jzx-payWeixin0905.html'
+            image: '{{$banner->image_url}}',
+            href: '{{$banner->href_url}}'
           },
-          {
-            name: '',
-            image: '/image/banner.jpg',
-            href: '#'
-          }
+          @endforeach
         ],
 
         main_class: {
@@ -399,7 +396,7 @@
     var swiper = new Swiper('.swiper-container', {
       autoHeight: true,
       loop: true,
-      autopaly: 20000,
+      autopaly: {{$thyroidClass->banner_autopaly}},
       autoplayDisableOnInteraction : false,
       speed: 800
     });
