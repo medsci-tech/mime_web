@@ -397,7 +397,7 @@
       autoHeight: true,
       loop: true,
       autopaly: {{$thyroidClass->banner_autopaly}},
-      autoplayDisableOnInteraction : true,
+      autoplayDisableOnInteraction : false,
       speed: 800
     });
 
@@ -409,7 +409,7 @@
 //                'href': '#',
 //                'data-open': 'exampleModal1'
 //            });
-
+      swiper.startAutoplay();
     })
 
   </script>
