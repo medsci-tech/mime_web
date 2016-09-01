@@ -409,7 +409,6 @@
 //                'href': '#',
 //                'data-open': 'exampleModal1'
 //            });
-      swiper.startAutoplay();
     })
 
   </script>
