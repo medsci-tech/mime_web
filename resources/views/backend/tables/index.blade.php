@@ -146,7 +146,7 @@
         "<button class='btn btn-flat btn-danger' disabled>删除</button>" + "&nbsp;" +
         "</div>"
       );
-      $('#articleList_filter label').css('margin-top', '5px');
+      $('#articleList_filter label').css('margin-bottom', '10px');
       $('#articleList tbody tr').click(function () {
         $(this).siblings().removeClass('success');
         $(this).addClass('success');
