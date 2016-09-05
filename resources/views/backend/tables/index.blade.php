@@ -3,10 +3,17 @@
 @section('title','tables')
 
 @section('css')
-  <link rel="stylesheet" href="{{asset('vendor')}}/datatables/dataTables.bootstrap.css">
-  <link rel="stylesheet"
-        href="{{asset('vendor')}}/datatables/extensions/Responsive/css/dataTables.responsive.css">
-  <link rel="stylesheet" href="{{asset('vendor')}}/umeditor/themes/default/css/umeditor.css">
+  <link rel="stylesheet" href="/css/backend-tables.css">
+  <style>
+    .table .success td, .table .success th {
+      background-color: #dff0d8 !important;
+    }
+
+    table.dataTable.display tbody tr.success > .sorting_1,
+    table.dataTable.order-column.stripe tbody tr.success   > .sorting_1 {
+      background-color: #d9ead4 !important;
+    }
+  </style>
 @endsection
 
 @section('content')
@@ -34,7 +41,8 @@
               <div id="articleList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                   <div class="col-sm-12">
-                    <table id="articleList" class="table table-bordered table-hover dataTable" role="grid"
+                    <table id="articleList" class="table table-bordered table-hover dataTable nowrap display"
+                           role="grid"
                            aria-describedby="articleList_info">
                       <thead style="word-break: keep-all">
                       <tr role="row">
@@ -86,12 +94,7 @@
 @endsection
 
 @section('js')
-  <script src="{{asset('vendor')}}/datatables/jquery.dataTables.min.js"></script>
-  <script src="{{asset('vendor')}}/datatables/dataTables.bootstrap.min.js"></script>
-  <script src="{{asset('vendor')}}/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
-  <script src="{{asset('vendor')}}/umeditor/umeditor.config.js"></script>
-  <script src="{{asset('vendor')}}/umeditor/umeditor.js"></script>
-  <script type="{{asset('vendor')}}/umeditor/lang/zh-cn/zh-cn.js"></script>
+  <script src="/js/backend-tables.js"></script>
   <script>
     $(function () {
       $("#articleList").DataTable({
@@ -119,6 +122,13 @@
             "2015-08-05 11:11:49",
             "2015-12-08 11:13:07",
             "admin"
+          ],
+          [
+            "标题",
+            "简介",
+            "2015-08-05 11:11:49",
+            "2015-12-08 11:13:07",
+            "admin"
           ]
         ]
       });
@@ -126,12 +136,7 @@
         $('#myInput').focus()
       });
 
-      var create = UM.getEditor('create', {
-        initialFrameWidth: '100%',
-        autoHeightEnabled: false,
-        scaleEnabled: true
-      });
-      var edit = UM.getEditor('edit');
+
     });
     $(function () {
       $('#articleList_filter').prepend(
