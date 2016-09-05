@@ -14,11 +14,12 @@ class CreateBannersTables extends Migration
     {
         //
         Schema::create('banners', function (Blueprint $table) {
-            $table->increments('id')->comment('Ö÷¼ü.');
-            $table->string('image_url')->comment('bannerÍ¼Æ¬µØÖ·.');
-            $table->string('href_url')->comment('Á´½ÓµØÖ·.');
-            $table->string('page')->comment('ËùÊôÒ³Ãæ.');
-            $table->tinyInteger('status')->default(0)->comment('ÊÇ·ñÏÔÊ¾ 0 Îª²»ÏÔÊ¾ 1ÎªÏÔÊ¾.');
+            $table->increments('id')->comment('ä¸»é”®.');
+            $table->string('image_url')->comment('bannerå›¾ç‰‡åœ°å€.');
+            $table->string('href_url')->comment('é“¾æŽ¥åœ°å€.');
+            $table->string('page')->comment('æ‰€å±žé¡µé¢.');
+            $table->tinyInteger('status')->default(0)->comment('æ˜¯å¦æ˜¾ç¤º 0 ä¸ºä¸æ˜¾ç¤º 1ä¸ºæ˜¾ç¤º.');
+            $table->integer('weight')->default(0)->comment('æƒé‡.');
             $table->timestamps();
         });
     }
