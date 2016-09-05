@@ -1,10 +1,10 @@
-@extends('/layouts/app')
+@extends('backend/layouts/app')
 
 @section('title','添加文章')
 
 @section('css')
-  <link rel="stylesheet" href="{{asset('vendor')}}/plugins/umeditor/themes/default/css/umeditor.css">
-  <link rel="stylesheet" href="{{asset('vendor')}}/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+  <link rel="stylesheet" href="{{asset('vendor')}}/umeditor/themes/default/css/umeditor.css">
+  <link rel="stylesheet" href="{{asset('vendor')}}/bootstrap-tagsinput/bootstrap-tagsinput.css">
   <style>
     .bootstrap-tagsinput {
       display: block;
@@ -20,10 +20,10 @@
 @endsection
 
 @section('js')
-  <script src="{{asset('vendor')}}/plugins/umeditor/umeditor.config.js"></script>
-  <script src="{{asset('vendor')}}/plugins/umeditor/umeditor.js"></script>
-  <script src="{{asset('vendor')}}/plugins/umeditor/lang/zh-cn/zh-cn.js"></script>
-  <script src="{{asset('vendor')}}/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+  <script src="{{asset('vendor')}}/umeditor/umeditor.config.js"></script>
+  <script src="{{asset('vendor')}}/umeditor/umeditor.js"></script>
+  <script src="{{asset('vendor')}}/umeditor/lang/zh-cn/zh-cn.js"></script>
+  <script src="{{asset('vendor')}}/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
   <script>
     var qiniu_image_domain = "{{env('QINIU_IMAGE_DOMAIN')}}/";
 
@@ -49,7 +49,7 @@
     });
   </script>
 
-  {{--<script src="{{asset('vendor')}}/plugins/vuejs/vue.js"></script>--}}
+  {{--<script src="{{asset('vendor')}}/vuejs/vue.js"></script>--}}
   <script>
     $('#upload_thumb').click(function () {
       $('#thumbnail_file').click();

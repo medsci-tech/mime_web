@@ -1,4 +1,4 @@
-@extends('/backend/layouts/app')
+@extends('backend/layouts/app')
 
 @section('title','tables')
 
@@ -7,6 +7,82 @@
   <link rel="stylesheet"
         href="{{asset('vendor')}}/datatables/extensions/Responsive/css/dataTables.responsive.css">
   <link rel="stylesheet" href="{{asset('vendor')}}/umeditor/themes/default/css/umeditor.css">
+@endsection
+
+@section('content')
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        列表
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
+        <li class="active">列表</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-primary">
+            {{--<div class="box-header">--}}
+            {{--<h3 class="box-title">文章列表</h3>--}}
+            {{--</div><!-- /.box-header -->--}}
+            <div class="box-body">
+              <div id="articleList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table id="articleList" class="table table-bordered table-hover dataTable" role="grid"
+                           aria-describedby="articleList_info">
+                      <thead style="word-break: keep-all">
+                      <tr role="row">
+                        <th rowspan="1" colspan="1">文章标题</th>
+                        <th rowspan="1" colspan="1">内容简介</th>
+                        <th rowspan="1" colspan="1">新增时间</th>
+                        <th rowspan="1" colspan="1">更新时间</th>
+                        <th rowspan="1" colspan="1">发布人</th>
+                      </tr>
+                      </thead>
+                      <tfoot style="word-break: keep-all">
+                      <tr>
+                        <th rowspan="1" colspan="1">文章标题</th>
+                        <th rowspan="1" colspan="1">内容简介</th>
+                        <th rowspan="1" colspan="1">新增时间</th>
+                        <th rowspan="1" colspan="1">更新时间</th>
+                        <th rowspan="1" colspan="1">发布人</th>
+                      </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
+        </div><!-- /.col -->
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="modalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
 @endsection
 
 @section('js')
@@ -94,80 +170,4 @@
   {{--new Vue({});--}}
   {{--</script>--}}
 
-@endsection
-
-@section('content')
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        列表
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
-        <li class="active">列表</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
-            {{--<div class="box-header">--}}
-            {{--<h3 class="box-title">文章列表</h3>--}}
-            {{--</div><!-- /.box-header -->--}}
-            <div class="box-body">
-              <div id="articleList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <table id="articleList" class="table table-bordered table-hover dataTable" role="grid"
-                           aria-describedby="articleList_info">
-                      <thead style="word-break: keep-all">
-                      <tr role="row">
-                        <th rowspan="1" colspan="1">文章标题</th>
-                        <th rowspan="1" colspan="1">内容简介</th>
-                        <th rowspan="1" colspan="1">新增时间</th>
-                        <th rowspan="1" colspan="1">更新时间</th>
-                        <th rowspan="1" colspan="1">发布人</th>
-                      </tr>
-                      </thead>
-                      <tfoot style="word-break: keep-all">
-                      <tr>
-                        <th rowspan="1" colspan="1">文章标题</th>
-                        <th rowspan="1" colspan="1">内容简介</th>
-                        <th rowspan="1" colspan="1">新增时间</th>
-                        <th rowspan="1" colspan="1">更新时间</th>
-                        <th rowspan="1" colspan="1">发布人</th>
-                      </tr>
-                      </tfoot>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div><!-- /.box-body -->
-          </div><!-- /.box -->
-        </div><!-- /.col -->
-      </div>
-
-      <!-- Modal -->
-      <div class="modal fade" id="modalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                  aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- /.content -->
-  </div><!-- /.content-wrapper -->
 @endsection
