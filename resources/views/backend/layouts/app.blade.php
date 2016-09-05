@@ -17,6 +17,10 @@
       font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     }
 
+    h1,h2,h3,h4,h5 {
+      font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+
     .edui-scale {
       box-sizing: content-box;
     }
