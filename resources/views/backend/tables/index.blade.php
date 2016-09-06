@@ -34,9 +34,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box box-primary">
-            {{--<div class="box-header">--}}
-            {{--<h3 class="box-title">文章列表</h3>--}}
-            {{--</div><!-- /.box-header -->--}}
+            <div class="box-header">
+              <h3 class="box-title">tables</h3>
+            </div><!-- /.box-header -->
             <div class="box-body">
               <div id="articleList_wrapper" class="form-inline dt-bootstrap">
                 <div class="row">
@@ -50,8 +50,8 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr v-for="data in table_data" click="set_editor(data)">
-                        <td v-for="data in data">@{{ data }}</td>
+                      <tr v-for="data in table_data" @click="set_editor(data)">
+                      <td v-for="data in data">@{{ data }}</td>
                       </tr>
                       </tbody>
                     </table>
@@ -78,7 +78,7 @@
         table_head: ['a', 'b', 'c', 'd', 'e'],
         table_data: [
           ['1', '2', '3', '4', '5'],
-          ['1', '2', '3', '4', '5']
+          ['6', '7', '8', '9', '10']
         ],
         modal_data: [
           //一般input类型
@@ -99,29 +99,26 @@
           //select类型
           {
             box_type: 'select',
-            option: ['option1', 'option2', 'option3']
+            option: ['1', '2', '3', '4']
           },
           //textarea类型
           {
             box_type: 'textarea',
-            rows: 3,
-            type: 'text'
+            rows: 3
           }
         ]
       },
-      computed: {
-        initialize_editor: function () {
-          var l = this.table_head.length;
-          for (var i = 0; i < l; i++) {
-            this.modal_data[i].name = this.table_head[i];
-          }
+      compiled: function () {
+        var l = this.table_head.length;
+        for (var i = 0; i < l; i++) {
+          Vue.set(this.modal_data[i], 'name', this.table_head[i]);
         }
       },
       methods: {
         set_editor: function (e) {
           var l = e.length;
           for (var i = 0; i < l; i++) {
-            this.modal_data[i].value = e[i];
+            Vue.set(this.modal_data[i], 'value', e[i]);
           }
         }
       }
