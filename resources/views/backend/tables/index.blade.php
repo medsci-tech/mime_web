@@ -188,7 +188,8 @@
           var l = e.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', '');
-          }
+          };
+          $('#modal-edit').modal('show');
         },
         confirm_delete: function (e) {
           $.post(this.delete_info.url, e, function (data) {
