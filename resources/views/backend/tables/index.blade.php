@@ -38,10 +38,10 @@
             {{--<h3 class="box-title">文章列表</h3>--}}
             {{--</div><!-- /.box-header -->--}}
             <div class="box-body">
-              <div id="articleList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+              <div id="articleList_wrapper" class="form-inline dt-bootstrap">
                 <div class="row">
                   <div class="col-sm-12">
-                    <table id="articleList" class="table table-bordered table-hover dataTable nowrap display"
+                    <table id="articleList" class="table table-bordered table-hover"
                            role="grid"
                            aria-describedby="articleList_info">
                       <thead style="word-break: keep-all">
@@ -53,15 +53,24 @@
                         <th rowspan="1" colspan="1">发布人</th>
                       </tr>
                       </thead>
-                      <tfoot style="word-break: keep-all">
+                      <tbody>
                       <tr>
-                        <th rowspan="1" colspan="1">文章标题</th>
-                        <th rowspan="1" colspan="1">内容简介</th>
-                        <th rowspan="1" colspan="1">新增时间</th>
-                        <th rowspan="1" colspan="1">更新时间</th>
-                        <th rowspan="1" colspan="1">发布人</th>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
                       </tr>
-                      </tfoot>
+                      </tbody>
+                      {{--<tfoot style="word-break: keep-all">--}}
+                      {{--<tr>--}}
+                        {{--<th rowspan="1" colspan="1">文章标题</th>--}}
+                        {{--<th rowspan="1" colspan="1">内容简介</th>--}}
+                        {{--<th rowspan="1" colspan="1">新增时间</th>--}}
+                        {{--<th rowspan="1" colspan="1">更新时间</th>--}}
+                        {{--<th rowspan="1" colspan="1">发布人</th>--}}
+                      {{--</tr>--}}
+                      {{--</tfoot>--}}
                     </table>
                   </div>
                 </div>
@@ -96,48 +105,6 @@
 @section('js')
   <script src="/js/backend-tables.js"></script>
   <script>
-    $(function () {
-      $("#articleList").DataTable({
-        "oLanguage": {
-          "sLengthMenu": "每页显示 _MENU_ 条记录",
-          "sZeroRecords": "抱歉， 没有找到",
-          "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
-          "sInfoEmpty": "没有数据",
-          "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
-          "oPaginate": {
-            "sFirst": "首页",
-            "sPrevious": "前一页",
-            "sNext": "后一页",
-            "sLast": "尾页"
-          }
-        },
-        "bStateSave": true,
-        "responsive": true,
-        {{--"serverSide": true,--}}
-          {{--"ajax": "{{url('test/article/list')}}",--}}
-        "data": [
-          [
-            "标题",
-            "简介",
-            "2015-08-05 11:11:49",
-            "2015-12-08 11:13:07",
-            "admin"
-          ],
-          [
-            "标题",
-            "简介",
-            "2015-08-05 11:11:49",
-            "2015-12-08 11:13:07",
-            "admin"
-          ]
-        ]
-      });
-      $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').focus()
-      });
-
-
-    });
     $(function () {
       $('#articleList_filter').prepend(
         "<div class='inline'>" +

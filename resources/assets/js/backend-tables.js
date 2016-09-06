@@ -1,1 +1,1 @@
-require('datatables');
+// require('datatables');
