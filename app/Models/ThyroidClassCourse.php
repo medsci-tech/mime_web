@@ -18,6 +18,23 @@ class ThyroidClassCourse extends Model
     protected $table = 'thyroid_class_courses';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'comment',
+        'logo_url',
+        'teacher_id',
+        'thyroid_class_phase_id',
+        'qcloud_file_id',
+        'qcloud_app_id',
+        'is_show',
+        'sequence',
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function thyroidClassPhase()
