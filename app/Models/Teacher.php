@@ -18,6 +18,20 @@ class Teacher extends Model
     protected $table = 'teachers';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nickname',
+        'photo_url',
+        'name',
+        'office',
+        'title',
+        'introduction'
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function thyroidClassPhase()

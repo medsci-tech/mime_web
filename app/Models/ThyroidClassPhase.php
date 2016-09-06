@@ -16,7 +16,17 @@ class ThyroidClassPhase extends Model
      */
     protected $table = 'thyroid_class_phases';
 
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'comment',
+        'main_teacher_id',
+        'sequence'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
