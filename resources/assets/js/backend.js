@@ -8,7 +8,6 @@
 require('./bootstrap');
 
 require('jquery-slimscroll');
-require('datatables');
 require('../vendor/AdminLTE/js/app.min.js');
 require('../vendor/AdminLTE/js/demo.js');
 
@@ -19,8 +18,3 @@ require('../vendor/AdminLTE/js/demo.js');
  */
 
 
-Vue.component('example', require('./components/Example.vue'));
-
-var backend = new Vue({
-    el: 'body'
-});

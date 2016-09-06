@@ -10,7 +10,7 @@
     }
 
     table.dataTable.display tbody tr.success > .sorting_1,
-    table.dataTable.order-column.stripe tbody tr.success   > .sorting_1 {
+    table.dataTable.order-column.stripe tbody tr.success > .sorting_1 {
       background-color: #d9ead4 !important;
     }
   </style>
@@ -46,31 +46,14 @@
                            aria-describedby="articleList_info">
                       <thead style="word-break: keep-all">
                       <tr role="row">
-                        <th rowspan="1" colspan="1">文章标题</th>
-                        <th rowspan="1" colspan="1">内容简介</th>
-                        <th rowspan="1" colspan="1">新增时间</th>
-                        <th rowspan="1" colspan="1">更新时间</th>
-                        <th rowspan="1" colspan="1">发布人</th>
+                        <th v-for="head in table_head" rowspan="1" colspan="1">@{{ head }}</th>
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
+                      <tr v-for="data in table_data" click="set_editor(data)">
+                        <td v-for="data in data">@{{ data }}</td>
                       </tr>
                       </tbody>
-                      {{--<tfoot style="word-break: keep-all">--}}
-                      {{--<tr>--}}
-                        {{--<th rowspan="1" colspan="1">文章标题</th>--}}
-                        {{--<th rowspan="1" colspan="1">内容简介</th>--}}
-                        {{--<th rowspan="1" colspan="1">新增时间</th>--}}
-                        {{--<th rowspan="1" colspan="1">更新时间</th>--}}
-                        {{--<th rowspan="1" colspan="1">发布人</th>--}}
-                      {{--</tr>--}}
-                      {{--</tfoot>--}}
                     </table>
                   </div>
                 </div>
@@ -81,23 +64,7 @@
       </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="modalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                  aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      @include('backend.tables.edit')
     </section><!-- /.content -->
   </div><!-- /.content-wrapper -->
 @endsection
@@ -105,21 +72,68 @@
 @section('js')
   <script src="/js/backend-tables.js"></script>
   <script>
+    var tables = new Vue({
+      el: 'body',
+      data: {
+        table_head: ['a', 'b', 'c', 'd', 'e'],
+        table_data: [
+          ['1', '2', '3', '4', '5'],
+          ['1', '2', '3', '4', '5']
+        ],
+        modal_data: [
+          //一般input类型
+          {
+            box_type: 'input',
+            type: 'text'
+          },
+          //一般input类型
+          {
+            box_type: 'input',
+            type: 'text'
+          },
+          //一般input类型
+          {
+            box_type: 'input',
+            type: 'text'
+          },
+          //select类型
+          {
+            box_type: 'select',
+            option: ['option1', 'option2', 'option3']
+          },
+          //textarea类型
+          {
+            box_type: 'textarea',
+            rows: 3,
+            type: 'text'
+          }
+        ]
+      },
+      computed: {
+        initialize_editor: function () {
+          var l = this.table_head.length;
+          for (var i = 0; i < l; i++) {
+            this.modal_data[i].name = this.table_head[i];
+          }
+        }
+      },
+      methods: {
+        set_editor: function (e) {
+          var l = e.length;
+          for (var i = 0; i < l; i++) {
+            this.modal_data[i].value = e[i];
+          }
+        }
+      }
+    });
+
     $(function () {
-      $('#articleList_filter').prepend(
-        "<div class='inline'>" +
-        "<a href='{{ url('/article/create') }}' class='btn btn-flat btn-success'>添加</a>" + "&nbsp;" +
-        "<button class='btn btn-flat btn-warning' disabled>编辑</button>" + "&nbsp;" +
-        "<button class='btn btn-flat btn-danger' disabled>删除</button>" + "&nbsp;" +
-        "</div>"
-      );
-      $('#articleList_filter label').css('margin-bottom', '10px');
       $('#articleList tbody tr').click(function () {
         $(this).siblings().removeClass('success');
         $(this).addClass('success');
       });
       $('#articleList tbody tr').dblclick(function () {
-        $('#modalView').modal('show');
+        $('#modal-edit').modal('show');
       });
 
 
