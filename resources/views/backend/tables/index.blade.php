@@ -179,8 +179,8 @@
             Vue.set(this.modal_data[i], 'value', e[i]);
           }
         },
-        editor: function () {
-          tables.set_editor();
+        editor: function (e) {
+          tables.set_editor(e);
           $('#modal-edit').modal('show');
         },
         add: function () {
