@@ -5,3 +5,7 @@
 @import "../vendor/AdminLTE/css/AdminLTE";
 @import "../vendor/AdminLTE/css/skins/_all-skins";
 
+[v-cloak] {
+  display: none;
+}
+
