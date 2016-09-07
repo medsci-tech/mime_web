@@ -85,19 +85,13 @@
                 ],
 
                 swiper_pictures: [
-                    {
+                        @foreach($banners as $banner)
+                        {
                         name: '',
-                        image: '/image/轮播test.jpg',
-                        href: '#'
-                    }, {
-                        name: '',
-                        image: '/image/轮播test.jpg',
-                        href: '#'
-                    }, {
-                        name: '',
-                        image: '/image/轮播test.jpg',
-                        href: '#'
-                    }
+                        image: '{{$banner->image_url}}',
+                        href: '{{$banner->href_url}}'
+                    },
+                    @endforeach
                 ],
 
                 course_list: [

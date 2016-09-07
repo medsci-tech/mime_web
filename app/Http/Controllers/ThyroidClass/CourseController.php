@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ThyroidClass;
 
+use App\Models\Banner;
 use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
@@ -36,7 +37,8 @@ class CourseController extends WebController
         return view('thyroid-class.course.view', [
             'course' => ThyroidClassCourse::find($request->input('course_id')),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
-            'date' => $date
+            'date' => $date,
+            'banners' => Banner::where('page', 'view')->where('status', 1)->orderBy('weight', 'desc')->get()
         ]);
     }
 
