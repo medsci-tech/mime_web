@@ -60,12 +60,12 @@
         ],
 
         update_info: {
-          tilte: '编辑',
+          title: '编辑',
           action: '',
           method: 'post'
         },
         add_info: {
-          tilte: '添加',
+          title: '添加',
           action: '',
           method: 'post'
         },
@@ -74,7 +74,7 @@
         },
 
         form_info: {
-          tilte: '编辑',
+          title: '编辑',
           action: '',
           method: 'post'
         },
