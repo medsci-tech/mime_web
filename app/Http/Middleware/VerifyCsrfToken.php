@@ -18,5 +18,6 @@ class VerifyCsrfToken extends BaseVerifier
         '/admin/thyroid*',
         '/admin/phase*',
         '/admin/course*',
+        '/admin/banner*',
     ];
 }

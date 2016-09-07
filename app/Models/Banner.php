@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Banner
  * @package App\Models
+ * @mixin \Eloquent
  */
 class Banner extends Model
 {
@@ -15,4 +16,16 @@ class Banner extends Model
      */
     protected $table = 'banners';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'image_url',
+        'href_url',
+        'page',
+        'status',
+        'weight'
+    ];
 }

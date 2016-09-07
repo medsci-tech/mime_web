@@ -61,10 +61,6 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
 
 Route::auth();
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
-//    Route::get('/', 'AdminController@index');
-    Route::get('/', function (){
-        return view('backend.tables.index');
-    });
     Route::any('/student-logs', 'AdminController@studentLogs');
     Route::group(['prefix' => 'excel'], function () {
         Route::get('/', 'ExcelController@excelForm');
@@ -75,9 +71,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::any('/test_log_detail', 'ExcelController@getLogDetail');
     });
 
-
     Route::resource('teacher', 'TeacherController');
     Route::resource('thyroid', 'ThyroidController');
     Route::resource('phase', 'PhaseController');
     Route::resource('course', 'CourseController');
+    Route::resource('banner', 'BannerController');
 });
