@@ -61,6 +61,11 @@ class TeacherController extends Controller
     {
         $data = $this->formatData($request);
         Teacher::create($data);
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '添加成功',
+            'message' => '添加讲师成功',
+        ]);
         return redirect('/admin/teacher');
     }
 
@@ -88,6 +93,12 @@ class TeacherController extends Controller
         $teacher = Teacher::find($id);
         $teacher->update($data);
 
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '修改成功',
+            'message' => '修改讲师成功',
+        ]);
+
         return redirect('/admin/teacher');
     }
 
@@ -100,9 +111,9 @@ class TeacherController extends Controller
         return response()->json([
             'success' => Teacher::find($id)->delete(),
             'data' => [
-                'type' => '',
-                'title' => '',
-                'message' => ''
+                'type' => 'success',
+                'title' => '删除成功',
+                'message' => '删除讲师成功'
             ]
         ]);
     }

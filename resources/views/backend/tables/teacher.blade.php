@@ -67,11 +67,19 @@
           action: '',
           method: 'post'
         },
-        alert: {
-          type: '',
-          title: '',
-          message: ''
-        }
+        @if(Session::has('alert'))
+            alert: {
+              type: '{{Session::get("alert")['type']}}',
+              title: '{{Session::get("alert")['title']}}',
+              message: '{{Session::get("alert")['message']}}'
+            }
+        @else
+            alert: {
+                type: '',
+                title: '',
+                message: ''
+            }
+        @endif
       }
 
   </script>
