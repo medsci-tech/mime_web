@@ -15,5 +15,8 @@ class VerifyCsrfToken extends BaseVerifier
         '/thyroid-class/course/timer',
         '/thyroid-class/enter',
         '/admin/teacher*',
+        '/admin/thyroid*',
+        '/admin/phase*',
+        '/admin/course*',
     ];
 }

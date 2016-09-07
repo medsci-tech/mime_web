@@ -9,19 +9,25 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class PhaseController
+ * @package App\Http\Controllers\Admin
+ */
 class PhaseController extends Controller
 {
+
     /**
      * Data filtering.
      *
+     * @param $request
      * @return array
      */
-    private function formatData(Request $request)
+    private function formatData($request)
     {
         $data = [
             'title' => $request->input('title'),
             'comment' => $request->input('title'),
-            'logo_url' => $request->input('logo_url')
+            'main_teacher_id' => $request->input('main_teacher_id')
         ];
 
 
@@ -92,5 +98,23 @@ class PhaseController extends Controller
         return response()->json([
             'success' =>ThyroidClassPhase::find($id)->delete()
         ]);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(Request $request, $id)
+    {
+
+        $data = $this->formatData($request);
+        $teacher = ThyroidClassPhase::find($id);
+        $teacher->update($data);
+
+        return redirect('/admin/phase');
     }
 }

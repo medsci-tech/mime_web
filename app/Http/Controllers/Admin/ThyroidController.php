@@ -12,9 +12,10 @@ class ThyroidController extends Controller
     /**
      * Data filtering.
      *
+     * @param $request
      * @return array
      */
-    private function formatData(Request $request)
+    private function formatData($request)
     {
         $data = [
             'title' => $request->input('title'),
@@ -93,6 +94,13 @@ class ThyroidController extends Controller
      */
     public function destroy($id)
     {
-
+        return response()->json([
+            'success' => ThyroidClass::find($id)->delete(),
+            'data' => [
+                'type' => '',
+                'title' => '',
+                'message' => ''
+            ]
+        ]);
     }
 }

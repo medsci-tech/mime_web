@@ -10,7 +10,7 @@
       table_head: ['id', '单元名称', '授课老师', '简介'],
       table_data: [
           @foreach($phases as $phase)
-        ['{{$phase->id}}', '{{$phase->title}}', '{{$phase->teacher->name}}', '{{$phase->comment}}'],
+        ['{{$phase->id}}', '{{$phase->title}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{{$phase->comment}}'],
         @endforeach
       ],
       pagination: '{{$phases->render() }}',
@@ -43,16 +43,17 @@
 
       update_info: {
         title: '编辑',
-        action: '',
-        method: 'post'
+        action: '/admin/phase',
+        method: 'put'
       },
       add_info: {
         title: '添加',
-        action: '',
+        action: '/admin/phase',
         method: 'post'
       },
       delete_info: {
-        url: ''
+        url: '/admin/phase',
+        method: 'delete',
       },
 
       form_info: {

@@ -7,12 +7,13 @@
 @section('tables_data')
   <script>
     var data = {
-      table_head: ['id', '姓名', '宣传照', '科室', '职称', '介绍'],
+      table_head: ['id', '名称', 'banner滚动时间（单位/毫秒）', '最新更新时间', '介绍'],
       table_data: [
-          @foreach($teachers as $teacher)
-        ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
+          @foreach($thyroids as $thyroid)
+        ['{{$thyroid->id}}', '{{$thyroid->title}}', '{{$thyroid->banner_autopaly}}', '{{$thyroid->latest_update_at}}', '{{$thyroid->comment}}'],
         @endforeach
       ],
+      pagination: '{{$thyroids->render() }}',
       modal_data: [
         {
           box_type: 'input',
@@ -21,50 +22,39 @@
         },
         {
           box_type: 'input',
-          name: 'name',
-          type: 'text'
-        },
-        {
-          box_type: 'input',
-          name: 'photo_url',
-          type: 'text'
-        },
-        {
-          box_type: 'input',
-          name: 'office',
-          type: 'text'
-        },
-        {
-          box_type: 'input',
           name: 'title',
           type: 'text'
         },
-        //select类型
-//          {
-//            box_type: 'select',
-//            name: 'd',
-//            option: ['1', '2', '3', '4']
-//          },
-        //textarea类型
+        {
+          box_type: 'input',
+          name: 'banner_autopaly',
+          type: 'text'
+        },
+        {
+          box_type: 'input',
+          name: 'latest_update_at',
+          type: 'text'
+        },
         {
           box_type: 'textarea',
-          name: 'introduction',
+          name: 'comment',
           rows: 8
         }
       ],
 
       update_info: {
         title: '编辑',
-        action: '',
-        method: 'post'
+        action: '/admin/thyroid',
+        method: 'put'
       },
       add_info: {
         title: '添加',
-        action: '',
+        action: '/admin/thyroid',
         method: 'post'
       },
       delete_info: {
-        url: ''
+        url: '/admin/thyroid',
+        method: 'delete'
       },
 
       form_info: {
