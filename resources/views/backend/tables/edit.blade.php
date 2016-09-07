@@ -8,6 +8,7 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" action="@{{ form_info.action }}" method="@{{ form_info.method }}">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div v-for="data in modal_data">
             <div v-if="data.box_type == 'input'" class="form-group">
               <label for="@{{ data.name }}" class="col-sm-2 control-label">@{{ data.title }}</label>
