@@ -22,7 +22,6 @@ class TeacherController extends Controller
     private function formatData($request)
     {
         $data = [
-            'nickname' => $request->input('nickname'),
             'photo_url' => $request->input('photo_url'),
             'name' => $request->input('name'),
             'office' => $request->input('office'),
@@ -30,7 +29,6 @@ class TeacherController extends Controller
             'introduction' => $request->input('introduction'),
         ];
 
-        dd($data);
         return $data;
     }
 
@@ -42,7 +40,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('backend.tables.teacher', ['teachers' => Teacher::paginate('5')]);
+        return view('backend.tables.teacher', ['teachers' => Teacher::paginate('2')]);
     }
 
     /**
@@ -85,6 +83,7 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $data = $this->formatData($request);
         $teacher = Teacher::find($id);
         $teacher->update($data);
