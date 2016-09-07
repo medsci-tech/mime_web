@@ -49,7 +49,7 @@
 
         update_info: {
           title: '编辑',
-          action: '/admin/teacher/',
+          action: '/admin/teacher',
           method: 'put'
         },
         add_info: {
