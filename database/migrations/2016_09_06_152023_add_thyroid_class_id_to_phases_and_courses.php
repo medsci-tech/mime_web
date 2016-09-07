@@ -14,12 +14,12 @@ class AddThyroidClassIdToPhasesAndCourses extends Migration
     {
         //
         Schema::table('thyroid_class_phases', function (Blueprint $table) {
-            $table->integer('thyroid_class_id')->unsigned()->comment('公开课ID');
+            $table->integer('thyroid_class_id')->nullable()->default(null)->unsigned()->comment('公开课ID');
             $table->foreign('thyroid_class_id')->references('id')->on('thyroid_classes');
         });
 
         Schema::table('thyroid_class_courses', function (Blueprint $table) {
-            $table->integer('thyroid_class_id')->unsigned()->comment('公开课ID');
+            $table->integer('thyroid_class_id')->nullable()->default(null)->unsigned()->comment('公开课ID');
             $table->foreign('thyroid_class_id')->references('id')->on('thyroid_classes');
         });
     }
