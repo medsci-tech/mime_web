@@ -15,40 +15,48 @@
         }
       },
       data: {
-        table_head: ['a', 'b', 'c', 'd', 'e'],
+        table_head: ['id', '姓名', '宣传照', '科室', '职称', '介绍'],
         table_data: [
-          ['1', '2', '3', '4', '5'],
-          ['6', '7', '8', '9', '10']
+          @foreach($teachers as $teacher)
+            ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
+          @endforeach
         ],
         modal_data: [
-          //一般input类型
           {
             box_type: 'input',
-            name: 'a',
+            name: 'id',
             type: 'text'
           },
-          //一般input类型
           {
             box_type: 'input',
-            name: 'b',
+            name: 'name',
             type: 'text'
           },
-          //一般input类型
           {
             box_type: 'input',
-            name: 'c',
+            name: 'photo_url',
+            type: 'text'
+          },
+          {
+            box_type: 'input',
+            name: 'office',
+            type: 'text'
+          },
+          {
+            box_type: 'input',
+            name: 'title',
             type: 'text'
           },
           //select类型
-          {
-            box_type: 'select',
-            name: 'd',
-            option: ['1', '2', '3', '4']
-          },
+//          {
+//            box_type: 'select',
+//            name: 'd',
+//            option: ['1', '2', '3', '4']
+//          },
           //textarea类型
           {
             box_type: 'textarea',
-            name: 'e',
+            name: 'introduction',
             rows: 3
           }
         ],
@@ -81,6 +89,7 @@
       methods: {
         set_editor: function (e) {
           tables.form_info = tables.update_info;
+          tables.form_info.action = '/admin/teacher/'+ e[0];
           var l = e.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', e[i]);

@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     });
 
 
+    Route::resource('teacher', 'TeacherController');
     Route::resource('thyroid', 'ThyroidController');
     Route::resource('phase', 'PhaseController');
     Route::resource('course', 'categoryController');

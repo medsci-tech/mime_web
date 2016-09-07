@@ -38,7 +38,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('admin.backend.teacher.index', ['teachers' => Teacher::paginate('20')]);
+        return view('backend.tables.teacher', ['teachers' => Teacher::paginate('20')]);
     }
 
     /**
