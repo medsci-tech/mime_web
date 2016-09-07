@@ -126,7 +126,7 @@
           $(event.target).parent().addClass('fade');
         },
         is_img: function (e) {
-          var reg=/^(http|ftp|https):\/\/*(jpg|png)$/
+          var reg=/.(jpg|png)$/;
           return reg.test(e);
         }
       }
