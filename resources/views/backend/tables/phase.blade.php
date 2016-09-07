@@ -78,7 +78,7 @@
         set_editor: function (e) {
           tables.form_info = tables.update_info;
           tables.form_info.action = '/admin/teacher/'+ e[0];
-          var l = e.length;
+          var l = tables.table_head.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', e[i]);
           }
@@ -89,7 +89,7 @@
         },
         add: function () {
           tables.form_info = tables.add_info;
-          var l = e.length;
+          var l = tables.table_head.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', '');
           }
