@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Teacher;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
-use App\Models\ThyroidClasscourse;
+use App\Models\ThyroidClassCourse;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
