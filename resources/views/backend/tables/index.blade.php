@@ -13,6 +13,13 @@
     table.dataTable.order-column.stripe tbody tr.success > .sorting_1 {
       background-color: #d9ead4 !important;
     }
+
+    @media (max-width: 767px){
+      .fixed .content-wrapper, .fixed .right-side {
+        padding-top: 50px;
+      }
+    }
+
   </style>
 @endsection
 
@@ -49,7 +56,7 @@
                 </div>
               </div>
             </div><!-- /.box-header -->
-            <div class="box-body no-padding" v-cloak>
+            <div class="box-body no-padding" style="overflow: scroll" v-cloak>
               <table class="table table-bordered table-hover table-striped table-responsive">
                 <thead style="word-break: keep-all">
                 <tr role="row">
