@@ -13,6 +13,13 @@
     table.dataTable.order-column.stripe tbody tr.success > .sorting_1 {
       background-color: #d9ead4 !important;
     }
+
+    @media (max-width: 767px){
+      .fixed .content-wrapper, .fixed .right-side {
+        padding-top: 100px;
+      }
+    }
+
   </style>
 @endsection
 
