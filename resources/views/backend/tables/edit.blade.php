@@ -1,4 +1,4 @@
-<div v-cloak  class="modal" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -41,7 +41,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn-primary">确认修改</button>
+        <button type="submit" class="btn btn-primary">确认</button>
       </div>
     </div>
   </div>
