@@ -119,6 +119,10 @@
         },
         cancel_delete: function (event) {
           $(event.target).parent().addClass('fade');
+        },
+        is_img: function (e) {
+          var reg=/.(jpg|png)$/;
+          return reg.test(e);
         }
       }
     });
