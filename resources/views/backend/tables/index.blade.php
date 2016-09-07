@@ -158,8 +158,10 @@
     });
   </script>
   <script>
-    //单击加颜色,双击事件
+
     $(function () {
+
+      //单击加颜色,双击事件
       $('tbody tr').click(function () {
         $(this).siblings().removeClass('success');
         $(this).addClass('success');
@@ -180,6 +182,11 @@
           i = 0;
         }
       }, false);
+
+      //textarea auto height
+      $('textarea').keyup(function () {
+        $(this).height(this.scrollHeight-15);
+      });
     });
   </script>
 
