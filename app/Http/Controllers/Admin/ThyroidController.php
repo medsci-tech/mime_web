@@ -34,7 +34,7 @@ class ThyroidController extends Controller
      */
     public function index()
     {
-        return view('admin.backend.thyroid.index', ['thyroids' => ThyroidClass::paginate('20')]);
+        return view('backend.tables.thyroid', ['thyroids' => ThyroidClass::paginate('10')]);
     }
 
     /**

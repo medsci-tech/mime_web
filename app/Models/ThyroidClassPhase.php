@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ThyroidClassPhase
@@ -11,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ThyroidClassPhase extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     /**
      * @var string
      */
