@@ -97,6 +97,13 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-
+        return response()->json([
+            'success' => Teacher::find($id)->delete(),
+            'data' => [
+                'type' => '',
+                'title' => '',
+                'message' => ''
+            ]
+        ]);
     }
 }

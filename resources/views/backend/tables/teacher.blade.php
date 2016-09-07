@@ -1,7 +1,7 @@
 @extends('backend.tables.index')
 
-@section('title','title1')
-@section('box_title','title1')
+@section('title', '讲师信息')
+@section('box_title','讲师列表')
 
 
 @section('tables_data')
@@ -40,7 +40,6 @@
             name: 'title',
             type: 'text'
           },
-          //textarea类型
           {
             box_type: 'textarea',
             name: 'introduction',
@@ -50,16 +49,17 @@
 
         update_info: {
           title: '编辑',
-          action: '',
-          method: 'post'
+          action: '/admin/teacher/',
+          method: 'put'
         },
         add_info: {
           title: '添加',
-          action: '',
+          action: '/admin/teacher',
           method: 'post'
         },
         delete_info: {
-          url: ''
+          url: '/admin/teacher',
+          method: 'delete'
         },
 
         form_info: {

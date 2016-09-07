@@ -112,8 +112,9 @@
       data: data,
       methods: {
         set_editor: function (e) {
-          tables.form_info = tables.update_info;
-          tables.form_info.action += e['id'];
+          Vue.set(this.form_info, 'title', this.update_info.title);
+          Vue.set(this.form_info, 'action', this.update_info.action+e[0]);
+          Vue.set(this.form_info, 'method', this.update_info.method+e[0]);
           var l = tables.table_head.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', e[i]);
@@ -135,12 +136,15 @@
           $('#modal-edit').modal('show');
         },
         confirm_delete: function (e) {
-          var url = this.delete_info.url + e['id'];
-          $.post(url, e, function (data) {
-            if (data.success) {
-              history.go(0);
-            } else {
-              tables.alert = data.alert;
+          var url = this.delete_info.url +  '/' +  e[0];
+          $.ajax({
+            url: url,
+            type: 'delete',
+            success: function(data) {
+              tables.alert = data;
+            },
+            error: function (XMLResponse) {
+              alert(XMLResponse.responseText);
             }
           })
         },
