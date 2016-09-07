@@ -26,6 +26,7 @@ class CourseController extends Controller
             'thyroid_class_phase_id' => $request->input('thyroid_class_phase_id'),
             'qcloud_file_id' => $request->input('qcloud_file_id'),
             'qcloud_app_id' => $request->input('qcloud_app_id'),
+            'is_show' => $request->input('is_show'),
         ];
 
 

@@ -7,10 +7,10 @@
 @section('tables_data')
   <script>
     var data = {
-        table_head: ['id', '编号', '课程名称', '所属单元', '缩略图', '腾讯云file_id', '腾讯云app_id'],
+        table_head: ['id', '编号', '课程名称', '是否显示','所属单元', '缩略图', '腾讯云file_id', '腾讯云app_id'],
         table_data: [
           @foreach($courses as $course)
-            ['{{$course->id}}', '{{$course->sequence}}', '{{$course->title}}', '{{$course->thyroidClassPhase ?$course->thyroidClassPhase->title :''}}', '{{$course->logo_url}}', '{{$course->qcloud_file_id}}', '{{$course->qcloud_app_id}}'],
+            ['{{$course->id}}', '{{$course->sequence}}', '{{$course->title}}', '{{$course->is_show ?'显示' :'不显示'}}', '{{$course->thyroidClassPhase ?$course->thyroidClassPhase->title :''}}', '{{$course->logo_url}}', '{{$course->qcloud_file_id}}', '{{$course->qcloud_app_id}}'],
           @endforeach
         ],
         pagination: '{{$courses->render() }}',
@@ -29,6 +29,14 @@
             box_type: 'input',
             name: 'title',
             type: 'text'
+          },
+          {
+            box_type: 'select',
+            name: 'is_show',
+            option: {
+              '显示': '1',
+              '不显示': '0'
+            }
           },
           {
             box_type: 'select',
