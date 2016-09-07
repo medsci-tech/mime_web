@@ -113,7 +113,7 @@
       methods: {
         set_editor: function (e) {
           Vue.set(this.form_info, 'title', this.update_info.title);
-          Vue.set(this.form_info, 'action', this.update_info.action+e[0]);
+          Vue.set(this.form_info, 'action', this.update_info.action+'/'+e[0]);
           Vue.set(this.form_info, 'method', this.update_info.method);
           var l = tables.table_head.length;
           for (var i = 0; i < l; i++) {
@@ -139,7 +139,7 @@
           var url = this.delete_info.url +  '/' +  e[0];
           $.ajax({
             url: url,
-            type: 'delete',
+            type: this.delete_info.method,
             success: function(data) {
               tables.alert = data;
             },
