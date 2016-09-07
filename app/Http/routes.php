@@ -71,6 +71,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::any('/test_log_detail', 'ExcelController@getLogDetail');
     });
 
+    Route::get('/', 'TeacherController@index');
     Route::resource('teacher', 'TeacherController');
     Route::resource('thyroid', 'ThyroidController');
     Route::resource('phase', 'PhaseController');
