@@ -163,7 +163,7 @@
           return reg.test(e);
         },
         submit: function () {
-          $('form').submit;
+          $('form').submit();
         }
       }
     });
