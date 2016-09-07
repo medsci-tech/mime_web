@@ -7,8 +7,9 @@
         <h4 class="modal-title" id="myModalLabel">@{{ form_info.title }}</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" action="@{{ form_info.action }}" method="@{{ form_info.method }}">
+        <form class="form-horizontal" role="form" action="@{{ form_info.action }}" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input v-if=" form_info.method == 'put' " type="hidden" name="_method" value="put"/>
           <div v-for="data in modal_data">
             <div v-if="data.box_type == 'input' && data.name != 'id'" class="form-group">
               <label for="@{{ data.name }}" class="col-sm-2 control-label">@{{ data.title }}</label>
