@@ -141,7 +141,11 @@
             url: url,
             type: this.delete_info.method,
             success: function(data) {
-              tables.alert = data;
+              if(data.success){
+                history.go(0);
+              }else{
+                tables.alert = data;
+              }
             },
             error: function (XMLResponse) {
               alert(XMLResponse.responseText);
@@ -157,6 +161,9 @@
         is_img: function (e) {
           var reg=/.(jpg|png)$/;
           return reg.test(e);
+        },
+        submit: function () {
+          $('form').submit;
         }
       }
     });
