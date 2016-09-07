@@ -16,7 +16,7 @@
 
     @media (max-width: 767px){
       .fixed .content-wrapper, .fixed .right-side {
-        padding-top: 100px;
+        padding-top: 50px;
       }
     }
 
@@ -56,7 +56,7 @@
                 </div>
               </div>
             </div><!-- /.box-header -->
-            <div class="box-body no-padding" v-cloak>
+            <div class="box-body no-padding" style="overflow: scroll" v-cloak>
               <table class="table table-bordered table-hover table-striped table-responsive">
                 <thead style="word-break: keep-all">
                 <tr role="row">
