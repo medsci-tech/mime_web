@@ -76,7 +76,7 @@
                   <div class="fade inline"
                        style="padding: 5px 5px 8px 5px; background-color: #aaa; border-radius: 5px;">
                     <button class="btn btn-xs btn-primary" @click="cancel_delete($event)">取消</button>
-                    <button class="btn btn-xs btn-danger" @click="confirm_delete(data)">确认删除</button>
+                    <button class="btn btn-xs btn-danger" @click="confirm_delete(data | debounce 5000)">确认删除</button>
                   </div>
                 </td>
                 </tr>
@@ -198,9 +198,5 @@
     });
   </script>
 
-  {{--<script src="{{asset('vendor')}}/vuejs/vue.js"></script>--}}
-  {{--<script>--}}
-  {{--new Vue({});--}}
-  {{--</script>--}}
 
 @endsection
