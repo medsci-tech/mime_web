@@ -63,6 +63,9 @@
                 <tbody>
                 <tr v-for="data in table_data" @click="set_editor(data)">
                 <td v-for="data in data">@{{ data }}
+                  <div v-if=" data.test(/^(http|ftp|https):\/\/*(.jpg|.png)$)">
+                    <img class="img-responsive" src="../image/test.jpg" alt="">
+                  </div>
                 </td>
                 <td style="white-space: nowrap">
                   <button class="btn btn-xs btn-primary" @click="editor(data)">修改</button>
