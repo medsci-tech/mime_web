@@ -62,9 +62,12 @@
                 </thead>
                 <tbody>
                 <tr v-for="data in table_data" @click="set_editor(data)">
-                <td v-for="data in data">@{{ data }}
+                <td v-for="data in data">
                   <div v-if="is_img(data)">
                     <img class="img-responsive" :src="data" alt="">
+                  </div>
+                  <div v-else>
+                    @{{ data }}
                   </div>
                 </td>
                 <td style="white-space: nowrap">

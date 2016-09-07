@@ -30,7 +30,7 @@
               <label for="@{{ data.name }}" class="col-sm-2 control-label">@{{ data.title }}</label>
               <div class="col-sm-10">
                 <select required class="form-control" name="@{{ data.name }}" id="@{{ data.name }}" v-model="data.value">
-                  <option v-for="(key, value) in data.option" value="@{{ value }}">@{{ value }}</option>
+                  <option value="@{{ value }}">@{{ value }}</option>
                   <option v-for="(key, value) in data.option" value="@{{ value }}">@{{ key }}</option>
                 </select>
               </div>
