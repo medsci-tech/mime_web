@@ -15,14 +15,13 @@
         }
       },
       data: {
-        table_head: ['id', '姓名', '宣传照', '科室', '职称', '介绍'],
+        table_head: ['id', '编号', '课程名称', '所属单元', '缩略图', '腾讯云file_id', '腾讯云app_id'],
         table_data: [
-          [1,2,3,4,5,6]
-          @foreach($teachers as $teacher)
-            ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
+          @foreach($courses as $course)
+            ['{{$course->id}}', '{{$course->sequence}}', '{{$course->title}}', '{{$course->thyroidClassPhase->title}}', '{{$course->logo_url}}', '{{$course->qcloud_file_id}}', '{{$course->qcloud_app_id}}'],
           @endforeach
         ],
-        pagination: '{{$teachers->render() }}',
+        pagination: '{{$courses->render() }}',
         modal_data: [
           {
             box_type: 'input',
@@ -31,17 +30,7 @@
           },
           {
             box_type: 'input',
-            name: 'name',
-            type: 'text'
-          },
-          {
-            box_type: 'input',
-            name: 'photo_url',
-            type: 'text'
-          },
-          {
-            box_type: 'input',
-            name: 'office',
+            name: 'sequence',
             type: 'text'
           },
           {
@@ -49,29 +38,34 @@
             name: 'title',
             type: 'text'
           },
-          //select类型
           {
             box_type: 'select',
-            name: 'd',
+            name: 'thyroid_class_phase_id',
             option: {
-              'key': 'value'
+              @foreach($phases as $phase)
+              '{{$phase->title}}': '{{$phase->id}}',
+              @endforeach
             }
           },
-          //textarea类型
           {
-            box_type: 'textarea',
-            name: 'introduction',
-            rows: 3
+            box_type: 'input',
+            name: 'qcloud_file_id',
+            type: 'text'
+          },
+          {
+            box_type: 'input',
+            name: 'qcloud_app_id',
+            type: 'text'
           }
         ],
 
         update_info: {
-          title: '编辑',
+          tilte: '编辑',
           action: '',
           method: 'post'
         },
         add_info: {
-          title: '添加',
+          tilte: '添加',
           action: '',
           method: 'post'
         },
@@ -80,7 +74,7 @@
         },
 
         form_info: {
-          title: '编辑',
+          tilte: '编辑',
           action: '',
           method: 'post'
         },
@@ -105,7 +99,7 @@
         },
         add: function () {
           tables.form_info = tables.add_info;
-          var l = tables.table_head.length;
+          var l = e.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', '');
           }

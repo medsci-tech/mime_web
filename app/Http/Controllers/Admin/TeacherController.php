@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class TeacherController
+ * @package App\Http\Controllers\Admin
+ */
 class TeacherController extends Controller
 {
     /**
@@ -26,7 +30,6 @@ class TeacherController extends Controller
             'introduction' => $request->input('introduction'),
         ];
 
-
         return $data;
     }
 
@@ -38,17 +41,14 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('backend.tables.teacher', ['teachers' => Teacher::paginate('20')]);
+        return view('backend.tables.teacher', ['teachers' => Teacher::paginate('5')]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        return view('admin.backend.teacher.create');
     }
 
 
@@ -78,8 +78,8 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param int $id
-     *
+     * @param Request $request
+     * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)

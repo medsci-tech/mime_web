@@ -1,7 +1,7 @@
 @extends('backend.tables.index')
 
-@section('title','title1')
-@section('box_title','title1')
+@section('title','单元管理')
+@section('box_title','单元列表')
 
 
 @section('tables_data')
@@ -15,14 +15,13 @@
         }
       },
       data: {
-        table_head: ['id', '姓名', '宣传照', '科室', '职称', '介绍'],
+        table_head: ['id', '单元名称', '授课老师', '简介'],
         table_data: [
-          [1,2,3,4,5,6]
-          @foreach($teachers as $teacher)
-            ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
+          @foreach($phases as $phase)
+            ['{{$phase->id}}', '{{$phase->title}}', '{{$phase->teacher->name}}', '{{$phase->comment}}'],
           @endforeach
         ],
-        pagination: '{{$teachers->render() }}',
+        pagination: '{{$phases->render() }}',
         modal_data: [
           {
             box_type: 'input',
@@ -31,47 +30,32 @@
           },
           {
             box_type: 'input',
-            name: 'name',
-            type: 'text'
-          },
-          {
-            box_type: 'input',
-            name: 'photo_url',
-            type: 'text'
-          },
-          {
-            box_type: 'input',
-            name: 'office',
-            type: 'text'
-          },
-          {
-            box_type: 'input',
             name: 'title',
             type: 'text'
           },
-          //select类型
           {
             box_type: 'select',
-            name: 'd',
+            name: 'main_teacher_id',
             option: {
-              'key': 'value'
+              @foreach($teachers as $teacher)
+              '{{$teacher->name}}': '{{$teacher->id}}',
+              @endforeach
             }
           },
-          //textarea类型
           {
             box_type: 'textarea',
-            name: 'introduction',
+            name: 'comment',
             rows: 3
           }
         ],
 
         update_info: {
-          title: '编辑',
+          tilte: '编辑',
           action: '',
           method: 'post'
         },
         add_info: {
-          title: '添加',
+          tilte: '添加',
           action: '',
           method: 'post'
         },
@@ -80,7 +64,7 @@
         },
 
         form_info: {
-          title: '编辑',
+          tilte: '编辑',
           action: '',
           method: 'post'
         },
@@ -105,7 +89,7 @@
         },
         add: function () {
           tables.form_info = tables.add_info;
-          var l = tables.table_head.length;
+          var l = e.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', '');
           }

@@ -36,7 +36,10 @@ class PhaseController extends Controller
      */
     public function index()
     {
-        return view('admin.backend.phase.index', ['phases' => ThyroidClassPhase::paginate('20')]);
+        return view('backend.tables.phase', [
+            'phases' => ThyroidClassPhase::paginate('20'),
+            'teachers' => Teacher::all()
+        ]);
     }
 
     /**

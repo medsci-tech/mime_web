@@ -17,12 +17,10 @@
       data: {
         table_head: ['id', '姓名', '宣传照', '科室', '职称', '介绍'],
         table_data: [
-          [1,2,3,4,5,6]
           @foreach($teachers as $teacher)
             ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
           @endforeach
         ],
-        pagination: '{{$teachers->render() }}',
         modal_data: [
           {
             box_type: 'input',
@@ -50,13 +48,11 @@
             type: 'text'
           },
           //select类型
-          {
-            box_type: 'select',
-            name: 'd',
-            option: {
-              'key': 'value'
-            }
-          },
+//          {
+//            box_type: 'select',
+//            name: 'd',
+//            option: ['1', '2', '3', '4']
+//          },
           //textarea类型
           {
             box_type: 'textarea',
@@ -66,12 +62,12 @@
         ],
 
         update_info: {
-          title: '编辑',
+          tilte: '编辑',
           action: '',
           method: 'post'
         },
         add_info: {
-          title: '添加',
+          tilte: '添加',
           action: '',
           method: 'post'
         },
@@ -80,7 +76,7 @@
         },
 
         form_info: {
-          title: '编辑',
+          tilte: '编辑',
           action: '',
           method: 'post'
         },
@@ -105,7 +101,7 @@
         },
         add: function () {
           tables.form_info = tables.add_info;
-          var l = tables.table_head.length;
+          var l = e.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', '');
           }

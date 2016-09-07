@@ -11,8 +11,11 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
-          <li><a href="{{ url('#') }}"><i class="fa fa-circle-o"></i>老师信息</a></li>
-          <li><a href="{{ url('#') }}"><i class="fa fa-circle-o"></i>课程信息</a></li>
+          <li><a href="{{ url('/admin/thyroid') }}"><i class="fa fa-circle-o"></i>公课信息</a></li>
+          <li><a href="{{ url('/admin/teacher') }}"><i class="fa fa-circle-o"></i>老师信息</a></li>
+          <li><a href="{{ url('/admin/phase') }}"><i class="fa fa-circle-o"></i>单元信息</a></li>
+          <li><a href="{{ url('/admin/course') }}"><i class="fa fa-circle-o"></i>课程信息</a></li>
+          <li><a href="{{ url('/admin/banner') }}"><i class="fa fa-circle-o"></i>Banner信息</a></li>
         </ul>
       </li>
     </ul>

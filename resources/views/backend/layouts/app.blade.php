@@ -71,13 +71,13 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="/image/test.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"> 用户名 </span>
+                <span class="hidden-xs"> {{ Auth::user()->name }} </span>
               </a>
               <ul class="dropdown-menu" style="width: inherit;min-width: inherit">
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">登出</a>
+                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">登出</a>
                   </div>
                 </li>
               </ul>

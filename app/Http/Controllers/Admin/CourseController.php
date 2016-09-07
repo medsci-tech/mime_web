@@ -36,7 +36,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('admin.backend.course.index', ['courses' => ThyroidClassCourse::paginate('20')]);
+        return view('backend.tables.course', [
+            'courses' => ThyroidClassCourse::paginate('10'),
+            'phases' => ThyroidClassPhase::all(),
+        ]);
     }
 
     /**
