@@ -76,7 +76,7 @@
                   <div class="fade inline"
                        style="padding: 5px 5px 8px 5px; background-color: #aaa; border-radius: 5px;">
                     <button class="btn btn-xs btn-primary" @click="cancel_delete($event)">取消</button>
-                    <button class="btn btn-xs btn-danger" @click="confirm_delete(data | debounce 5000)">确认删除</button>
+                    <button class="btn btn-xs btn-danger" @click="confirm_delete(data, $event)">确认删除</button>
                   </div>
                 </td>
                 </tr>
@@ -135,8 +135,10 @@
           }
           $('#modal-edit').modal('show');
         },
-        confirm_delete: function (e) {
+        confirm_delete: function (e, event) {
           var url = this.delete_info.url +  '/' +  e[0];
+          $(event.target).attr('disabled','disabled');
+          $(event.target).prev().attr('disabled','disabled');
           $.ajax({
             url: url,
             type: this.delete_info.method,
@@ -145,10 +147,14 @@
                 history.go(0);
               }else{
                 tables.alert = data;
+                $(event.target).removeAttr('disabled','disabled');
+                $(event.target).prev().removeAttr('disabled','disabled');
               }
             },
             error: function (XMLResponse) {
               alert(XMLResponse.responseText);
+              $(event.target).removeAttr('disabled','disabled');
+              $(event.target).prev().removeAttr('disabled','disabled');
             }
           })
         },
