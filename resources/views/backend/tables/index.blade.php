@@ -144,7 +144,7 @@
             type: this.delete_info.method,
             success: function(data) {
               if(data.success){
-                history.go(0);
+                location.reload();
               }else{
                 tables.alert = data;
                 $(event.target).removeAttr('disabled','disabled');
