@@ -19,7 +19,7 @@ class TeacherController extends Controller
      *
      * @return array
      */
-    private function formatData(Request $request)
+    private function formatData($request)
     {
         $data = [
             'nickname' => $request->input('nickname'),
@@ -30,6 +30,7 @@ class TeacherController extends Controller
             'introduction' => $request->input('introduction'),
         ];
 
+        dd($data);
         return $data;
     }
 
