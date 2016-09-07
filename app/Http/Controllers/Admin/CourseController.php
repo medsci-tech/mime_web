@@ -21,7 +21,11 @@ class CourseController extends Controller
         $data = [
             'title' => $request->input('title'),
             'comment' => $request->input('title'),
-            'logo_url' => $request->input('logo_url')
+            'logo_url' => $request->input('logo_url'),
+            'sequence' => $request->input('sequence'),
+            'thyroid_class_phase_id' => $request->input('thyroid_class_phase_id'),
+            'qcloud_file_id' => $request->input('qcloud_file_id'),
+            'qcloud_app_id' => $request->input('qcloud_app_id'),
         ];
 
 
@@ -92,5 +96,22 @@ class CourseController extends Controller
         return response()->json([
             'success' =>ThyroidClassCourse::find($id)->delete()
         ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(Request $request, $id)
+    {
+
+        $data = $this->formatData($request);
+        $teacher = ThyroidClasscourse::find($id);
+        $teacher->update($data);
+
+        return redirect('/admin/course');
     }
 }

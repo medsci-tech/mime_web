@@ -23,7 +23,6 @@ class ThyroidController extends Controller
             'logo_url' => $request->input('logo_url')
         ];
 
-
         return $data;
     }
 

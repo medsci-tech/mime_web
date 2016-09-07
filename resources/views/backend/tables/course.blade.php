@@ -1,6 +1,6 @@
 @extends('backend.tables.index')
 
-@section('title','title1')
+@section('title','课程信息')
 @section('box_title','title1')
 
 
@@ -10,7 +10,7 @@
         table_head: ['id', '编号', '课程名称', '所属单元', '缩略图', '腾讯云file_id', '腾讯云app_id'],
         table_data: [
           @foreach($courses as $course)
-            ['{{$course->id}}', '{{$course->sequence}}', '{{$course->title}}', '{{$course->thyroidClassPhase->title}}', '{{$course->logo_url}}', '{{$course->qcloud_file_id}}', '{{$course->qcloud_app_id}}'],
+            ['{{$course->id}}', '{{$course->sequence}}', '{{$course->title}}', '{{$course->thyroidClassPhase ?$course->thyroidClassPhase->title :''}}', '{{$course->logo_url}}', '{{$course->qcloud_file_id}}', '{{$course->qcloud_app_id}}'],
           @endforeach
         ],
         pagination: '{{$courses->render() }}',
@@ -41,6 +41,11 @@
           },
           {
             box_type: 'input',
+            name: 'logo_url',
+            type: 'text'
+          },
+            {
+            box_type: 'input',
             name: 'qcloud_file_id',
             type: 'text'
           },
@@ -53,16 +58,17 @@
 
         update_info: {
           title: '编辑',
-          action: '',
-          method: 'post'
+          action: '/admin/course',
+          method: 'put'
         },
         add_info: {
           title: '添加',
-          action: '',
+          action: '/admin/course',
           method: 'post'
         },
         delete_info: {
-          url: ''
+          url: '/admin/course',
+          method: 'delete'
         },
 
         form_info: {
