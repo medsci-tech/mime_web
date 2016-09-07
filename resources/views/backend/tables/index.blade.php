@@ -62,7 +62,11 @@
                 </thead>
                 <tbody>
                 <tr v-for="data in table_data" @click="set_editor(data)">
-                <td v-for="data in data">@{{ data }}</td>
+                <td v-for="data in data">@{{ data }}
+                  <div v-if=" data.match() ">
+                    <img class="img-responsive" src="../image/test.jpg" alt="">
+                  </div>
+                </td>
                 <td style="white-space: nowrap">
                   <button class="btn btn-xs btn-primary" @click="editor(data)">修改</button>
                   <button class="btn btn-xs btn-warning" @click="pre_delete($event)">删除</button>
@@ -78,13 +82,7 @@
 
             </div><!-- /.box-body -->
             <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">«</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
+              @{{{ pagination }}}
             </div>
           </div><!-- /.box -->
         </div><!-- /.col -->

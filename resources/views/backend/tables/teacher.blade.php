@@ -22,6 +22,7 @@
             ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
           @endforeach
         ],
+        pagination: '{{$categories->render() }}',
         modal_data: [
           {
             box_type: 'input',
