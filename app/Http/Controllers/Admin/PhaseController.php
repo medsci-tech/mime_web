@@ -28,7 +28,7 @@ class PhaseController extends Controller
             'title' => $request->input('title'),
             'comment' => $request->input('title'),
             'main_teacher_id' => $request->input('main_teacher_id'),
-            'logo_url' => $request->input('main_teacher_id'),
+            'logo_url' => $request->input('logo_url'),
         ];
 
 
