@@ -10,7 +10,7 @@
         <form class="form-horizontal" role="form" action="@{{ form_info.action }}" method="@{{ form_info.method }}">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div v-for="data in modal_data">
-            <div v-if="data.box_type == 'input'" class="form-group">
+            <div v-if="data.box_type == 'input' && data.name != 'id'" class="form-group">
               <label for="@{{ data.name }}" class="col-sm-2 control-label">@{{ data.title }}</label>
               <div class="col-sm-10">
                 <input type="@{{ data.type }}" required class="form-control" name="@{{ data.name }}" id="@{{ data.name }}" v-model="data.value" placeholder="@{{ data.value }}">
@@ -27,7 +27,7 @@
               <label for="@{{ data.name }}" class="col-sm-2 control-label">@{{ data.title }}</label>
               <div class="col-sm-10">
                 <select required class="form-control" name="@{{ data.name }}" id="@{{ data.name }}" v-model="data.value">
-                  <option v-for="option in data.option" value="@{{ option }}">@{{ option }}</option>
+                  <option v-for="(key, value) in data.option" value="@{{ value }}">@{{ key }}</option>
                 </select>
               </div>
             </div>
@@ -36,8 +36,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn-primary">确认修改</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">鍒犻櫎</button>
+        <button type="submit" class="btn btn-primary">纭鍒犻櫎</button>
       </div>
     </div>
   </div>

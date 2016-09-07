@@ -50,11 +50,11 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body no-padding" v-cloak>
-              <table class="table table-bordered table-hover table-striped">
+              <table class="table table-bordered table-hover table-striped table-responsive">
                 <thead style="word-break: keep-all">
                 <tr role="row">
-                  <th v-for="head in table_head" rowspan="1" colspan="1">@{{ head }}</th>
-                  <th rowspan="1" colspan="1">
+                  <th v-for="head in table_head" rowspan="1" colspan="1" style="white-space: nowrap">@{{ head }}</th>
+                  <th rowspan="1" colspan="1" style="white-space: nowrap">
                     数据操作&emsp;
                     <button class="btn btn-xs btn-success" @click='add()'><i class="fa fa-plus"></i>&nbsp;新增</button>
                   </th>
@@ -63,7 +63,7 @@
                 <tbody>
                 <tr v-for="data in table_data" @click="set_editor(data)">
                 <td v-for="data in data">@{{ data }}</td>
-                <td>
+                <td style="white-space: nowrap">
                   <button class="btn btn-xs btn-primary" @click="editor(data)">修改</button>
                   <button class="btn btn-xs btn-warning" @click="pre_delete($event)">删除</button>
                   <div class="fade inline"
