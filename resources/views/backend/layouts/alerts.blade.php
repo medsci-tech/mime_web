@@ -1,4 +1,4 @@
-<template v-cloak>
+<div v-cloak>
   <div v-show="alert.type == 'danger'" class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <h4><i class="icon fa fa-ban"></i>@{{ alert.title }}</h4>
@@ -19,4 +19,4 @@
     <h4><i class="icon fa fa-check"></i>@{{ alert.title }}</h4>
     @{{ alert.message }}
   </div>
-</template>
+</div>
