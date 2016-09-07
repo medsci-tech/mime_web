@@ -14,6 +14,9 @@
               <label for="@{{ data.name }}" class="col-sm-2 control-label">@{{ data.title }}</label>
               <div class="col-sm-10">
                 <input type="@{{ data.type }}" required class="form-control" name="@{{ data.name }}" id="@{{ data.name }}" v-model="data.value" placeholder="@{{ data.value }}">
+                <div v-show=" data.value.test(/^(http|ftp|https):\/\/*(.jpg|.png)$)">
+                  <img class="img-responsive" src="../image/test.jpg" alt="">
+                </div>
               </div>
             </div>
             <div v-if="data.box_type == 'textarea'" class="form-group">
