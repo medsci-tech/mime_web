@@ -161,9 +161,6 @@
         is_img: function (e) {
           var reg=/.(jpg|png)$/;
           return reg.test(e);
-        },
-        submit: function () {
-          $('form').submit();
         }
       }
     });

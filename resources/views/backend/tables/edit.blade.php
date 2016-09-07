@@ -36,13 +36,13 @@
               </div>
             </div>
           </div>
-
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary">确认</button>
+          </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" @click="submit" class="btn btn-primary">确认</button>
-      </div>
+
     </div>
   </div>
 </div>
