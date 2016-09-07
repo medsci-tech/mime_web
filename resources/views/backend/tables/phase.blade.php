@@ -37,7 +37,7 @@
         {
           box_type: 'textarea',
           name: 'comment',
-          rows: 3
+          rows: 8
         }
       ],
 

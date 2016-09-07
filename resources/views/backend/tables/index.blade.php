@@ -113,10 +113,13 @@
       methods: {
         set_editor: function (e) {
           tables.form_info = tables.update_info;
-          tables.form_info.action = '/admin/teacher/'+ e[0];
+          tables.form_info.action += e['id'];
           var l = tables.table_head.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', e[i]);
+            if(this.modal_data[i].box_type == 'select'){
+              Vue.set(this.modal_data[i], 'value', this.modal_data[i].option[e[i]]);
+            }
           }
         },
         editor: function (e) {
@@ -132,7 +135,8 @@
           $('#modal-edit').modal('show');
         },
         confirm_delete: function (e) {
-          $.post(this.delete_info.url, e, function (data) {
+          var url = this.delete_info.url + e['id'];
+          $.post(url, e, function (data) {
             if (data.success) {
               history.go(0);
             } else {

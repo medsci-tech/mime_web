@@ -49,7 +49,7 @@
         {
           box_type: 'textarea',
           name: 'introduction',
-          rows: 3
+          rows: 8
         }
       ],
 
