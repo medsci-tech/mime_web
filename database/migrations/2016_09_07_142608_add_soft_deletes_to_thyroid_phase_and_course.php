@@ -13,7 +13,7 @@ class AddSoftDeletesToThyroidPhaseAndCourse extends Migration
     public function up()
     {
         //
-        Schema::table('thyroid_class', function (Blueprint $table) {
+        Schema::table('thyroid_classes', function (Blueprint $table) {
             $table->softDeletes();
         });
 
