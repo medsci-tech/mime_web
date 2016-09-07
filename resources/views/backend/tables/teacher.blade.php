@@ -21,7 +21,7 @@
             ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
           @endforeach
         ],
-        {{--pagination: '{{$categories->render()}}',--}}
+        pagination: '{{$teachers->render()}}',
         modal_data: [
           {
             box_type: 'input',
@@ -47,14 +47,6 @@
             box_type: 'input',
             name: 'title',
             type: 'text'
-          },
-          //select类型
-          {
-            box_type: 'select',
-            name: 'd',
-            option: {
-              'key': 'value'
-            }
           },
           //textarea类型
           {
