@@ -29,7 +29,7 @@ class ThyroidClassPhase extends Model
         'title',
         'comment',
         'main_teacher_id',
-        'sequence'
+        'logo_url'
     ];
 
     /**
