@@ -1,7 +1,7 @@
 @extends('backend.tables.index')
 
-@section('title','title1')
-@section('box_title','title1')
+@section('title','公开课')
+@section('box_title','公开课列表')
 
 
 @section('tables_data')
