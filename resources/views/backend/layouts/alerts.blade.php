@@ -20,3 +20,25 @@
     @{{ alert.message }}
   </div>
 </div>
+
+<script>
+
+
+@if(Session::has('alert'))
+  var alert = {
+      type: '{{Session::get("alert")['type']}}',
+      title: '{{Session::get("alert")['title']}}',
+      message: '{{Session::get("alert")['message']}}'
+    };
+
+@else
+  var alert = {
+      type: '',
+      title: '',
+      message: ''
+    };
+
+@endif
+
+
+</script>

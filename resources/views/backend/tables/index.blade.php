@@ -56,7 +56,7 @@
                 </div>
               </div>
             </div><!-- /.box-header -->
-            <div class="box-body no-padding" style="overflow: scroll" v-cloak>
+            <div class="box-body no-padding" style="overflow: auto" v-cloak>
               <table class="table table-bordered table-hover table-striped table-responsive">
                 <thead style="word-break: keep-all">
                 <tr role="row">

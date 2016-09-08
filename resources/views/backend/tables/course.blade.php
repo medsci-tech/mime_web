@@ -84,11 +84,7 @@
           action: '',
           method: 'post'
         },
-        alert: {
-          type: '',
-          title: '',
-          message: ''
-        }
+        alert: alert,
       }
   </script>
 @endsection
