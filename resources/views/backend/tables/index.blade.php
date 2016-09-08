@@ -110,7 +110,7 @@
   <script src="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.all.min.js"></script>
   @yield('tables_data')
   <script>
-    
+
     Vue.filter('text', function (value) {
       return value.replace(/<\/?[^>]*>/g,'');
     });
