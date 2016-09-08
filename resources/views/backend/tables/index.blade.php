@@ -4,6 +4,7 @@
 
 @section('css')
   <link rel="stylesheet" href="/css/backend-tables.css">
+  <link rel="stylesheet" href="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.css">
   <style>
     .table .success td, .table .success th {
       background-color: #dff0d8 !important;
@@ -14,7 +15,7 @@
       background-color: #d9ead4 !important;
     }
 
-    @media (max-width: 767px){
+    @media (max-width: 767px) {
       .fixed .content-wrapper, .fixed .right-side {
         padding-top: 50px;
       }
@@ -68,13 +69,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="data in table_data" @click="set_editor(data)">
-                <td v-for="data in data">
-                  <div v-if="is_img(data)">
-                    <img class="img-responsive" :src="data" alt="">
+                <tr v-for="data in table_data">
+                <td v-for="item in data" track-by="$index">
+                  <div v-if="is_img(item)">
+                    <img class="img-responsive" :src="item" alt="">
                   </div>
                   <div v-else>
-                    @{{ data }}
+                    @{{ item | text }}
                   </div>
                 </td>
                 <td style="white-space: nowrap">
@@ -91,7 +92,7 @@
               </table>
 
             </div><!-- /.box-body -->
-            <div class="box-footer clearfix">
+            <div v-cloak class="box-footer clearfix">
               @{{{ pagination }}}
             </div>
           </div><!-- /.box -->
@@ -106,8 +107,14 @@
 
 @section('js')
   <script src="/js/backend-tables.js"></script>
+  <script src="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.all.min.js"></script>
   @yield('tables_data')
   <script>
+    
+    Vue.filter('text', function (value) {
+      return value.replace(/<\/?[^>]*>/g,'');
+    });
+
     var tables = new Vue({
       el: 'body',
       compiled: function () {
@@ -120,13 +127,29 @@
       methods: {
         set_editor: function (e) {
           Vue.set(this.form_info, 'title', this.update_info.title);
-          Vue.set(this.form_info, 'action', this.update_info.action+'/'+e[0]);
+          Vue.set(this.form_info, 'action', this.update_info.action + '/' + e[0]);
           Vue.set(this.form_info, 'method', this.update_info.method);
           var l = tables.table_head.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', e[i]);
-            if(this.modal_data[i].box_type == 'select'){
+            if (this.modal_data[i].box_type == 'select') {
               Vue.set(this.modal_data[i], 'value', this.modal_data[i].option[e[i]]);
+            }
+            if (this.modal_data[i].box_type === 'textarea') {
+
+              $('#'+this.modal_data[i].name).wysihtml5({
+                toolbar: {
+                  "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+                  "emphasis": true, //Italics, bold, etc. Default true
+                  "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+                  "html": true, //Button which allows you to edit the generated HTML. Default false
+                  "link": false, //Button to insert a link. Default true
+                  "image": false, //Button to insert an image. Default true,
+                  "color": false, //Button to change color of font
+                  "blockquote": false, //Blockquote
+                  "size": 'xs' //default: none, other options are xs, sm, lg
+                }
+              });
             }
           }
         },
@@ -143,25 +166,25 @@
           $('#modal-edit').modal('show');
         },
         confirm_delete: function (e, event) {
-          var url = this.delete_info.url +  '/' +  e[0];
-          $(event.target).attr('disabled','disabled');
-          $(event.target).prev().attr('disabled','disabled');
+          var url = this.delete_info.url + '/' + e[0];
+          $(event.target).attr('disabled', 'disabled');
+          $(event.target).prev().attr('disabled', 'disabled');
           $.ajax({
             url: url,
             type: this.delete_info.method,
-            success: function(data) {
-              if(data.success){
+            success: function (data) {
+              if (data.success) {
                 location.reload();
-              }else{
+              } else {
                 tables.alert = data;
-                $(event.target).removeAttr('disabled','disabled');
-                $(event.target).prev().removeAttr('disabled','disabled');
+                $(event.target).removeAttr('disabled', 'disabled');
+                $(event.target).prev().removeAttr('disabled', 'disabled');
               }
             },
             error: function (XMLResponse) {
               alert(XMLResponse.responseText);
-              $(event.target).removeAttr('disabled','disabled');
-              $(event.target).prev().removeAttr('disabled','disabled');
+              $(event.target).removeAttr('disabled', 'disabled');
+              $(event.target).prev().removeAttr('disabled', 'disabled');
             }
           })
         },
@@ -172,11 +195,13 @@
           $(event.target).parent().addClass('fade');
         },
         is_img: function (e) {
-          var reg=/.(jpg|png)$/;
+          var reg = /.(jpg|png)$/;
           return reg.test(e);
         }
       }
     });
+
+
   </script>
   <script>
 
@@ -187,29 +212,11 @@
         $(this).siblings().removeClass('success');
         $(this).addClass('success');
       });
-      $('tbody tr').dblclick(function () {
-        $('#modal-edit').modal('show');
-      });
 
-
-      var i = 0;
-      $('tbody tr')[0].addEventListener("touchstart", function () {
-        i++;
-        setTimeout(function () {
-          i = 0;
-        }, 200);
-        if (i > 1) {
-          $('#modalView').modal('show');
-          i = 0;
-        }
-      }, false);
-
-      //textarea auto height
-      $('textarea').keyup(function () {
-        $(this).height(this.scrollHeight-15);
-      });
     });
   </script>
 
+  <script type="text/javascript">
 
+  </script>
 @endsection

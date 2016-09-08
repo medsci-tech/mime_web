@@ -27,7 +27,7 @@ class CreateThyroidClassCoursesTable extends Migration
             $table->unsignedInteger('play_count')->default(0)->comment('播放次数合计');
             $table->unsignedInteger('question_count')->default(0)->comment('提问数合计');
 
-            $table->integer('teacher_id')->unsigned()->comment('教师ID');
+            $table->integer('teacher_id')->nullbale()->unsigned()->default(null)->comment('教师ID');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
             $table->integer('thyroid_class_phase_id')->unsigned()->comment('学期ID');
@@ -53,10 +53,10 @@ class CreateThyroidClassCoursesTable extends Migration
     public function down()
     {
         //
-        Schema::table('thyroid_class_courses', function (Blueprint $table) {
-            $table->dropForeign('thyroid_class_courses_teacher_id_foreign');
-            $table->dropForeign('thyroid_class_courses_phase_id_foreign');
-        });
+//        Schema::table('thyroid_class_courses', function (Blueprint $table) {
+//            $table->dropForeign('thyroid_class_courses_teacher_id_foreign');
+//            $table->dropForeign('thyroid_class_courses_phase_id_foreign');
+//        });
         Schema::drop('thyroid_class_courses');
     }
 }

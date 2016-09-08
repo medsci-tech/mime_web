@@ -23,8 +23,7 @@
             <div v-if="data.box_type == 'textarea'" class="form-group">
               <label for="@{{ data.name }}" class="col-sm-2 control-label">@{{ data.title }}</label>
               <div class="col-sm-10">
-                <textarea style="resize: none;min-height: 160px" required class="form-control wysihtml5-editor" name="@{{ data.name }}" id="@{{ data.name }}" v-model="data.value" placeholder="@{{ data.value }}">
-                </textarea>
+                <textarea style="resize: none;min-height: 160px" required class="form-control wysihtml5-editor" name="@{{ data.name }}" id="@{{ data.name }}">@{{ data.value }}</textarea>
               </div>
             </div>
             <div v-if="data.box_type == 'select'" class="form-group">

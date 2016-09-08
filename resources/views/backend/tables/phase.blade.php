@@ -10,7 +10,7 @@
       table_head: ['id', '单元名称', '封面图', '授课老师', '简介'],
       table_data: [
           @foreach($phases as $phase)
-        ['{{$phase->id}}', '{{$phase->title}}', '{{$phase->logo_url}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{{$phase->comment}}'],
+        ['{{$phase->id}}', '{{$phase->title}}', '{{$phase->logo_url}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{!! $phase->comment !!}'],
         @endforeach
       ],
       pagination: '{{$phases->render() }}',

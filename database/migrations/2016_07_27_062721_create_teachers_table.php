@@ -35,8 +35,8 @@ class CreateTeachersTable extends Migration
             $table->string('hospital_level')->nullable()->comment('医院等级');
             $table->string('hospital_name')->nullable()->comment('医院名称');
 
-            $table->unique('phone');
-            $table->index('phone');
+//            $table->unique('phone');
+//            $table->index('phone');
 
             $table->text('introduction')->nullable()->comment('介绍');
 
