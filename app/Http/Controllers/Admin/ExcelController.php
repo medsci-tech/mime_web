@@ -8,13 +8,24 @@ use App\Models\Student;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
 
+/**
+ * Class ExcelController
+ * @package App\Http\Controllers\Admin
+ */
 class ExcelController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function excelForm()
     {
         return view('admin.excel');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function student(Request $request)
     {
         $excel = $request->file('excel');
@@ -28,6 +39,10 @@ class ExcelController extends Controller
         return redirect('/admin/excel');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function playLog(Request $request)
     {
         $excel = $request->file('excel');
@@ -55,6 +70,10 @@ class ExcelController extends Controller
         return redirect('/admin/excel');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function playLogDetail(Request $request)
     {
         $excel = $request->file('excel');
@@ -77,6 +96,9 @@ class ExcelController extends Controller
         return redirect('/admin/excel');
     }
 
+    /**
+     *
+     */
     public function test() {
         //dd(\Redis::command('flushall'));
         $logs = PlayLog::all();
@@ -119,6 +141,10 @@ class ExcelController extends Controller
         }
     }
 
+    /**
+     * @param $logId
+     * @param $date
+     */
     function getClickedAt($logId, &$date) {
         if (\Redis::command('HEXISTS', [$logId, $date])) {
             $date = date('Y-m-d H:i:s',strtotime('+1 second',strtotime($date)));;
@@ -128,6 +154,9 @@ class ExcelController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     */
     function getLogDetail(Request $request) {
         //'student_course_id:' . $studentsArray[$data['phone']] .'-'.$data['thyroid_class_course_id'];
         $logId =  'student_course_id:' . $request->input('student_id').'-'.$request->input('course_id');

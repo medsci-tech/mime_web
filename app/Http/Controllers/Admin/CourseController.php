@@ -26,7 +26,7 @@ class CourseController extends Controller
             'thyroid_class_phase_id' => $request->input('thyroid_class_phase_id'),
             'qcloud_file_id' => $request->input('qcloud_file_id'),
             'qcloud_app_id' => $request->input('qcloud_app_id'),
-            'is_show' => $request->input('is_show'),
+            'is_show' => $request->input('is_show')
         ];
 
 
@@ -48,20 +48,6 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin.backend.course.create', [
-            'phases' => ThyroidClassPhase::all(),
-            'teachers' => Teacher::all(),
-        ]);
-    }
-
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -71,19 +57,15 @@ class CourseController extends Controller
     {
         $data = $this->formatData($request);
         ThyroidClassCourse::create($data);
+
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '添加成功',
+            'message' => '添加课程成功',
+        ]);
+
         return redirect('/admin/course');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     */
-    public function edit($id)
-    {
-
-    }
-
 
     /**
      * Remove the specified resource from storage.
@@ -95,7 +77,12 @@ class CourseController extends Controller
     public function destroy($id)
     {
         return response()->json([
-            'success' =>ThyroidClassCourse::find($id)->delete()
+            'success' =>ThyroidClassCourse::find($id)->delete(),
+            'data' => [
+                'type' => 'success',
+                'title' => '删除成功',
+                'message' => '删除课程成功'
+            ]
         ]);
     }
 
@@ -108,10 +95,15 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $data = $this->formatData($request);
         $teacher = ThyroidClasscourse::find($id);
         $teacher->update($data);
+
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '修改成功',
+            'message' => '修改课程成功',
+        ]);
 
         return redirect('/admin/course');
     }

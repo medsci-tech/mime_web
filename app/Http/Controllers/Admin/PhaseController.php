@@ -29,8 +29,8 @@ class PhaseController extends Controller
             'comment' => $request->input('comment'),
             'main_teacher_id' => $request->input('main_teacher_id'),
             'logo_url' => $request->input('logo_url'),
+            'sequence' => $request->input('sequence')
         ];
-
 
         return $data;
     }
@@ -50,20 +50,6 @@ class PhaseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin.backend.phase.create', [
-            'thyroids' => ThyroidClass::all(),
-            'teachers' => Teacher::all(),
-        ]);
-    }
-
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -73,19 +59,15 @@ class PhaseController extends Controller
     {
         $data = $this->formatData($request);
         ThyroidClassPhase::create($data);
+
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '添加成功',
+            'message' => '添加单元成功',
+        ]);
+
         return redirect('/admin/phase');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     */
-    public function edit($id)
-    {
-
-    }
-
 
     /**
      * Remove the specified resource from storage.
@@ -97,7 +79,12 @@ class PhaseController extends Controller
     public function destroy($id)
     {
         return response()->json([
-            'success' =>ThyroidClassPhase::find($id)->delete()
+            'success' =>ThyroidClassPhase::find($id)->delete(),
+            'data' => [
+                'type' => 'success',
+                'title' => '删除成功',
+                'message' => '删除单元成功'
+            ]
         ]);
     }
 
@@ -115,6 +102,12 @@ class PhaseController extends Controller
         $data = $this->formatData($request);
         $teacher = ThyroidClassPhase::find($id);
         $teacher->update($data);
+
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '修改成功',
+            'message' => '修改单元成功',
+        ]);
 
         return redirect('/admin/phase');
     }

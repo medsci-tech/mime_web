@@ -7,6 +7,10 @@ use App\Models\PlayLog;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
+/**
+ * Class AdminController
+ * @package App\Http\Controllers\Admin
+ */
 class AdminController extends Controller
 {
     /**
@@ -19,6 +23,10 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function studentLogs(Request $request) {
         $student = Student::where('phone', $request->input('phone'))->first();
         if($student) {
