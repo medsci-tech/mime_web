@@ -10,7 +10,7 @@
         table_head: ['id', '姓名', '宣传照', '科室', '职称', '介绍'],
         table_data: [
           @foreach($teachers as $teacher)
-            ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{{$teacher->introduction}}'],
+            ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}', '{!!$teacher->introduction!!}'],
           @endforeach
         ],
         pagination: '{{$teachers->render()}}',
