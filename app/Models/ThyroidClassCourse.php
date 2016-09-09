@@ -14,7 +14,15 @@ class ThyroidClassCourse extends Model
 {
     use SoftDeletes;
 
+    /**
+     * @var array
+     */
     protected $dates = ['deleted_at'];
+
+    /**
+     * @var array
+     */
+    protected $appends = ['play_count'];
 
     /**
      * @var string
@@ -60,5 +68,17 @@ class ThyroidClassCourse extends Model
     public function playLogs()
     {
         return $this->hasMany(PlayLog::class);
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function getPlayCountAttribute()
+    {
+        if(\Redis::command('HEXISTS', ['course_play_count', $this->attributes['id']])) {
+            return \Redis::command('HGET', ['course_play_count', $this->attributes['id']]);
+        } else {
+            return 0;
+        }
     }
 }

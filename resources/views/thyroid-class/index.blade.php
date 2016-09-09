@@ -354,7 +354,7 @@
                       {
                         title: '学习',
                         fa: 'youtube-play',
-                        content: '{{$coursePlayCount[$thyroidClassCourse->id]}}人'
+                        content: '{{$thyroidClassCourse->play_count}}人'
                       }
                     ]
                   },
