@@ -83,17 +83,27 @@ class TeacherController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        return response()->json([
-            'success' => Teacher::find($id)->delete(),
-            'data' => [
+        if (Teacher::find($id)->delete()) {
+            \Session::flash('alert', [
                 'type' => 'success',
                 'title' => '删除成功',
-                'message' => '删除讲师成功'
-            ]
-        ]);
+                'message' => '删除讲师成功',
+            ]);
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 }

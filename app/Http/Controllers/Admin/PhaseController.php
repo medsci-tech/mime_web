@@ -78,14 +78,20 @@ class PhaseController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json([
-            'success' =>ThyroidClassPhase::find($id)->delete(),
-            'data' => [
+        if (ThyroidClassPhase::find($id)->delete()) {
+            \Session::flash('alert', [
                 'type' => 'success',
                 'title' => '删除成功',
                 'message' => '删除单元成功'
-            ]
-        ]);
+            ]);
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 
 

@@ -88,16 +88,26 @@ class BannerController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        return response()->json([
-            'success' => banner::find($id)->delete(),
-            'data' => [
+        if (Banner::find($id)->delete()) {
+            \Session::flash('alert', [
                 'type' => 'success',
                 'title' => '删除成功',
                 'message' => '删除Banner成功'
-            ]
-        ]);
+            ]);
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 }

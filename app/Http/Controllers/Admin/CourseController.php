@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Teacher;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
 use App\Models\ThyroidClassCourse;
@@ -76,14 +75,20 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json([
-            'success' =>ThyroidClassCourse::find($id)->delete(),
-            'data' => [
+        if (ThyroidClassCourse::find($id)->delete()) {
+            \Session::flash('alert', [
                 'type' => 'success',
                 'title' => '删除成功',
                 'message' => '删除课程成功'
-            ]
-        ]);
+            ]);
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 
     /**
