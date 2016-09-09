@@ -369,7 +369,7 @@
             content: [
                 @foreach($teachers as $teacher)
               {
-                headimg: '{{$teacher->headimgurl}}',
+                headimg: '{{$teacher->photo_url}}',
                 name: '{{$teacher->name}}',
                 title: '{{$teacher->title}}',
                 office: '{{$teacher->office}}',
