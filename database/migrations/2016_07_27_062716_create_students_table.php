@@ -42,6 +42,8 @@ class CreateStudentsTable extends Migration
             $table->unique('phone');
             $table->index('phone');
 
+            $table->timestamp('entered_at');
+
             $table->timestamps();
         });
 

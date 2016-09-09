@@ -16,22 +16,17 @@ class CreateThyroidClassPhasesTable extends Migration
         Schema::create('thyroid_class_phases', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('number')->comment('学期编号');
-
+            $table->string('sequence');
             $table->string('title')->comment('学期title');
             $table->text('comment')->comment('学期简介');
             $table->string('logo_url')->comment('logo');
 
-            $table->unsignedInteger('student_count')->default(0)->comment('学生数');
-            $table->unsignedInteger('play_count')->default(0)->comment('播放次数合计');
-            $table->unsignedInteger('question_count')->default(0)->comment('提问数合计');
-
             $table->integer('main_teacher_id')->unsigned()->comment('主讲教师ID');
             $table->foreign('main_teacher_id')->references('id')->on('teachers');
-
-            $table->unique('number');
+            $table->tinyInteger('is_show')->default(0)->comment('是否显示');
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
     }

@@ -35,7 +35,7 @@ class CreateThyroidClassesTable extends Migration
             $table->timestamp('latest_update_at')->comment('最近更新时间');
 
             $table->timestamps();
-
+            $table->softDeletes();
         });
 
     }
