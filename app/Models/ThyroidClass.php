@@ -31,7 +31,9 @@ class ThyroidClass extends Model
      */
     protected $fillable = [
         'title',
-        'comment'
+        'comment',
+        'logo_url',
+        'banner_autopaly',
+        'latest_update_at',
     ];
-
 }

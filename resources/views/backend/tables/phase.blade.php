@@ -7,10 +7,10 @@
 @section('tables_data')
   <script>
     var data = {
-      table_head: ['id', '单元名称', '封面图', '授课老师', '简介'],
+      table_head: ['id', '序列名称','单元名称', '封面图', '授课老师', '简介'],
       table_data: [
           @foreach($phases as $phase)
-        ['{{$phase->id}}', '{{$phase->title}}', '{{$phase->logo_url}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{!! $phase->comment !!}'],
+        ['{{$phase->id}}', '{{$phase->sequence}}', '{{$phase->title}}', '{{$phase->logo_url}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{!! $phase->comment !!}'],
         @endforeach
       ],
       pagination: '{{$phases->render() }}',
@@ -18,6 +18,11 @@
         {
           box_type: 'input',
           name: 'id',
+          type: 'text'
+        },
+        {
+          box_type: 'input',
+          name: 'sequence',
           type: 'text'
         },
         {
@@ -58,7 +63,7 @@
       },
       delete_info: {
         url: '/admin/phase',
-        method: 'delete',
+        method: 'delete'
       },
 
       form_info: {
@@ -66,7 +71,7 @@
         action: '',
         method: 'post'
       },
-      alert: alert,
+      alert: alert
     }
 
   </script>

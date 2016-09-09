@@ -19,8 +19,10 @@ class ThyroidController extends Controller
     {
         $data = [
             'title' => $request->input('title'),
-            'comment' => $request->input('title'),
-            'logo_url' => $request->input('logo_url')
+            'comment' => $request->input('comment'),
+            'logo_url' => $request->input('logo_url'),
+            'banner_autopaly' => $request->input('banner_autopaly'),
+            'latest_update_at' => $request->input('latest_update_at'),
         ];
 
         return $data;
@@ -38,17 +40,6 @@ class ThyroidController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin.backend.thyroid.create');
-    }
-
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -58,17 +49,13 @@ class ThyroidController extends Controller
     {
         $data = $this->formatData($request);
         ThyroidClass::create($data);
+
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '添加成功',
+            'message' => '添加公开课成功'
+        ]);
         return redirect('/admin/thyroid');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     */
-    public function edit($id)
-    {
-
     }
 
     /**
@@ -84,9 +71,14 @@ class ThyroidController extends Controller
         $thyroid = ThyroidClass::find($id);
         $thyroid->update($data);
 
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '修改成功',
+            'message' => '添加公开课成功'
+        ]);
+
         return redirect('/admin/thyroid');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -96,9 +88,9 @@ class ThyroidController extends Controller
         return response()->json([
             'success' => ThyroidClass::find($id)->delete(),
             'data' => [
-                'type' => '',
-                'title' => '',
-                'message' => ''
+                'type' => 'success',
+                'title' => '删除成功',
+                'message' => '删除公开课成功'
             ]
         ]);
     }

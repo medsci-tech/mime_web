@@ -25,7 +25,7 @@ class BannerController extends Controller
             'href_url' => $request->input('href_url'),
             'status' => $request->input('status'),
             'page' => $request->input('page'),
-            'weight' => $request->input('weight'),
+            'weight' => $request->input('weight')
         ];
 
         return $data;
@@ -39,14 +39,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('backend.tables.banner', ['banners' => Banner::paginate('2')]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+        return view('backend.tables.banner', ['banners' => Banner::paginate('5')]);
     }
 
 
@@ -60,17 +53,14 @@ class BannerController extends Controller
     {
         $data = $this->formatData($request);
         Banner::create($data);
+
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '添加成功',
+            'message' => '添加Banner成功',
+        ]);
+
         return redirect('/admin/banner');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     */
-    public function edit($id)
-    {
-
     }
 
     /**
@@ -87,6 +77,11 @@ class BannerController extends Controller
         $banner = Banner::find($id);
         $banner->update($data);
 
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '修改成功',
+            'message' => '修改Banner成功',
+        ]);
         return redirect('/admin/banner');
     }
 
@@ -97,7 +92,12 @@ class BannerController extends Controller
     public function destroy($id)
     {
         return response()->json([
-            'success' => banner::find($id)->delete()
+            'success' => banner::find($id)->delete(),
+            'data' => [
+                'type' => 'success',
+                'title' => '删除成功',
+                'message' => '删除Banner成功'
+            ]
         ]);
     }
 }

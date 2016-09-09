@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -40,16 +39,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('backend.tables.teacher', ['teachers' => Teacher::paginate('2')]);
+        return view('backend.tables.teacher', ['teachers' => Teacher::paginate('5')]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -70,16 +61,6 @@ class TeacherController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     */
-    public function edit($id)
-    {
-
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param Request $request
@@ -88,7 +69,6 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $data = $this->formatData($request);
         $teacher = Teacher::find($id);
         $teacher->update($data);
@@ -101,7 +81,6 @@ class TeacherController extends Controller
 
         return redirect('/admin/teacher');
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -15,7 +15,7 @@
 
     <div style="background-color: #25562c;">
         <div class="row">
-            <img src="http://obdm9m6gj.bkt.clouddn.com/%E6%92%AD%E6%94%BE%E9%A1%B5banner.jpg" alt="">
+            <img src="{{$banners->first()->image_url}}" alt="">
         </div>   
     </div>
 
