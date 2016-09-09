@@ -136,7 +136,7 @@
               Vue.set(this.modal_data[i], 'value', this.modal_data[i].option[e[i]]);
             }
             if (this.modal_data[i].box_type === 'textarea') {
-              $('.wysihtml5-sandbox'). contents().find('body').text(tables.modal_data[i].value);
+              $('.wysihtml5-sandbox'). contents().find('body').html(tables.modal_data[i].value);
             }
           }
         },
@@ -150,7 +150,7 @@
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', '');
             if (this.modal_data[i].box_type === 'textarea') {
-              $('.wysihtml5-sandbox'). contents().find('body').text(tables.modal_data[i].value);
+              $('.wysihtml5-sandbox'). contents().find('body').html(tables.modal_data[i].value);
             }
           }
           $('#modal-edit').modal('show');
