@@ -25,7 +25,7 @@ class TeacherController extends Controller
             'name' => $request->input('name'),
             'office' => $request->input('office'),
             'title' => $request->input('title'),
-            'introduction' => $request->input('introduction'),
+            'introduction' => $request->input('introduction')
         ];
 
         return $data;

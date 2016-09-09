@@ -7,10 +7,10 @@
 @section('tables_data')
   <script>
     var data = {
-      table_head: ['id', '序列名称','单元名称', '封面图', '授课老师', '简介'],
+      table_head: ['id', '是否显示', '序列名称','单元名称', '封面图', '授课老师', '简介'],
       table_data: [
           @foreach($phases as $phase)
-        ['{{$phase->id}}', '{{$phase->sequence}}', '{{$phase->title}}', '{{$phase->logo_url}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{!! $phase->comment !!}'],
+        ['{{$phase->id}}', '{{$phase->is_show ?'显示' :'不显示'}}','{{$phase->sequence}}', '{{$phase->title}}', '{{$phase->logo_url}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{!! $phase->comment !!}'],
         @endforeach
       ],
       pagination: '{{$phases->render() }}',
@@ -19,6 +19,14 @@
           box_type: 'input',
           name: 'id',
           type: 'text'
+        },
+        {
+          box_type: 'select',
+          name: 'is_show',
+          option: {
+            '显示': '1',
+            '不显示': '0'
+          }
         },
         {
           box_type: 'input',
