@@ -28,10 +28,9 @@ class ThyroidClassController extends WebController
         return view('thyroid-class.index', [
             'teachers' => Teacher::all(),
             'thyroidClass' => ThyroidClass::all()->first(),
-            'thyroidClassPhases' => ThyroidClassPhase::all(),
+            'thyroidClassPhases' => ThyroidClassPhase::where('is_show', 1)->get(),
             'studentCount' => \Redis::command('GET', ['enter_count']),
             'playCount' => \Redis::command('GET', ['play_count']),
-            'coursePlayCount' => \Redis::command('HGETALL', ['course_play_count']),
             'banners' => Banner::where('page', 'index')->where('status', 1)->orderBy('weight', 'desc')->get()
         ]);
     }
