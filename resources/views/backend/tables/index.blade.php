@@ -136,20 +136,7 @@
               Vue.set(this.modal_data[i], 'value', this.modal_data[i].option[e[i]]);
             }
             if (this.modal_data[i].box_type === 'textarea') {
-
-              $('#'+this.modal_data[i].name).wysihtml5({
-                toolbar: {
-                  "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
-                  "emphasis": true, //Italics, bold, etc. Default true
-                  "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-                  "html": true, //Button which allows you to edit the generated HTML. Default false
-                  "link": false, //Button to insert a link. Default true
-                  "image": false, //Button to insert an image. Default true,
-                  "color": false, //Button to change color of font
-                  "blockquote": false, //Blockquote
-                  "size": 'xs' //default: none, other options are xs, sm, lg
-                }
-              });
+              $('.wysihtml5-sandbox'). contents().find('body').text(tables.modal_data[i].value);
             }
           }
         },
@@ -162,6 +149,9 @@
           var l = tables.table_head.length;
           for (var i = 0; i < l; i++) {
             Vue.set(this.modal_data[i], 'value', '');
+            if (this.modal_data[i].box_type === 'textarea') {
+              $('.wysihtml5-sandbox'). contents().find('body').text(tables.modal_data[i].value);
+            }
           }
           $('#modal-edit').modal('show');
         },
@@ -213,10 +203,21 @@
         $(this).addClass('success');
       });
 
+      $('textarea').wysihtml5({
+        toolbar: {
+          "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+          "emphasis": true, //Italics, bold, etc. Default true
+          "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+          "html": true, //Button which allows you to edit the generated HTML. Default false
+          "link": false, //Button to insert a link. Default true
+          "image": false, //Button to insert an image. Default true,
+          "color": false, //Button to change color of font
+          "blockquote": false, //Blockquote
+          "size": 'xs' //default: none, other options are xs, sm, lg
+        }
+      });
+
     });
   </script>
 
-  <script type="text/javascript">
-
-  </script>
 @endsection
