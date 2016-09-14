@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
+use App\Http\Controllers\Controller;
 
 class StudentController extends Controller
 {
