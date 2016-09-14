@@ -51,7 +51,7 @@
                 <form action="/admin/student" method="get">
                 <div class="input-group" style="width: 150px;">
                   <input name="search" class="form-control input-sm pull-right"  placeholder="手机号、姓名、医院、城市、科室或职称"
-                       type="text">
+                       type="text" value="{{isset($search) ?$search :''}}">
                   <div class="input-group-btn">
                     <button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>
                   </div>
