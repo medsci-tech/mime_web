@@ -26,7 +26,9 @@
       modal_data: '',
       alert: alert,
       @if(isset($search))
-       pagination: '{{$students->appends(['key' => $search])->render() }}',
+       pagination: '{{$students->appends(['key' => $search])->render() }}'
+      @else
+        pagination: '{{$students->render() }}'
       @endif
 
     }
