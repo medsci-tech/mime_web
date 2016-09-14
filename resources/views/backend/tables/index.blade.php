@@ -216,7 +216,7 @@
           "size": 'xs' //default: none, other options are xs, sm, lg
         }
       });
-
+      $("a[href$={{ current_url }}]").parent().addClass('active');
     });
   </script>
 

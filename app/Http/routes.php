@@ -78,3 +78,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('course', 'CourseController');
     Route::resource('banner', 'BannerController');
 });
+
+Route::get('/admin/test', function(){
+   return view('backend.tables.student');
+});

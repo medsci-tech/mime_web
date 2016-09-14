@@ -20,6 +20,7 @@
     "ionicons": "^3.0.0",
     "jquery-slimscroll": "^1.3.8",
     "datatables": "^1.10.12",
-    "ueditor": "^1.1.4"
+    "ueditor": "^1.1.4",
+    "vue-echarts": "^0.1.1"
   }
 }
