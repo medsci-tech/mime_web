@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
 use App\Models\Student;
 use App\Models\Teacher;
-use App\Models\ThyroidClassCourse;
-use App\Models\ThyroidClassPhase;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -22,14 +20,19 @@ class StudentController extends Controller
         foreach(Teacher::all() as $teacher) {
             $teacherArray[$teacher->id] = $teacher->name;
         }
-        foreach(ThyroidClassPhase::all() as $phase) {
-            $phraseArray[$phase->id] = $phase->title;
-        }
-        foreach(ThyroidClassCourse::all() as $course) {
-            $courseArray[$course->id] = $course->title;
-        }
         return view('backend.tables.student', [
             'students' => Student::paginate('10'),
+            'courseArray' => $courseArray
+        ]);
+    }
+
+    public function search(Request $request) {
+        $courseArray = [];
+        foreach(Teacher::all() as $teacher) {
+            $teacherArray[$teacher->id] = $teacher->name;
+        }
+        return view('backend.tables.student', [
+            'students' => Student::search($request->input('key'))->paginate('10'),
             'courseArray' => $courseArray
         ]);
     }

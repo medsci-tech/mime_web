@@ -25,7 +25,10 @@
       ],
       modal_data: '',
       alert: alert,
-      pagination: '{{$students->render()}}',
+      @if(isset($search))
+       pagination: '{{$students->appends(['key' => $search])->render() }}',
+      @endif
+
     }
   </script>
 @endsection
