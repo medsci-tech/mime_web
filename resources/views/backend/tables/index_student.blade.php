@@ -48,16 +48,16 @@
             <div class="box-header with-border">
               <h3 class="box-title">@yield('box_title')</h3>
               <div class="box-tools">
+                <form action="/admin/student/search" method="post">
                 <div class="input-group" style="width: 150px;">
-                  <form action="/admin/student/search" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input name="key" class="form-control input-sm pull-right"  placeholder="手机号、姓名、医院、城市、科室或职称"
                        type="text">
                   <div class="input-group-btn">
                     <button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>
                   </div>
-                  </form>
                 </div>
+                </form>
               </div>
             </div><!-- /.box-header -->
             <div class="box-body no-padding" style="overflow: auto" v-cloak>
