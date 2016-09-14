@@ -48,7 +48,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">@yield('box_title')</h3>
               <div class="box-tools">
-                <form action="/admin/student/search" method="get">
+                <form action="/admin/student" method="get">
                 <div class="input-group" style="width: 150px;">
                   <input name="search" class="form-control input-sm pull-right"  placeholder="手机号、姓名、医院、城市、科室或职称"
                        type="text">

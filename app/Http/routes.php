@@ -78,5 +78,4 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('course', 'CourseController');
     Route::resource('banner', 'BannerController');
     Route::resource('student', 'StudentController');
-    Route::get('/search/student', 'StudentController@search');
 });

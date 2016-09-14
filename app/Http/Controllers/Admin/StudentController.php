@@ -14,28 +14,24 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $courseArray = [];
         foreach(ThyroidClassCourse::all() as $course) {
             $courseArray[$course->id] = $course->title;
         }
-        return view('backend.tables.student', [
-            'students' => Student::paginate('10'),
-            'courseArray' => $courseArray
-        ]);
-    }
-
-    public function search(Request $request) {
-        $courseArray = [];
-        foreach(ThyroidClassCourse::all() as $course) {
-            $courseArray[$course->id] = $course->title;
+        if($request->has('search')) {
+            $search = $request->input('search');
+            return view('backend.tables.student', [
+                'students' => Student::search($search)->paginate('10'),
+                'courseArray' => $courseArray,
+                'search' => $search
+            ]);
+        } else {
+            return view('backend.tables.student', [
+                'students' => Student::paginate('10'),
+                'courseArray' => $courseArray
+            ]);
         }
-        $search = $request->input('search');
-        return view('backend.tables.student', [
-            'students' => Student::search($search)->paginate('10'),
-            'courseArray' => $courseArray,
-            'search' => $search
-        ]);
     }
 }
