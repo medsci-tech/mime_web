@@ -216,7 +216,7 @@
           "size": 'xs' //default: none, other options are xs, sm, lg
         }
       });
-      $("a[href$={{ \Session::get('currentUrl') }}]").parent().addClass('active');
+      //$("a[href$={{ \Session::get('currentUrl') }}]").parent().addClass('active');
     });
   </script>
 
