@@ -24,7 +24,7 @@ class Authenticate
                 return redirect()->guest('login');
             }
         }
-
+        \Session::set('currentUrl', '/'.$request->path());
         return $next($request);
     }
 }
