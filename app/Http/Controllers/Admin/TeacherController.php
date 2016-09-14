@@ -15,7 +15,7 @@ class TeacherController extends Controller
 {
     /**
      * Data filtering.
-     *
+     * @param Request $request
      * @return array
      */
     private function formatData($request)

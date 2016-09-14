@@ -30,7 +30,7 @@ class StudentController extends Controller
         foreach(ThyroidClassCourse::all() as $course) {
             $courseArray[$course->id] = $course->title;
         }
-        return view('admin.table.student', [
+        return view('backend.tables.student', [
             'students' => Student::paginate('10'),
             'teacherArray' => $teacherArray,
             'phraseArray' => $phraseArray,
