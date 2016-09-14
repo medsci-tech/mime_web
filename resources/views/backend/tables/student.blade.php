@@ -24,7 +24,8 @@
         @endforeach
       ],
       modal_data: '',
-      alert: alert
+      alert: alert,
+      pagination: '{{$students->render()}}',
     }
   </script>
 @endsection
