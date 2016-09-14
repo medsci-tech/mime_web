@@ -26,7 +26,7 @@ class StudentController extends Controller
         ]);
     }
 
-    public function search(Request $request) {
+    public function show(Request $request) {
         $courseArray = [];
         foreach(ThyroidClassCourse::all() as $course) {
             $courseArray[$course->id] = $course->title;
