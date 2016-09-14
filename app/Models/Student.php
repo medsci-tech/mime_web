@@ -37,22 +37,6 @@ class Student extends Model
         'password'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Builder|static
-     */
-    public function thyroidClassStudent() {
-        return $this->hasOne(ThyroidClassStudent::class);
-    }
-
-    /**
-     * @return $this
-     */
-    public function enter() {
-        $this->thyroidClassStudent()->save(thyroidClassStudent::create());
-        return $this;
-    }
-
-
     public function playLogs()
     {
         return $this->hasMany(PlayLog::class);

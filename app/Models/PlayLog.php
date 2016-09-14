@@ -49,4 +49,9 @@ class PlayLog extends Model
     {
         return $this->belongsTo(ThyroidClassCourse::class, 'thyroid_class_course_id');
     }
+
+    public function details() {
+        $logId =  'student_course_id:' .  $this->attributes['student_course_id'];
+        return \Redis::command('HGETALL', [$logId]);
+    }
 }

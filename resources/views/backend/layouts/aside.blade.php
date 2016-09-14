@@ -25,7 +25,7 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/test') }}"><i class="fa fa-circle-o"></i>学生信息</a></li>
+          <li><a href="{{ url('/admin/student') }}"><i class="fa fa-circle-o"></i>学生信息</a></li>
         </ul>
       </li>
     </ul>
