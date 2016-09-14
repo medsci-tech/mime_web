@@ -31,7 +31,7 @@ class StudentController extends Controller
         foreach(ThyroidClassCourse::all() as $course) {
             $courseArray[$course->id] = $course->title;
         }
-        $search = $request->input('key');
+        $search = $request->input('search');
         return view('backend.tables.student', [
             'students' => Student::search($search)->paginate('10'),
             'courseArray' => $courseArray,
