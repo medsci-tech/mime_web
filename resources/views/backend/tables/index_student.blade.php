@@ -129,7 +129,7 @@
       $('tbody tr').dblclick(function () {
         $('#modal-list').modal('show');
       });
-      $("a[href$={{ current_url }}]").parent().addClass('active');
+      $("a[href$={{ \Session::get('currentUrl') }}]").parent().addClass('active');
     });
   </script>
 
