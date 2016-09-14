@@ -50,7 +50,6 @@
               <div class="box-tools">
                 <form action="/admin/student/search" method="get">
                 <div class="input-group" style="width: 150px;">
-                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input name="key" class="form-control input-sm pull-right"  placeholder="手机号、姓名、医院、城市、科室或职称"
                        type="text">
                   <div class="input-group-btn">
