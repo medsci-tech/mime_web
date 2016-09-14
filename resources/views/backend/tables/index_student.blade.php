@@ -49,7 +49,7 @@
               <h3 class="box-title">@yield('box_title')</h3>
               <div class="box-tools">
                 <div class="input-group" style="width: 150px;">
-                  <input name="table_search" class="form-control input-sm pull-right" disabled placeholder="搜索暂不可用"
+                  <input name="table_search" class="form-control input-sm pull-right"  placeholder=""
                          type="text">
                   <div class="input-group-btn">
                     <button class="btn btn-sm btn-default" disabled><i class="fa fa-search"></i></button>
