@@ -12,11 +12,11 @@
       data: [
         @foreach($students as $student)
         {
-          table_data: [{{$student->id}}, {{$student->name}}, {{$student->province}}, {{$student->city}}, {{$student->area}}, {{$student->hospital_name}}, {{$student->office}}, {{$student->title}}, {{$student->created_at}}, {{$student->entered_at ?$student->entered_at:"未注册"}}],
+          table_data: ['{{$student->id}}', '{{$student->name}}', '{{$student->province}}', '{{$student->city}}', '{{$student->area}}', '{{$student->hospital_name}}', '{{$student->office}}', '{{$student->title}}', '{{$student->created_at}}', '{{$student->entered_at}}'],
           log_data: [
             @foreach($student->playLogs as $log)
               @foreach($log->details as $key => $value)
-                [{{$courseArray[$log->thyroid_class_course_id]}}, {{$key}}, {{$value}}, {{$teacherArray[$log->teacher_id]}}],
+                ['{{$courseArray[$log->thyroid_class_course_id]}}', '{{$key}}', '{{$value}}', '{{$teacherArray[$log->teacher_id]}}'],
               @endforeach
             @endforeach
           ]
