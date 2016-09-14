@@ -55,7 +55,6 @@ class Student extends Model
         return $query->where('name', 'like', '%' . $seed . '%')
             ->orWhere('phone', 'like', '%' . $seed . '%')
             ->orWhere('email', 'like', '%' . $seed . '%')
-            ->orWhere('birthday', 'like', '%' . $seed . '%')
             ->orWhere('province', 'like', '%' . $seed . '%')
             ->orWhere('city', 'like', '%' . $seed . '%')
             ->orWhere('area', 'like', '%' . $seed . '%')
