@@ -26,14 +26,16 @@ class StudentController extends Controller
         ]);
     }
 
-    public function show(Request $request) {
+    public function search(Request $request) {
         $courseArray = [];
         foreach(ThyroidClassCourse::all() as $course) {
             $courseArray[$course->id] = $course->title;
         }
+        $search = $request->input('key');
         return view('backend.tables.student', [
-            'students' => Student::search($request->input('key'))->paginate('10'),
-            'courseArray' => $courseArray
+            'students' => Student::search($search)->paginate('10'),
+            'courseArray' => $courseArray,
+            'search' => $search
         ]);
     }
 }
