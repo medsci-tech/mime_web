@@ -14,8 +14,8 @@
         {
           table_data: [{{$student->id}}, {{$student->name}}, {{$student->province}}, {{$student->city}}, {{$student->area}}, {{$student->hospital_name}}, {{$student->office}}, {{$student->title}}, {{$student->created_at}}, {{$student->entered_at ?$student->entered_at:"未注册"}}],
           log_data: [
-            @foreach($student->playLogs as $key => $value)
-              @foreach($log->details as $detail)
+            @foreach($student->playLogs as $log)
+              @foreach($log->details as $key => $value)
                 [{{$courseArray[$log->thyroid_class_course_id]}}, {{$key}}, {{$value}}, {{$teacherArray[$log->teacher_id]}}],
               @endforeach
             @endforeach
