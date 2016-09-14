@@ -18,8 +18,6 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $teacherArray = [];
-        $phraseArray = [];
         $courseArray = [];
         foreach(Teacher::all() as $teacher) {
             $teacherArray[$teacher->id] = $teacher->name;
@@ -32,8 +30,6 @@ class StudentController extends Controller
         }
         return view('backend.tables.student', [
             'students' => Student::paginate('10'),
-            'teacherArray' => $teacherArray,
-            'phraseArray' => $phraseArray,
             'courseArray' => $courseArray
         ]);
     }

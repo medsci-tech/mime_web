@@ -8,7 +8,7 @@
   <script>
     var data = {
       table_head: ['id', '姓名', '省', '市', '区', '医院', '科室', '职称', '注册时间', '报名时间'],
-      log_head: ['课程名称', '点击时间', '观看时长', '讲师'],
+      log_head: ['课程名称', '点击时间', '观看时长'],
       data: [
         @foreach($students as $student)
         {
@@ -16,7 +16,7 @@
           log_data: [
             @foreach($student->playLogs as $log)
               @foreach($log->details as $key => $value)
-                ['{{$courseArray[$log->thyroid_class_course_id]}}', '{{$key}}', '{{$value}}', '{{$teacherArray[$log->teacher_id]}}'],
+                ['{{$courseArray[$log->thyroid_class_course_id]}}', '{{$key}}', '{{$value}}'],
               @endforeach
             @endforeach
           ]

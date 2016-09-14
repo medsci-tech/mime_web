@@ -49,8 +49,11 @@
               <h3 class="box-title">@yield('box_title')</h3>
               <div class="box-tools">
                 <div class="input-group" style="width: 150px;">
-                  <input name="table_search" class="form-control input-sm pull-right"  placeholder=""
+                  <form action="" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input name="key" class="form-control input-sm pull-right"  placeholder="手机号或姓名"
                          type="text">
+                  </form>
                   <div class="input-group-btn">
                     <button class="btn btn-sm btn-default" disabled><i class="fa fa-search"></i></button>
                   </div>
