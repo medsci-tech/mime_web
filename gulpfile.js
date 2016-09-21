@@ -14,9 +14,6 @@ require('laravel-elixir-vue');
  */
 
 elixir(function(mix) {
-    mix.sass('backend.scss')
-       .webpack('backend.js')
-
-       .sass('backend-tables.scss')
-       .webpack('backend-tables.js');
+    mix.sass('backend-charts.scss')
+       .webpack('backend-charts.js')
 });
