@@ -28,6 +28,16 @@
           <li><a href="{{ url('/admin/student') }}"><i class="fa fa-circle-o"></i>学生信息</a></li>
         </ul>
       </li>
+      <li class="active treeview">
+        <a href="{{url('#')}}">
+          <i class="fa fa-pie-chart"></i>
+          <span>数据统计</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu-open">
+          <li><a href="{{ url('/abc') }}"><i class="fa fa-circle-o"></i>柱状图</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

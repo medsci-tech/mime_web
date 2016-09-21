@@ -31,7 +31,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">@yield('box_title')</h3>
             </div><!-- /.box-header -->
-            <div class="box-body no-padding" style="overflow: auto">
+            <div class="box-body" style="overflow: auto">
 
                 <echart></echart>
 

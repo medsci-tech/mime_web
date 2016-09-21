@@ -83,5 +83,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 });
 
 Route::get('/abc', function() {
-    return view('backend.charts.charts_map');
+    return view('backend.charts.charts_bar');
 });
