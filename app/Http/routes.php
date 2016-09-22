@@ -89,6 +89,9 @@ Route::group(['prefix' => 'charts'], function(){
     Route::get('/map', function() {
         return view('backend.charts.charts_map');
     });
+    Route::get('/map2', function() {
+        return view('backend.charts.charts_map2');
+    });
     Route::get('/pie', function() {
         return view('backend.charts.charts_pie');
     });

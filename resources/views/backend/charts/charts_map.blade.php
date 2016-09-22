@@ -11,7 +11,7 @@
   <style>
     .echarts {
       width: 100%;
-      height: 500px;
+      height: 600px;
     }
   </style>
 
@@ -434,7 +434,7 @@
             },
             bmap: {
               center: [104.114129, 37.550339],
-              zoom: 4,
+              zoom: 5,
               roam: true,
               mapStyle: {
                 styleJson: [{
