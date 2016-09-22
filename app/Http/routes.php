@@ -82,6 +82,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
 });
 
-Route::get('/abc', function() {
-    return view('backend.charts.charts_bar');
+Route::group(['prefix' => 'charts'], function(){
+    Route::get('/bar', function() {
+        return view('backend.charts.charts_bar');
+    });
+    Route::get('/map', function() {
+        return view('backend.charts.charts_map');
+    });
+    Route::get('/pie', function() {
+        return view('backend.charts.charts_pie');
+    });
+    Route::get('/polar', function() {
+        return view('backend.charts.charts_polar');
+    });
 });
+

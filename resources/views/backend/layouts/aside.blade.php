@@ -35,7 +35,10 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/abc') }}"><i class="fa fa-circle-o"></i>柱状图</a></li>
+          <li><a href="{{ url('/charts/bar') }}"><i class="fa fa-circle-o"></i>柱状图</a></li>
+          <li><a href="{{ url('/charts/map') }}"><i class="fa fa-circle-o"></i>地图</a></li>
+          <li><a href="{{ url('/charts/pie') }}"><i class="fa fa-circle-o"></i>饼图</a></li>
+          <li><a href="{{ url('/charts/polar') }}"><i class="fa fa-circle-o"></i>极坐标图</a></li>
         </ul>
       </li>
     </ul>
