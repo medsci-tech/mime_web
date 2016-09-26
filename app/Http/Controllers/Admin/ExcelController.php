@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\PlayLog;
 use App\Models\Student;
 use App\Models\ThyroidClassCourse;
-use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
 
 /**
@@ -192,6 +191,7 @@ class ExcelController extends Controller
             $logs = \Redis::command('HGETAll', [$studentCourseId]);
             $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
             foreach($logs as $key => $value) {
+                var_dump($logs);
                 $item = [
                     $coursesArray[$logArray[1]]['phase'],
                     $coursesArray[$logArray[1]]['course'],
