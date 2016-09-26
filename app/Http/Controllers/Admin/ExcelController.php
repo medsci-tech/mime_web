@@ -186,6 +186,7 @@ class ExcelController extends Controller
 
         $studentCourseIds = \Redis::command('keys', ['student_course_id*']);
         $cellData = [['单元名称', '课程名称', '学员姓名',  '学员电话', '起始观看时间', '观看时长(单位/秒)']];
+        dd($studentCourseIds);
         foreach($studentCourseIds as $studentCourseId) {
             $logs = \Redis::command('HGETAll', [$studentCourseId]);
             $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
