@@ -47,7 +47,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">@yield('box_title')</h3>
-              <button class="btn btn-xs btn-success">导出</button>
+              <a class="btn btn-xs btn-success" href="/admin/excel/logs2excel">导出</a>
               <div class="box-tools">
                 <form action="/admin/student" method="get">
                 <div class="input-group" style="width: 270px;">
