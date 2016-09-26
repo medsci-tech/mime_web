@@ -209,6 +209,6 @@ class ExcelController extends Controller
             });
         })->export('xls');
 
-        return redirect()->back();
+        return redirect('/admin/student');
     }
 }
