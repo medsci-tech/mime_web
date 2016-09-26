@@ -34,4 +34,10 @@ class StudentController extends Controller
             ]);
         }
     }
+
+    public function Logs2Excel() {
+        $keys = \Redis::command('keys ', ["student_course_id*"]);
+        $logs = \Redis::command('HGETALL ', $keys);
+        dd($logs);
+    }
 }
