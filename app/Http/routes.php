@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::post('/play-log-detail', 'ExcelController@playLogDetail');
         Route::any('/test', 'ExcelController@test');
         Route::any('/test_log_detail', 'ExcelController@getLogDetail');
+        Route::any('/logs2excel', 'ExcelController@Logs2Excel');
     });
 
     Route::get('/', 'TeacherController@index');
@@ -78,8 +79,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('course', 'CourseController');
     Route::resource('banner', 'BannerController');
     Route::resource('student', 'StudentController');
-
-
 });
 //
 //Route::group(['prefix' => 'charts'], function(){

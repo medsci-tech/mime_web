@@ -165,4 +165,49 @@ class ExcelController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function Logs2Excel() {
+        $courses = ThyroidClassCourse::all();
+        $coursesArray = array();
+        foreach($courses as $course) {
+            $coursesArray[$course->id] = [
+                'course' => $course->sequence.$course->title,
+                'phase' => $course->thyroidClassPhase->title,
+            ];
+        }
+
+        $students = Student::get(['id', 'phone', 'name']);
+        $studentsArray = array();
+        foreach($students as $student) {
+            $studentsArray[$student->id] = ['name' => $student->name, 'phone' => $student->phone];
+        }
+
+        $studentCourseIds = \Redis::command('keys', ['student_course_id*']);
+        $cellData = [['单元名称', '课程名称', '学员姓名',  '学员电话', '起始观看时间', '观看时长(单位/秒)']];
+        foreach($studentCourseIds as $studentCourseId) {
+            $logs = \Redis::command('HGETAll', [$studentCourseId]);
+            $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
+            foreach($logs as $key => $value) {
+                $item = [
+                    $coursesArray[$logArray[1]]['phase'],
+                    $coursesArray[$logArray[1]]['course'],
+                    $studentsArray[$logArray[0]]['name'],
+                    $studentsArray[$logArray[0]]['phone'],
+                    $key,
+                    $value,
+                ];
+                array_push($cellData, $item);
+            }
+        }
+
+        \Excel::create('公开课观看日志',function($excel) use ($cellData){
+            $excel->sheet(date('Y-M-D'), function($sheet) use ($cellData){
+                $sheet->rows($cellData);
+            });
+        })->export('xls');
+
+        return redirect()->back();
+    }
 }
