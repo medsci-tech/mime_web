@@ -81,22 +81,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
 
 });
-
-Route::group(['prefix' => 'charts'], function(){
-    Route::get('/bar', function() {
-        return view('backend.charts.charts_bar');
-    });
-    Route::get('/map', function() {
-        return view('backend.charts.charts_map');
-    });
-    Route::get('/map2', function() {
-        return view('backend.charts.charts_map2');
-    });
-    Route::get('/pie', function() {
-        return view('backend.charts.charts_pie');
-    });
-    Route::get('/polar', function() {
-        return view('backend.charts.charts_polar');
-    });
-});
+//
+//Route::group(['prefix' => 'charts'], function(){
+//    Route::get('/bar', function() {
+//        return view('backend.charts.charts_bar');
+//    });
+//    Route::get('/map', function() {
+//        return view('backend.charts.charts_map');
+//    });
+//    Route::get('/map2', function() {
+//        return view('backend.charts.charts_map2');
+//    });
+//    Route::get('/pie', function() {
+//        return view('backend.charts.charts_pie');
+//    });
+//    Route::get('/polar', function() {
+//        return view('backend.charts.charts_polar');
+//    });
+//});
 
