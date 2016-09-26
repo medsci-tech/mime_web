@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PlayLog;
 use App\Models\Student;
+use App\Models\ThyroidClassCourse;
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
 
