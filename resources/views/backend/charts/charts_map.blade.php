@@ -15,7 +15,7 @@
     }
   </style>
 
-  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Lk4kuOwFdCgKL50HeOcGWGEG6LVB42fZ"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=LTE6HGnzAZd2C4AS0BWjk9nEgDglWay8"></script>
 
   <script>
     Vue.component('echart', {
