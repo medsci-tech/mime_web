@@ -73,7 +73,7 @@
               text:['高','低'],           // 文本，默认为数值文本
               calculable : true,
               inRange: {
-                color: ['white','green']
+                color: ['#eee','rgba(66, 139, 202, 0.9)']
               }
             },
             toolbox: {
