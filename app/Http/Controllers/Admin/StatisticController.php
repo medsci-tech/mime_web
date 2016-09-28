@@ -20,8 +20,12 @@ class StatisticController extends Controller
             $city->student_count = Student::where('area', $city->area)->count();
             $city->save();
         }
+        return redirect('/admin/statistic/map');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function map() {
         return view('backend.charts.charts_map', [
             'cities' => City::all()
