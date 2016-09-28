@@ -79,7 +79,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('course', 'CourseController');
     Route::resource('banner', 'BannerController');
     Route::resource('student', 'StudentController');
+    Route::group(['prefix' => 'statistic'], function () {
+        Route::get('/map', 'StatisticController@map');
+    });
 });
+
+
 //
 //Route::group(['prefix' => 'charts'], function(){
 //    Route::get('/bar', function() {
@@ -98,4 +103,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 //        return view('backend.charts.charts_polar');
 //    });
 //});
+
+Route::get('/city', 'Admin\StatisticController@update');
 

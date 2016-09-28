@@ -22,7 +22,10 @@
       template: '#template',
       data: function () {
         var data = [
-          {name:'武汉',value:[114.300908,30.609866,50]}
+          //{name:'武汉',value:[114.300908,30.609866, 50]},
+                @foreach($cities as $city)
+                   {name:'{{$city->area}}', value:[{{$city->longitude}}, {{$city->latitude}}, {{$city->student_count}}]},
+                @endforeach
         ];
 
         return {
@@ -145,7 +148,13 @@
                 coordinateSystem: 'bmap',
                 data: data,
                 symbolSize: function (val) {
-                  return val[2] / 5;
+                  if(val[2] > 150) {
+                      return 30;
+                  } else if(val[2] < 30 && val[2] > 0) {
+                    return 6;
+                  } else {
+                    return val[2]/ 5;
+                  }
                 },
                 label: {
                   normal: {
