@@ -81,6 +81,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('student', 'StudentController');
     Route::group(['prefix' => 'statistic'], function () {
         Route::get('/map', 'StatisticController@map');
+        Route::get('/update', 'StatisticController@update');
     });
 });
 
@@ -104,5 +105,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 //    });
 //});
 
-Route::get('/city', 'Admin\StatisticController@update');
+
 
