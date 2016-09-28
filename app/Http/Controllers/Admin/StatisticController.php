@@ -27,7 +27,7 @@ class StatisticController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     function map() {
-        return view('backend.charts.charts_map', [
+        return view('backend.charts.charts_map_area', [
             'cities' => City::all()
         ]);
     }

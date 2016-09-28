@@ -24,7 +24,7 @@
         var data = [
           //{name:'武汉',value:[114.300908,30.609866, 50]},
                 @foreach($cities as $city)
-                   {name:'{{$city->area}}', value:[{{$city->longitude}}, {{$city->latitude}}, {{$city->student_count}}]},
+                   {name:'{{$city->city.$city->area}}', value:[{{$city->longitude}}, {{$city->latitude}}, {{$city->student_count}}]},
                 @endforeach
         ];
 
