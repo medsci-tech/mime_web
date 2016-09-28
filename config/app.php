@@ -160,6 +160,7 @@ return [
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Vinelab\Http\HttpServiceProvider::class
     ],
 
     /*
@@ -174,7 +175,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -207,7 +207,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Message' =>  App\Helpers\Message\Facades\Message::class,
         'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class
+        'Excel'  => Maatwebsite\Excel\Facades\Excel::class,
+        'MyHttp' => Vinelab\Http\Facades\Client::class
     ],
-
 ];

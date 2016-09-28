@@ -27,8 +27,6 @@ class CreateStudentStatistics extends Migration
             $table->string('area');
             $table->decimal('latitude', 11, 8)->default(0)->comment('城市经度.');
             $table->decimal('longitude', 11, 8)->default(0)->comment('城市纬度.');
-
-            $table->timestamps();
         });
     }
 
