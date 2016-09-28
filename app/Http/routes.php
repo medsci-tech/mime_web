@@ -99,3 +99,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 //    });
 //});
 
+Route::get('/city', function() {
+});
+

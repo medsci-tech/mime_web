@@ -14,9 +14,9 @@ class CreateStudentStatistics extends Migration
     {
         Schema::create('student_statistics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('statistic_term', 255)->nullable()->comment('Í³¼ÆÏîÄ¿Ãû');
-            $table->string('meta_key', 255)->nullable()->comment('ÔªÐÅÏ¢¹Ø¼ü×Ö');
-            $table->string('meta_value', 255)->nullable()->comment('ÔªÐÅÏ¢µÄÏêÏ¸Öµ');
+            $table->string('statistic_term', 255)->nullable()->comment('ç»Ÿè®¡é¡¹ç›®å');
+            $table->string('meta_key', 255)->nullable()->comment('å…ƒä¿¡æ¯å…³é”®å­—');
+            $table->string('meta_value', 255)->nullable()->comment('å…ƒä¿¡æ¯çš„è¯¦ç»†å€¼');
             $table->timestamps();
         });
 
@@ -24,8 +24,9 @@ class CreateStudentStatistics extends Migration
             $table->increments('id');
             $table->string('province');
             $table->string('city')->index();
-            $table->decimal('latitude', 11, 8)->default(0)->comment('³ÇÊÐ¾­¶È.');
-            $table->decimal('longitude', 11, 8)->default(0)->comment('³ÇÊÐÎ³¶È.');
+            $table->string('area');
+            $table->decimal('latitude', 11, 8)->default(0)->comment('åŸŽå¸‚ç»åº¦.');
+            $table->decimal('longitude', 11, 8)->default(0)->comment('åŸŽå¸‚çº¬åº¦.');
 
             $table->timestamps();
         });
