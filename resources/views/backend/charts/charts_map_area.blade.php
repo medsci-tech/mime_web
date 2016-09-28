@@ -40,7 +40,7 @@
             bmap: {
               center: [104.114129, 37.550339],
               zoom: 5,
-              roam: true,
+              roam: false,
               mapStyle: {
                 styleJson: [{
                   'featureType': 'water',
@@ -168,7 +168,7 @@
                 },
                 itemStyle: {
                   normal: {
-                    color: 'green'
+                    color: 'rgba(66, 139, 202, 0.9)'
                   }
                 }
               },
