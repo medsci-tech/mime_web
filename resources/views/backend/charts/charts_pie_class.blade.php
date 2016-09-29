@@ -23,7 +23,7 @@
 
         var data = [
                 @foreach($phases as $phase)
-                  @foreach($phase as $course)
+                  @foreach($phase->thyroidClassCourses as $course)
                     {value:{{$course->play_count}}, name:'{{$course->title}}'},
                   @endforeach
                 @endforeach
