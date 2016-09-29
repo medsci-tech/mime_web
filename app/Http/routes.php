@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::get('/area-map', 'StatisticController@areaMap');
         Route::get('/province-map', 'StatisticController@provinceMap');
         Route::get('/register-bar', 'StatisticController@registerBar');
+        Route::get('/class-pie', 'StatisticController@classPie');
         Route::get('/update', 'StatisticController@update');
     });
 });
