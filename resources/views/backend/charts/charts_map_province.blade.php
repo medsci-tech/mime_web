@@ -67,7 +67,7 @@
             },
             visualMap: {
               min: 0,
-              max: 1000,
+              max: 100,
               left: 'left',
               top: 'bottom',
               text:['高','低'],           // 文本，默认为数值文本
