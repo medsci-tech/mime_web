@@ -80,30 +80,32 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('banner', 'BannerController');
     Route::resource('student', 'StudentController');
     Route::group(['prefix' => 'statistic'], function () {
-        Route::get('/map', 'StatisticController@map');
+        Route::get('/area-map', 'StatisticController@areaMap');
+        Route::get('/province-map', 'StatisticController@provinceMap');
+        Route::get('/register-bar', 'StatisticController@registerBar');
         Route::get('/update', 'StatisticController@update');
     });
 });
 
 
-//
-//Route::group(['prefix' => 'charts'], function(){
-//    Route::get('/bar', function() {
-//        return view('backend.charts.charts_bar');
-//    });
-//    Route::get('/map', function() {
-//        return view('backend.charts.charts_map');
-//    });
-//    Route::get('/map2', function() {
-//        return view('backend.charts.charts_map2');
-//    });
-//    Route::get('/pie', function() {
-//        return view('backend.charts.charts_pie');
-//    });
-//    Route::get('/polar', function() {
-//        return view('backend.charts.charts_polar');
-//    });
-//});
+
+Route::group(['prefix' => 'charts'], function(){
+    Route::get('/bar', function() {
+        return view('backend.charts.charts_bar');
+    });
+    Route::get('/map', function() {
+        return view('backend.charts.charts_map');
+    });
+    Route::get('/map2', function() {
+        return view('backend.charts.charts_map_province');
+    });
+    Route::get('/pie', function() {
+        return view('backend.charts.charts_pie');
+    });
+    Route::get('/polar', function() {
+        return view('backend.charts.charts_polar');
+    });
+});
 
 
 

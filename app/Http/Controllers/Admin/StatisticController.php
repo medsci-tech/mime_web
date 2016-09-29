@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use Carbon\Carbon;
 
 /**
  * Class StatisticController
@@ -13,10 +14,11 @@ use App\Models\Student;
  */
 class StatisticController extends Controller
 {
-    function update() {
+    function update()
+    {
         $cities = City::all();
 
-        foreach($cities as $city) {
+        foreach ($cities as $city) {
             $city->student_count = Student::where('area', $city->area)->count();
             $city->save();
         }
@@ -26,9 +28,25 @@ class StatisticController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    function map() {
+    function areaMap()
+    {
         return view('backend.charts.charts_map_area', [
             'cities' => City::all()
         ]);
+    }
+
+    function provinceMap()
+    {
+        return view('backend.charts.charts_map_province');
+    }
+
+    function pie()
+    {
+
+    }
+
+    function registerBar()
+    {
+        return view('backend.charts.charts_bar_register');
     }
 }

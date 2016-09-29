@@ -31,15 +31,17 @@
       <li class="active treeview">
         <a href="{{url('#')}}">
           <i class="fa fa-pie-chart"></i>
-          <span>数据统计</span>
+          <span>学员统计</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/charts/bar') }}"><i class="fa fa-circle-o"></i>柱状图</a></li>
-          <li><a href="{{ url('/charts/map') }}"><i class="fa fa-circle-o"></i>地图</a></li>
-          <li><a href="{{ url('/charts/map2') }}"><i class="fa fa-circle-o"></i>地图2</a></li>
-          <li><a href="{{ url('/charts/pie') }}"><i class="fa fa-circle-o"></i>饼图</a></li>
-          <li><a href="{{ url('/charts/polar') }}"><i class="fa fa-circle-o"></i>极坐标图</a></li>
+          <li><a href="{{ url('/admin/statistic/area-map') }}"><i class="fa fa-circle-o"></i>用户分布图</a></li>
+          <li><a href="{{ url('/admin/statistic/province-map') }}"><i class="fa fa-circle-o"></i>地区分布图</a></li>
+          <li><a href="{{ url('/admin/statistic/register-bar') }}"><i class="fa fa-circle-o"></i>注册分布图</a></li>
+          {{--<li><a href="{{ url('/charts/map') }}"><i class="fa fa-circle-o"></i>地图</a></li>--}}
+          {{--<li><a href="{{ url('/charts/map2') }}"><i class="fa fa-circle-o"></i>地图2</a></li>--}}
+          {{--<li><a href="{{ url('/charts/pie') }}"><i class="fa fa-circle-o"></i>饼图</a></li>--}}
+          {{--<li><a href="{{ url('/charts/polar') }}"><i class="fa fa-circle-o"></i>极坐标图</a></li>--}}
         </ul>
       </li>
     </ul>
