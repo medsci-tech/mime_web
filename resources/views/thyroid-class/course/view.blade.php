@@ -168,9 +168,7 @@
 
                     if (status == 'playing') {
                         interval = setInterval(timer, 30000);
-                    }
-
-                    if (status == 'suspended' || status == 'playEnd' || status == 'stop') {
+                    } else {
                         clearInterval(interval);
                     }
 
