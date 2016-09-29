@@ -36,7 +36,7 @@
             },
             tooltip : {
               trigger: 'item',
-              formatter: '{b0}: {c2}'
+              formatter: '{b0}: {c}'
             },
             bmap: {
               center: [104.114129, 37.550339],
