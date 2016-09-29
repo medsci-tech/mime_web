@@ -1,4 +1,4 @@
-@extends('backend.charts.index')
+  @extends('backend.charts.index')
 
 @section('title', '图表')
 @section('box_title','图表')
@@ -35,7 +35,8 @@
               left: 'center'
             },
             tooltip : {
-              trigger: 'item'
+              trigger: 'item',
+              formatter: '{b0}: {c2}'
             },
             bmap: {
               center: [104.114129, 37.550339],
