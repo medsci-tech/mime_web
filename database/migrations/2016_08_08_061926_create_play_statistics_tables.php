@@ -27,8 +27,8 @@ class CreatePlayStatisticsTables extends Migration
             $table->integer('thyroid_class_course_id')->unsigned()->comment('课程ID');
             $table->foreign('thyroid_class_course_id')->references('id')->on('thyroid_class_courses');
 
-            $table->integer('play_duration')->comment('播放总时长,单位秒');
-            $table->integer('play_times')->comment('播放次数');
+            $table->integer('play_duration')->nullable()->comment('播放总时长,单位秒');
+            $table->integer('play_times')->nullable()->comment('播放次数');
 
             $table->string('student_course_id');
             $table->unique('student_course_id');

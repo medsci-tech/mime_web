@@ -17,7 +17,6 @@ class CreateTeachersTable extends Migration
             $table->increments('id');
 
             $table->string('name')->nullable()->comment('名字');
-            $table->string('sex')->nullable()->comment('性别');
             $table->string('photo_url')->nullable()->comment('宣传照');
             $table->string('office')->nullable()->comment('科室');
             $table->string('title')->nullable()->comment('职称');

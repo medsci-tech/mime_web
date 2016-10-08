@@ -22,11 +22,11 @@ class CreateStudentStatistics extends Migration
 
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('province');
-            $table->string('city')->index();
-            $table->string('area');
-            $table->decimal('latitude', 11, 8)->default(0)->comment('城市经度.');
-            $table->decimal('longitude', 11, 8)->default(0)->comment('城市纬度.');
+            $table->string('province')->nullable();
+            $table->string('city')->nullable()->index();
+            $table->string('area')->nullable();
+            $table->decimal('latitude', 11, 8)->nullable()->default(0)->comment('城市经度.');
+            $table->decimal('longitude', 11, 8)->nullable()->default(0)->comment('城市纬度.');
             $table->integer('student_count')->nullable()->default(0)->comment('学员总数');
             $table->timestamps();
         });
