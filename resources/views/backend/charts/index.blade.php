@@ -53,13 +53,19 @@
   @yield('charts_data')
 
   <script>
-    new Vue({
+    var chart = new Vue({
       el: 'body',
       data: {
         alert:alert
       }
     });
 
+    var myChart = chart.$children[0].$children[0].chart;
+
+
     {{--$("a[href$={{ \Session::get('currentUrl') }}]").parent().addClass('active');--}}
+
   </script>
+
+  @yield('charts_function')
 @endsection
