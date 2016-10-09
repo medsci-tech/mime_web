@@ -94,7 +94,7 @@
                 type: 'pie',
                 radius: '55%',
                 center: ['75%', '50%'],
-                data: data[params.name],
+                data: data.course[params.name],
                 itemStyle: {
                   emphasis: {
                     shadowBlur: 10,
