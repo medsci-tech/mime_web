@@ -20,20 +20,16 @@
 
     var data = {
       phases: [
-          @foreach($phases as $phase)
-        {
-          value:{{$phase->play_count}}, name: '{{$phase->title}}'
-        }
+        @foreach($phases as $phase)
+        {value:{{$phase->play_count}}, name: '{{$phase->title}}'},
         @endforeach
       ],
       course: {
         @foreach($phases as $phase)
         '{{$phase->title}}': [
-            @foreach($phase->thyroidClassCourses as $course)
-          {
-            value:{{$course->play_count}}, name: '{{$course->title.$course->sequence}}'
-          }
-          @endforeach
+                @foreach($phase->thyroidClassCourses as $course)
+                    {value:{{$course->play_count}}, name: '{{$course->title.$course->sequence}}'},
+                @endforeach
         ]
         @endforeach
       }
