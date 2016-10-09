@@ -54,8 +54,8 @@
               show: true,
               feature: {
                 mark: {show: true},
-                dataView: {show: true, readOnly: true},
-                magicType: {show: true, type: ['bar']},
+                dataView: {show: true, readOnly: false},
+                //magicType: {show: true, type: ['bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
               }
