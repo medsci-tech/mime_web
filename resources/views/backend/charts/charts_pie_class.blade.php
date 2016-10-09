@@ -28,7 +28,7 @@
         @foreach($phases as $phase)
         '{{$phase->title}}': [
                 @foreach($phase->thyroidClassCourses as $course)
-                    {value:{{$course->play_count}}, name: '{{$course->title.$course->sequence}}'},
+                    {value:{{$course->play_count}}, name: '{{$course->sequence}}'},
                 @endforeach
         ],
         @endforeach
@@ -48,7 +48,7 @@
             },
             tooltip: {
               trigger: 'item',
-              formatter: "{a} <br/>{b} : {c} ({d}%)"
+              formatter: "{b} : {c} ({d}%)"
             },
 //            legend: {
 //              orient: 'vertical',
@@ -60,7 +60,7 @@
                 name: '课程统计',
                 type: 'pie',
                 radius: '55%',
-                center: ['50%', '60%'],
+                center: ['50%', '50%'],
                 data: data.phases,
                 itemStyle: {
                   emphasis: {
@@ -90,7 +90,7 @@
                 center: ['25%', '50%']
               },
               {
-                name: '访问来源2',
+                name: '课程点击量',
                 type: 'pie',
                 radius: '55%',
                 center: ['75%', '50%'],
