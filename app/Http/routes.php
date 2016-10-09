@@ -106,6 +106,9 @@ Route::group(['prefix' => 'charts'], function(){
     Route::get('/polar', function() {
         return view('backend.charts.charts_polar');
     });
+    Route::get('/line', function() {
+        return view('backend.charts.charts_line');
+    });
 });
 
 
