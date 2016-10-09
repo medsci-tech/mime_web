@@ -30,7 +30,7 @@
                 @foreach($phase->thyroidClassCourses as $course)
                     {value:{{$course->play_count}}, name: '{{$course->title.$course->sequence}}'},
                 @endforeach
-        ]
+        ],
         @endforeach
       }
     };
