@@ -37,7 +37,7 @@
               show: true,
               feature: {
                 mark: {show: true},
-                dataView: {show: true, readOnly: false},
+                dataView: {show: true, readOnly: true},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}

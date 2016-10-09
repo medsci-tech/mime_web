@@ -50,6 +50,16 @@
               trigger: 'item',
               formatter: "点击数:{c} ({d}%)"
             },
+            toolbox: {
+              show: true,
+              feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: true},
+                magicType: {show: true, type: ['bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+              }
+            },
 //            legend: {
 //              orient: 'vertical',
 //              left: 'left',
