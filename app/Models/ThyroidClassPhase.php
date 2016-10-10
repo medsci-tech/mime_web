@@ -57,7 +57,8 @@ class ThyroidClassPhase extends Model
         $courses = $this->hasMany(ThyroidClassCourse::class);
         $count = 0;
         foreach($courses as $course) {
-            $count = \Redis::command('HGET', ['course_play_count', $course->id]);
+            //$count = \Redis::command('HGET', ['course_play_count', $course->id]);
+            $count = $course->id;
         }
         return $count;
     }
