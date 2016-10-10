@@ -190,7 +190,7 @@ class ExcelController extends Controller
             $logs = \Redis::command('HGETAll', [$studentCourseId]);
             $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
             foreach($logs as $key => $value) {
-                if($key > '2016-09-01 00:00:00' && $value > 7200) {
+                if($key > '2016-09-08 00:00:00' && $value > 7200) {
                     $item = [
                         $coursesArray[$logArray[1]]['phase'],
                         $coursesArray[$logArray[1]]['course'],
