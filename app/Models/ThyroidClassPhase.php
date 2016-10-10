@@ -54,11 +54,10 @@ class ThyroidClassPhase extends Model
      */
     public function getPlayCountAttribute()
     {
-        $courses = $this->hasMany(ThyroidClassCourse::class);
+        $courses = ThyroidClassCourse::where('thyroid_class_phase_id', $this->attributes['id'])->get();
         $count = 0;
         foreach($courses as $course) {
-            //$count = \Redis::command('HGET', ['course_play_count', $course->id]);
-            $count = $course->id;
+            $count += \Redis::command('HGET', ['course_play_count', $course->id]);
         }
         return $count;
     }
