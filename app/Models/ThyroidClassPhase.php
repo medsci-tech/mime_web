@@ -14,10 +14,10 @@ class ThyroidClassPhase extends Model
 {
     use SoftDeletes;
 
+    protected $appends = ['play_count'];
+
     protected $dates = ['deleted_at'];
-    /**
-     * @var string
-     */
+
     protected $table = 'thyroid_class_phases';
 
     /**
@@ -47,5 +47,18 @@ class ThyroidClassPhase extends Model
      */
     public function teacher() {
         return $this->belongsTo(Teacher::class, 'main_teacher_id');
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function getPlayCountAttribute()
+    {
+        $courses = $this->hasMany(ThyroidClassCourse::class);
+        $count = 0;
+        foreach($courses as $course) {
+            $count +=  \Redis::command('HGET', ['course_play_count', $course->id]);
+        }
+        return $count;
     }
 }
