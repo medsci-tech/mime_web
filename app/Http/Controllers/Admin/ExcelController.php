@@ -168,7 +168,7 @@ class ExcelController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function Logs2Excel() {
+    public function logs2Excel() {
         $courses = ThyroidClassCourse::all();
         $coursesArray = array();
         foreach($courses as $course) {
@@ -220,5 +220,14 @@ class ExcelController extends Controller
         })->export('xls');
 
         return redirect('/admin/student');
+    }
+
+    function exportPhone() {
+        $students = Student::all();
+        $array = [];
+        foreach($students as $student) {
+            array_push($array, $student->phone);
+        }
+        dd(json_encode($array));
     }
 }

@@ -69,7 +69,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::post('/play-log-detail', 'ExcelController@playLogDetail');
         Route::any('/test', 'ExcelController@test');
         Route::any('/test_log_detail', 'ExcelController@getLogDetail');
-        Route::any('/logs2excel', 'ExcelController@Logs2Excel');
+        Route::any('/logs2excel', 'ExcelController@logs2Excel');
+        Route::any('/export-phone', 'ExcelController@exportPhone');
     });
 
     Route::get('/', 'TeacherController@index');
