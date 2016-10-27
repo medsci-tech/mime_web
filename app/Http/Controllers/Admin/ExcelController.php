@@ -188,6 +188,7 @@ class ExcelController extends Controller
         $cellData = [['单元名称', '课程名称', '学员姓名',  '学员电话', '起始观看时间', '观看时长(单位/秒)']];
         foreach($studentCourseIds as $studentCourseId) {
             $logs = \Redis::command('HGETAll', [$studentCourseId]);
+            echo $logs.'<hr />';
             $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
             foreach($logs as $key => $value) {
                 if($key > '2016-09-08 00:00:00' && $value > 7200) {
