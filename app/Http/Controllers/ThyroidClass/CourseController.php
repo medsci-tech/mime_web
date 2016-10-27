@@ -49,10 +49,16 @@ class CourseController extends WebController
     public function timer(Request $request)
     {
         $courseId = $request->input('course_id');
-        $date = $request->input('date');
-        $logId = 'student_course_id:' . $this->studentId . '-' . $courseId;
-        return response()->json([
-            'success' => \Redis::command('HINCRBY', [$logId, $date, 30])
-        ]);
+        if($courseId) {
+            $date = $request->input('date');
+            $logId = 'student_course_id:' . $this->studentId . '-' . $courseId;
+            return response()->json([
+                'success' => \Redis::command('HINCRBY', [$logId, $date, 30])
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 }
