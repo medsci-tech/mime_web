@@ -417,8 +417,8 @@
     (function () {
       var option = {
         "auto_play": "0",
-        "file_id": "14651978969263309496",
-        "app_id": "1252490301",
+        "file_id": "{{$thyroidClass->qcloud_file_id}}",
+        "app_id": "{{$thyroidClass->qcloud_app_id}}",
         "width": 1920,
         "height": 1080
       };
