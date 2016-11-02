@@ -10,7 +10,7 @@
       table_head: ['id', '名称', 'banner滚动时间（单位/毫秒）', '最新更新时间', '介绍', '视频 app id', '视频 file id'],
       table_data: [
           @foreach($thyroids as $thyroid)
-        ['{{$thyroid->id}}', '{{$thyroid->title}}', '{{$thyroid->banner_autopaly}}', '{{$thyroid->latest_update_at}}', '{{$thyroid->comment}}', {{$thyroid->qcloud_app_id}}, {{$thyroid->qcloud_file_id}}],
+        ['{{$thyroid->id}}', '{{$thyroid->title}}', '{{$thyroid->banner_autopaly}}', '{{$thyroid->latest_update_at}}', '{{$thyroid->comment}}', '{{$thyroid->qcloud_app_id}}','{{$thyroid->qcloud_file_id}}'],
         @endforeach
       ],
       pagination: '{{$thyroids->render() }}',
