@@ -27,8 +27,9 @@ class ThyroidController extends Controller
             'logo_url' => $request->input('logo_url'),
             'banner_autopaly' => $request->input('banner_autopaly'),
             'latest_update_at' => $request->input('latest_update_at'),
+            'qcloud_file_id' => $request->input('qcloud_file_id'),
+            'qcloud_app_id' => $request->input('qcloud_app_id')
         ];
-
         return $data;
     }
 
