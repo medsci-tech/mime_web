@@ -169,7 +169,7 @@ class ExcelController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logs2Excel() {
-        $courses = ThyroidClassCourse::where('update','>', '2016-10-01')->where('update','<', '2016-11-01')->get();
+        $courses = ThyroidClassCourse::where('updated_at','>', '2016-10-01')->where('updated_at','<', '2016-11-01')->get();
         $coursesArray = array();
         foreach($courses as $course) {
             $coursesArray[$course->id] = [
