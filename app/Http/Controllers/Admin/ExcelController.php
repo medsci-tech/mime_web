@@ -169,7 +169,7 @@ class ExcelController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logs2Excel() {
-        $courses = ThyroidClassCourse::where('updated_at','>', '2016-10-01')->where('updated_at','<', '2016-11-01')->get();
+        $courses = ThyroidClassCourse::all();
         $coursesArray = array();
         foreach($courses as $course) {
             $coursesArray[$course->id] = [
@@ -187,7 +187,7 @@ class ExcelController extends Controller
         $studentCourseIds = \Redis::command('keys', ['student_course_id*']);
         $cellData = [['单元名称', '课程名称', '学员姓名',  '学员电话', '起始观看时间', '观看时长(单位/秒)']];
         foreach($studentCourseIds as $studentCourseId) {
-            echo $studentCourseId.'<hr />';
+            //echo $studentCourseId.'<hr />';
             $logs = \Redis::command('HGETAll', [$studentCourseId]);
             $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
             foreach($logs as $key => $value) {
