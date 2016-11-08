@@ -62,6 +62,7 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
 Route::auth();
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::any('/student-logs', 'AdminController@studentLogs');
+    Route::any('/reset-pwd', 'StudentController@resetPwd');
     Route::group(['prefix' => 'excel'], function () {
         Route::get('/', 'ExcelController@excelForm');
         Route::post('/student', 'ExcelController@student');
