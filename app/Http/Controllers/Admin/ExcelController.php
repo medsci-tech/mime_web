@@ -250,6 +250,7 @@ class ExcelController extends Controller
         $cellData = [['单元名称', '课程名称', '学员姓名', '学员电话', '起始观看时间', '观看时长(单位/秒)']];
         foreach ($playLogs as $playLog) {
             //echo $studentCourseId.'<hr />';
+            dd($playLog->detail);
             foreach ($playLog->detail as $key => $value) {
                 $item = [
                     $coursesArray[$playLog->thyroid_class_course_id]['phase'],
