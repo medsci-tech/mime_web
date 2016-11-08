@@ -53,11 +53,8 @@ class StudentController extends Controller
     {
         $phone = $request->input('phone');
         $password = \Hash::make(substr($phone, -6));
-        dd($password);
-        $phone = $request->input('phone');
-        $password = \Hash::make(substr($phone, -6));
         $student = Student::where('phone', $phone)->first();
-        $student->$password;
+        $student->password = $password;
         $student->save();
 
         return response()->json([
