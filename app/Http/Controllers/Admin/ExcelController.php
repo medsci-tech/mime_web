@@ -32,7 +32,7 @@ class ExcelController extends Controller
         \Excel::load($excel, function ($reader) use ($excel) {
             $excelData = \Excel::load($excel)->get()->toArray();
             foreach ($excelData as $data) {
-                $data['password'] = \Hash::make(substr($data['phone'],-6));
+                $data['password'] = \Hash::make(substr($data['phone'], -6));
                 Student::create($data);
             }
         });
@@ -51,7 +51,7 @@ class ExcelController extends Controller
 
             $students = Student::get(['id', 'phone']);
             $studentsArray = array();
-            foreach($students as $student) {
+            foreach ($students as $student) {
                 $studentsArray[$student->phone] = $student->id;
             }
 
@@ -62,7 +62,7 @@ class ExcelController extends Controller
                     'thyroid_class_course_id' => $data['thyroid_class_course_id'],
                     'play_times' => $data['play_times'],
                     'play_duration' => $data['play_duration'],
-                    'student_course_id' => $studentsArray[$data['phone']].'-'.$data['thyroid_class_course_id']
+                    'student_course_id' => $studentsArray[$data['phone']] . '-' . $data['thyroid_class_course_id']
                 ];
                 PlayLog::create($logData);
             }
@@ -82,13 +82,13 @@ class ExcelController extends Controller
 
             $students = Student::get(['id', 'phone']);
             $studentsArray = array();
-            foreach($students as $student) {
+            foreach ($students as $student) {
                 $studentsArray[$student->phone] = $student->id;
             }
 
             foreach ($excelData as $data) {
-                $logId =  'student_course_id:' . $studentsArray[$data['phone']] .'-'.$data['thyroid_class_course_id'];
-                $date =  $data['clicked_at'];
+                $logId = 'student_course_id:' . $studentsArray[$data['phone']] . '-' . $data['thyroid_class_course_id'];
+                $date = $data['clicked_at'];
                 $this->getClickedAt($logId, $date);
                 \Redis::command('HSET', [$logId, $date, $data['play_duration']]);
             }
@@ -99,41 +99,42 @@ class ExcelController extends Controller
     /**
      *
      */
-    public function test() {
+    public function test()
+    {
         //dd(\Redis::command('flushall'));
         $logs = PlayLog::all();
-        foreach($logs as $log) {
-            $logId =  'student_course_id:' . $log->student_course_id;
+        foreach ($logs as $log) {
+            $logId = 'student_course_id:' . $log->student_course_id;
             $data = \Redis::command('HGETALL', [$logId]);
             $playTimes = \Redis::command('HLEN', [$logId]);
-            if($log->play_times == $playTimes) {
-                echo $log->id.':success<br>';
+            if ($log->play_times == $playTimes) {
+                echo $log->id . ':success<br>';
                 // 次数
                 $playDuration = 0;
-                foreach($data as $item) {
+                foreach ($data as $item) {
                     $playDuration += $item;
                 }
-                if($playDuration == $log->play_duration) {
+                if ($playDuration == $log->play_duration) {
                     echo 'play_duration:success';
                 } else {
-                    echo 'play_duration:fail;log_play_duration:'.$log->play_duration.';redis_play_duration:'.$playDuration;
+                    echo 'play_duration:fail;log_play_duration:' . $log->play_duration . ';redis_play_duration:' . $playDuration;
                 }
                 echo '<hr>';
             } else {
                 // 次数
                 echo $log->play_times;
                 echo $playTimes;
-                var_dump( \Redis::command('hgetall', [$logId]));
-                echo $log->id.':fail';
+                var_dump(\Redis::command('hgetall', [$logId]));
+                echo $log->id . ':fail';
                 // 时间
                 $playDuration = 0;
-                foreach($data as $item) {
+                foreach ($data as $item) {
                     $playDuration += $item;
                 }
-                if($playDuration == $log->play_duration) {
+                if ($playDuration == $log->play_duration) {
                     echo 'play_duration:success';
                 } else {
-                    echo 'play_duration:fail;log_play_duration:'.$log->play_duration.';redis_play_duration:'.$playDuration;
+                    echo 'play_duration:fail;log_play_duration:' . $log->play_duration . ';redis_play_duration:' . $playDuration;
                 }
 
                 echo '<hr>';
@@ -145,9 +146,10 @@ class ExcelController extends Controller
      * @param $logId
      * @param $date
      */
-    function getClickedAt($logId, &$date) {
+    function getClickedAt($logId, &$date)
+    {
         if (\Redis::command('HEXISTS', [$logId, $date])) {
-            $date = date('Y-m-d H:i:s',strtotime('+1 second',strtotime($date)));;
+            $date = date('Y-m-d H:i:s', strtotime('+1 second', strtotime($date)));;
             $this->getClickedAt($logId, $date);
         } else {
             return;
@@ -157,9 +159,10 @@ class ExcelController extends Controller
     /**
      * @param Request $request
      */
-    function getLogDetail(Request $request) {
+    function getLogDetail(Request $request)
+    {
         //'student_course_id:' . $studentsArray[$data['phone']] .'-'.$data['thyroid_class_course_id'];
-        $logId =  'student_course_id:' . $request->input('student_id').'-'.$request->input('course_id');
+        $logId = 'student_course_id:' . $request->input('student_id') . '-' . $request->input('course_id');
         echo \Session::get('studentId');
         dd(\Redis::command('hgetall', [$logId]));
     }
@@ -168,65 +171,112 @@ class ExcelController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function logs2Excel() {
+//    public function logs2Excel() {
+//        $courses = ThyroidClassCourse::all();
+//        $coursesArray = array();
+//        foreach($courses as $course) {
+//            $coursesArray[$course->id] = [
+//                'course' => $course->sequence.$course->title,
+//                'phase' => $course->thyroidClassPhase->title,
+//            ];
+//        }
+//
+//        $students = Student::get(['id', 'phone', 'name']);
+//        $studentsArray = array();
+//        foreach($students as $student) {
+//            $studentsArray[$student->id] = ['name' => $student->name, 'phone' => $student->phone];
+//        }
+//
+//        $studentCourseIds = \Redis::command('keys', ['student_course_id*']);
+//        $cellData = [['单元名称', '课程名称', '学员姓名',  '学员电话', '起始观看时间', '观看时长(单位/秒)']];
+//        foreach($studentCourseIds as $studentCourseId) {
+//            //echo $studentCourseId.'<hr />';
+//            $logs = \Redis::command('HGETAll', [$studentCourseId]);
+//            $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
+//            foreach($logs as $key => $value) {
+//                if($key > '2016-09-08 00:00:00' && $value > 7200) {
+//                    $item = [
+//                        $coursesArray[$logArray[1]]['phase'],
+//                        $coursesArray[$logArray[1]]['course'],
+//                        $studentsArray[$logArray[0]]['name'],
+//                        $studentsArray[$logArray[0]]['phone'],
+//                        $key,
+//                        7200,
+//                    ];
+//                } else {
+//                    $item = [
+//                        $coursesArray[$logArray[1]]['phase'],
+//                        $coursesArray[$logArray[1]]['course'],
+//                        $studentsArray[$logArray[0]]['name'],
+//                        $studentsArray[$logArray[0]]['phone'],
+//                        $key,
+//                        $value,
+//                    ];
+//                }
+//                array_push($cellData, $item);
+//            }
+//        }
+//
+//        \Excel::create('公开课观看日志',function($excel) use ($cellData){
+//            $excel->sheet(date('Y-M-D'), function($sheet) use ($cellData){
+//                $sheet->rows($cellData);
+//            });
+//        })->export('xls');
+//
+//        return redirect('/admin/student');
+//    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logs2Excel()
+    {
         $courses = ThyroidClassCourse::all();
         $coursesArray = array();
-        foreach($courses as $course) {
+        foreach ($courses as $course) {
             $coursesArray[$course->id] = [
-                'course' => $course->sequence.$course->title,
-                'phase' => $course->thyroidClassPhase->title,
+                'course' => $course->sequence . $course->title,
+                'phase' => $course->thyroidClassPhase->title
             ];
         }
 
         $students = Student::get(['id', 'phone', 'name']);
         $studentsArray = array();
-        foreach($students as $student) {
+        foreach ($students as $student) {
             $studentsArray[$student->id] = ['name' => $student->name, 'phone' => $student->phone];
         }
 
-        $studentCourseIds = \Redis::command('keys', ['student_course_id*']);
-        $cellData = [['单元名称', '课程名称', '学员姓名',  '学员电话', '起始观看时间', '观看时长(单位/秒)']];
-        foreach($studentCourseIds as $studentCourseId) {
+        $playLogs = PlayLog::where('updated_at', '>', '2016-10-01')->where('updated_at', '<', '2016-11-01')->all();
+        $cellData = [['单元名称', '课程名称', '学员姓名', '学员电话', '起始观看时间', '观看时长(单位/秒)']];
+        foreach ($playLogs as $playLog) {
             //echo $studentCourseId.'<hr />';
-            $logs = \Redis::command('HGETAll', [$studentCourseId]);
-            $logArray = explode('-' ,substr($studentCourseId, strpos($studentCourseId, ':')+1));
-            foreach($logs as $key => $value) {
-                if($key > '2016-09-08 00:00:00' && $value > 7200) {
-                    $item = [
-                        $coursesArray[$logArray[1]]['phase'],
-                        $coursesArray[$logArray[1]]['course'],
-                        $studentsArray[$logArray[0]]['name'],
-                        $studentsArray[$logArray[0]]['phone'],
-                        $key,
-                        7200,
-                    ];
-                } else {
-                    $item = [
-                        $coursesArray[$logArray[1]]['phase'],
-                        $coursesArray[$logArray[1]]['course'],
-                        $studentsArray[$logArray[0]]['name'],
-                        $studentsArray[$logArray[0]]['phone'],
-                        $key,
-                        $value,
-                    ];
-                }
+            foreach ($playLog->detail as $key => $value) {
+                $item = [
+                    $coursesArray[$playLog->thyroid_class_course_id]['phase'],
+                    $coursesArray[$playLog->thyroid_class_course_id]['course'],
+                    $studentsArray[$playLog->student_id]['name'],
+                    $studentsArray[$playLog->student_id]['phone'],
+                    $key,
+                    $value
+                ];
                 array_push($cellData, $item);
             }
         }
-
-        \Excel::create('公开课观看日志',function($excel) use ($cellData){
-            $excel->sheet(date('Y-M-D'), function($sheet) use ($cellData){
+        \Excel::create('公开课观看日志', function ($excel) use ($cellData) {
+            $excel->sheet(date('Y-M-D'), function ($sheet) use ($cellData) {
                 $sheet->rows($cellData);
             });
-        })->export('xls');
+        })->
+        export('xls');
 
         return redirect('/admin/student');
     }
 
-    function exportPhone() {
+    function exportPhone()
+    {
         $students = Student::all();
         $array = [];
-        foreach($students as $student) {
+        foreach ($students as $student) {
             array_push($array, $student->phone);
         }
         dd(json_encode($array));
