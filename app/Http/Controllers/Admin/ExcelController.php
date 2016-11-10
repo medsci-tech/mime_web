@@ -246,7 +246,7 @@ class ExcelController extends Controller
             $studentsArray[$student->id] = ['name' => $student->name, 'phone' => $student->phone];
         }
 
-        $playLogs = PlayLog::where('updated_at', '>', '2016-10-01')->where('updated_at', '<', '2016-11-01')->get();
+        $playLogs = PlayLog::where('updated_at', '>', '2016-10-01')->get();
         $cellData = [['单元名称', '课程名称', '学员姓名', '学员电话', '起始观看时间', '观看时长(单位/秒)']];
         foreach ($playLogs as $playLog) {
             //echo $studentCourseId.'<hr />';
