@@ -15,7 +15,7 @@
 
     <div style="background-color: #25562c;">
         <div class="row">
-            <img src="{{$banners ?$banners->first()->image_url :''}}" alt="">
+            <img src="{{$banners ?$banners->image_url :''}}" alt="">
         </div>   
     </div>
 

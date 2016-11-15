@@ -38,7 +38,7 @@ class CourseController extends WebController
             'course' => ThyroidClassCourse::find($request->input('course_id')),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
             'date' => $date,
-            'banners' => Banner::where('page', 'view')->where('status', 1)->orderBy('weight', 'desc')->get()
+            'banners' => Banner::where('page', 'view')->where('status', 1)->orderBy('weight', 'desc')->first()
         ]);
     }
 
