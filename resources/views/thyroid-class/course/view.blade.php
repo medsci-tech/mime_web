@@ -12,10 +12,10 @@
 @section('content')
 
     @include('layouts.header')
-    @if($banner)
+    @if($banners)
         <div style="background-color: #25562c;">
             <div class="row">
-                <img src="{{$banner->image_url}}" alt="">
+                <img src="{{$banners->image_url}}" alt="">
             </div>
         </div>
     @endif
