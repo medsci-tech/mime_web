@@ -18,7 +18,7 @@ class BannerController extends Controller
      *
      * @return array
      */
-    private function formatData($request)
+    private function formatData(Request $request)
     {
         $data = [
             'image_url' => $request->input('image_url'),
@@ -59,7 +59,6 @@ class BannerController extends Controller
             'title' => '添加成功',
             'message' => '添加Banner成功',
         ]);
-
         return redirect('/admin/banner');
     }
 

@@ -12,34 +12,37 @@
 @section('content')
 
     @include('layouts.header')
-
-    <div style="background-color: #25562c;">
-        <div class="row">
-            <img src="{{$banners ?$banners->image_url :''}}" alt="">
-        </div>   
-    </div>
-
-<div style="background-color: #555;">
-    <div class="row video">
-
-        <div class="medium-8 small-12 columns">
-            <div id="id_video_container" style="width:100%;"></div>
+    @if($banner)
+        <div style="background-color: #25562c;">
+            <div class="row">
+                <img src="{{$banners->image_url}}" alt="">
+            </div>
         </div>
-        <div class="medium-4 small-12 columns video-list">
-            <h5>&nbsp;课程列表</h5>
-            <ul class="vertical menu" data-accordion-menu id="video-accordion">
-                <li v-for="subject in course_list">
-                    <a id="video_@{{$index+1}}" href="#">@{{ subject.sequence }}&nbsp;<abbr class="over-hide" title="@{{ subject.subject }}">@{{ subject.subject }}</abbr></a>
-                    <ul class="menu vertical nested">
-                        <li v-for="course in subject.courses" :class="(course.id == currentCourse)?'active':''">
-                            <a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;<abbr class="over-hide" title="@{{ course.name }}">@{{ course.name }}</abbr></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+    @endif
+
+    <div style="background-color: #555;">
+        <div class="row video">
+
+            <div class="medium-8 small-12 columns">
+                <div id="id_video_container" style="width:100%;"></div>
+            </div>
+            <div class="medium-4 small-12 columns video-list">
+                <h5>&nbsp;课程列表</h5>
+                <ul class="vertical menu" data-accordion-menu id="video-accordion">
+                    <li v-for="subject in course_list">
+                        <a id="video_@{{$index+1}}" href="#">@{{ subject.sequence }}&nbsp;<abbr class="over-hide"
+                                                                                                title="@{{ subject.subject }}">@{{ subject.subject }}</abbr></a>
+                        <ul class="menu vertical nested">
+                            <li v-for="course in subject.courses" :class="(course.id == currentCourse)?'active':''">
+                                <a href="@{{ course.href }}">@{{ course.sequence }}&nbsp;<abbr class="over-hide"
+                                                                                               title="@{{ course.name }}">@{{ course.name }}</abbr></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
 
     @include('layouts.footer')
@@ -95,13 +98,13 @@
                 ],
 
                 course_list: [
-                    @foreach($thyroidClassPhases as $thyroidClassPhase)
-                    {
+                        @foreach($thyroidClassPhases as $thyroidClassPhase)
+                        {
                         subject: '{{$thyroidClassPhase->title}}',
                         sequence: '{{$thyroidClassPhase->sequence}}',
                         courses: [
-                            @foreach($thyroidClassPhase->thyroidClassCourses as $thyroidClassCourse)
-                            {
+                                @foreach($thyroidClassPhase->thyroidClassCourses as $thyroidClassCourse)
+                                {
                                 name: '{{$thyroidClassCourse->title}}',
                                 sequence: '{{$thyroidClassCourse->sequence}}',
                                 href: '/thyroid-class/course/view?course_id={{$thyroidClassCourse->id}}',
@@ -150,7 +153,10 @@
 
                     function timer() {
 
-                        $.post('/thyroid-class/course/timer', {course_id: option.course_id, date:option.date}, function (data) {
+                        $.post('/thyroid-class/course/timer', {
+                            course_id: option.course_id,
+                            date: option.date
+                        }, function (data) {
                             if (data) {
                                 console.log('OK');
                             } else {
@@ -177,13 +183,13 @@
             new qcVideo.Player(/*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/ "id_video_container", option, func);
         })();
 
-//        $('.video-list').css('height', $('.video-list').prev().height());
+        //        $('.video-list').css('height', $('.video-list').prev().height());
 
     </script>
     <script>
         $(document).foundation();
 
-        $('#video_'+vm.currentPhase).trigger('click');
+        $('#video_' + vm.currentPhase).trigger('click');
 
     </script>
 @endsection

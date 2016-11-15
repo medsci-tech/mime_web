@@ -38,7 +38,7 @@ class CourseController extends WebController
             'course' => ThyroidClassCourse::find($request->input('course_id')),
             'thyroidClassPhases' => ThyroidClassPhase::all(),
             'date' => $date,
-            'banners' => Banner::where('page', 'view')->where('status', 1)->orderBy('weight', 'desc')->first()
+            'banner' => Banner::where('page', 'view')->where('status', 1)->orderBy('weight', 'desc')->first()
         ]);
     }
 
@@ -49,7 +49,7 @@ class CourseController extends WebController
     public function timer(Request $request)
     {
         $courseId = $request->input('course_id');
-        if($courseId) {
+        if ($courseId) {
             $date = $request->input('date');
             $logId = 'student_course_id:' . $this->studentId . '-' . $courseId;
             return response()->json([
