@@ -87,15 +87,15 @@
                     }
                 ],
 
-                swiper_pictures: [
-                        @foreach($banners as $banner)
-                        {
-                        name: '',
-                        image: '{{$banner->image_url}}',
-                        href: '{{$banner->href_url}}'
-                    },
-                    @endforeach
-                ],
+                {{--swiper_pictures: [--}}
+                        {{--@foreach($banners as $banner)--}}
+                        {{--{--}}
+                        {{--name: '',--}}
+                        {{--image: '{{$banner->image_url}}',--}}
+                        {{--href: '{{$banner->href_url}}'--}}
+                    {{--},--}}
+                    {{--@endforeach--}}
+                {{--],--}}
 
                 course_list: [
                         @foreach($thyroidClassPhases as $thyroidClassPhase)
