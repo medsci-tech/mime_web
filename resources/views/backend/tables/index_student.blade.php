@@ -78,7 +78,8 @@
                   </div>
                 </td>
                 <td style="white-space: nowrap">
-                  <button class="btn btn-xs btn-primary" @click="show(data)">查看</button>
+                  <button class="btn btn-xs btn-primary" @click="show(data)">查看</button>&nbsp;
+                  <button class="btn btn-xs btn-info" @click="charge(data)">充值</button>
                 </td>
                 </tr>
                 </tbody>
@@ -113,6 +114,13 @@
         },
         show: function (e) {
           $('#modal-list').modal('show');
+        },
+        charge: function (e) {
+          $.get('/admin/reset-pwd', {phone: this.data.table_data[1]}, function(data){
+            if(data){
+              alert('充值成功')
+            }
+          })
         }
       }
     });
