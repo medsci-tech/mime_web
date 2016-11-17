@@ -116,7 +116,7 @@
           $('#modal-list').modal('show');
         },
         charge: function (e) {
-          $.get('/admin/reset-pwd', {phone: this.data.table_data[1]}, function(data){
+          $.get('/admin/reset-pwd', {phone: e.table_data[1]}, function(data){
             if(data){
               alert('充值成功')
             }
