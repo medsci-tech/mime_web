@@ -55,10 +55,9 @@ class StudentController extends Controller
         $password = \Hash::make(substr($phone, -6));
         $student = Student::where('phone', $phone)->first();
         $student->password = $password;
-        $student->save();
 
         return response()->json([
-            'success' => false
+            'success' => $student->save()
         ]);
     }
 }

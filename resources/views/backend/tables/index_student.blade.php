@@ -79,7 +79,7 @@
                 </td>
                 <td style="white-space: nowrap">
                   <button class="btn btn-xs btn-primary" @click="show(data)">查看</button>&nbsp;
-                  <button class="btn btn-xs btn-info" @click="charge(data)">充值</button>
+                  <button class="btn btn-xs btn-info" @click="charge(data)">重置密码</button>
                 </td>
                 </tr>
                 </tbody>
@@ -118,7 +118,7 @@
         charge: function (e) {
           $.get('/admin/reset-pwd', {phone: e.table_data[1]}, function(data){
             if(data){
-              alert('充值成功')
+              alert('重置密码成功')
             }
           })
         }
