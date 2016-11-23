@@ -118,7 +118,7 @@
         charge: function (e) {
           $.get('/admin/reset-pwd', {phone: e.table_data[1]}, function(data){
             if(data){
-              alert('重置密码成功')
+              alerts('重置密码成功')
             }
           })
         }
