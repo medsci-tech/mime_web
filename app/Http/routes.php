@@ -114,4 +114,9 @@ Route::group(['prefix' => 'charts'], function(){
 });
 
 
+Route::group(['prefix' => 'system', 'namespace' => 'System', 'middleware' => 'auth'], function () {
+    Route::resource('/site', 'SiteController@index');
+});
+
+
 
