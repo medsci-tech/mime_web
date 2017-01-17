@@ -9,7 +9,7 @@
             table_head: [
                 'id',
                 '名称',
-                '链接',
+                '站点地址',
                 '状态'
             ],
             table_data: [
@@ -18,7 +18,7 @@
                     '{{$list->id}}',
                     '{{$list->name}}',
                     '{{$list->link}}',
-                    '{{$list->status}}'
+                    '{{config('params')['status_option'][$list->status]}}'
                 ],
                 @endforeach
             ],
@@ -43,8 +43,9 @@
                     box_type: 'select',
                     name: 'status',
                     option: {
-                        1:'启用',
-                        0:'禁用'
+                        @foreach(config('params')['status_option'] as $key => $val)
+                        '{{$val}}': '{{$key}}',
+                        @endforeach
                     }
                 }
             ],
