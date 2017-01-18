@@ -13,7 +13,7 @@ class Exercise extends Model
      */
     protected $fillable = [
         'type',
-        'video_id',
+        'check_type',
         'question',
         'option',
         'answer',
@@ -25,9 +25,4 @@ class Exercise extends Model
         return time();
     }
 
-
-    public function video()
-    {
-        return $this->belongsTo(ThyroidClassCourse::class);
-    }
 }
