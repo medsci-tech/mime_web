@@ -53,11 +53,12 @@ var exerciseInitForMime = function (element, option_name, answer_name) {
  * @param element string | eq:'#div'
  * @param option json | eq:{A: "1", B: "2", C: "4"}
  * @param answer string | eq:'A,B,C'
- * @param checkType string | eq:'radio'
+ * @param type1 string | eq:'radio'
+ * @param type2 string | eq:'show'
  * @param option_name string
  * @param answer_name string
  */
-var exerciseEditForMime = function (element, option, answer, checkType ,option_name ,answer_name) {
+var exerciseEditForMime = function (element, option, answer, type1, type2, option_name ,answer_name) {
     var html = '';
     var i = 0;
     var optionLength = Object.keys(option).length;
@@ -66,11 +67,11 @@ var exerciseEditForMime = function (element, option, answer, checkType ,option_n
             html += '<tr data-key="' + ( i + 1 ) + '">';
             html += '    <td>' +key+ '</td>';
             html += '    <td><input type="text" class="form-control" name="' + option_name + '[' +key+ ']" value="' + option[key] + '"></td>';
-            html += '    <td><input type="' + checkType + '" ';
+            html += '    <td><input type="' + type1 + '" ';
             if(answer.match(key)){
                 html += 'checked="checked" ';
             }
-            html += ' class="checkValue" name="' + answer_name + '[]" value="' +key+ '"></td>';
+            html += ' class="checkValue" name="' + answer_name + '[]" value="' +key+ '" style="display:'+type2+'"></td>';
             html += '    <td>';
             html += '        <a href="javascript:void(0);" class="delThisOption"><span class="glyphicon glyphicon-minus-sign"></span></a>';
             if(i == optionLength - 1){
