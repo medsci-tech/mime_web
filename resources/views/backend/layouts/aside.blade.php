@@ -26,6 +26,7 @@
           <li><a href="{{ url('/admin/phase') }}"><i class="fa fa-circle-o"></i>单元信息</a></li>
           <li><a href="{{ url('/admin/course') }}"><i class="fa fa-circle-o"></i>课程信息</a></li>
           <li><a href="{{ url('/admin/banner') }}"><i class="fa fa-circle-o"></i>Banner</a></li>
+          <li><a href="{{ url('/newback/exercise') }}"><i class="fa fa-circle-o"></i>试题管理</a></li>
         </ul>
       </li>
       <li class="active treeview">
