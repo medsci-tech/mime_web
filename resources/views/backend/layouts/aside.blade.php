@@ -7,6 +7,16 @@
       <li class="active treeview">
         <a href="{{url('#')}}">
           <i class="fa fa-dashboard"></i>
+          <span>系统配置</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu-open" style="display: block;">
+          <li><a href="{{ url('/system/site') }}"><i class="fa fa-circle-o"></i>站点管理</a></li>
+        </ul>
+      </li>
+      <li class="active treeview">
+        <a href="{{url('#')}}">
+          <i class="fa fa-dashboard"></i>
           <span>公开课管理</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -16,6 +26,7 @@
           <li><a href="{{ url('/admin/phase') }}"><i class="fa fa-circle-o"></i>单元信息</a></li>
           <li><a href="{{ url('/admin/course') }}"><i class="fa fa-circle-o"></i>课程信息</a></li>
           <li><a href="{{ url('/admin/banner') }}"><i class="fa fa-circle-o"></i>Banner</a></li>
+          <li><a href="{{ url('/newback/exercise') }}"><i class="fa fa-circle-o"></i>试题管理</a></li>
         </ul>
       </li>
       <li class="active treeview">

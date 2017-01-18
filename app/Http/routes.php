@@ -47,10 +47,10 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
     Route::any('/enter', 'ThyroidClassController@enter');
     Route::any('/update-statistics', 'ThyroidClassController@updateStatistics');
 
-    Route::group(['prefix' => 'sign-up'], function () {
-        Route::get('/create', 'SignUpController@create');
-        Route::post('/store', 'SignUpController@store');
-    });
+//    Route::group(['prefix' => 'sign-up'], function () {
+//        Route::get('/create', 'SignUpController@create');
+//        Route::post('/store', 'SignUpController@store');
+//    });
 
     Route::group(['prefix' => 'course'], function () {
         Route::get('/view', 'CourseController@view');
@@ -113,5 +113,16 @@ Route::group(['prefix' => 'charts'], function(){
     });
 });
 
+
+Route::group(['prefix' => 'system', 'namespace' => 'System', 'middleware' => 'auth'], function () {
+    Route::resource('/site', 'SiteController');
+});
+
+
+Route::group(['prefix' => 'newback', 'namespace' => 'Newback', 'middleware' => 'auth'], function () {
+    Route::get('/exercise', 'ExerciseController@index');
+    Route::post('/exercise', 'ExerciseController@save');
+    Route::delete('/exercise', 'ExerciseController@destroy');
+});
 
 
