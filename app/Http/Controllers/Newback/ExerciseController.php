@@ -13,10 +13,8 @@ class ExerciseController extends Controller
 {
     public function index(){
         $lists = Model::paginate('10');
-        $courses = ThyroidClassCourse::all();
         return view('newback.exercise.index',[
             'lists' => $lists,
-            'courses' => $courses,
         ]);
     }
 

@@ -13,10 +13,9 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">所属课程</label>
             <div class="col-sm-10">
-              <select class="form-control" name="video_id" id="form-video_id">
-                <option value="">-请选择-</option>
-                @foreach($courses as $course)
-                  <option value="{{$course->id}}">{{$course->sequence}}{{$course->title}}</option>
+              <select class="form-control" name="check_type" id="form-check_type">
+                @foreach(config('params')['exercise']['check_type'] as $key => $val)
+                  <option value="{{$key}}">{{$val}}</option>
                 @endforeach
               </select>
             </div>

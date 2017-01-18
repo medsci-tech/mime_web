@@ -50,8 +50,8 @@
                             <table class="table table-bordered table-hover table-striped table-responsive">
                                 <thead style="word-break: keep-all">
                                 <tr>
-                                    <th>所属课程</th>
-                                    <th>类型</th>
+                                    <th>问题类型</th>
+                                    <th>选择类型</th>
                                     <th>问题</th>
                                     <th>选项数</th>
                                     <th>答案</th>
@@ -66,17 +66,17 @@
                                 <tbody>
                                 @foreach($lists as $list)
                                 <tr>
-                                    <td>{{$list->video->sequence}}{{$list->video->title}}</td>
                                     <td>{{config('params')['exercise']['type'][$list->type]}}</td>
+                                    <td>{{config('params')['exercise']['check_type'][$list->check_type]}}</td>
                                     <td>{{$list->question}}</td>
                                     <td>{{count(unserialize($list->option))}}</td>
-                                    <td>{{$list->answer}}</td>
+                                    <td>@if($list->type != 2){{$list->answer}}@endif</td>
                                     <td>{{$list->resolve}}</td>
                                     <td>{{config('params')['status_option'][$list->status]}}</td>
                                     <td style="white-space: nowrap">
                                         <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
                                             data-id="{{$list->id}}"
-                                            data-video_id="{{$list->video_id}}"
+                                            data-check_type="{{$list->check_type}}"
                                             data-type="{{$list->type}}"
                                             data-question="{{$list->question}}"
                                             data-option="{{json_encode(unserialize($list->option))}}"
@@ -145,13 +145,23 @@
                 thisTr.after(trHtml);
                 $(this).remove();
             });
+
             /*题目单选多选切换*/
-            $('#exercise-type').change(function() {
-                var checkValue = $('#optionListBody').find('.checkValue');
+            $('#form-check_type').change(function() {
+                var checkValue = optionListBody.find('.checkValue');
                 if(1 == $(this).val()){
                     checkValue.attr('type','radio');
                 }else {
                     checkValue.attr('type','checkbox');
+                }
+            });
+            /*题目类型切换*/
+            $('#form-type').change(function() {
+                var checkValue = optionListBody.find('.checkValue');
+                if(1 == $(this).val()){
+                    checkValue.show();
+                }else {
+                    checkValue.hide();
                 }
             });
 
@@ -159,7 +169,7 @@
                 var defaltData = '';
                 $('#form-id').val(defaltData);
                 $('#form-type').val(1);
-                $('#form-video_id').val(defaltData);
+                $('#form-check_type').val(1);
                 $('#form-question').val(defaltData);
                 $('#form-resolve').val(defaltData);
                 $('#form-status').val(1);
@@ -168,7 +178,7 @@
             $('[data-btn="edit"]').click(function () {
                 var id = $(this).attr('data-id');
                 var type = $(this).attr('data-type');
-                var video_id = $(this).attr('data-video_id');
+                var check_type = $(this).attr('data-check_type');
                 var question = $(this).attr('data-question');
                 var option = JSON.parse($(this).attr('data-option'));
                 var answer = $(this).attr('data-answer');
@@ -178,16 +188,20 @@
 
                 $('#form-id').val(id);
                 $('#form-type').val(type);
-                $('#form-video_id').val(video_id);
+                $('#form-check_type').val(check_type);
                 $('#form-question').val(question);
                 $('#form-resolve').val(resolve);
                 $('#form-status').val(status);
 
-                var checkType = 'radio';
-                if(type == 2){
-                    checkType = 'checkbox';
+                var type1 = 'radio';
+                var type2 = '';
+                if(check_type == 2){
+                    type1 = 'checkbox';
                 }
-                exerciseEditForMime('#optionListBody', option, answer, checkType, option_name, answer_name);
+                if(type == 2){
+                    type2 = 'none';
+                }
+                exerciseEditForMime('#optionListBody', option, answer, type1, type2, option_name, answer_name);
             });
             
             $('[data-btn="delete"]').click(function () {
