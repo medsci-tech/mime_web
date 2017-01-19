@@ -12,8 +12,14 @@ use App\Http\Controllers\Controller;
 class ExerciseController extends Controller
 {
     public function index(){
-        $lists = Model::paginate('10');
+        $lists = Model::paginate(10);
         return view('newback.exercise.index',[
+            'lists' => $lists,
+        ]);
+    }
+    public function index_table(){
+        $lists = Model::where('status',1)->get();
+        return view('newback.exercise.index_table',[
             'lists' => $lists,
         ]);
     }

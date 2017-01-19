@@ -216,3 +216,13 @@ var getDataListForMime = function(dataList) {
     }
     return list;
 };
+
+$(function () {
+    $("th input:checkbox").on('click',function() {
+        var checkedStatus = this.checked;
+        var checkbox = $(this).parents('.table').find('tr td:first-child input:checkbox');
+        checkbox.each(function() {
+            this.checked = checkedStatus;
+        });
+    });
+});
