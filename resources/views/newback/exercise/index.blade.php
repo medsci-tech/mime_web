@@ -64,10 +64,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($lists)
                                 @foreach($lists as $list)
                                 <tr>
-                                    <td>{{config('params')['exercise']['type'][$list->type]}}</td>
-                                    <td>{{config('params')['exercise']['check_type'][$list->check_type]}}</td>
+                                    <td>{{$list->type($list->type)}}</td>
+                                    <td>{{$list->check_type($list->check_type)}}</td>
                                     <td>{{$list->question}}</td>
                                     <td>{{count(unserialize($list->option))}}</td>
                                     <td>@if($list->type != 2){{$list->answer}}@endif</td>
@@ -88,6 +89,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @endif
                                 </tbody>
                             </table>
 

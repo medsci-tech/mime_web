@@ -22,10 +22,13 @@ class ExerciseController extends Controller
         $id = $request->input('id');
         $option = $request->input('option');
         $answer = $request->input('answer');
+        $type = $request->input('type');
         $request_all = $request->all();
         $request_all['option'] = serialize($option);
-        if($answer){
+        if($type == 1 && $answer){
             $request_all['answer'] = implode(',', $answer);
+        }else{
+            $request_all['answer'] = '';
         }
         if($id){
             $result = Model::find($id)->update($request_all);
