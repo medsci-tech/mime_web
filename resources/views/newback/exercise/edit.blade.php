@@ -14,7 +14,7 @@
             <label class="col-sm-2 control-label">所属课程</label>
             <div class="col-sm-10">
               <select class="form-control" name="check_type" id="form-check_type">
-                @foreach(config('params')['exercise']['check_type'] as $key => $val)
+                @foreach(\App\Models\Exercise::EXERCISE_CHECK_TYPE as $key => $val)
                   <option value="{{$key}}">{{$val}}</option>
                 @endforeach
               </select>
@@ -24,7 +24,7 @@
             <label class="col-sm-2 control-label">类型</label>
             <div class="col-sm-10">
               <select class="form-control" name="type" id="form-type">
-                @foreach(config('params')['exercise']['type'] as $key => $val)
+                @foreach(\App\Models\Exercise::EXERCISE_TYPE as $key => $val)
                   <option value="{{$key}}">{{$val}}</option>
                 @endforeach
               </select>
