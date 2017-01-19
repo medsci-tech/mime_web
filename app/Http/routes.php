@@ -121,6 +121,7 @@ Route::group(['prefix' => 'system', 'namespace' => 'System', 'middleware' => 'au
 
 Route::group(['prefix' => 'newback', 'namespace' => 'Newback', 'middleware' => 'auth'], function () {
     Route::get('/exercise', 'ExerciseController@index');
+    Route::get('/exercise/table', 'ExerciseController@index_table');
     Route::post('/exercise', 'ExerciseController@save');
     Route::delete('/exercise', 'ExerciseController@destroy');
 });
