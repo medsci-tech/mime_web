@@ -10,38 +10,24 @@ use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
-    /**
-     * Data filtering.
-     *
-     * @return array
-     */
-    private function formatData(Request $request)
-    {
-        $data = [
-            'title' => $request->input('title'),
-            'comment' => $request->input('title'),
-            'logo_url' => $request->input('logo_url'),
-            'sequence' => $request->input('sequence'),
-            'thyroid_class_phase_id' => $request->input('thyroid_class_phase_id'),
-            'qcloud_file_id' => $request->input('qcloud_file_id'),
-            'qcloud_app_id' => $request->input('qcloud_app_id'),
-            'is_show' => $request->input('is_show')
-        ];
-
-
-        return $data;
-    }
-
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index1()
     {
         return view('backend.tables.course', [
             'courses' => ThyroidClassCourse::paginate('10'),
+            'phases' => ThyroidClassPhase::all(),
+        ]);
+    }
+
+    public function index()
+    {
+        return view('newback.course.index', [
+            'lists' => ThyroidClassCourse::paginate('10'),
             'phases' => ThyroidClassPhase::all(),
         ]);
     }
@@ -54,15 +40,24 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->formatData($request);
-        ThyroidClassCourse::create($data);
-
-        \Session::flash('alert', [
-            'type' => 'success',
-            'title' => '添加成功',
-            'message' => '添加课程成功',
-        ]);
-
+        $data = $request->all();
+        $id = $request->input('id');
+        if($id){
+            $res = ThyroidClassCourse::find($id)->update($data);
+        }else{
+            $res = ThyroidClassCourse::create($data);
+        }
+        if($res) {
+            \Session::flash('alert', [
+                'type' => 'success',
+                'title' => '操作成功',
+            ]);
+        }else{
+            \Session::flash('alert', [
+                'type' => 'danger',
+                'title' => '操作失败',
+            ]);
+        }
         return redirect('/admin/course');
     }
 
@@ -73,43 +68,21 @@ class CourseController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        if (ThyroidClassCourse::find($id)->delete()) {
+        $result = ThyroidClassCourse::find($request->input('id'))->delete();
+        if($result) {
             \Session::flash('alert', [
                 'type' => 'success',
-                'title' => '删除成功',
-                'message' => '删除课程成功'
+                'title' => '操作成功',
             ]);
-            return response()->json([
-                'success' => true
-            ]);
-        } else {
-            return response()->json([
-                'success' => false
+        }else{
+            \Session::flash('alert', [
+                'type' => 'danger',
+                'title' => '操作失败',
             ]);
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function update(Request $request, $id)
-    {
-        $data = $this->formatData($request);
-        $teacher = ThyroidClasscourse::find($id);
-        $teacher->update($data);
-
-        \Session::flash('alert', [
-            'type' => 'success',
-            'title' => '修改成功',
-            'message' => '修改课程成功',
-        ]);
-
         return redirect('/admin/course');
     }
+
 }
