@@ -1,6 +1,6 @@
 @extends('newback.layouts.app')
 
-@section('title','试题管理')
+@section('title','课程管理')
 
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
@@ -50,13 +50,13 @@
                             <table class="table table-bordered table-hover table-striped table-responsive">
                                 <thead style="word-break: keep-all">
                                 <tr>
-                                    <th>问题类型</th>
-                                    <th>选择类型</th>
-                                    <th>问题</th>
-                                    <th>选项数</th>
-                                    <th>答案</th>
-                                    <th>解析</th>
-                                    <th>状态</th>
+                                    <th>编号</th>
+                                    <th>课程名称</th>
+                                    <th>是否显示</th>
+                                    <th>所属单元</th>
+                                    <th>缩略图</th>
+                                    <th>腾讯云file_id</th>
+                                    <th>腾讯云app_id</th>
                                     <th>
                                         数据操作&emsp;
                                         <button class="btn btn-xs btn-success" data-btn="add" data-target="#modal-edit" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;新增</button>
@@ -67,23 +67,29 @@
                                 @if($lists)
                                 @foreach($lists as $list)
                                 <tr>
-                                    <td>{{$list->type($list->type)}}</td>
-                                    <td>{{$list->check_type($list->check_type)}}</td>
-                                    <td>{{$list->question}}</td>
-                                    <td>{{count(unserialize($list->option))}}</td>
-                                    <td>@if($list->type != 2){{$list->answer}}@endif</td>
-                                    <td>{{$list->resolve}}</td>
-                                    <td>{{config('params')['status_option'][$list->status]}}</td>
+                                    <td>{{$list->sequence}}</td>
+                                    <td>{{$list->title}}</td>
+                                    <td>{{config('params')['status_option'][$list->is_show]}}</td>
+                                    <td>{{$list->thyroidClassPhase ? $list->thyroidClassPhase->title :''}}</td>
+                                    <td>
+                                        @if($list->logo_url)
+                                        <img class="img-responsive" src="{{$list->logo_url}}">
+                                            @else
+                                            无
+                                            @endif
+                                    </td>
+                                    <td>{{$list->qcloud_file_id}}</td>
+                                    <td>{{$list->qcloud_app_id}}</td>
                                     <td style="white-space: nowrap">
                                         <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
                                             data-id="{{$list->id}}"
-                                            data-check_type="{{$list->check_type}}"
-                                            data-type="{{$list->type}}"
-                                            data-question="{{$list->question}}"
-                                            data-option="{{json_encode(unserialize($list->option))}}"
-                                            data-answer="{{$list->answer}}"
-                                            data-resolve="{{$list->resolve}}"
-                                            data-status="{{$list->status}}"
+                                            data-sequence="{{$list->sequence}}"
+                                            data-title="{{$list->title}}"
+                                            data-thyroid_class_phase_id="{{$list->thyroid_class_phase_id}}"
+                                            data-logo_url="{{$list->logo_url}}"
+                                            data-qcloud_file_id="{{$list->qcloud_file_id}}"
+                                            data-qcloud_app_id="{{$list->qcloud_app_id}}"
+                                            data-is_show="{{$list->is_show}}"
                                         >修改</button>
                                         <button class="btn btn-xs btn-warning" data-btn="delete" data-id="{{$list->id}}">删除</button>
                                     </td>
@@ -103,9 +109,9 @@
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-    @include('newback.exercise.edit')
+    @include('newback.course.edit')
 
-    <form id="delete-form" action="{{url('newback/exercise')}}" method="post" style="display: none;">
+    <form id="delete-form" action="{{url('/admin/course')}}" method="post" style="display: none;">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="id">
@@ -113,119 +119,64 @@
 @endsection
 
 @section('js')
-    <script>
+<script>
+    $(function () {
+        $('[data-btn="add"]').click(function(){
+            var defaltData = '';
+            $('#form-id').val(defaltData);
+            $('#form-sequence').val(defaltData);
+            $('#form-title').val(defaltData);
+            $('#form-thyroid_class_phase_id').val(defaltData);
+            $('#form-logo_url').val(defaltData);
+            $('#form-qcloud_file_id').val(defaltData);
+            $('#form-qcloud_app_id').val(defaltData);
+            $('#form-is_show').val(1);
+        });
+        $('[data-btn="edit"]').click(function () {
+            var id = $(this).attr('data-id');
+            var sequence = $(this).attr('data-sequence');
+            var title = $(this).attr('data-title');
+            var thyroid_class_phase_id = $(this).attr('data-thyroid_class_phase_id');
+            var logo_url = $(this).attr('data-logo_url');
+            var qcloud_file_id = $(this).attr('data-qcloud_file_id');
+            var qcloud_app_id = $(this).attr('data-qcloud_app_id');
+            var is_show = $(this).attr('data-is_show');
+            /* 编辑初始化 */
 
-        $(function () {
-            var answer_name = 'answer';
-            var option_name = 'option';
+            $('#form-id').val(id);
+            $('#form-sequence').val(sequence);
+            $('#form-title').val(title);
+            $('#form-thyroid_class_phase_id').val(thyroid_class_phase_id);
+            if(logo_url){
+                $('#form-logo_url').after('<img class="img-responsive" src="'+logo_url+'">');
+            }
+            $('#form-logo_url').val(logo_url);
+            $('#form-qcloud_file_id').val(qcloud_file_id);
+            $('#form-qcloud_app_id').val(qcloud_app_id);
+            $('#form-is_show').val(is_show);
 
-            var optionListBody = $('#optionListBody');
-            /*删除题库选项*/
-            optionListBody.on('click','.delThisOption',function() {
-                delThisRowOptionForMime('#optionListBody', this, 1, option_name);
-            });
-            /*添加题库选项*/
-            optionListBody.on('click','.addNextOption',function() {
-                var thisTr = $(this).parent().parent();
-                var datakey = parseInt(thisTr.attr('data-key'));
-                var thisLatter = String.fromCharCode(65 + datakey);
-                var checkValue = $('#exercise-type').val();
-                var checkType = 'radio';
-                if(checkValue == 2){
-                    checkType = 'checkbox';
-                }
-                var trHtml = ''
-                        + '<tr data-key="' + ( datakey + 1 ) + '">'
-                        + '    <td>' +thisLatter+ '</td>'
-                        + '    <td><input type="text" class="form-control" name="' + option_name + '[' +thisLatter+ ']"></td>'
-                        + '    <td><input type="' + checkType + '" class="checkValue" name="' + answer_name + '[]" value="' +thisLatter+ '"></td>'
-                        + '    <td>'
-                        + '        <a href="javascript:void(0);" class="delThisOption"><span class="glyphicon glyphicon-minus-sign"></span></a>'
-                        + '        <a href="javascript:void(0);" class="addNextOption"><span class="glyphicon glyphicon-plus-sign"></span></a>'
-                        + '    </td>'
-                        + '</tr>';
-                thisTr.after(trHtml);
-                $(this).remove();
-            });
+        });
 
-            /*题目单选多选切换*/
-            $('#form-check_type').change(function() {
-                var checkValue = optionListBody.find('.checkValue');
-                if(1 == $(this).val()){
-                    checkValue.attr('type','radio');
-                }else {
-                    checkValue.attr('type','checkbox');
-                }
-            });
-            /*题目类型切换*/
-            $('#form-type').change(function() {
-                var checkValue = optionListBody.find('.checkValue');
-                if(1 == $(this).val()){
-                    checkValue.show();
-                }else {
-                    checkValue.hide();
-                }
-            });
-
-            $('[data-btn="add"]').click(function(){
-                var defaltData = '';
-                $('#form-id').val(defaltData);
-                $('#form-type').val(1);
-                $('#form-check_type').val(1);
-                $('#form-question').val(defaltData);
-                $('#form-resolve').val(defaltData);
-                $('#form-status').val(1);
-                exerciseInitForMime('#optionListBody', option_name, answer_name);
-            });
-            $('[data-btn="edit"]').click(function () {
-                var id = $(this).attr('data-id');
-                var type = $(this).attr('data-type');
-                var check_type = $(this).attr('data-check_type');
-                var question = $(this).attr('data-question');
-                var option = JSON.parse($(this).attr('data-option'));
-                var answer = $(this).attr('data-answer');
-                var resolve = $(this).attr('data-resolve');
-                var status = $(this).attr('data-status');
-                /* 编辑初始化 */
-
-                $('#form-id').val(id);
-                $('#form-type').val(type);
-                $('#form-check_type').val(check_type);
-                $('#form-question').val(question);
-                $('#form-resolve').val(resolve);
-                $('#form-status').val(status);
-
-                var type1 = 'radio';
-                var type2 = '';
-                if(check_type == 2){
-                    type1 = 'checkbox';
-                }
-                if(type == 2){
-                    type2 = 'none';
-                }
-                exerciseEditForMime('#optionListBody', option, answer, type1, type2, option_name, answer_name);
-            });
-            
-            $('[data-btn="delete"]').click(function () {
-                var id = $(this).data('id');
-                console.log(id);
-                if(id){
-                    var delete_form =  $('#delete-form');
-                    delete_form.find('input[name="id"]').val(id);
-                    swal({
-                        title: "您确定要删除吗",
-                        type: "warning",
-                        showCancelButton: true,
-                        cancelButtonText: '取消',
-                        confirmButtonColor: "#f8ac59",
-                        confirmButtonText: "确定",
-                        closeOnConfirm: false
-                    }, function () {
-                        delete_form.submit();
-                    });
-                }
-            });
-        })
-    </script>
-    @endsection
+        $('[data-btn="delete"]').click(function () {
+            var id = $(this).data('id');
+            console.log(id);
+            if(id){
+                var delete_form =  $('#delete-form');
+                delete_form.find('input[name="id"]').val(id);
+                swal({
+                    title: "您确定要删除吗",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: '取消',
+                    confirmButtonColor: "#f8ac59",
+                    confirmButtonText: "确定",
+                    closeOnConfirm: false
+                }, function () {
+                    delete_form.submit();
+                });
+            }
+        });
+    })
+</script>
+@endsection
 
