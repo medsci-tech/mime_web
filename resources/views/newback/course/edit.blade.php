@@ -33,9 +33,30 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label">试题</label>
+            <div class="col-sm-10">
+              <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>问题类型</th>
+                  <th>问题</th>
+                  <th>选项数</th>
+                  <th>答案</th>
+                  <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="tableListBody">
+                </tbody>
+              </table>
+              <button id="add-child" type="button" class="btn btn-info btn-sm">添加</button>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">所属单元</label>
             <div class="col-sm-10">
               <select class="form-control" name="thyroid_class_phase_id" id="form-thyroid_class_phase_id">
+                <option value="">-请选择-</option>
                 @foreach($phases as $phase)
                   <option value="{{$phase->id}}">{{$phase->title}}</option>
                 @endforeach

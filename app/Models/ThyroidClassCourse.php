@@ -44,6 +44,7 @@ class ThyroidClassCourse extends Model
         'qcloud_app_id',
         'is_show',
         'sequence',
+        'exercise_ids',
     ];
 
     /**

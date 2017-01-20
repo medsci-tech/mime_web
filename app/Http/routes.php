@@ -79,7 +79,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('thyroid', 'ThyroidController');
     Route::resource('phase', 'PhaseController');
     Route::get('course', 'CourseController@index');
-    Route::post('course', 'CourseController@save');
+    Route::post('course', 'CourseController@store');
     Route::delete('course', 'CourseController@destroy');
     Route::resource('banner', 'BannerController');
     Route::resource('student', 'StudentController');

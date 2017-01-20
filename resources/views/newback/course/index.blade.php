@@ -119,6 +119,8 @@
 @endsection
 
 @section('js')
+
+    <script src="{{asset('vendor/layer/layer.js')}}" ></script>
 <script>
     $(function () {
         $('[data-btn="add"]').click(function(){
@@ -175,6 +177,23 @@
                     delete_form.submit();
                 });
             }
+        });
+
+        /*删除试题*/
+        $('#tableListBody').on('click','.delThisOption',function() {
+            delThisRowOptionForMime('#tableListBody', this, 0, 'exercise_ids', 2);
+        });
+        /*添加试题*/
+        $('#add-child').click(function() {
+            layer.open({
+                offset: '80px',
+                type: 2,
+                title: '添加试题',
+                area: ['800px', '600px'],
+                fix: false, //不固定
+                maxmin: true,
+                content: '/newback/exercise/table'
+            });
         });
     })
 </script>
