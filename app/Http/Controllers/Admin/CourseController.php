@@ -42,6 +42,12 @@ class CourseController extends Controller
     {
         $data = $request->all();
         $id = $request->input('id');
+        $exercise_ids = $request->input('exercise_ids');
+        if($exercise_ids){
+            $data['exercise_ids'] = implode(',', $exercise_ids);
+        }else{
+            $data['exercise_ids'] = '';
+        }
         if($id){
             $res = ThyroidClassCourse::find($id)->update($data);
         }else{

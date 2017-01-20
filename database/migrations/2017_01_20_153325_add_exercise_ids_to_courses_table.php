@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddVideoToThyroidClassesTable extends Migration
+class AddExerciseIdsToCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,8 @@ class AddVideoToThyroidClassesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('thyroid_classes', function(Blueprint $table) {
-            $table->string('qcloud_file_id')->comment('file_id');
-            $table->string('qcloud_app_id')->comment('app_id');
+        Schema::table('thyroid_class_courses', function(Blueprint $table) {
+            $table->string('exercise_ids')->comment('试题id集合');
         });
     }
 

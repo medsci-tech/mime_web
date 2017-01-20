@@ -76,7 +76,8 @@
                             </table>
                         </div><!-- /.box-body -->
                         <div class="box-footer clearfix">
-                            <button class="btn btn-xs btn-info">添加</button>
+                            <button class="btn btn-sm btn-default" data-btn="layerCtrlParentCancel">取消</button>
+                            <button class="btn btn-sm btn-info" data-btn="layerCtrlParent">添加</button>
                         </div>
                     </div><!-- /.box -->
                 </div><!-- /.col -->
@@ -87,13 +88,15 @@
 
 <script src="/js/backend.js"></script>
 <script src="{{asset('vendor/sweetalert/sweetalert.min.js')}}" ></script>
+<script src="{{asset('vendor/layer/layer.js')}}" ></script>
 <script src="{{asset('js/jquery-common-mime-fun.js')}}"></script>
 <script>
     $(function () {
+        var ids_name = 'exercise_ids';
         /*题库添加试题，完成后关闭窗口*/
-        $('[data-toggle="layerCtrlParent"]').on('click',function() {
+        $('[data-btn="layerCtrlParent"]').on('click',function() {
             var check = $('#layerCtrlTableList').find('input[name="selection[]"]');
-            var parentHtml = parent.$('#formModal #examListBody');
+            var parentHtml = parent.$('#tableListBody');
             var parentLastNum = $(parentHtml.html()).length;
             if('' == parentHtml || undefined == parentHtml){
                 parentLastNum = 0;
@@ -102,13 +105,13 @@
             for(var i =0; i < check.length; i++){
                 if(check[i].checked == true){
                     parentLastNum++;
-                    var tdHtml = $(check[i]).parent().next().next();
+                    var tdHtml = $(check[i]).parent().next();
                     html += '<tr data-key="' + parentLastNum + '">';
                     html += '    <td>' + parentLastNum + '</td>';
-                    html += '    <td>' + tdHtml.html() + '<input type="hidden" name="Exam[exe_ids][]" value="' + $(check[i]).val() + '"></td>';
-                    html += '    <td><a href="/exercise/view?id=' + $(check[i]).val() + '">' + tdHtml.next().html() + '</a></td>';
+                    html += '    <td>' + tdHtml.html() + '<input type="hidden" name="'+ids_name+'[]" value="' + $(check[i]).val() + '"></td>';
                     html += '    <td>' + tdHtml.next().next().html() + '</td>';
                     html += '    <td>' + tdHtml.next().next().next().html() + '</td>';
+                    html += '    <td>' + tdHtml.next().next().next().next().html() + '</td>';
                     html += '    <td>';
                     html += '        <a href="javascript:void(0);" class="delThisOption"><span class="glyphicon glyphicon-minus-sign"></span></a>';
                     html += '    </td>';
@@ -125,7 +128,7 @@
         });
 
         /*题库取消添加试题，关闭窗口*/
-        $('[data-toggle="layerCtrlParentCancel"]').on('click',function() {
+        $('[data-btn="layerCtrlParentCancel"]').on('click',function() {
             var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
             parent.layer.close(index);
         });
