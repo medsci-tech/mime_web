@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ThyroidClass;
+use App\Models\ThyroidClass as Model;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -13,26 +13,6 @@ use App\Http\Controllers\Controller;
  */
 class ThyroidController extends Controller
 {
-    /**
-     * Data filtering.
-     *
-     * @param $request
-     * @return array
-     */
-    private function formatData($request)
-    {
-        $data = [
-            'title' => $request->input('title'),
-            'comment' => $request->input('comment'),
-            'logo_url' => $request->input('logo_url'),
-            'banner_autopaly' => $request->input('banner_autopaly'),
-            'latest_update_at' => $request->input('latest_update_at'),
-            'qcloud_file_id' => $request->input('qcloud_file_id'),
-            'qcloud_app_id' => $request->input('qcloud_app_id')
-        ];
-        return $data;
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -41,7 +21,7 @@ class ThyroidController extends Controller
      */
     public function index()
     {
-        return view('backend.tables.thyroid', ['thyroids' => ThyroidClass::paginate('10')]);
+        return view('backend.tables.thyroid', ['thyroids' => Model::paginate('10')]);
     }
 
     /**
@@ -52,14 +32,12 @@ class ThyroidController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->formatData($request);
-        ThyroidClass::create($data);
-
-        \Session::flash('alert', [
-            'type' => 'success',
-            'title' => '添加成功',
-            'message' => '添加公开课成功'
-        ]);
+        $result = Model::create($request->all());
+        if($result) {
+            $this->flash_success();
+        }else{
+            $this->flash_error();
+        }
         return redirect('/admin/thyroid');
     }
 
@@ -72,15 +50,12 @@ class ThyroidController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->formatData($request);
-        $thyroid = ThyroidClass::find($id);
-        $thyroid->update($data);
-
-        \Session::flash('alert', [
-            'type' => 'success',
-            'title' => '修改成功',
-            'message' => '添加公开课成功'
-        ]);
+        $result = Model::find($id)->update($request->all());
+        if($result) {
+            $this->flash_success();
+        }else{
+            $this->flash_error();
+        }
 
         return redirect('/admin/thyroid');
     }
@@ -95,17 +70,14 @@ class ThyroidController extends Controller
      */
     public function destroy($id)
     {
-
-        if (ThyroidClass::find($id)->delete()) {
-            \Session::flash('alert', [
-                'type' => 'success',
-                'title' => '删除成功',
-                'message' => '删除公开课成功'
-            ]);
+        $result = Model::find($id)->delete();
+        if($result) {
+            $this->flash_success();
             return response()->json([
                 'success' => true
             ]);
-        } else {
+        }else{
+            $this->flash_error();
             return response()->json([
                 'success' => false
             ]);

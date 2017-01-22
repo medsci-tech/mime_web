@@ -15,4 +15,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+
+    public function flash_success(){
+        \Session::flash('alert', [
+            'type' => 'success',
+            'title' => '成功',
+            'message' => '操作成功'
+        ]);
+    }
+    public function flash_error(){
+        \Session::flash('alert', [
+            'type' => 'danger',
+            'title' => '失败',
+            'message' => '操作失败'
+        ]);
+    }
 }
