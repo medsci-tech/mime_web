@@ -126,6 +126,7 @@ Route::group(['prefix' => 'newback', 'namespace' => 'Newback', 'middleware' => '
     Route::get('/exercise/table', 'ExerciseController@index_table');
     Route::post('/exercise', 'ExerciseController@save');
     Route::delete('/exercise', 'ExerciseController@destroy');
+    Route::post('/exercise/get_list', 'ExerciseController@getList');
 });
 
 

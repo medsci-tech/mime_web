@@ -218,6 +218,13 @@ var getDataListForMime = function(dataList) {
 };
 
 $(function () {
+    // ajax 添加csrf
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $("th input:checkbox").on('click',function() {
         var checkedStatus = this.checked;
         var checkbox = $(this).parents('.table').find('tr td:first-child input:checkbox');

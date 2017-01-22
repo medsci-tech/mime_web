@@ -70,4 +70,23 @@ class ExerciseController extends Controller
         }
         return redirect(url('newback/exercise'));
     }
+
+    public function getList(Request $request){
+        $ids = $request->input('ids');
+        $data = [];
+        if($ids){
+            $ids = explode(',', $ids);
+            $lists = Model::whereIn('id',$ids)->get();
+            if($lists){
+                foreach ($lists as $i => $list){
+                    $data[$i]['id'] = $list->id;
+                    $data[$i]['type'] = $list->type($list->type);
+                    $data[$i]['question'] = $list->question;
+                    $data[$i]['option'] = count(unserialize($list->option));
+                    $data[$i]['answer'] = $list->answer;
+                }
+            }
+        }
+        return ['code' => 200, 'data' => $data];
+    }
 }
