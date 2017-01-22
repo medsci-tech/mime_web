@@ -11,7 +11,7 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
-          <li><a href="{{ url('/system/site') }}"><i class="fa fa-circle-o"></i>站点管理</a></li>
+          <li><a href="{{ url('/newback/site') }}"><i class="fa fa-circle-o"></i>站点管理</a></li>
         </ul>
       </li>
       <li class="active treeview">
@@ -21,12 +21,12 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
-          <li><a href="{{ url('/admin/thyroid') }}"><i class="fa fa-circle-o"></i>公课信息</a></li>
-          <li><a href="{{ url('/admin/teacher') }}"><i class="fa fa-circle-o"></i>老师信息</a></li>
-          <li><a href="{{ url('/admin/phase') }}"><i class="fa fa-circle-o"></i>单元信息</a></li>
-          <li><a href="{{ url('/admin/course') }}"><i class="fa fa-circle-o"></i>课程信息</a></li>
-          <li><a href="{{ url('/admin/banner') }}"><i class="fa fa-circle-o"></i>Banner</a></li>
-          <li><a href="{{ url('/newback/exercise') }}"><i class="fa fa-circle-o"></i>试题管理</a></li>
+          <li><a href="{{ url('/admin/thyroid') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>公课信息</a></li>
+          <li><a href="{{ url('/admin/teacher') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>老师信息</a></li>
+          <li><a href="{{ url('/admin/phase') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>单元信息</a></li>
+          <li><a href="{{ url('/admin/course') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>课程信息</a></li>
+          <li><a href="{{ url('/admin/banner') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>Banner</a></li>
+          <li><a href="{{ url('/newback/exercise') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>试题管理</a></li>
         </ul>
       </li>
       <li class="active treeview">
@@ -36,7 +36,7 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/student') }}"><i class="fa fa-circle-o"></i>学生信息</a></li>
+          <li><a href="{{ url('/admin/student') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>学生信息</a></li>
         </ul>
       </li>
       <li class="active treeview">
@@ -46,13 +46,9 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/statistic/area-map') }}"><i class="fa fa-circle-o"></i>用户分布</a></li>
-          <li><a href="{{ url('/admin/statistic/province-map') }}"><i class="fa fa-circle-o"></i>地区分布</a></li>
-          <li><a href="{{ url('/admin/statistic/register-bar') }}"><i class="fa fa-circle-o"></i>注册统计</a></li>
-          {{--<li><a href="{{ url('/charts/map') }}"><i class="fa fa-circle-o"></i>地图</a></li>--}}
-          {{--<li><a href="{{ url('/charts/map2') }}"><i class="fa fa-circle-o"></i>地图2</a></li>--}}
-          {{--<li><a href="{{ url('/charts/pie') }}"><i class="fa fa-circle-o"></i>饼图</a></li>--}}
-          {{--<li><a href="{{ url('/charts/polar') }}"><i class="fa fa-circle-o"></i>极坐标图</a></li>--}}
+          <li><a href="{{ url('/admin/statistic/area-map') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>用户分布</a></li>
+          <li><a href="{{ url('/admin/statistic/province-map') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>地区分布</a></li>
+          <li><a href="{{ url('/admin/statistic/register-bar') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>注册统计</a></li>
         </ul>
       </li>
       <li class="active treeview">
@@ -62,7 +58,7 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/statistic/class-pie') }}"><i class="fa fa-circle-o"></i>课程统计</a></li>
+          <li><a href="{{ url('/admin/statistic/class-pie') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>课程统计</a></li>
         </ul>
       </li>
     </ul>

@@ -11,7 +11,7 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
-          <li><a href="{{ url('/system/site') }}"><i class="fa fa-circle-o"></i>站点管理</a></li>
+          <li><a href="{{ url('/newback/site') }}"><i class="fa fa-circle-o"></i>站点管理</a></li>
         </ul>
       </li>
     </ul>
