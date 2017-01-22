@@ -15,7 +15,6 @@ class CreateSiteTable extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->comment('站点名称');
-            $table->string('link')->nullable()->comment('站点地址');
             $table->tinyInteger('status')->nullable()->default(0);
             $table->timestamps();
         });

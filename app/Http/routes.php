@@ -116,12 +116,10 @@ Route::group(['prefix' => 'charts'], function(){
 });
 
 
-Route::group(['prefix' => 'system', 'namespace' => 'System', 'middleware' => 'auth'], function () {
-    Route::resource('/site', 'SiteController');
-});
-
-
 Route::group(['prefix' => 'newback', 'namespace' => 'Newback', 'middleware' => 'auth'], function () {
+    Route::get('/site', 'SiteController@index');
+    Route::post('/site', 'SiteController@save');
+
     Route::get('/exercise', 'ExerciseController@index');
     Route::get('/exercise/table', 'ExerciseController@index_table');
     Route::post('/exercise', 'ExerciseController@save');
