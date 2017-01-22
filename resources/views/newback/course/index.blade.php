@@ -90,6 +90,7 @@
                                             data-qcloud_file_id="{{$list->qcloud_file_id}}"
                                             data-qcloud_app_id="{{$list->qcloud_app_id}}"
                                             data-is_show="{{$list->is_show}}"
+                                            data-exercise_ids="{{$list->exercise_ids}}"
                                         >修改</button>
                                         <button class="btn btn-xs btn-warning" data-btn="delete" data-id="{{$list->id}}">删除</button>
                                     </td>
@@ -122,7 +123,39 @@
 
     <script src="{{asset('vendor/layer/layer.js')}}" ></script>
 <script>
+    var getExerciseList = function (data) {
+        $.ajax({
+            type: 'post',
+            url: '{{url('/newback/exercise/get_list')}}',
+            data: data,
+            success: function(res){
+                var html = '';
+                if(res.data){
+                    var parentLastNum = 0;
+                    var ids_name = 'exercise_ids';
+                    for(var i in res.data){
+                        parentLastNum++;
+                        html += '<tr data-key="' + parentLastNum + '">';
+                        html += '    <td>' + parentLastNum + '</td>';
+                        html += '    <td>' + res.data[i]['type'] + '<input type="hidden" name="'+ids_name+'[]" value="' + res.data[i]['id'] + '"></td>';
+                        html += '    <td>' + res.data[i]['question'] + '</td>';
+                        html += '    <td>' + res.data[i]['option'] + '</td>';
+                        html += '    <td>' + res.data[i]['answer'] + '</td>';
+                        html += '    <td>';
+                        html += '        <a href="javascript:void(0);" class="delThisOption"><span class="glyphicon glyphicon-minus-sign"></span></a>';
+                        html += '    </td>';
+                        html += '</tr>';
+                    }
+                }
+                $('#tableListBody').html(html);
+            },
+            error:function () {
+                $('#tableListBody').html('');
+            }
+        });
+    };
     $(function () {
+        var tableListBody = $('#tableListBody');
         $('[data-btn="add"]').click(function(){
             var defaltData = '';
             $('#form-id').val(defaltData);
@@ -133,6 +166,7 @@
             $('#form-qcloud_file_id').val(defaltData);
             $('#form-qcloud_app_id').val(defaltData);
             $('#form-is_show').val(1);
+            tableListBody.html(defaltData);
         });
         $('[data-btn="edit"]').click(function () {
             var id = $(this).attr('data-id');
@@ -143,25 +177,26 @@
             var qcloud_file_id = $(this).attr('data-qcloud_file_id');
             var qcloud_app_id = $(this).attr('data-qcloud_app_id');
             var is_show = $(this).attr('data-is_show');
+            var exercise_ids = $(this).attr('data-exercise_ids');
             /* 编辑初始化 */
-
             $('#form-id').val(id);
             $('#form-sequence').val(sequence);
             $('#form-title').val(title);
             $('#form-thyroid_class_phase_id').val(thyroid_class_phase_id);
+            var logo_url_ele = $('#form-logo_url');
             if(logo_url){
-                $('#form-logo_url').after('<img class="img-responsive" src="'+logo_url+'">');
+                logo_url_ele.after('<img class="img-responsive" src="'+logo_url+'">');
             }
-            $('#form-logo_url').val(logo_url);
+            logo_url_ele.val(logo_url);
             $('#form-qcloud_file_id').val(qcloud_file_id);
             $('#form-qcloud_app_id').val(qcloud_app_id);
             $('#form-is_show').val(is_show);
+            getExerciseList({'ids':exercise_ids});
 
         });
 
         $('[data-btn="delete"]').click(function () {
             var id = $(this).data('id');
-            console.log(id);
             if(id){
                 var delete_form =  $('#delete-form');
                 delete_form.find('input[name="id"]').val(id);
@@ -180,7 +215,7 @@
         });
 
         /*删除试题*/
-        $('#tableListBody').on('click','.delThisOption',function() {
+        tableListBody.on('click','.delThisOption',function() {
             delThisRowOptionForMime('#tableListBody', this, 0, 'exercise_ids', 2);
         });
         /*添加试题*/
@@ -195,7 +230,7 @@
                 content: '/newback/exercise/table'
             });
         });
-    })
+    });
 </script>
 @endsection
 
