@@ -42,15 +42,9 @@ class ExerciseController extends Controller
             $result = Model::create($request_all);
         }
         if($result) {
-            \Session::flash('alert', [
-                'type' => 'success',
-                'title' => '操作成功',
-            ]);
+            $this->flash_success();
         }else{
-            \Session::flash('alert', [
-                'type' => 'danger',
-                'title' => '操作失败',
-            ]);
+            $this->flash_error();
         }
         return redirect(url('newback/exercise'));
     }
@@ -58,15 +52,9 @@ class ExerciseController extends Controller
     public function destroy(Request $request){
         $result = Model::find($request->input('id'))->delete();
         if($result) {
-            \Session::flash('alert', [
-                'type' => 'success',
-                'title' => '操作成功',
-            ]);
+            $this->flash_success();
         }else{
-            \Session::flash('alert', [
-                'type' => 'danger',
-                'title' => '操作失败',
-            ]);
+            $this->flash_error();
         }
         return redirect(url('newback/exercise'));
     }

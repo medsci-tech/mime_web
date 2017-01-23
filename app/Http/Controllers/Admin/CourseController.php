@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\ThyroidClassPhase;
 use Illuminate\Http\Request;
-use App\Models\ThyroidClassCourse;
+use App\Models\ThyroidClassCourse as Model;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +19,7 @@ class CourseController extends Controller
     public function index1()
     {
         return view('backend.tables.course', [
-            'courses' => ThyroidClassCourse::paginate('10'),
+            'courses' => Model::paginate('10'),
             'phases' => ThyroidClassPhase::all(),
         ]);
     }
@@ -27,7 +27,7 @@ class CourseController extends Controller
     public function index()
     {
         return view('newback.course.index', [
-            'lists' => ThyroidClassCourse::paginate('10'),
+            'lists' => Model::paginate('10'),
             'phases' => ThyroidClassPhase::all(),
         ]);
     }
@@ -49,20 +49,14 @@ class CourseController extends Controller
             $data['exercise_ids'] = '';
         }
         if($id){
-            $res = ThyroidClassCourse::find($id)->update($data);
+            $result = Model::find($id)->update($data);
         }else{
-            $res = ThyroidClassCourse::create($data);
+            $result = Model::create($data);
         }
-        if($res) {
-            \Session::flash('alert', [
-                'type' => 'success',
-                'title' => '操作成功',
-            ]);
+        if($result) {
+            $this->flash_success();
         }else{
-            \Session::flash('alert', [
-                'type' => 'danger',
-                'title' => '操作失败',
-            ]);
+            $this->flash_error();
         }
         return redirect('/admin/course');
     }
@@ -76,17 +70,11 @@ class CourseController extends Controller
      */
     public function destroy(Request $request)
     {
-        $result = ThyroidClassCourse::find($request->input('id'))->delete();
+        $result = Model::find($request->input('id'))->delete();
         if($result) {
-            \Session::flash('alert', [
-                'type' => 'success',
-                'title' => '操作成功',
-            ]);
+            $this->flash_success();
         }else{
-            \Session::flash('alert', [
-                'type' => 'danger',
-                'title' => '操作失败',
-            ]);
+            $this->flash_error();
         }
         return redirect('/admin/course');
     }

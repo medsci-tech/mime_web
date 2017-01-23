@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Banner;
+use App\Models\Banner as Model;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -13,24 +13,6 @@ use App\Http\Controllers\Controller;
  */
 class BannerController extends Controller
 {
-    /**
-     * Data filtering.
-     *
-     * @return array
-     */
-    private function formatData(Request $request)
-    {
-        $data = [
-            'image_url' => $request->input('image_url'),
-            'href_url' => $request->input('href_url'),
-            'status' => $request->input('status'),
-            'page' => $request->input('page'),
-            'weight' => $request->input('weight')
-        ];
-
-        return $data;
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -39,7 +21,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('backend.tables.banner', ['banners' => Banner::paginate('5')]);
+        return view('backend.tables.banner', ['banners' => Model::paginate('5')]);
     }
 
 
@@ -51,14 +33,12 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->formatData($request);
-        Banner::create($data);
-
-        \Session::flash('alert', [
-            'type' => 'success',
-            'title' => '添加成功',
-            'message' => '添加Banner成功',
-        ]);
+        $result = Model::create($request->all());
+        if($result) {
+            $this->flash_success();
+        }else{
+            $this->flash_error();
+        }
         return redirect('/admin/banner');
     }
 
@@ -71,16 +51,12 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $data = $this->formatData($request);
-        $banner = Banner::find($id);
-        $banner->update($data);
-
-        \Session::flash('alert', [
-            'type' => 'success',
-            'title' => '修改成功',
-            'message' => '修改Banner成功',
-        ]);
+        $result = Model::find($id)->update($request->all());
+        if($result) {
+            $this->flash_success();
+        }else{
+            $this->flash_error();
+        }
         return redirect('/admin/banner');
     }
 
@@ -94,16 +70,14 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        if (Banner::find($id)->delete()) {
-            \Session::flash('alert', [
-                'type' => 'success',
-                'title' => '删除成功',
-                'message' => '删除Banner成功'
-            ]);
+        $result = Model::find($id)->delete();
+        if($result) {
+            $this->flash_success();
             return response()->json([
                 'success' => true
             ]);
-        } else {
+        }else{
+            $this->flash_error();
             return response()->json([
                 'success' => false
             ]);
