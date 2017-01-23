@@ -37,6 +37,7 @@ class ThyroidClass extends Model
         'latest_update_at',
         'latest_update_at',
         'qcloud_app_id',
-        'qcloud_file_id'
+        'qcloud_file_id',
+        'site_id',
     ];
 }
