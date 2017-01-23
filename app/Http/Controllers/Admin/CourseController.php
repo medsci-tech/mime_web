@@ -16,20 +16,17 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index1()
+    public function index(Request $request)
     {
-        return view('backend.tables.course', [
-            'courses' => Model::paginate('10'),
-            'phases' => ThyroidClassPhase::all(),
-        ]);
-    }
-
-    public function index()
-    {
-        return view('newback.course.index', [
-            'lists' => Model::paginate('10'),
-            'phases' => ThyroidClassPhase::all(),
-        ]);
+        $site_id = $request->input('site_id');
+        if($site_id){
+            return view('newback.course.index', [
+                'lists' => Model::where('site_id',$site_id)->paginate(10),
+                'phases' => ThyroidClassPhase::all(),
+            ]);
+        }else{
+            return redirect('newback/site');
+        }
     }
 
     /**
@@ -40,6 +37,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $site_id = $request->input('site_id');
         $data = $request->all();
         $id = $request->input('id');
         $exercise_ids = $request->input('exercise_ids');
@@ -58,7 +56,7 @@ class CourseController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/course');
+        return redirect('/admin/course?site_id='.$site_id);
     }
 
     /**
@@ -70,13 +68,14 @@ class CourseController extends Controller
      */
     public function destroy(Request $request)
     {
+        $site_id = $request->input('site_id');
         $result = Model::find($request->input('id'))->delete();
         if($result) {
             $this->flash_success();
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/course');
+        return redirect('/admin/course?site_id='.$site_id);
     }
 
 }
