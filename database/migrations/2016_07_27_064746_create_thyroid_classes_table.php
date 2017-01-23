@@ -20,6 +20,7 @@ class CreateThyroidClassesTable extends Migration
             $table->string('comment')->comment('简介');
             $table->string('schedule')->comment('日程');
             $table->string('logo_url')->comment('logo');
+            $table->string('site_id')->comment('所属站点');
 
             $table->unsignedInteger('phase_count')->default(0)->comment('学期数');
             $table->unsignedInteger('course_count')->default(0)->comment('课程数');
