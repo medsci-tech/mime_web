@@ -54,16 +54,16 @@
 
       update_info: {
         title: '编辑',
-        action: '',
+        action: '/admin/thyroid',
         method: 'put'
       },
       add_info: {
         title: '添加',
-        action: '',
+        action: '/admin/thyroid',
         method: 'post'
       },
       delete_info: {
-        url: '',
+        url: '/admin/thyroid',
         method: 'delete'
       },
 
