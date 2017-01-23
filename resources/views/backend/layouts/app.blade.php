@@ -92,10 +92,6 @@
       </nav>
     </header>
 
-    @if (Auth::guest())
-    @else
-      @include('backend.layouts.aside')
-    @endif
     @yield('content')
 
     <footer class="main-footer">

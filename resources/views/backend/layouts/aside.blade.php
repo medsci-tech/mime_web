@@ -7,7 +7,7 @@
       <li class="active treeview">
         <a href="{{url('#')}}">
           <i class="fa fa-dashboard"></i>
-          <span>系统配置</span>
+          <span>公共管理</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
@@ -27,58 +27,7 @@
           <li><a href="{{ url('/admin/banner') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>Banner</a></li>
         </ul>
       </li>
-      <li class="active treeview">
-        <a href="{{url('#')}}">
-          <i class="fa fa-book"></i>
-          <span>试题管理</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/newback/exercise') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>试题信息</a></li>
-        </ul>
-      </li>
-      <li class="active treeview">
-        <a href="{{url('#')}}">
-          <i class="fa fa-book"></i>
-          <span>老师管理</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/teacher') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>老师信息</a></li>
-        </ul>
-      </li>
-      <li class="active treeview">
-        <a href="{{url('#')}}">
-          <i class="fa fa-book"></i>
-          <span>学生管理</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/student') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>学生信息</a></li>
-        </ul>
-      </li>
-      <li class="active treeview">
-        <a href="{{url('#')}}">
-          <i class="fa fa-pie-chart"></i>
-          <span>学员统计</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/statistic/area-map') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>用户分布</a></li>
-          <li><a href="{{ url('/admin/statistic/province-map') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>地区分布</a></li>
-          <li><a href="{{ url('/admin/statistic/register-bar') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>注册统计</a></li>
-        </ul>
-      </li>
-      <li class="active treeview">
-        <a href="{{url('#')}}">
-          <i class="fa fa-pie-chart"></i>
-          <span>课程统计</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/statistic/class-pie') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>课程统计</a></li>
-        </ul>
-      </li>
+
     </ul>
   </section>
   <!-- /.sidebar -->

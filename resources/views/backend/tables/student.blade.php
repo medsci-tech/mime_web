@@ -3,7 +3,10 @@
 @section('title', '学生信息')
 @section('box_title','学生列表')
 
-
+@if (Auth::guest())
+@else
+  @include('newback.layouts.site_aside')
+@endif
 @section('tables_data')
   <script>
     var data = {

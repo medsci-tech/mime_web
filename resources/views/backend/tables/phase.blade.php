@@ -4,6 +4,10 @@
 @section('box_title','单元列表')
 
 
+@if (Auth::guest())
+@else
+  @include('backend.layouts.aside')
+@endif
 @section('tables_data')
   <script>
     var data = {
