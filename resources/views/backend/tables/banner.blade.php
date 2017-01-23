@@ -3,7 +3,10 @@
 @section('title', 'Banner')
 @section('box_title','banner列表')
 
-
+@if (Auth::guest())
+@else
+    @include('backend.layouts.aside')
+@endif
 @section('tables_data')
   <script>
     var data = {

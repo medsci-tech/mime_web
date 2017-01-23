@@ -3,6 +3,10 @@
 @section('title', '图表')
 @section('box_title','图表')
 
+@if (Auth::guest())
+@else
+  @include('newback.layouts.site_aside')
+@endif
 @section('charts_data')
 
   <template id="template">

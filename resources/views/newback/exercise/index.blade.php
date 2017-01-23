@@ -26,7 +26,10 @@
 
     </style>
 @endsection
-@include('backend.layouts.aside')
+@if (Auth::guest())
+@else
+    @include('newback.layouts.site_aside')
+@endif
 @section('content')
     <div class="content-wrapper">
 
