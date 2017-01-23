@@ -25,7 +25,8 @@
         }
 
     </style>
-@endsection@if (Auth::guest())
+@endsection
+@if (Auth::guest())
 @else
     @include('backend.layouts.aside')
 @endif
