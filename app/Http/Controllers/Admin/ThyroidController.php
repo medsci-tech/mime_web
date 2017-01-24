@@ -23,7 +23,7 @@ class ThyroidController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
-            return view('backend.tables.thyroid', ['thyroids' => Model::where('site_id',$site_id)->paginate('10')]);
+            return view('backend.tables.thyroid', ['thyroids' => Model::where('site_id',$site_id)->paginate(10)]);
         }else{
             return redirect('newback/site');
         }

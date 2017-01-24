@@ -19,9 +19,15 @@ class BannerController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        return view('backend.tables.banner', ['banners' => Model::paginate('5')]);
+        $site_id = $request->input('site_id');
+        if($site_id){
+            return view('backend.tables.banner', ['banners' => Model::where('site_id',$site_id)->paginate(5)]);
+        }else{
+            return redirect('newback/site');
+        }
     }
 
 
@@ -33,13 +39,14 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        $site_id = $request->input('site_id');
         $result = Model::create($request->all());
         if($result) {
             $this->flash_success();
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/banner');
+        return redirect('/admin/banner?site_id='.$site_id);
     }
 
     /**
@@ -51,13 +58,14 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $site_id = $request->input('site_id');
         $result = Model::find($id)->update($request->all());
         if($result) {
             $this->flash_success();
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/banner');
+        return redirect('/admin/banner?site_id='.$site_id);
     }
 
 
