@@ -41,7 +41,7 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">课程类型</h3>
+                            <h3 class="box-title">课程分类</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body no-padding" style="overflow: auto">
                             <table class="table table-bordered table-hover table-striped table-responsive">
