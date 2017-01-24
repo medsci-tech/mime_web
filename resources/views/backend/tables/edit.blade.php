@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">@{{ form_info.title }}</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" action="@{{ form_info.action }}" method="post">
+        <form class="form-horizontal" role="form" action="@{{ form_info.action }}?site_id={{$_GET['site_id'] ?? ''}}" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input v-if=" form_info.method == 'put' " type="hidden" name="_method" value="put"/>
           <div v-for="data in modal_data">
