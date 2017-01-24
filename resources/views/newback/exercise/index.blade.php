@@ -1,7 +1,5 @@
 @extends('newback.layouts.app')
 
-@section('title','试题管理')
-
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
     <link rel="stylesheet" href="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.css">
@@ -36,9 +34,6 @@
         <section class="content-header">
 
             @include('newback.layouts.alerts')
-            <h1>
-                @yield('title')
-            </h1>
         </section>
 
         <!-- Main content -->
@@ -47,7 +42,7 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">列表</h3>
+                            <h3 class="box-title">试题信息</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body no-padding" style="overflow: auto">
                             <table class="table table-bordered table-hover table-striped table-responsive">
