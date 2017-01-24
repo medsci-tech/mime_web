@@ -17,7 +17,7 @@
         ['{{$thyroid->id}}', '{{$thyroid->title}}', '{{$thyroid->banner_autopaly}}', '{{$thyroid->latest_update_at}}', '{{$thyroid->comment}}', '{{$thyroid->qcloud_app_id}}','{{$thyroid->qcloud_file_id}}'],
         @endforeach
       ],
-      pagination: '{{$thyroids->render() }}',
+      pagination: '{{$thyroids->appends(['site_id' => $_GET['site_id'] ?? ''])->render() }}',
       modal_data: [
         {
           box_type: 'input',
