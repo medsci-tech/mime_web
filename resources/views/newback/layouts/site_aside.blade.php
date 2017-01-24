@@ -27,11 +27,11 @@
       <li class="active treeview">
         <a href="{{url('#')}}">
           <i class="fa fa-book"></i>
-          <span>老师管理</span>
+          <span>讲师管理</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open">
-          <li><a href="{{ url('/admin/teacher') }}"><i class="fa fa-circle-o"></i>老师信息</a></li>
+          <li><a href="{{ url('/admin/teacher') }}"><i class="fa fa-circle-o"></i>讲师信息</a></li>
         </ul>
       </li>
       <li class="active treeview">

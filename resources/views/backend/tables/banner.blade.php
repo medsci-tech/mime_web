@@ -1,7 +1,6 @@
 @extends('backend.tables.index')
 
-@section('title', 'Banner')
-@section('box_title','banner列表')
+@section('box_title','banner')
 
 @if (Auth::guest())
 @else

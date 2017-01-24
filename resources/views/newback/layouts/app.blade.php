@@ -93,7 +93,6 @@
       </nav>
     </header>
 
-
     @yield('content')
 
     <footer class="main-footer">

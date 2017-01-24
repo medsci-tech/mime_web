@@ -1,7 +1,6 @@
 @extends('backend.tables.index_student')
 
-@section('title', '学生信息')
-@section('box_title','学生列表')
+@section('box_title','学生信息')
 
 @if (Auth::guest())
 @else
