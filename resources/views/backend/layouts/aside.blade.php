@@ -22,6 +22,7 @@
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
           <li><a href="{{ url('/admin/thyroid') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>课程介绍</a></li>
+          <li><a href="{{ url('/newback/course-class') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>分类信息</a></li>
           <li><a href="{{ url('/admin/phase') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>单元信息</a></li>
           <li><a href="{{ url('/admin/course') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>课程信息</a></li>
           <li><a href="{{ url('/admin/banner') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>Banner</a></li>
