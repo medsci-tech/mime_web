@@ -105,7 +105,7 @@
 
                         </div><!-- /.box-body -->
                         <div class="box-footer clearfix">
-                            {{$lists->render()}}
+                            {{$lists->appends(['site_id' => $_GET['site_id'] ?? ''])->render()}}
                         </div>
                     </div><!-- /.box -->
                 </div><!-- /.col -->
@@ -115,7 +115,7 @@
     </div><!-- /.content-wrapper -->
     @include('newback.course.edit')
 
-    <form id="delete-form" action="{{url('/admin/course')}}" method="post" style="display: none;">
+    <form id="delete-form" action="{{url('/admin/course')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post" style="display: none;">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="id">
