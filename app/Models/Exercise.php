@@ -30,10 +30,6 @@ class Exercise extends Model
         'status',
     ];
 
-    protected function getDateFormat(){
-        return time();
-    }
-
     public function type($index = null){
         if($index){
             if(!array_key_exists($index,self::EXERCISE_TYPE)){
