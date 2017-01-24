@@ -26,6 +26,7 @@ class Banner extends Model
         'href_url',
         'page',
         'status',
-        'weight'
+        'weight',
+        'site_id',
     ];
 }

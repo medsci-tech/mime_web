@@ -20,12 +20,17 @@ class PhaseController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('backend.tables.phase', [
-            'phases' => Model::paginate('20'),
-            'teachers' => Teacher::all()
-        ]);
+        $site_id = $request->input('site_id');
+        if($site_id){
+            return view('backend.tables.phase', [
+                'phases' => Model::where('site_id',$site_id)->paginate(20),
+                'teachers' => Teacher::all()
+            ]);
+        }else{
+            return redirect('newback/site');
+        }
     }
 
     /**
@@ -36,6 +41,8 @@ class PhaseController extends Controller
      */
     public function store(Request $request)
     {
+        $site_id = $request->input('site_id');
+        dd($request->all());
         $result = Model::create($request->all());
         if($result) {
             $this->flash_success();
@@ -43,8 +50,30 @@ class PhaseController extends Controller
             $this->flash_error();
         }
 
-        return redirect('/admin/phase');
+        return redirect('/admin/phase?site_id='.$site_id);
     }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(Request $request, $id)
+    {
+        $site_id = $request->input('site_id');
+        $result = Model::find($id)->update($request->all());
+        if($result) {
+            $this->flash_success();
+        }else{
+            $this->flash_error();
+        }
+
+        return redirect('/admin/phase?site_id='.$site_id);
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -67,25 +96,5 @@ class PhaseController extends Controller
                 'success' => false
             ]);
         }
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function update(Request $request, $id)
-    {
-        $result = Model::find($id)->update($request->all());
-        if($result) {
-            $this->flash_success();
-        }else{
-            $this->flash_error();
-        }
-
-        return redirect('/admin/phase');
     }
 }

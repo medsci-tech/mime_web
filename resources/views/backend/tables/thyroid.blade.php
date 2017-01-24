@@ -1,7 +1,6 @@
 @extends('backend.tables.index')
 
-@section('title','公开课')
-@section('box_title','公开课列表')
+@section('box_title','课程介绍')
 
 
 @if (Auth::guest())
@@ -17,7 +16,7 @@
         ['{{$thyroid->id}}', '{{$thyroid->title}}', '{{$thyroid->banner_autopaly}}', '{{$thyroid->latest_update_at}}', '{{$thyroid->comment}}', '{{$thyroid->qcloud_app_id}}','{{$thyroid->qcloud_file_id}}'],
         @endforeach
       ],
-      pagination: '{{$thyroids->render() }}',
+      pagination: '{{$thyroids->appends(['site_id' => $_GET['site_id'] ?? ''])->render() }}',
       modal_data: [
         {
           box_type: 'input',

@@ -117,14 +117,20 @@ Route::group(['prefix' => 'charts'], function(){
 
 
 Route::group(['prefix' => 'newback', 'namespace' => 'Newback', 'middleware' => 'auth'], function () {
+    // 站点
     Route::get('/site', 'SiteController@index');
     Route::post('/site', 'SiteController@save');
-
+    // 试题
     Route::get('/exercise', 'ExerciseController@index');
     Route::get('/exercise/table', 'ExerciseController@index_table');
     Route::post('/exercise', 'ExerciseController@save');
     Route::delete('/exercise', 'ExerciseController@destroy');
     Route::post('/exercise/get_list', 'ExerciseController@getList');
+    // 课程类型
+    Route::get('/course-class', 'CourseClassController@index');
+    Route::post('/course-class', 'CourseClassController@save');
+    Route::delete('/course-class', 'CourseClassController@destroy');
+    Route::post('/course-class/get_list', 'CourseClassController@getList');
 });
 
 

@@ -1,7 +1,6 @@
 @extends('backend.tables.index')
 
-@section('title','单元管理')
-@section('box_title','单元列表')
+@section('box_title','单元信息')
 
 
 @if (Auth::guest())
@@ -17,7 +16,7 @@
         ['{{$phase->id}}', '{{$phase->is_show ?'显示' :'不显示'}}','{{$phase->sequence}}', '{{$phase->title}}', '{{$phase->logo_url}}', '{{$phase->teacher ?$phase->teacher->name :''}}', '{!! $phase->comment !!}'],
         @endforeach
       ],
-      pagination: '{{$phases->render() }}',
+      pagination: '{{$phases->appends(['site_id' => $_GET['site_id'] ?? ''])->render() }}',
       modal_data: [
         {
           box_type: 'input',

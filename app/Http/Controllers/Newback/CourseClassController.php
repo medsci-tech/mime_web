@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Newback;
 
-use App\Models\ThyroidClassPhase;
+use App\Models\CourseClass as Model;
 use Illuminate\Http\Request;
-use App\Models\ThyroidClassCourse as Model;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class CourseController extends Controller
+class CourseClassController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +19,8 @@ class CourseController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
-            return view('newback.course.index', [
+            return view('newback.course-class.index', [
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
-                'phases' => ThyroidClassPhase::all(),
             ]);
         }else{
             return redirect('newback/site');
@@ -35,28 +33,23 @@ class CourseController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
-    {
+
+    public function save(Request $request){
         $site_id = $request->input('site_id');
-        $data = $request->all();
         $id = $request->input('id');
-        $exercise_ids = $request->input('exercise_ids');
-        if($exercise_ids){
-            $data['exercise_ids'] = implode(',', $exercise_ids);
-        }else{
-            $data['exercise_ids'] = '';
-        }
+        $request_all = $request->all();
+//        dd($request_all);
         if($id){
-            $result = Model::find($id)->update($data);
+            $result = Model::find($id)->update($request_all);
         }else{
-            $result = Model::create($data);
+            $result = Model::create($request_all);
         }
         if($result) {
             $this->flash_success();
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/course?site_id='.$site_id);
+        return redirect('/newback/course-class?site_id='.$site_id);
     }
 
     /**
@@ -75,7 +68,10 @@ class CourseController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/course?site_id='.$site_id);
+        return redirect('/newback/course-class?site_id='.$site_id);
     }
 
+    public function getList(){
+        return 'he';
+    }
 }

@@ -26,7 +26,7 @@
 @endsection
 @if (Auth::guest())
 @else
-    @include('newback.layouts.site_aside')
+    @include('backend.layouts.aside')
 @endif
 @section('content')
     <div class="content-wrapper">
@@ -41,15 +41,15 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">站点管理</h3>
+                            <h3 class="box-title">课程类型</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body no-padding" style="overflow: auto">
                             <table class="table table-bordered table-hover table-striped table-responsive">
                                 <thead style="word-break: keep-all">
                                 <tr>
-                                    <th>站点ID</th>
-                                    <th>站点名称</th>
-                                    <th>站点状态</th>
+                                    <th>ID</th>
+                                    <th>名称</th>
+                                    <th>状态</th>
                                     <th>
                                         数据操作&emsp;
                                         <button class="btn btn-xs btn-success" data-btn="add" data-target="#modal-edit" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;新增</button>
@@ -61,7 +61,7 @@
                                     @foreach($lists as $list)
                                         <tr>
                                             <td>{{$list->id}}</td>
-                                            <td><a href="/admin/thyroid?site_id={{$list->id}}">{{$list->name}}</a></td>
+                                            <td>{{$list->name}}</td>
                                             <td>{{config('params')['status_option'][$list->status]}}</td>
                                             <td style="white-space: nowrap">
                                                 <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
@@ -78,7 +78,7 @@
 
                         </div><!-- /.box-body -->
                         <div class="box-footer clearfix">
-                            {{$lists->render()}}
+                            {{$lists->appends(['site_id' => $_GET['site_id'] ?? ''])->render()}}
                         </div>
                     </div><!-- /.box -->
                 </div><!-- /.col -->
@@ -86,7 +86,7 @@
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-    @include('newback.site.edit')
+    @include('newback.course-class.edit')
 
 @endsection
 
@@ -95,7 +95,6 @@
     <script>
 
         $(function () {
-            var tableListBody = $('#tableListBody');
             $('[data-btn="add"]').click(function(){
                 var defaltData = '';
                 $('#form-id').val(defaltData);

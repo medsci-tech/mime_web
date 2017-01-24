@@ -1,7 +1,6 @@
 @extends('backend.tables.index')
 
-@section('title', 'Banner')
-@section('box_title','banner列表')
+@section('box_title','banner')
 
 @if (Auth::guest())
 @else
@@ -16,7 +15,7 @@
             ['{{$banner->id}}', '{{$banner->image_url}}', '{{$banner->href_url}}', '{{$banner->status ?'显示' :'不显示'}}', '{{$banner->page}}', '{{$banner->weight}}'],
           @endforeach
         ],
-        pagination: '{{$banners->render()}}',
+        pagination: '{{$banners->appends(['site_id' => $_GET['site_id'] ?? ''])->render()}}',
         modal_data: [
           {
             box_type: 'input',

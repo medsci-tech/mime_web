@@ -1,7 +1,5 @@
 @extends('newback.layouts.app')
 
-@section('title','课程管理')
-
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
     <link rel="stylesheet" href="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.css">
@@ -25,7 +23,8 @@
         }
 
     </style>
-@endsection@if (Auth::guest())
+@endsection
+@if (Auth::guest())
 @else
     @include('backend.layouts.aside')
 @endif
@@ -33,11 +32,7 @@
     <div class="content-wrapper">
 
         <section class="content-header">
-
             @include('newback.layouts.alerts')
-            <h1>
-                @yield('title')
-            </h1>
         </section>
 
         <!-- Main content -->
@@ -46,7 +41,7 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">列表</h3>
+                            <h3 class="box-title">课程信息</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body no-padding" style="overflow: auto">
                             <table class="table table-bordered table-hover table-striped table-responsive">
@@ -104,7 +99,7 @@
 
                         </div><!-- /.box-body -->
                         <div class="box-footer clearfix">
-                            {{$lists->render()}}
+                            {{$lists->appends(['site_id' => $_GET['site_id'] ?? ''])->render()}}
                         </div>
                     </div><!-- /.box -->
                 </div><!-- /.col -->
@@ -114,7 +109,7 @@
     </div><!-- /.content-wrapper -->
     @include('newback.course.edit')
 
-    <form id="delete-form" action="{{url('/admin/course')}}" method="post" style="display: none;">
+    <form id="delete-form" action="{{url('/admin/course')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post" style="display: none;">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="id">
