@@ -47,7 +47,7 @@ class PlayLog extends Model
      */
     public function course()
     {
-        return $this->belongsTo(ThyroidClassCourse::class, 'thyroid_class_course_id');
+        return $this->belongsTo(\App\Models\ThyroidClassCourse::class, 'thyroid_class_course_id');
     }
 
 

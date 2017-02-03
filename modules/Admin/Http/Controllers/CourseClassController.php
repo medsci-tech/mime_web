@@ -23,7 +23,7 @@ class CourseClassController extends Controller
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
             ]);
         }else{
-            return redirect('newback/site');
+            return redirect('/site');
         }
     }
 
@@ -49,7 +49,7 @@ class CourseClassController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/newback/course-class?site_id='.$site_id);
+        return redirect('/course-class?site_id='.$site_id);
     }
 
     /**
@@ -68,7 +68,7 @@ class CourseClassController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/newback/course-class?site_id='.$site_id);
+        return redirect('/course-class?site_id='.$site_id);
     }
 
     public function getList(){
