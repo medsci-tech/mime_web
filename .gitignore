@@ -9,3 +9,9 @@ Homestead.json
 /public/upload
 composer.lock
 _ide_helper.php
+/modules/Admin/Assets/.gitkeep
+/modules/Admin/Config/.gitkeep
+/modules/admin/Console/.gitkeep
+/modules/admin/Database/Migrations/*.gitkeep
+/modules/admin/database/Seeders/.gitkeep
+/modules/admin/Entities/.gitkeep

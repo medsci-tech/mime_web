@@ -10,10 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-#Route::get('/', 'ThyroidClass\ThyroidClassController@index');
-
-
 Route::group(['prefix' => 'home', 'namespace' => 'Home'], function () {
 
     Route::group(['prefix' => 'register'], function () {
@@ -59,41 +55,6 @@ Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], funct
 
 });
 
-Route::auth();
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
-    Route::any('/student-logs', 'AdminController@studentLogs');
-    Route::any('/reset-pwd', 'StudentController@resetPwd');
-    Route::group(['prefix' => 'excel'], function () {
-        Route::get('/', 'ExcelController@excelForm');
-        Route::post('/student', 'ExcelController@student');
-        Route::post('/play-log', 'ExcelController@playLog');
-        Route::post('/play-log-detail', 'ExcelController@playLogDetail');
-        Route::any('/test', 'ExcelController@test');
-        Route::any('/test_log_detail', 'ExcelController@getLogDetail');
-        Route::any('/logs2excel', 'ExcelController@logs2Excel');
-        Route::any('/export-phone', 'ExcelController@exportPhone');
-    });
-
-    Route::get('/', 'TeacherController@index');
-    Route::resource('teacher', 'TeacherController');
-    Route::resource('thyroid', 'ThyroidController');
-    Route::resource('phase', 'PhaseController');
-    Route::get('course', 'CourseController@index');
-    Route::post('course', 'CourseController@store');
-    Route::delete('course', 'CourseController@destroy');
-    Route::resource('banner', 'BannerController');
-    Route::resource('student', 'StudentController');
-    Route::group(['prefix' => 'statistic'], function () {
-        Route::get('/area-map', 'StatisticController@areaMap');
-        Route::get('/province-map', 'StatisticController@provinceMap');
-        Route::get('/register-bar', 'StatisticController@registerBar');
-        Route::get('/class-pie', 'StatisticController@classPie');
-        Route::get('/update', 'StatisticController@update');
-    });
-});
-
-
-
 Route::group(['prefix' => 'charts'], function(){
     Route::get('/bar', function() {
         return view('backend.charts.charts_bar');
@@ -115,22 +76,5 @@ Route::group(['prefix' => 'charts'], function(){
     });
 });
 
-
-Route::group(['prefix' => 'newback', 'namespace' => 'Newback', 'middleware' => 'auth'], function () {
-    // 站点
-    Route::get('/site', 'SiteController@index');
-    Route::post('/site', 'SiteController@save');
-    // 试题
-    Route::get('/exercise', 'ExerciseController@index');
-    Route::get('/exercise/table', 'ExerciseController@index_table');
-    Route::post('/exercise', 'ExerciseController@save');
-    Route::delete('/exercise', 'ExerciseController@destroy');
-    Route::post('/exercise/get_list', 'ExerciseController@getList');
-    // 课程类型
-    Route::get('/course-class', 'CourseClassController@index');
-    Route::post('/course-class', 'CourseClassController@save');
-    Route::delete('/course-class', 'CourseClassController@destroy');
-    Route::post('/course-class/get_list', 'CourseClassController@getList');
-});
 
 

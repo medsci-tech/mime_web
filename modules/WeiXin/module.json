@@ -1,0 +1,15 @@
+{
+    "name": "WeiXin",
+    "alias": "weixin",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\WeiXin\\Providers\\WeiXinServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}
