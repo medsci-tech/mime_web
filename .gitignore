@@ -15,3 +15,4 @@ _ide_helper.php
 /modules/admin/Database/Migrations/*.gitkeep
 /modules/admin/database/Seeders/.gitkeep
 /modules/admin/Entities/.gitkeep
+*.gitkeep

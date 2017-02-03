@@ -1,0 +1,2 @@
+[02-Feb-2017 16:46:03 Asia/Shanghai] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in D:\web\mime_class\vendor\laravel\framework\src\Illuminate\Foundation\Auth\AuthenticatesUsers.php on line 65
+[03-Feb-2017 11:35:22 Asia/Shanghai] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in D:\web\mime_class\vendor\predis\predis\src\Connection\StreamConnection.php on line 311
