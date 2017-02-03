@@ -16,3 +16,6 @@ _ide_helper.php
 /modules/admin/database/Seeders/.gitkeep
 /modules/admin/Entities/.gitkeep
 *.gitkeep
+/modules/WeiXin
+/modules/Wap
+/php_errors.log
