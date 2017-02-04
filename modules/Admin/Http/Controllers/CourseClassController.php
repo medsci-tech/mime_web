@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Newback;
+namespace Modules\Admin\Http\Controllers;
 
 use App\Models\CourseClass as Model;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Pingpong\Modules\Routing\Controller;
 
 class CourseClassController extends Controller
 {
@@ -19,7 +19,7 @@ class CourseClassController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
-            return view('newback.course-class.index', [
+            return view('admin::backend.course-class.index', [
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
             ]);
         }else{

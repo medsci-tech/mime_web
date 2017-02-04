@@ -7,7 +7,7 @@
         <h4 class="modal-title">编辑</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" action="{{url('/newback/course-class')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post">
+        <form class="form-horizontal" role="form" action="{{url('/course-class')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="id" id="form-id" value="">
           <div class="form-group">

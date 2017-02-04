@@ -1,4 +1,4 @@
-@extends('newback.layouts.app')
+@extends('admin::backend.layouts.app')
 
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
@@ -26,13 +26,13 @@
 @endsection
 @if (Auth::guest())
 @else
-    @include('backend.layouts.aside')
+    @include('admin::backend.layouts.aside')
 @endif
 @section('content')
     <div class="content-wrapper">
 
         <section class="content-header">
-            @include('newback.layouts.alerts')
+            @include('admin::backend.layouts.alerts')
         </section>
 
         <!-- Main content -->
@@ -86,7 +86,7 @@
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-    @include('newback.course-class.edit')
+    @include('admin::backend.course-class.edit')
 
 @endsection
 
