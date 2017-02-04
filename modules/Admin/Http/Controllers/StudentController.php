@@ -4,7 +4,7 @@ namespace Modules\Admin\Http\Controllers;
 
 use Modules\Admin\Entities\Student;
 use Pingpong\Modules\Routing\Controller;
-use App\Models\ThyroidClassCourse;
+use Modules\Admin\Entities\ThyroidClassCourse;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
