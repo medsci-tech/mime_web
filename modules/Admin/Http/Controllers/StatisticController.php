@@ -6,7 +6,7 @@ use App\Models\City;
 use App\Http\Requests;
 use Pingpong\Modules\Routing\Controller;
 use Modules\Admin\Entities\Student;
-use App\Models\ThyroidClassPhase;
+use Modules\Admin\Entities\ThyroidClassPhase;
 
 /**
  * Class StatisticController
