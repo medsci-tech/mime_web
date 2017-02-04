@@ -18,13 +18,16 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
         Route::any('/export-phone', 'ExcelController@exportPhone');
     });
 
-    Route::get('/', 'TeacherController@index');
+    Route::get('/', 'SiteController@index');
     Route::resource('teacher', 'TeacherController');
     Route::resource('thyroid', 'ThyroidController');
     Route::resource('phase', 'PhaseController');
     Route::get('course', 'CourseController@index');
     Route::post('course', 'CourseController@store');
     Route::delete('course', 'CourseController@destroy');
+    Route::get('course-class', 'CourseClassController@index');
+    Route::post('course-class', 'CourseClassController@save');
+    Route::delete('course-class', 'CourseClassController@destroy');
     Route::resource('banner', 'BannerController');
     Route::resource('student', 'StudentController');
     Route::group(['prefix' => 'statistic'], function () {
