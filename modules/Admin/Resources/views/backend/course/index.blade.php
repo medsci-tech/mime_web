@@ -1,4 +1,4 @@
-@extends('newback.layouts.app')
+@extends('admin::backend.layouts.app')
 
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
@@ -26,13 +26,13 @@
 @endsection
 @if (Auth::guest())
 @else
-    @include('backend.layouts.aside')
+    @include('admin::backend.layouts.aside')
 @endif
 @section('content')
     <div class="content-wrapper">
 
         <section class="content-header">
-            @include('newback.layouts.alerts')
+            @include('admin::backend.layouts.alerts')
         </section>
 
         <!-- Main content -->
@@ -107,9 +107,9 @@
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-    @include('newback.course.edit')
+    @include('admin::backend.course.edit')
 
-    <form id="delete-form" action="{{url('/admin/course')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post" style="display: none;">
+    <form id="delete-form" action="{{url('/course')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post" style="display: none;">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="id">
@@ -123,7 +123,7 @@
     var getExerciseList = function (data) {
         $.ajax({
             type: 'post',
-            url: '{{url('/newback/exercise/get_list')}}',
+            url: '{{url('/exercise/get_list')}}',
             data: data,
             success: function(res){
                 var html = '';
@@ -224,7 +224,7 @@
                 area: ['800px', '600px'],
                 fix: false, //不固定
                 maxmin: true,
-                content: '/newback/exercise/table'
+                content: '/exercise/table'
             });
         });
     });

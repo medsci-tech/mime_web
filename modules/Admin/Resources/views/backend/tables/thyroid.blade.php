@@ -1,11 +1,11 @@
-@extends('backend.tables.index')
+@extends('admin::backend.tables.index')
 
 @section('box_title','课程介绍')
 
 
 @if (Auth::guest())
 @else
-  @include('backend.layouts.aside')
+  @include('admin::backend.layouts.aside')
 @endif
 @section('tables_data')
   <script>
@@ -57,16 +57,16 @@
 
       update_info: {
         title: '编辑',
-        action: '/admin/thyroid',
+        action: '/thyroid',
         method: 'put'
       },
       add_info: {
         title: '添加',
-        action: '/admin/thyroid',
+        action: '/thyroid',
         method: 'post'
       },
       delete_info: {
-        url: '/admin/thyroid',
+        url: '/thyroid',
         method: 'delete'
       },
 

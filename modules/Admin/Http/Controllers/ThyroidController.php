@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Admin\Http\Controllers;
 
 use App\Models\ThyroidClass as Model;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Pingpong\Modules\Routing\Controller;
 
 /**
  * Class ThyroidController
@@ -23,9 +23,9 @@ class ThyroidController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
-            return view('backend.tables.thyroid', ['thyroids' => Model::where('site_id',$site_id)->paginate(10)]);
+            return view('admin::backend.tables.thyroid', ['thyroids' => Model::where('site_id',$site_id)->paginate(10)]);
         }else{
-            return redirect('newback/site');
+            return redirect('/site');
         }
     }
 
@@ -44,7 +44,7 @@ class ThyroidController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/thyroid?site_id='.$site_id);
+        return redirect('/thyroid?site_id='.$site_id);
     }
 
     /**
@@ -64,7 +64,7 @@ class ThyroidController extends Controller
             $this->flash_error();
         }
 
-        return redirect('/admin/thyroid?site_id='.$site_id);
+        return redirect('/thyroid?site_id='.$site_id);
     }
 
 

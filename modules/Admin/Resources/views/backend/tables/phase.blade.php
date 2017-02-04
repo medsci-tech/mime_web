@@ -1,11 +1,11 @@
-@extends('backend.tables.index')
+@extends('admin::backend.tables.index')
 
 @section('box_title','单元信息')
 
 
 @if (Auth::guest())
 @else
-  @include('backend.layouts.aside')
+  @include('admin::backend.layouts.aside')
 @endif
 @section('tables_data')
   <script>
@@ -64,16 +64,16 @@
 
       update_info: {
         title: '编辑',
-        action: '/admin/phase',
+        action: '/phase',
         method: 'put'
       },
       add_info: {
         title: '添加',
-        action: '/admin/phase',
+        action: '/phase',
         method: 'post'
       },
       delete_info: {
-        url: '/admin/phase',
+        url: '/phase',
         method: 'delete'
       },
 

@@ -23,9 +23,9 @@ class BannerController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
-            return view('backend.tables.banner', ['banners' => Model::where('site_id',$site_id)->paginate(5)]);
+            return view('admin::backend.tables.banner', ['banners' => Model::where('site_id',$site_id)->paginate(5)]);
         }else{
-            return redirect('newback/site');
+            return redirect('/site');
         }
     }
 
@@ -45,7 +45,7 @@ class BannerController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/banner?site_id='.$site_id);
+        return redirect('/banner?site_id='.$site_id);
     }
 
     /**
@@ -64,7 +64,7 @@ class BannerController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/banner?site_id='.$site_id);
+        return redirect('/banner?site_id='.$site_id);
     }
 
 

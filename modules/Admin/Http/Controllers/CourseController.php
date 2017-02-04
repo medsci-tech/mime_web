@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Admin\Http\Controllers;
 
-use App\Models\ThyroidClassPhase;
+use Modules\Admin\Entities\ThyroidClassPhase;
 use Illuminate\Http\Request;
-use App\Models\ThyroidClassCourse as Model;
+use Modules\Admin\Entities\ThyroidClassCourse as Model;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Pingpong\Modules\Routing\Controller;
 
 class CourseController extends Controller
 {
@@ -20,12 +20,12 @@ class CourseController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
-            return view('newback.course.index', [
+            return view('admin::backend.course.index', [
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
                 'phases' => ThyroidClassPhase::all(),
             ]);
         }else{
-            return redirect('newback/site');
+            return redirect('/site');
         }
     }
 
@@ -56,7 +56,7 @@ class CourseController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/course?site_id='.$site_id);
+        return redirect('/course?site_id='.$site_id);
     }
 
     /**
@@ -75,7 +75,7 @@ class CourseController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect('/admin/course?site_id='.$site_id);
+        return redirect('/course?site_id='.$site_id);
     }
 
 }

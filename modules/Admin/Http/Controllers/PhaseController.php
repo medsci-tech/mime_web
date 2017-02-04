@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Models\Teacher;
-use App\Models\ThyroidClassPhase as Model;
+namespace Modules\Admin\Http\Controllers;
+use Modules\Admin\Entities\Teacher;
+use Modules\Admin\Entities\ThyroidClassPhase as Model;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Pingpong\Modules\Routing\Controller;
 
 /**
  * Class PhaseController
@@ -24,12 +23,12 @@ class PhaseController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
-            return view('backend.tables.phase', [
+            return view('admin::backend.tables.phase', [
                 'phases' => Model::where('site_id',$site_id)->paginate(20),
                 'teachers' => Teacher::all()
             ]);
         }else{
-            return redirect('newback/site');
+            return redirect('/site');
         }
     }
 
@@ -50,7 +49,7 @@ class PhaseController extends Controller
             $this->flash_error();
         }
 
-        return redirect('/admin/phase?site_id='.$site_id);
+        return redirect('/phase?site_id='.$site_id);
     }
 
 
@@ -71,7 +70,7 @@ class PhaseController extends Controller
             $this->flash_error();
         }
 
-        return redirect('/admin/phase?site_id='.$site_id);
+        return redirect('/phase?site_id='.$site_id);
     }
 
 
