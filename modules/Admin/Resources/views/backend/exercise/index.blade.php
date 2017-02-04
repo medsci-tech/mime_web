@@ -26,7 +26,7 @@
 @endsection
 @if (Auth::guest())
 @else
-    @include('admin::backend.layouts.site_aside')
+    @include('admin::backend.layouts.aside')
 @endif
 @section('content')
     <div class="content-wrapper">

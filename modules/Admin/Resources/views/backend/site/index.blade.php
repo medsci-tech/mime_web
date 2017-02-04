@@ -61,7 +61,7 @@
                                     @foreach($lists as $list)
                                         <tr>
                                             <td>{{$list->id}}</td>
-                                            <td><a href="/admin/thyroid?site_id={{$list->id}}">{{$list->name}}</a></td>
+                                            <td><a href="{{url('thyroid')}}?site_id={{$list->id}}">{{$list->name}}</a></td>
                                             <td>{{config('params')['status_option'][$list->status]}}</td>
                                             <td style="white-space: nowrap">
                                                 <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
