@@ -5,7 +5,7 @@
 
 @if (Auth::guest())
 @else
-  @include('admin::backend.layouts.site_aside')
+  @include('admin::backend.layouts.aside')
 @endif
 @section('charts_data')
   <template id="template">
