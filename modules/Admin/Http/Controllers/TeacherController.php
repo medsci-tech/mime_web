@@ -13,13 +13,19 @@ class TeacherController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Request $request
+     * @return mixed
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin::backend.tables.teacher', ['teachers' => Model::paginate('5')]);
+        $site_id = $request->input('site_id');
+        if($site_id){
+            return view('admin::backend.tables.teacher', [
+                'teachers' => Model::where('site_id',$site_id)->paginate(10),
+            ]);
+        }else{
+            return redirect('/site');
+        }
     }
 
     /**
@@ -30,13 +36,14 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+        $site_id = $request->input('site_id');
         $result = Model::create($request->all());
         if($result) {
             $this->flash_success();
         }else{
             $this->flash_error();
         }
-        return redirect('/teacher');
+        return redirect('/teacher?site_id='.$site_id);
     }
 
     /**
@@ -48,6 +55,7 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $site_id = $request->input('site_id');
         $result = Model::find($id)->update($request->all());
         if($result) {
             $this->flash_success();
@@ -55,7 +63,7 @@ class TeacherController extends Controller
             $this->flash_error();
         }
 
-        return redirect('/teacher');
+        return redirect('/teacher?site_id='.$site_id);
     }
 
     /**

@@ -224,7 +224,7 @@
                 area: ['800px', '600px'],
                 fix: false, //不固定
                 maxmin: true,
-                content: '/exercise/table'
+                content: '/exercise/table?site_id={{$_GET['site_id'] ?? ''}}'
             });
         });
     });
