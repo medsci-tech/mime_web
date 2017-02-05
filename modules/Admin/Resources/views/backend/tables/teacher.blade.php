@@ -51,16 +51,16 @@
 
         update_info: {
           title: '编辑',
-          action: '/admin/teacher',
+          action: '/teacher',
           method: 'put'
         },
         add_info: {
           title: '添加',
-          action: '/admin/teacher',
+          action: '/teacher',
           method: 'post'
         },
         delete_info: {
-          url: '/admin/teacher',
+          url: '/teacher',
           method: 'delete'
         },
 
