@@ -4,7 +4,6 @@ namespace Modules\Admin\Http\Controllers;
 use Modules\Admin\Entities\Teacher as Model;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Pingpong\Modules\Routing\Controller;
 
 /**
  * Class TeacherController

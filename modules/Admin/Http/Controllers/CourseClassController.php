@@ -4,9 +4,7 @@ namespace Modules\Admin\Http\Controllers;
 
 use App\Models\CourseClass as Model;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use Pingpong\Modules\Routing\Controller;
 
 class CourseClassController extends Controller
 {
