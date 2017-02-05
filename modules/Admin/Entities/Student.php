@@ -34,6 +34,7 @@ class Student extends Model
         'hospital_level',
         'hospital_name',
         'entered_at',
+        'site_id',
         'password'
     ];
 

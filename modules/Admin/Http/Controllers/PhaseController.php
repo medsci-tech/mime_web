@@ -24,7 +24,7 @@ class PhaseController extends Controller
         if($site_id){
             return view('admin::backend.tables.phase', [
                 'phases' => Model::where('site_id',$site_id)->paginate(20),
-                'teachers' => Teacher::all()
+                'teachers' => Teacher::where('site_id',$site_id)->get(),
             ]);
         }else{
             return redirect('/site');
@@ -40,7 +40,6 @@ class PhaseController extends Controller
     public function store(Request $request)
     {
         $site_id = $request->input('site_id');
-        dd($request->all());
         $result = Model::create($request->all());
         if($result) {
             $this->flash_success();
