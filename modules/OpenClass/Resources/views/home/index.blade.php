@@ -1,4 +1,4 @@
-@extends('layouts.open')
+@extends('openclass::layouts.open')
 
 @section('title','公开课首页')
 
@@ -11,7 +11,7 @@
 
 @section('content')
 
-  @include('layouts.header')
+  @include('openclass::layouts.header')
 
   <div class="row">
     <div class="swiper-container">
@@ -231,7 +231,7 @@
     </div>
   </div>
 
-  @include('layouts.footer')
+  @include('openclass::layouts.footer')
 
 @endsection
 
@@ -266,12 +266,12 @@
             @if(\Session::has('studentId'))
             @if(\Session::has('replenished') && \Session::get('replenished'))
           {
-            name: '{{\App\Models\Student::find(Session::get("studentId"))->name}}',
+            name: '{{\Modules\Openclass\Entities\Student::find(Session::get("studentId"))->name}}',
             href: '#'
           },
             @else
           {
-            name: '{{\App\Models\Student::find(Session::get("studentId"))->phone}}',
+            name: '{{\Modules\Openclass\Entities\Student::find(Session::get("studentId"))->phone}}',
             href: '#'
           },
             @endif

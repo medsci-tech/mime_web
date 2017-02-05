@@ -13,10 +13,11 @@ class AirClassController extends Controller {
         //判断指定键是否存在
         if(\Redis::exists($key)){
             //根据键名获取键值
-            dd(\Redis::get($key));
+            //dd(\Redis::get($key));
         }
 
 		return view('airclass::index');
 	}
 	
 }
+

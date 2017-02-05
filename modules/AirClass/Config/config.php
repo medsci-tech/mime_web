@@ -1,5 +1,9 @@
 <?php
 
 return [
-	'name' => 'AirClass'
+	'name' => 'AirClass',
+    'redis' => [
+
+
+    ],
 ];
