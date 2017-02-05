@@ -46,7 +46,7 @@
         return {
           pie: {
             title: {
-              text: '甲状腺公开课',
+              text: '{{$title->name}}',
               subtext: '课程统计',
               x: 'center'
             },
