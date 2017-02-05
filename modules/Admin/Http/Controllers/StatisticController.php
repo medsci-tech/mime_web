@@ -56,9 +56,42 @@ class StatisticController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    function registerBar()
+    function registerBar(Request $request)
     {
-        return view('admin::backend.charts.charts_bar_register');
+        $site_id = $request->input('site_id');
+        $format = 'Y-m';
+        $return_data = [
+            'date' => [],
+            'register' => [],
+            'sign' => [],
+        ];
+        if($site_id){
+            $first_time = Student::where('site_id',$site_id)->orderBy('id','asc')->first()['created_at'];
+            $last_time = Student::where('site_id',$site_id)->orderBy('id','desc')->first()['created_at'];
+            if($first_time && $last_time){
+                $first_data = date($format,strtotime($first_time));
+                $last_data = date($format,strtotime($last_time));
+                while ($first_data <= $last_data){
+                    $first_data_next = date($format,strtotime('+1 month',strtotime($first_data)));
+                    $register_counts = Student::where('site_id',$site_id)
+                        ->where('created_at', '>=', $first_data)
+                        ->where('created_at', '<', $first_data_next)
+                        ->count();
+                    $sign_counts = Student::where('site_id',$site_id)
+                        ->where('entered_at', '>=', $first_data)
+                        ->where('entered_at', '<', $first_data_next)
+                        ->count();
+                    $return_data['date'][] = $first_data;
+                    $return_data['register'][] = $register_counts;
+                    $return_data['sign'][] = $sign_counts;
+                    $first_data = $first_data_next;
+                }
+            }
+//            dd($return_data);
+            return view('admin::backend.charts.charts_bar_register',['data'=>$return_data]);
+        }else{
+            return redirect('/site');
+        }
     }
 
     /**
