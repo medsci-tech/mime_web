@@ -32,7 +32,7 @@
     <div class="content-wrapper">
 
         <section class="content-header">
-            @include('admin::backend.layouts.alerts')
+            @include('admin::layouts.alerts')
         </section>
 
         <!-- Main content -->

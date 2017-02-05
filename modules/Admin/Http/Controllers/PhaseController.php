@@ -5,7 +5,6 @@ use Modules\Admin\Entities\Teacher;
 use Modules\Admin\Entities\ThyroidClassPhase as Model;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Pingpong\Modules\Routing\Controller;
 
 /**
  * Class PhaseController

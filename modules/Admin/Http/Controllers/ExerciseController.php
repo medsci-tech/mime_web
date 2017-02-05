@@ -3,11 +3,9 @@
 namespace Modules\Admin\Http\Controllers;
 
 use Modules\Admin\Entities\Exercise as Model;
-use App\Models\ThyroidClassCourse;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Pingpong\Modules\Routing\Controller;
 
 class ExerciseController extends Controller
 {
