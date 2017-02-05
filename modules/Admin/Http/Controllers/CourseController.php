@@ -6,7 +6,6 @@ use Modules\Admin\Entities\ThyroidClassPhase;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse as Model;
 use App\Http\Requests;
-use Pingpong\Modules\Routing\Controller;
 
 class CourseController extends Controller
 {
