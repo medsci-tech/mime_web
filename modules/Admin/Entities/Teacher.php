@@ -33,6 +33,7 @@ class Teacher extends Model
         'name',
         'office',
         'title',
+        'site_id',
         'introduction'
     ];
 

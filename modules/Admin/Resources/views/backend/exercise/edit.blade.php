@@ -7,7 +7,7 @@
         <h4 class="modal-title">试题管理</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" action="{{url('/exercise')}}" method="post">
+        <form class="form-horizontal" role="form" action="{{url('/exercise')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="id" id="form-id" value="">
           <div class="form-group">

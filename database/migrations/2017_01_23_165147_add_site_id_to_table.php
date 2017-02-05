@@ -28,6 +28,15 @@ class AddSiteIdToThyoidPhaseCourseBanner extends Migration
         Schema::table('banners', function(Blueprint $table) {
             $table->integer('site_id')->default(1)->comment('所属站点');
         });
+        Schema::table('exercises', function(Blueprint $table) {
+            $table->integer('site_id')->default(1)->comment('所属站点');
+        });
+        Schema::table('teachers', function(Blueprint $table) {
+            $table->integer('site_id')->default(1)->comment('所属站点');
+        });
+        Schema::table('students', function(Blueprint $table) {
+            $table->integer('site_id')->default(1)->comment('所属站点');
+        });
     }
 
     /**

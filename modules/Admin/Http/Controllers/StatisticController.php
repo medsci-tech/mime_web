@@ -3,8 +3,8 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Models\City;
-use App\Http\Requests;
-use Pingpong\Modules\Routing\Controller;
+use Illuminate\Http\Request;
+use Modules\Admin\Entities\Site;
 use Modules\Admin\Entities\Student;
 use Modules\Admin\Entities\ThyroidClassPhase;
 
@@ -14,11 +14,10 @@ use Modules\Admin\Entities\ThyroidClassPhase;
  */
 class StatisticController extends Controller
 {
-    /**
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    function update()
+
+    function update(Request $request)
     {
+        $site_id = $request->input('site_id');
         $cities = City::all();
 
         foreach ($cities as $city) {
@@ -65,9 +64,11 @@ class StatisticController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    function classPie() {
+    function classPie(Request $request) {
+        $site_id = $request->input('site_id');
         return view('admin::backend.charts.charts_pie_class', [
-            'phases' => ThyroidClassPhase::all()
+            'phases' => ThyroidClassPhase::where('site_id',$site_id)->get(),
+            'title' => Site::find($site_id),
         ]);
     }
 }

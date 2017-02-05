@@ -93,7 +93,7 @@
 
                         </div><!-- /.box-body -->
                         <div class="box-footer clearfix">
-                            {{$lists->render()}}
+                            {{$lists->appends(['site_id' => $_GET['site_id'] ?? ''])->render()}}
                         </div>
                     </div><!-- /.box -->
                 </div><!-- /.col -->
@@ -103,7 +103,7 @@
     </div><!-- /.content-wrapper -->
     @include('admin::backend.exercise.edit')
 
-    <form id="delete-form" action="{{url('/exercise')}}" method="post" style="display: none;">
+    <form id="delete-form" action="{{url('/exercise')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post" style="display: none;">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="id">

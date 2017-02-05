@@ -47,10 +47,11 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">@yield('box_title')</h3>
-                            <a class="btn btn-xs btn-success" href="/excel/logs2excel">导出</a>
+                            <a class="btn btn-xs btn-success" href="{{url('/excel/logs2excel')}}?site_id={{$_GET['site_id'] ?? ''}}">导出</a>
 
                             <div class="box-tools">
-                                <form action="/student" method="get">
+                                <form action="{{url('/student')}}" method="get">
+                                    <input type="hidden" name="site_id" value="{{$_GET['site_id'] ?? ''}}">
                                     <div class="input-group" style="width: 270px;">
                                         <input name="search" class="form-control input-sm pull-right"
                                                placeholder="手机号、姓名、医院、城市、科室或职称"

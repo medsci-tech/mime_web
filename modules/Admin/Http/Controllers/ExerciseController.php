@@ -9,20 +9,31 @@ use App\Http\Requests;
 
 class ExerciseController extends Controller
 {
-    public function index(){
-        $lists = Model::paginate(10);
-        return view('admin::backend.exercise.index',[
-            'lists' => $lists,
-        ]);
+    public function index(Request $request){
+
+        $site_id = $request->input('site_id');
+        if($site_id){
+            return view('admin::backend.exercise.index', [
+                'lists' => Model::where('site_id',$site_id)->paginate(10),
+            ]);
+        }else{
+            return redirect('/site');
+        }
     }
-    public function index_table(){
-        $lists = Model::where('status',1)->get();
-        return view('admin::backend.exercise.index_table',[
-            'lists' => $lists,
-        ]);
+    public function index_table(Request $request){
+
+        $site_id = $request->input('site_id');
+        if($site_id){
+            return view('admin::backend.exercise.index_table', [
+                'lists' => Model::where(['site_id' => $site_id, 'status' => 1])->paginate(10),
+            ]);
+        }else{
+            return redirect('/site');
+        }
     }
 
     public function save(Request $request){
+        $site_id = $request->input('site_id');
         $id = $request->input('id');
         $option = $request->input('option');
         $answer = $request->input('answer');
@@ -44,17 +55,18 @@ class ExerciseController extends Controller
         }else{
             $this->flash_error();
         }
-        return redirect(url('/exercise'));
+        return redirect(url('/exercise?site_id='.$site_id));
     }
 
     public function destroy(Request $request){
+        $site_id = $request->input('site_id');
         $result = Model::find($request->input('id'))->delete();
         if($result) {
             $this->flash_success();
         }else{
             $this->flash_error();
         }
-        return redirect(url('/exercise'));
+        return redirect(url('/exercise?site_id='.$site_id));
     }
 
     public function getList(Request $request){

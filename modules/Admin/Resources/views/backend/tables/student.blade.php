@@ -28,9 +28,9 @@
       modal_data: '',
       alert: alert,
       @if(isset($search))
-        pagination: '{{$students->appends(['search' => $search])->render() }}'
+        pagination: '{{$students->appends(['search' => $search, 'site_id' => $_GET['site_id'] ?? ''])->render() }}',
       @else
-        pagination: '{{$students->render() }}'
+        pagination: '{{$students->appends(['site_id' => $_GET['site_id'] ?? ''])->render()}}',
       @endif
 
     }
