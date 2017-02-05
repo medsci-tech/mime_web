@@ -2,10 +2,9 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use Pingpong\Modules\Routing\Controller;
 use Modules\Admin\Entities\PlayLog;
 use Modules\Admin\Entities\Student;
-use App\Models\ThyroidClassCourse;
+use Modules\Admin\Entities\ThyroidClassCourse;
 use Illuminate\Http\Request;
 
 /**
@@ -229,9 +228,10 @@ class ExcelController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function logs2Excel()
+    public function logs2Excel(Request $request)
     {
-        $courses = ThyroidClassCourse::all();
+        $site_id = $request->input('site_id');
+        $courses = ThyroidClassCourse::where('site_id',$site_id)->get();
         $coursesArray = array();
         foreach ($courses as $course) {
             $coursesArray[$course->id] = [
@@ -240,7 +240,7 @@ class ExcelController extends Controller
             ];
         }
 
-        $students = Student::get(['id', 'phone', 'name']);
+        $students = Student::where('site_id',$site_id)->get(['id', 'phone', 'name']);
         $studentsArray = array();
         foreach ($students as $student) {
             $studentsArray[$student->id] = ['name' => $student->name, 'phone' => $student->phone];

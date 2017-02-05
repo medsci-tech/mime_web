@@ -15,23 +15,28 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $courseArray = [];
-        foreach (ThyroidClassCourse::all() as $course) {
-            $courseArray[$course->id] = $course->title;
-        }
-        if ($request->has('search')) {
-            $search = $request->input('search');
+        $site_id = $request->input('site_id');
+        if($site_id){
+            $courseArray = [];
+            foreach (ThyroidClassCourse::all() as $course) {
+                $courseArray[$course->id] = $course->title;
+            }
+            if ($request->has('search')) {
+                $search = $request->input('search');
+                $students = Student::search($search)->where('site_id',$site_id)->paginate(10);
+            } else {
+                $search = null;
+                $students = Student::where('site_id',$site_id)->paginate(10);
+            }
             return view('admin::backend.tables.student', [
-                'students' => Student::search($search)->paginate('10'),
+                'students' => $students,
                 'courseArray' => $courseArray,
                 'search' => $search
             ]);
-        } else {
-            return view('admin::backend.tables.student', [
-                'students' => Student::paginate('10'),
-                'courseArray' => $courseArray
-            ]);
+        }else{
+            return redirect('/site');
         }
+
     }
 
     /**
