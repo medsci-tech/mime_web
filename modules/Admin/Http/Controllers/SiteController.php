@@ -6,8 +6,6 @@ use Modules\Admin\Entities\Site as Model;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Pingpong\Modules\Routing\Controller;
-use Symfony\Component\Debug\Tests\MockExceptionHandler;
 
 class SiteController extends Controller
 {

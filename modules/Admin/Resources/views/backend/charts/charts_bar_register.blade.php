@@ -28,7 +28,7 @@
         return {
           bar: {
             title: {
-              text: '2016甲状腺公开课 学员注册',
+              text: '学员统计',
               subtext: 'By Medscience-tech'
             },
             tooltip: {
@@ -51,7 +51,11 @@
             xAxis: [
               {
                 type: 'category',
-                data: ['3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月']
+                data: [
+                  @foreach($data['date'] as $val)
+                  '{{$val}}',
+                  @endforeach
+                ]
               }
             ],
             yAxis: [
@@ -64,14 +68,9 @@
                 name: '注册人数',
                 type: 'bar',
                 data: [
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-03-01 00:00:00')->where('created_at', '<', '2016-04-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-04-01 00:00:00')->where('created_at', '<', '2016-05-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-05-01 00:00:00')->where('created_at', '<', '2016-06-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-06-01 00:00:00')->where('created_at', '<', '2016-07-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-07-01 00:00:00')->where('created_at', '<', '2016-08-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-08-01 00:00:00')->where('created_at', '<', '2016-09-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-09-01 00:00:00')->where('created_at', '<', '2016-10-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('created_at', '>', '2016-10-01 00:00:00')->where('created_at', '<', '2016-11-01 00:00:00')->count()}},
+                  @foreach($data['register'] as $val)
+                  {{$val}},
+                  @endforeach
                 ],
                 markPoint: {
                   data: [
@@ -89,14 +88,9 @@
                 name: '报名人数',
                 type: 'bar',
                 data: [
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-03-01 00:00:00')->where('entered_at', '<', '2016-04-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-04-01 00:00:00')->where('entered_at', '<', '2016-05-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-05-01 00:00:00')->where('entered_at', '<', '2016-06-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-06-01 00:00:00')->where('entered_at', '<', '2016-07-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-07-01 00:00:00')->where('entered_at', '<', '2016-08-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-08-01 00:00:00')->where('entered_at', '<', '2016-09-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-09-01 00:00:00')->where('entered_at', '<', '2016-10-01 00:00:00')->count()}},
-                  {{\Modules\Admin\Entities\Student::where('entered_at', '>', '2016-10-01 00:00:00')->where('entered_at', '<', '2016-11-01 00:00:00')->count()}}
+                  @foreach($data['sign'] as $val)
+                  {{$val}},
+                  @endforeach
                 ],
                 markPoint: {
                   data: [
