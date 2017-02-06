@@ -15,9 +15,8 @@ use Modules\Admin\Entities\ThyroidClassPhase;
 class StatisticController extends Controller
 {
 
-    function update(Request $request)
+    function update()
     {
-        $site_id = $request->input('site_id');
         $cities = City::all();
 
         foreach ($cities as $city) {
