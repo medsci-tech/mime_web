@@ -45,7 +45,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="{{url('/backend')}}" class="logo hidden-xs">
+      <a href="{{url('/')}}" class="logo hidden-xs">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"></span>
         <!-- logo for regular state and mobile devices -->
