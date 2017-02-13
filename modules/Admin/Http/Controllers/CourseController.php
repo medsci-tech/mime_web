@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\CourseClass;
 use Modules\Admin\Entities\ThyroidClassPhase;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse as Model;
@@ -22,6 +23,7 @@ class CourseController extends Controller
             return view('admin::backend.course.index', [
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
                 'phases' => ThyroidClassPhase::all(),
+                'course_classes' => CourseClass::where('status', 1)->get(),
             ]);
         }else{
             return redirect('/site');
