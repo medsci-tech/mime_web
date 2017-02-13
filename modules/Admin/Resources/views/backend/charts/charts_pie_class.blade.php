@@ -46,7 +46,7 @@
         return {
           pie: {
             title: {
-              text: '{{$title->name}}',
+              text: '{{$title['name']}}',
               subtext: '课程统计',
               x: 'center'
             },
