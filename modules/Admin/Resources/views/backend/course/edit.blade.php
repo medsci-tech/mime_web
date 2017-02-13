@@ -23,6 +23,16 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label">课程类别</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="course_class_id" id="form-course_class_id">
+                @foreach($course_classes as $course_class)
+                  <option value="{{$course_class->id}}">{{$course_class->name}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">是否显示</label>
             <div class="col-sm-10">
               <select class="form-control" name="is_show" id="form-is_show">

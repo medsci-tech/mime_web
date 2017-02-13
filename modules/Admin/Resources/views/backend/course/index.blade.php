@@ -49,6 +49,7 @@
                                 <tr>
                                     <th>编号</th>
                                     <th>课程名称</th>
+                                    <th>课程类别</th>
                                     <th>是否显示</th>
                                     <th>所属单元</th>
                                     <th>缩略图</th>
@@ -66,6 +67,7 @@
                                 <tr>
                                     <td>{{$list->sequence}}</td>
                                     <td>{{$list->title}}</td>
+                                    <td>{{$list->courseClass->name}}</td>
                                     <td>{{config('params')['status_option'][$list->is_show]}}</td>
                                     <td>{{$list->thyroidClassPhase ? $list->thyroidClassPhase->title :''}}</td>
                                     <td>
@@ -88,6 +90,7 @@
                                             data-qcloud_app_id="{{$list->qcloud_app_id}}"
                                             data-is_show="{{$list->is_show}}"
                                             data-exercise_ids="{{$list->exercise_ids}}"
+                                            data-course_class_id="{{$list->course_class_id}}"
                                         >修改</button>
                                         <button class="btn btn-xs btn-warning" data-btn="delete" data-id="{{$list->id}}">删除</button>
                                     </td>
@@ -163,6 +166,7 @@
             $('#form-qcloud_file_id').val(defaltData);
             $('#form-qcloud_app_id').val(defaltData);
             $('#form-is_show').val(1);
+            $('#form-course_class_id').val(defaltData);
             tableListBody.html(defaltData);
         });
         $('[data-btn="edit"]').click(function () {
@@ -174,6 +178,7 @@
             var qcloud_file_id = $(this).attr('data-qcloud_file_id');
             var qcloud_app_id = $(this).attr('data-qcloud_app_id');
             var is_show = $(this).attr('data-is_show');
+            var course_class_id = $(this).attr('data-course_class_id');
             var exercise_ids = $(this).attr('data-exercise_ids');
             /* 编辑初始化 */
             $('#form-id').val(id);
@@ -188,6 +193,7 @@
             $('#form-qcloud_file_id').val(qcloud_file_id);
             $('#form-qcloud_app_id').val(qcloud_app_id);
             $('#form-is_show').val(is_show);
+            $('#form-course_class_id').val(course_class_id);
             getExerciseList({'ids':exercise_ids});
 
         });
