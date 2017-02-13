@@ -185,11 +185,10 @@
             $('#form-sequence').val(sequence);
             $('#form-title').val(title);
             $('#form-thyroid_class_phase_id').val(thyroid_class_phase_id);
-            var logo_url_ele = $('#form-logo_url');
             if(logo_url){
-                logo_url_ele.after('<img class="img-responsive" src="'+logo_url+'">');
+                $('#form-logo_url_html').html('<img class="img-responsive" src="'+logo_url+'">');
             }
-            logo_url_ele.val(logo_url);
+            $('#form-logo_url').val(logo_url);
             $('#form-qcloud_file_id').val(qcloud_file_id);
             $('#form-qcloud_app_id').val(qcloud_app_id);
             $('#form-is_show').val(is_show);

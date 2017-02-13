@@ -77,6 +77,7 @@
             <label class="col-sm-2 control-label">缩略图</label>
             <div class="col-sm-10">
               <input type="text" required class="form-control" name="logo_url" id="form-logo_url" placeholder="">
+              <div id="form-logo_url_html"></div>
             </div>
           </div>
           <div class="form-group">
