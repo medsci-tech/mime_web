@@ -96,6 +96,11 @@
                                             data-teacher_id="{{$list->teacher_id}}"
                                         >修改</button>
                                         <button class="btn btn-xs btn-warning" data-btn="delete" data-id="{{$list->id}}">删除</button>
+                                        <button class="btn btn-xs @if($list->recomment_time > 0) btn-warning @else btn-info @endif"
+                                                @if($list->recomment_time > 0) data-btn="recommend_cancel" @else data-btn="recommend" @endif data-id="{{$list->id}}">
+                                            @if($list->recomment_time > 0) 取消推荐 @else 推荐 @endif
+                                        </button>
+                                        {{--<button class="btn btn-xs btn-warning" data-btn="recommend_cancel" data-id="{{$list->id}}">取消推荐</button>--}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -232,6 +237,32 @@
                 }, function () {
                     delete_form.submit();
                 });
+            }
+        });
+
+        $('[data-btn="recommend"]').click(function () {
+            var id = $(this).data('id');
+            if(id){
+                var url = '{{url('/course/status')}}';
+                var data = {
+                    'id': id,
+                    'key': 'recommend',
+                    'value' : 1
+                };
+                subActionAjaxForMime('post', url, data, window.location.href);
+            }
+        });
+
+        $('[data-btn="recommend_cancel"]').click(function () {
+            var id = $(this).data('id');
+            if(id){
+                var url = '{{url('/course/status')}}';
+                var data = {
+                    'id': id,
+                    'key': 'recommend',
+                    'value' : 0
+                };
+                subActionAjaxForMime('post', url, data, window.location.href);
             }
         });
 
