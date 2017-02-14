@@ -71,6 +71,32 @@ class CourseController extends Controller
         return redirect('/course?site_id='.$site_id);
     }
 
+    public function status(Request $request)
+    {
+        $id = $request->input('id');
+        $result = null;
+        if($id){
+            $key = $request->input('key');
+            $value = $request->input('value');
+            $update = [];
+            if($key == 'recommend'){
+                if($value == 1){
+                    $update['recomment_time'] = time();
+                }else{
+                    $update['recomment_time'] = 0;
+                }
+            }
+            if($update){
+                $result = Model::find($id)->update($update);
+            }
+        }
+        if($result) {
+            return ['code' => 200];
+        }else{
+            return ['code' => 500];
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

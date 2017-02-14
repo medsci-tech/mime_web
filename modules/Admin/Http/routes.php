@@ -25,6 +25,7 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
     Route::get('course', 'CourseController@index');
     Route::post('course', 'CourseController@store');
     Route::delete('course', 'CourseController@destroy');
+    Route::post('course/status', 'CourseController@status');
     Route::get('course-class', 'CourseClassController@index');
     Route::post('course-class', 'CourseClassController@save');
     Route::delete('course-class', 'CourseClassController@destroy');
