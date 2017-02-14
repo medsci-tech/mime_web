@@ -49,6 +49,7 @@
                                 <tr>
                                     <th>编号</th>
                                     <th>课程名称</th>
+                                    <th>课程类别</th>
                                     <th>是否显示</th>
                                     <th>所属单元</th>
                                     <th>缩略图</th>
@@ -66,6 +67,7 @@
                                 <tr>
                                     <td>{{$list->sequence}}</td>
                                     <td>{{$list->title}}</td>
+                                    <td>{{$list->courseClass->name}}</td>
                                     <td>{{config('params')['status_option'][$list->is_show]}}</td>
                                     <td>{{$list->thyroidClassPhase ? $list->thyroidClassPhase->title :''}}</td>
                                     <td>
@@ -88,6 +90,10 @@
                                             data-qcloud_app_id="{{$list->qcloud_app_id}}"
                                             data-is_show="{{$list->is_show}}"
                                             data-exercise_ids="{{$list->exercise_ids}}"
+                                            data-course_class_id="{{$list->course_class_id}}"
+                                            data-course_class_has_teacher="{{\App\Models\CourseClass::find($list->course_class_id)['has_teacher']}}"
+                                            data-course_class_has_phase="{{\App\Models\CourseClass::find($list->course_class_id)['has_children']}}"
+                                            data-teacher_id="{{$list->teacher_id}}"
                                         >修改</button>
                                         <button class="btn btn-xs btn-warning" data-btn="delete" data-id="{{$list->id}}">删除</button>
                                     </td>
@@ -163,6 +169,8 @@
             $('#form-qcloud_file_id').val(defaltData);
             $('#form-qcloud_app_id').val(defaltData);
             $('#form-is_show').val(1);
+            $('#form-course_class_id').val(defaltData);
+            $('#form-teacher_id').val(defaltData);
             tableListBody.html(defaltData);
         });
         $('[data-btn="edit"]').click(function () {
@@ -174,20 +182,36 @@
             var qcloud_file_id = $(this).attr('data-qcloud_file_id');
             var qcloud_app_id = $(this).attr('data-qcloud_app_id');
             var is_show = $(this).attr('data-is_show');
+            var course_class_id = $(this).attr('data-course_class_id');
+            var course_class_has_teacher = $(this).attr('data-course_class_has_teacher');
+            var course_class_has_phase = $(this).attr('data-course_class_has_phase');
+            var teacher_id = $(this).attr('data-teacher_id');
             var exercise_ids = $(this).attr('data-exercise_ids');
             /* 编辑初始化 */
             $('#form-id').val(id);
             $('#form-sequence').val(sequence);
             $('#form-title').val(title);
             $('#form-thyroid_class_phase_id').val(thyroid_class_phase_id);
-            var logo_url_ele = $('#form-logo_url');
             if(logo_url){
-                logo_url_ele.after('<img class="img-responsive" src="'+logo_url+'">');
+                $('#form-logo_url_html').html('<img class="img-responsive" src="'+logo_url+'">');
             }
-            logo_url_ele.val(logo_url);
+            $('#form-logo_url').val(logo_url);
             $('#form-qcloud_file_id').val(qcloud_file_id);
             $('#form-qcloud_app_id').val(qcloud_app_id);
             $('#form-is_show').val(is_show);
+            $('#form-course_class_id').val(course_class_id);
+            $('#form-teacher_id').val(teacher_id);
+
+            if(course_class_has_teacher == 1){
+                $('#teacher_id_parentDiv').show();
+            }else {
+                $('#teacher_id_parentDiv').hide();
+            }
+            if(course_class_has_phase == 1){
+                $('#phase_id_parentDiv').show();
+            }else {
+                $('#phase_id_parentDiv').hide();
+            }
             getExerciseList({'ids':exercise_ids});
 
         });
@@ -226,6 +250,21 @@
                 maxmin: true,
                 content: '/exercise/table?site_id={{$_GET['site_id'] ?? ''}}'
             });
+        });
+
+        /*课程类型*/
+        $('#form-course_class_id').on('change', function () {
+            var selected_option = this.options[this.selectedIndex];
+            if(selected_option.getAttribute('data-has_teacher') == 1){
+                $('#teacher_id_parentDiv').show();
+            }else {
+                $('#teacher_id_parentDiv').hide();
+            }
+            if(selected_option.getAttribute('data-has_phase') == 1){
+                $('#phase_id_parentDiv').show();
+            }else {
+                $('#phase_id_parentDiv').hide();
+            }
         });
     });
 </script>

@@ -2,6 +2,8 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\CourseClass;
+use Modules\Admin\Entities\Teacher;
 use Modules\Admin\Entities\ThyroidClassPhase;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse as Model;
@@ -22,6 +24,8 @@ class CourseController extends Controller
             return view('admin::backend.course.index', [
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
                 'phases' => ThyroidClassPhase::all(),
+                'course_classes' => CourseClass::where('status', 1)->get(),
+                'teachers' => Teacher::all(),
             ]);
         }else{
             return redirect('/site');
@@ -40,6 +44,15 @@ class CourseController extends Controller
         $data = $request->all();
         $id = $request->input('id');
         $exercise_ids = $request->input('exercise_ids');
+        $course_classes = CourseClass::find($data['course_class_id']);
+        if(!$course_classes['has_teacher']){
+            // 如果类别没有讲师，则teacher_id为空
+            $data['teacher_id'] = '';
+        }
+        if(!$course_classes['has_children']){
+            // 如果类别没有所属单元，则thyroid_class_phase_id为空
+            $data['thyroid_class_phase_id'] = '';
+        }
         if($exercise_ids){
             $data['exercise_ids'] = implode(',', $exercise_ids);
         }else{

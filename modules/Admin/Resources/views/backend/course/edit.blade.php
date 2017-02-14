@@ -23,6 +23,38 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label">课程类别</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="course_class_id" id="form-course_class_id">
+                @foreach($course_classes as $course_class)
+                  <option value="{{$course_class->id}}" data-has_teacher="{{$course_class->has_teacher}}" data-has_phase="{{$course_class->has_children}}">{{$course_class->name}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group" id="teacher_id_parentDiv">
+            <label class="col-sm-2 control-label">讲师</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="teacher_id" id="form-teacher_id">
+                <option value="">-请选择-</option>
+                @foreach($teachers as $teacher)
+                  <option value="{{$teacher->id}}">{{$teacher->name}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group" id="phase_id_parentDiv">
+            <label class="col-sm-2 control-label">所属单元</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="thyroid_class_phase_id" id="form-thyroid_class_phase_id">
+                <option value="">-请选择-</option>
+                @foreach($phases as $phase)
+                  <option value="{{$phase->id}}">{{$phase->title}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">是否显示</label>
             <div class="col-sm-10">
               <select class="form-control" name="is_show" id="form-is_show">
@@ -53,20 +85,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">所属单元</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="thyroid_class_phase_id" id="form-thyroid_class_phase_id">
-                <option value="">-请选择-</option>
-                @foreach($phases as $phase)
-                  <option value="{{$phase->id}}">{{$phase->title}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
             <label class="col-sm-2 control-label">缩略图</label>
             <div class="col-sm-10">
               <input type="text" required class="form-control" name="logo_url" id="form-logo_url" placeholder="">
+              <div id="form-logo_url_html"></div>
             </div>
           </div>
           <div class="form-group">

@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Entities;
 
+use App\Models\CourseClass;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -46,6 +47,7 @@ class ThyroidClassCourse extends Model
         'sequence',
         'exercise_ids',
         'site_id',
+        'course_class_id',
     ];
 
     /**
@@ -82,5 +84,13 @@ class ThyroidClassCourse extends Model
         } else {
             return 0;
         }
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function courseClass()
+    {
+        return $this->belongsTo(CourseClass::class);
     }
 }
