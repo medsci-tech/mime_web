@@ -48,4 +48,9 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
     Route::delete('/exercise', 'ExerciseController@destroy');
     Route::post('/exercise/get_list', 'ExerciseController@getList');
 
+    /* 消息 */
+    Route::get('/msg', 'MsgController@index');
+    Route::get('/msg/set', 'MsgController@set');
+    Route::get('/msg/get', 'MsgController@get');
+
 });
