@@ -12,12 +12,15 @@ class CrateCourseClass extends Migration
      */
     public function up()
     {
-        Schema::create('course_class', function (Blueprint $table) {
+        Schema::create('course_classes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->comment('名称');
-            $table->integer('site_id')->default(1)->comment('站点id');
+            $table->tinyInteger('site_id')->default(1)->comment('站点id');
             $table->tinyInteger('status')->default(0)->comment('状态');
+            $table->tinyInteger('has_teacher')->default(0)->comment('是否有专家 0：无 1：有');
+            $table->tinyInteger('has_children')->default(0)->comment('是否有单元目录结构 1：是 0：否');
             $table->timestamps();
+            $table->index('site_id');
         });
     }
 

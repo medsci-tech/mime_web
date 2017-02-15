@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSiteIdToThyoidPhaseCourseBanner extends Migration
+class AddSiteIdToTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,25 +17,28 @@ class AddSiteIdToThyoidPhaseCourseBanner extends Migration
     public function up()
     {
         Schema::table('thyroid_classes', function(Blueprint $table) {
-            $table->integer('site_id')->default(1)->comment('所属站点');
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
         });
         Schema::table('thyroid_class_phases', function(Blueprint $table) {
-            $table->integer('site_id')->default(1)->comment('所属站点');
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
         });
         Schema::table('thyroid_class_courses', function(Blueprint $table) {
-            $table->integer('site_id')->default(1)->comment('所属站点');
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
         });
         Schema::table('banners', function(Blueprint $table) {
-            $table->integer('site_id')->default(1)->comment('所属站点');
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
         });
         Schema::table('exercises', function(Blueprint $table) {
-            $table->integer('site_id')->default(1)->comment('所属站点');
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
         });
         Schema::table('teachers', function(Blueprint $table) {
-            $table->integer('site_id')->default(1)->comment('所属站点');
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
         });
         Schema::table('students', function(Blueprint $table) {
-            $table->integer('site_id')->default(1)->comment('所属站点');
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
+        });
+        Schema::table('student_statistics', function(Blueprint $table) {
+            $table->tinyInteger('site_id')->default(1)->comment('所属站点');
         });
     }
 
