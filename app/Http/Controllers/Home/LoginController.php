@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\WebController;
-use App\Models\Student;
+use Modules\Admin\Entities\Student;
 
 /**
  * Class LoginController
@@ -19,6 +19,7 @@ class LoginController extends WebController
      */
     public function showLoginForm()
     {
+        dd(1);
         return view('home.login');
     }
 
