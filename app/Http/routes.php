@@ -33,28 +33,6 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home'], function () {
 
 });
 
-
-Route::group(['prefix' => 'thyroid-class', 'namespace' => 'ThyroidClass'], function () {
-
-    Route::get('/index', 'ThyroidClassController@index');
-    Route::get('/phases', 'ThyroidClassController@phases');
-    Route::get('/teachers', 'ThyroidClassController@teachers');
-    Route::get('/questions', 'ThyroidClassController@questions');
-    Route::any('/enter', 'ThyroidClassController@enter');
-    Route::any('/update-statistics', 'ThyroidClassController@updateStatistics');
-
-//    Route::group(['prefix' => 'sign-up'], function () {
-//        Route::get('/create', 'SignUpController@create');
-//        Route::post('/store', 'SignUpController@store');
-//    });
-
-    Route::group(['prefix' => 'course'], function () {
-        Route::get('/view', 'CourseController@view');
-        Route::any('/timer', 'CourseController@timer');
-    });
-
-});
-
 Route::group(['prefix' => 'charts'], function(){
     Route::get('/bar', function() {
         return view('backend.charts.charts_bar');

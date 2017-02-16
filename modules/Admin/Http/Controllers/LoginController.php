@@ -1,10 +1,9 @@
 <?php
 namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
-use Pingpong\Modules\Routing\Controller;
 use App\Http\Requests;
 use App\Http\Controllers\WebController;
-use App\Models\Student;
+use Modules\Admin\Entities\Student;
 
 /**
  * Class LoginController
