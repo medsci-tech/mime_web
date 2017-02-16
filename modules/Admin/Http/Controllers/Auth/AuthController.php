@@ -78,4 +78,13 @@ class AuthController extends Controller
         }
         return view('admin::auth.login');
     }
+
+    public function showRegistrationForm()
+    {
+        if (property_exists($this, 'registerView')) {
+            return view($this->registerView);
+        }
+
+        return view('admin::auth.register');
+    }
 }
