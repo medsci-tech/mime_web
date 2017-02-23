@@ -1,4 +1,4 @@
-<?php namespace Modules\Openclass\Http\Controllers;
+<?php namespace Modules\OpenClass\Http\Controllers;
 
 use App\Http\Controllers\WebController;
 use Modules\Openclass\Entities\Student;
