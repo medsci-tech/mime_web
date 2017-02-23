@@ -1,13 +1,13 @@
 <?php namespace Modules\OpenClass\Http\Controllers;
 
 use App\Http\Controllers\WebController;
-use Modules\Openclass\Entities\Student;
+use Modules\OpenClass\Entities\Student;
 use App\Models\Banner;
-use Modules\Openclass\Entities\PlayLog;
-use Modules\Openclass\Entities\Teacher;
+use Modules\OpenClass\Entities\PlayLog;
+use Modules\OpenClass\Entities\Teacher;
 use App\Models\ThyroidClass;
-use Modules\Openclass\Entities\ThyroidClassCourse;
-use Modules\Openclass\Entities\ThyroidClassPhase;
+use Modules\OpenClass\Entities\ThyroidClassCourse;
+use Modules\OpenClass\Entities\ThyroidClassPhase;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
