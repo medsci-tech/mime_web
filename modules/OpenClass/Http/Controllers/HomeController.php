@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Pingpong\Modules\Routing\Controller;
 
-class HomeClassController extends WebController {
+class HomeController extends WebController {
 	
 	public function index()
 	{
