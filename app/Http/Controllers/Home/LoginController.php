@@ -19,7 +19,6 @@ class LoginController extends WebController
      */
     public function showLoginForm()
     {
-        dd(1);
         return view('home.login');
     }
 

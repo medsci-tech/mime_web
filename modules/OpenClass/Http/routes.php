@@ -7,5 +7,5 @@
 Route::group(['domain' =>env('OPEN_DOMAIN'),'middleware' => 'web', 'prefix' => '', 'namespace' => 'Modules\OpenClass\Http\Controllers'], function()
 {
 	#Route::get('/', 'OpenClassController@index');
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeClassController@index');
 });
