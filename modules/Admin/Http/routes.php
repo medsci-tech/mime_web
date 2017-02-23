@@ -49,8 +49,12 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
     Route::post('/exercise/get_list', 'ExerciseController@getList');
 
     /* 消息 */
-    Route::get('/msg', 'MsgController@index');
-    Route::get('/msg/set', 'MsgController@set');
-    Route::get('/msg/get', 'MsgController@get');
+    Route::get('/msg/all', 'MsgController@all');
+    Route::get('/msg/site', 'MsgController@site');
+    Route::get('/msg/user', 'MsgController@user');
+    Route::post('/msg/set_all', 'MsgController@setAllMsg');
+    Route::post('/msg/set_site', 'MsgController@setSiteMsg');
+    Route::post('/msg/set_user', 'MsgController@setUserMsg');
+    Route::get('/msg/delete', 'MsgController@delete');
 
 });

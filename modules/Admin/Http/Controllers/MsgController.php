@@ -2,37 +2,123 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Redis;
+use Cache;
+use Modules\Admin\Entities\Site;
 
 class MsgController extends Controller
 {
-    public function index(){
-        $redis = Redis::connection();;
-        dd($redis);
+    protected $all_msg_key = 'all_station_msg';
+    protected $site_msg_key = 'site_station_msg';
+    protected $user_msg_key = 'user_station_msg';
+
+    public function all(){
+        $cache = Cache::get($this->all_msg_key);
+        $sites = Site::where('status',1)->get();
+
+        return view('admin::backend.msg.index',[
+            'lists' => $cache,
+            'sites' => $sites,
+            'list_row' => null,
+        ]);
+    }
+    public function site(){
+        $cache = Cache::get($this->site_msg_key);
+        $sites = Site::where('status',1)->get();
+
+        return view('admin::backend.msg.index',[
+            'lists' => $cache,
+            'sites' => $sites,
+            'list_row' => [
+                'th' => '站点',
+                'td' => 'site_id',
+            ],
+        ]);
+    }
+    public function user(){
+        $cache = Cache::get($this->user_msg_key);
+        $sites = Site::where('status',1)->get();
+
+        return view('admin::backend.msg.index',[
+            'lists' => $cache,
+            'sites' => $sites,
+            'list_row' => [
+                'th' => '用户',
+                'td' => 'phone',
+            ],
+        ]);
     }
 
-    public function set(){
-//        $key = 'user:name:6';
-//        $user = json_encode(['324','rewr']);
-//        $redis = Redis::set($key,$user);
-
-//        $redis = Redis::pipeline(function ($pipe) {
-//            for ($i = 0; $i < 10; $i++) {
-//                $pipe->set("key:$i", $i);
-//            }
-//        });
-
-        $redis = Redis::publish('test-channel', 'hehe123214');
-        dd($redis);
+    public function setAllMsg(Request $request){
+        $value = [
+            'content' => $request->input('content'),
+            'created_at' => Carbon::now(),
+        ];
+        $exits = Cache::has($this->all_msg_key);
+        if($exits){
+            $cache = Cache::get($this->all_msg_key);
+            array_push($cache,$value);
+            Cache::forever($this->all_msg_key,$cache);
+        }else{
+            Cache::forever($this->all_msg_key,[$value]);
+        }
+        $this->flash_success();
+        return redirect(url('/msg/all'));
     }
-    public function get(){
-//        $redis = Redis::get('test-channel');
-//        $redis = Redis::exists('user:name:6');
-        $redis = \Artisan::call('redis:subscribe');
-        dd($redis);
+
+    public function setSiteMsg(Request $request){
+        $site_id = $request->input('site_id');
+        if($site_id){
+            $value = [
+                'site_id' => $site_id,
+                'content' => $request->input('content'),
+                'created_at' => Carbon::now(),
+            ];
+            $exits = Cache::has($this->site_msg_key);
+            if($exits){
+                $cache = Cache::get($this->site_msg_key);
+                array_push($cache,$value);
+                Cache::forever($this->site_msg_key,$cache);
+            }else{
+                Cache::forever($this->site_msg_key,[$value]);
+            }
+            $this->flash_success();
+        }else{
+            $this->flash_error();
+        }
+        return redirect(url('/msg/site'));
+
+    }
+
+
+    public function setUserMsg(Request $request){
+        $phone = $request->input('phone');
+        if($phone){
+            $value = [
+                'phone' => $phone,
+                'content' => $request->input('content'),
+                'created_at' => Carbon::now(),
+            ];
+            $exits = Cache::has($this->user_msg_key);
+            if($exits){
+                $cache = Cache::get($this->user_msg_key);
+                array_push($cache,$value);
+                Cache::forever($this->user_msg_key,$cache);
+            }else{
+                Cache::forever($this->user_msg_key,[$value]);
+            }
+            $this->flash_success();
+        }else{
+            $this->flash_error();
+        }
+        return redirect(url('/msg/user'));
+    }
+
+    public function delete(){
+        Cache::flush();
     }
 
 
