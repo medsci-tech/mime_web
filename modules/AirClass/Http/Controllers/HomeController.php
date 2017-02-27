@@ -1,12 +1,29 @@
 <?php namespace Modules\Airclass\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\ThyroidClass;
+use Modules\Admin\Entities\ThyroidClassCourse;
 use Pingpong\Modules\Routing\Controller;
-class HomeController extends Controller {
-	
+class HomeController extends Controller
+{
+
+    protected $site_id = 1; // airClass site_id
+
 	public function index()
 	{
-		
-		return view('airclass::index');
+        // 轮播图
+        $banners = Banner::where(['site_id' => $this->site_id, 'status' => 1])->get();
+        // 课程介绍
+        $classes = ThyroidClass::where(['site_id' => $this->site_id])->get();
+        // 课程推荐
+        $recommend_classes = ThyroidClassCourse::where(['site_id' => $this->site_id])->orderBy('recomment_time')->limit(5)->get();
+
+		dd($recommend_classes);
+		return view('airclass::home.index',[
+            'banners' => $banners,
+            'classes' => $classes,
+            'recommend_classes' => $recommend_classes,
+        ]);
 	}
 
 
