@@ -47,11 +47,11 @@ class CourseController extends Controller
         $course_classes = CourseClass::find($data['course_class_id']);
         if(!$course_classes['has_teacher']){
             // 如果类别没有讲师，则teacher_id为空
-            $data['teacher_id'] = '';
+            $data['teacher_id'] = 0;
         }
         if(!$course_classes['has_children']){
             // 如果类别没有所属单元，则thyroid_class_phase_id为空
-            $data['thyroid_class_phase_id'] = '';
+            $data['thyroid_class_phase_id'] = 0;
         }
         if($exercise_ids){
             $data['exercise_ids'] = implode(',', $exercise_ids);
