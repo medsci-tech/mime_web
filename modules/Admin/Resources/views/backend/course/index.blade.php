@@ -169,13 +169,13 @@
             $('#form-id').val(defaltData);
             $('#form-sequence').val(defaltData);
             $('#form-title').val(defaltData);
-            $('#form-thyroid_class_phase_id').val(defaltData);
+            $('#form-thyroid_class_phase_id').val(0);
             $('#form-logo_url').val(defaltData);
             $('#form-qcloud_file_id').val(defaltData);
             $('#form-qcloud_app_id').val(defaltData);
             $('#form-is_show').val(1);
             $('#form-course_class_id').val(defaltData);
-            $('#form-teacher_id').val(defaltData);
+            $('#form-teacher_id').val(0);
             tableListBody.html(defaltData);
         });
         $('[data-btn="edit"]').click(function () {
