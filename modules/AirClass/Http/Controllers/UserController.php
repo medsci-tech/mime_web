@@ -1,24 +1,13 @@
 <?php namespace Modules\Airclass\Http\Controllers;
 
-
+use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Student;
 
 class UserController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
-		$password = '123456';
-		$user = Student::where(['phone' => '13554498149'])->first();
-//		if($user['password'] == \Hash::make($password)){
-//			\Auth::login($user);
-//		}else{
-//			dd(\Hash::make($password));
-//		}
-		$abc = \Auth::attempt(['phone' => '13554498149','password' => '123456']);
-//		$students = Student::where('')
-
-
-		dd($abc);
+		dd($request->session()->all());
 	}
 
 	public function info_update()
