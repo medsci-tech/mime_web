@@ -1,6 +1,10 @@
 <?php namespace Modules\Airclass\Http\Controllers;
 
+use Auth;
+use Hash;
 use Illuminate\Http\Request;
+use Modules\AirClass\Entities\Student;
+use Session;
 
 class UserPublicController extends Controller
 {
@@ -10,7 +14,9 @@ class UserPublicController extends Controller
      */
 	public function register_view()
 	{
-        dd('register');
+
+		$session = Session::get('login_student');
+		dd($session);
 	}
 
 	public function register_post(Request $request)
@@ -24,11 +30,37 @@ class UserPublicController extends Controller
 	 */
 	public function login_view()
 	{
-		dd('login');
+		$password = '123456';
+		$username = '13554498149';
+		$user = Student::where('phone', $username)->first();
+		if(Hash::check($password, $user['password'])){
+			Session::set('login_student',$user->id);
+		}else{
+			dd(Hash::make($password));
+		}
+		$session = Session::get('login_student');
+
+		dd($session);
 	}
+
 	public function login_post(Request $request)
 	{
+
+		$password = $request->input('password');
+		$username = $request->input('username');
+		$user = Student::where('phone', $username)->first();
+		if(Hash::check($password, $user['password'])){
+			Auth::login($user);
+			dd(Auth::user()); // 获取登录用户
+		}else{
+			dd(Hash::make($password));
+		}
 		dd('login');
+	}
+
+	public function logout(Request $request)
+	{
+		Auth::logout();
 	}
 
 	/**
@@ -38,6 +70,7 @@ class UserPublicController extends Controller
 	{
 		dd('密码找回');
 	}
+
 	public function pwd_recover_post(Request $request)
 	{
 		dd('密码找回');

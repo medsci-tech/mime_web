@@ -1,9 +1,9 @@
 <?php
 namespace Modules\AirClass\Entities;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Student extends Authenticatable
+class Student extends Model
 {
     /**
      * @var string

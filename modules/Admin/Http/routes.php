@@ -1,6 +1,6 @@
 <?php
 /* 后台系统域名配置env('ADMIN_DOMAIN') */
-Route::group(['middleware' => ['web'], 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web'], 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
     Route::auth();
 });
 
