@@ -1,6 +1,5 @@
 <?php namespace Modules\Airclass\Http\Controllers;
 
-use Auth;
 use Hash;
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Student;
@@ -14,9 +13,7 @@ class UserPublicController extends Controller
      */
 	public function register_view()
 	{
-
-		$session = Session::get('login_student');
-		dd($session);
+		dd('register');
 	}
 
 	public function register_post(Request $request)
@@ -30,37 +27,27 @@ class UserPublicController extends Controller
 	 */
 	public function login_view()
 	{
-		$password = '123456';
-		$username = '13554498149';
-		$user = Student::where('phone', $username)->first();
-		if(Hash::check($password, $user['password'])){
-			Session::set('login_student',$user->id);
-		}else{
-			dd(Hash::make($password));
-		}
-		$session = Session::get('login_student');
+		return 'login';
 
-		dd($session);
 	}
 
 	public function login_post(Request $request)
 	{
-
 		$password = $request->input('password');
 		$username = $request->input('username');
 		$user = Student::where('phone', $username)->first();
 		if(Hash::check($password, $user['password'])){
-			Auth::login($user);
-			dd(Auth::user()); // 获取登录用户
+			Session::set('login_student_session',$user->id);
+			return $this->return_data_format(200);
 		}else{
-			dd(Hash::make($password));
+			return $this->return_data_format(501, '用户名或密码错误');
 		}
-		dd('login');
 	}
 
 	public function logout(Request $request)
 	{
-		Auth::logout();
+		Session::forget('login_student_session');
+		redirect('/login');
 	}
 
 	/**
