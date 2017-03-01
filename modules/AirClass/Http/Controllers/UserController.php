@@ -7,7 +7,8 @@ class UserController extends Controller
 {
 	public function index(Request $request)
 	{
-		dd($request->session()->all());
+		$user = \Session::get('login_student');
+		dd($user);
 	}
 
 	public function info_update()

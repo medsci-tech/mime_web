@@ -1,6 +1,8 @@
 <?php
 /* 后台系统域名配置env('ADMIN_DOMAIN') */
-
+Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web'], 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+    Route::auth();
+});
 
 Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'prefix' => '', 'namespace' => 'Modules\Admin\Http\Controllers'], function(){
     Route::any('/student-logs', 'AdminController@studentLogs');
@@ -54,16 +56,5 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
     Route::post('/msg/set_site', 'MsgController@setSiteMsg');
     Route::post('/msg/set_user', 'MsgController@setUserMsg');
     Route::get('/msg/delete', 'MsgController@delete');
-
-    Route::get('login', 'Auth\AuthController@showLoginForm');
-    Route::post('login', 'Auth\AuthController@login');
-    Route::get('logout', 'Auth\AuthController@logout');
-
-    Route::get('register', 'Auth\AuthController@showRegistrationForm');
-    Route::post('register', 'Auth\AuthController@register');
-
-    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-    Route::post('password/reset', 'Auth\PasswordController@reset');
 
 });

@@ -2,9 +2,9 @@
 
 use Auth;
 use Hash;
-use Session;
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Student;
+use Session;
 
 class UserPublicController extends Controller
 {
@@ -14,7 +14,9 @@ class UserPublicController extends Controller
      */
 	public function register_view()
 	{
-		dd(Session::get('login_student'));
+
+		$session = Session::get('login_student');
+		dd($session);
 	}
 
 	public function register_post(Request $request)
@@ -36,9 +38,9 @@ class UserPublicController extends Controller
 		}else{
 			dd(Hash::make($password));
 		}
-//		var_dump(session());
-//		dd(Session::get('login_student'));
-		dd(Session::all());
+		$session = Session::get('login_student');
+
+		dd($session);
 	}
 
 	public function login_post(Request $request)
