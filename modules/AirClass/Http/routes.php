@@ -14,7 +14,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::get('/search', 'SearchController@index');
 
 	// 视频播放
-	Route::get('/video', 'VideoController@index');
+	Route::get('/video/{id}', 'VideoController@index');
 
 	// 用户公开访问
 	Route::get('/register', 'UserPublicController@register_view');
