@@ -2,13 +2,41 @@
 
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Student;
+use Session;
 
 class UserController extends Controller
 {
-	public function index(Request $request)
+	protected $user = null;
+	public function __construct()
 	{
-		$user = \Session::get('login_student');
-		dd($user);
+		$user = Session::get($this->student_login_session_key);
+		if($user){
+			$this->user = $user;
+		}else{
+			redirect(url('/login'));
+		}
+	}
+	public function study()
+	{
+		dd('video');
+	}
+
+	public function msg()
+	{
+		dd('video');
+	}
+
+	public function question()
+	{
+		dd('video');
+	}
+	public function edit_info()
+	{
+		dd('video');
+	}
+	public function edit_pwd()
+	{
+		dd('video');
 	}
 
 	public function info_update()
@@ -22,6 +50,11 @@ class UserController extends Controller
 	}
 
 
+	public function logout(Request $request)
+	{
+		Session::forget($this->student_login_session_key);
+		redirect('/login');
+	}
 	
 }
 
