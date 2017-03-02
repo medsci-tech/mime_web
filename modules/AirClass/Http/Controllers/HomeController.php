@@ -8,8 +8,6 @@ use Modules\Admin\Entities\ThyroidClassPhase;
 
 class HomeController extends Controller
 {
-
-    protected $site_id = 1; // airClass site_id
     protected $gkk_id = 1; // 空课项目公开课id
     protected $dyk_id = 2; // 空课项目答疑课id
     protected $sjk_id = 3; // 空课项目私教课id
