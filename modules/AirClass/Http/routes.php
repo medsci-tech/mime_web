@@ -24,6 +24,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 
 	//用户登录后访问
 	Route::get('/user', 'UserController@index');
-	Route::get('/user/info_update', 'UserController@info_update');
-	Route::get('/user/pwd_update', 'UserController@pwd_update');
+	Route::post('/user/info_update', 'UserController@info_update');
+	Route::post('/user/pwd_update', 'UserController@pwd_update');
+	Route::post('/user/comment', 'UserController@comment');
 });
