@@ -1,6 +1,7 @@
 <?php namespace Modules\Airclass\Http\Controllers;
 
 use App\Models\Comment;
+use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse;
 use Session;
 
@@ -20,9 +21,18 @@ class VideoController extends Controller
 	 */
 	public function index($id)
 	{
+		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
 		if($class){
-			// 评论
+			//## 章节列表
+			$chapter_classes = ThyroidClassCourse::where([
+				'site_id' => $this->site_id,
+				'is_show' => 1,
+				'course_class_id' => $class->course_class_id,
+				'thyroid_class_phase_id' => $class->thyroid_class_phase_id,
+			])->orderBy('sequence')->get();
+//			dd($chapter_classes);
+			//## 评论
 			$comments = [];
 			// 一级评论
 			$one_comments = Comment::where(['status' => 1, 'class_id' => $class->id, 'parent_id' => 0])->get();
@@ -56,7 +66,27 @@ class VideoController extends Controller
 					}
 				}
 			}
-			dd($comments);
+//			dd($comments);
+			//## 随机推荐课程
+			// 当前相同类别推荐
+			$recommend_class_num = 4; // 推荐课程个数
+			$add_recommend_classes = null; // 追加推荐课程
+			$recommend_classes = ThyroidClassCourse::where([
+				'site_id' => $this->site_id,
+				'is_show' => 1,
+				'course_class_id' => $class->course_class_id,
+				['thyroid_class_phase_id', '>', $class->thyroid_class_phase_id],
+			])->orderBy('sequence')->limit($recommend_class_num)->get();
+			$recommend_class_count = $recommend_classes->count();
+			// 如果下个单元推荐课程少于4个，则追加其他分类课程
+			if($recommend_class_count < $recommend_class_num){
+				$add_recommend_classes = ThyroidClassCourse::where([
+					'site_id' => $this->site_id,
+					'is_show' => 1,
+					['course_class_id', '>', $class->course_class_id],
+				])->orderBy('sequence')->limit($recommend_class_num - $recommend_class_count)->get();
+			}
+//			dd($add_recommend_classes);
 			$user = $this->user;
 			// 查询用户是否登陆
 			if($user){
@@ -66,9 +96,27 @@ class VideoController extends Controller
 				dd('no login');
 			}
 			dd($class);
+			return view('airclass::video.index',[
+				'class' => $class, // 当前课程信息
+				'chapter_classes' => $chapter_classes, // 相关章节列表
+				'comments' => $comments, // 评论列表
+				'recommend_classes' => $recommend_classes, // 推荐课程列表
+				'add_recommend_classes' => $add_recommend_classes, // 追加推荐课程列表
+			]);
 		}else{
 			abort(404);
+			return false;
 		}
+	}
+
+	// 评论
+	public function comment(Request $request){
+		$request_data = $request->all();
+	}
+
+	// 答题
+	public function answer(Request $request){
+		$request_data = $request->all();
 	}
 
 
