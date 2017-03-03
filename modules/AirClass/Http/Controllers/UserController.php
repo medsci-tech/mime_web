@@ -23,12 +23,14 @@ class UserController extends Controller
 
 	public function msg()
 	{
+//		$messages =
 		dd('video');
 	}
 
-	public function question()
+	public function comment()
 	{
-		dd('video');
+		$comments = [];
+		dd('comment');
 	}
 	public function edit_info()
 	{

@@ -35,7 +35,7 @@ class VideoController extends Controller
 			//## 评论
 			$comments = [];
 			// 一级评论
-			$one_comments = Comment::where(['status' => 1, 'class_id' => $class->id, 'parent_id' => 0])->get();
+			$one_comments = Comment::where(['status' => 1, 'class_id' => $class->id, 'parent_id' => 0])->orderBy('id', 'desc')->get();
 			if($one_comments){
 				foreach ($one_comments as $key => $one_comment){
 					$comments[$key] = [
@@ -48,8 +48,8 @@ class VideoController extends Controller
 						'to_name' => $one_comment->to_name,
 						'content' => $one_comment->content,
 					];
-					// 一级评论
-					$two_comments = Comment::where(['status' => 1, 'class_id' => $class->id, 'parent_id' => $one_comment->id])->get();
+					// 二级评论
+					$two_comments = Comment::where(['status' => 1, 'class_id' => $class->id, 'parent_id' => $one_comment->id])->orderBy('id', 'desc')->get();
 					if($two_comments){
 						foreach ($two_comments as $k => $two_comment){
 							$comments[$key]['child'][$k] = [
@@ -91,6 +91,7 @@ class VideoController extends Controller
 			// 查询用户是否登陆
 			if($user){
 				// 查询用户是否报名  调接口
+				// 如果已答题，显示答题信息和解析，未答题，显示题目
 
 			}else{
 				dd('no login');
@@ -102,6 +103,7 @@ class VideoController extends Controller
 				'comments' => $comments, // 评论列表
 				'recommend_classes' => $recommend_classes, // 推荐课程列表
 				'add_recommend_classes' => $add_recommend_classes, // 追加推荐课程列表
+				'user' => $user, // 登陆用户信息
 			]);
 		}else{
 			abort(404);
@@ -112,6 +114,12 @@ class VideoController extends Controller
 	// 评论
 	public function comment(Request $request){
 		$request_data = $request->all();
+		$result = Comment::create($request_data);
+		if($result){
+			return $this->return_data_format(200);
+		}else{
+			return $this->return_data_format(500);
+		}
 	}
 
 	// 答题
