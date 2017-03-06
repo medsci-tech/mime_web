@@ -1,5 +1,6 @@
 <?php namespace Modules\Airclass\Http\Controllers;
 
+use App\Models\AnswerLog;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse;
@@ -125,6 +126,16 @@ class VideoController extends Controller
 	// 答题
 	public function answer(Request $request){
 		$request_data = $request->all();
+		dd($request_data);
+		$save_data = [
+			'',
+		];
+		$result = AnswerLog::create($save_data);
+		if($result){
+			return $this->return_data_format(200);
+		}else{
+			return $this->return_data_format(500);
+		}
 	}
 
 

@@ -14,4 +14,7 @@ return [
         3 => '个人消息',
     ],
 
+    // 用户中心接口地址
+    'md_user_api_domain' => 'airclass.mimeweb.dev'
+
 ];
