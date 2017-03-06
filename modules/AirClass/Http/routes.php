@@ -20,6 +20,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 
 	// 用户公开访问
 	Route::get('/register', 'UserPublicController@register_view');
+	Route::post('/register/post', 'UserPublicController@register_post');
 	Route::get('/login', 'UserPublicController@login_view');
 	Route::get('/logout', 'UserPublicController@logout');
 	Route::get('/pwd_recover', 'UserPublicController@pwd_recover_view');
