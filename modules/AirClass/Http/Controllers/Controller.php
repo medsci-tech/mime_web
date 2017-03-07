@@ -11,6 +11,11 @@ class Controller extends BaseController
     {
         return ['code' => $code, 'msg' => $msg, 'data' => $data];
     }
+
+    protected function verify_code_post($phone, $code)
+    {
+        return $this->return_data_format(200);
+    }
 	
 }
 

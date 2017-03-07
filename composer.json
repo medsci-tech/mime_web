@@ -12,7 +12,8 @@
         "maatwebsite/excel": "~2.1.0",
 		"pingpong/modules": "^2.2",
         "vinelab/http": "dev-master",
-        "nesbot/carbon": "^1.22"
+        "nesbot/carbon": "^1.22",
+        "curl/curl": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
