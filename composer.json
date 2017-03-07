@@ -12,8 +12,7 @@
         "maatwebsite/excel": "~2.1.0",
 		"pingpong/modules": "^2.2",
         "vinelab/http": "dev-master",
-        "nesbot/carbon": "^1.22",
-        "guzzlehttp/guzzle": "^6.2"
+        "nesbot/carbon": "^1.22"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
