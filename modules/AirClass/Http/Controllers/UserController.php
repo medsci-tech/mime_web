@@ -7,6 +7,7 @@ use Session;
 use \App\Model\Doctor;
 use \App\Model\Hospital;
 use \App\Model\Address;
+use Hash;
 class UserController extends Controller
 {
 	protected $user = null;
@@ -54,10 +55,49 @@ class UserController extends Controller
 		dd('密码修改');
 	}
 
+    public function getReset()
+    {
+        return view('auth.reset');
+    }
+    /**
+     * 个人密码修改
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
+    public function postReset(Request $request)
+    {
+        $phone = $request->input('phone');
+        $password = $request->input('password');
+        $data = $request->all();
+        $rules = [
+            'phone' => 'required|digits:11',
+            'code' => 'required|digits:6',
+            'password'=>'required|between:6,20|confirmed',
+        ];
+        $messages = [
+            'phone.required' => '电话号码不能为空',
+            'code.required' => '验证码必须是6位',
+            'password.required' => '密码不能为空',
+            'password.between' => '密码必须是6~20位之间',
+            'confirmed' => '新密码和确认密码不匹配'
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+
+        $user = Auth::user();
+        if (!$validator->fails()) {
+            $user->password = Hash::make($password);
+            $user->save();
+        }
+        else
+            return ['status_code' => 0,'message' =>'修改失败!请完善资料!'];
+
+        //Auth::logout();  //更改完这次密码后，退出这个用户
+        //return redirect('/login');
+    }
 
     /**
      * 个人资料修改
-     * param data  要保存的字段键值对
      * @author      lxhui<772932587@qq.com>
      * @since 1.0
      * @return array
@@ -164,7 +204,6 @@ class UserController extends Controller
             }
 
         }
-
         return ['status_code' => 200, 'message'=>'保存成功!'];
 
     }
