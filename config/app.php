@@ -161,7 +161,7 @@ return [
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Vinelab\Http\HttpServiceProvider::class
+        Vinelab\Http\HttpServiceProvider::class,
     ],
 
     /*
@@ -210,6 +210,6 @@ return [
         'Message' =>  App\Helpers\Message\Facades\Message::class,
         'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class,
         'Excel'  => Maatwebsite\Excel\Facades\Excel::class,
-        'MyHttp' => Vinelab\Http\Facades\Client::class
+        'MyHttp' => Vinelab\Http\Facades\Client::class,
     ],
 ];
