@@ -1,19 +1,21 @@
 <?php
-
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Doctor extends Model
 {
-    protected $guarded = [];
 
-    public function hospital()
-    {
-        return $this->belongsTo('App\Model\Hospital', 'hospital_id');
-    }
-    public function officeRecord()
-    {
-        return $this->belongsTo('App\Model\Office', 'office','office_id');
-    }
+    protected $table = 'doctors';
+
+    protected $fillable = [
+        'name',
+        'phone',
+        'password',
+        'hospital_id',
+        'office',
+        'email',
+        'title',
+    ];
+
 }

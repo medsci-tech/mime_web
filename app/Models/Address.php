@@ -1,16 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Chelsea
- * Date: 2016/4/16
- * Time: 19:15
- */
 
-namespace App\Model;
-
+namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-
+    protected $table = 'address';
 }
