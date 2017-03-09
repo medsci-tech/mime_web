@@ -6,6 +6,7 @@ use Hash;
 use Illuminate\Http\Request;
 use DB;
 use Modules\AirClass\Entities\Student;
+use Modules\Airclass\Http\Requests\UserRegisterRequest;
 use Session;
 
 class UserPublicController extends Controller
@@ -27,13 +28,14 @@ class UserPublicController extends Controller
             'office' => '脑神经科',
             'title' => '主任',
         ];
-
+        return csrf_token();
 
     }
 
     public function register_post(Request $request)
     {
         $req_phone = $request->input('phone'); //手机号
+        $req_code = $request->input('code'); //手机验证码
         $req_pwd = $request->input('password'); //密码
         $req_province = $request->input('province'); //省
         $req_city = $request->input('city'); //市
@@ -42,7 +44,30 @@ class UserPublicController extends Controller
         $req_hospital_name = $request->input('hospital_name'); //医院名称
         $req_office = $request->input('office'); //科室
         $req_title = $request->input('title'); //职称
-
+        // 检测手机号有效性
+        $validator = \Validator::make(
+            $request->all(),
+            [
+                'phone' => [
+                    'required',
+                    'regex:/^1[35789]\d{9}$/',
+                ],
+            ],
+            [
+                'phone.required' => '手机号不能为空',
+                'phone.regex' => '手机号格式错误',
+            ]
+            );
+        $validator_error_first = $validator->errors()->first();
+        if($validator_error_first){
+            return $this->return_data_format(422, $validator_error_first);
+        }
+        // 检测手机验证码有效性
+        $sms = new SmsController();
+        $check_code = $sms->verify_code($req_phone, $req_code);
+        if($check_code['code'] != 200){
+            return $this->return_data_format(422, '验证码错误或已失效');
+        }
         // 检验手机号是否注册
         $doctor = Doctor::where('phone', $req_phone)->first();
         if($doctor){
@@ -148,7 +173,7 @@ class UserPublicController extends Controller
      */
     public function pwd_recover_view()
     {
-        dd('密码找回');
+        return view('airclass::userPublic.pwd_recover');
     }
 
     /**
@@ -186,11 +211,13 @@ class UserPublicController extends Controller
     public function send_code_post(Request $request)
     {
         $phone = $request->input('phone');
-        $check_format =
+        $code = $request->input('code');
         $sms = new SmsController();
-        $check_code = $sms->send_sms($phone, $verify_code);
 
-        dd('发送验证码接口');
+//        $res = $sms->send_sms($phone);
+        $res = $sms->verify_code($phone, $code);
+
+return $res;
     }
 
 
