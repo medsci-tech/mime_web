@@ -18,4 +18,9 @@ class Doctor extends Model
         'title',
     ];
 
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class);
+    }
+
 }

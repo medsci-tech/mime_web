@@ -24,6 +24,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::get('/login', 'UserPublicController@login_view');
 	Route::get('/logout', 'UserPublicController@logout');
 	Route::get('/pwd_recover', 'UserPublicController@pwd_recover_view');
+	Route::post('/sms/send', 'UserPublicController@send_code_post');
 
 	//用户登录后访问
 	Route::get('/user', 'UserController@index');

@@ -2,11 +2,9 @@
 
 use App\Models\Doctor;
 use App\Models\Hospital;
-use Curl\Curl;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
-use Mockery\CountValidator\Exception;
 use Modules\AirClass\Entities\Student;
 use Session;
 
@@ -107,7 +105,7 @@ class UserPublicController extends Controller
                 return $this->return_data_format(500, $api_to_uc_res['msg']);
             }
         }else{
-            return $this->return_data_format(404, '添加医生信息失败');
+            return $this->return_data_format(404, '注册失败');
         }
     }
 
@@ -132,10 +130,10 @@ class UserPublicController extends Controller
                 'nickname' => $user->nickname, // 昵称
                 'headimgurl' => $user->headimgurl, // 头像
                 'phone' => $user->phone,
-                'province' => $user->province,
-                'city' => $user->city,
-                'area' => $user->area,
-                'hospital_name' => $user->hospital_name, // 医院名称
+                'province' => $user->hospital->province,
+                'city' => $user->hospital->city,
+                'area' => $user->hospital->country,
+                'hospital_name' => $user->hospital, // 医院名称
                 'office' => $user->office, // 科室
                 'title' => $user->title, // 职称
             ]);
@@ -164,7 +162,9 @@ class UserPublicController extends Controller
         $verify_code = $request->input('verify_code'); // 短信验证码
         $password = $request->input('password'); // 密码
         $re_password = $request->input('re_password'); // 重复密码
-        $check_code = $this->verify_code_post($phone, $verify_code); // 校验短信验证码
+        // 校验短信验证码
+        $sms = new SmsController();
+        $check_code = $sms->verify_code_post($phone, $verify_code);
         if($check_code['code'] == 200){
             // 验证两次密码输入是否一致
             if($password == $re_password){
@@ -185,6 +185,10 @@ class UserPublicController extends Controller
 
     public function send_code_post(Request $request)
     {
+        $phone = $request->input('phone');
+        $check_format =
+        $sms = new SmsController();
+        $check_code = $sms->send_sms($phone, $verify_code);
 
         dd('发送验证码接口');
     }
