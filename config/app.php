@@ -162,6 +162,10 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Vinelab\Http\HttpServiceProvider::class,
+
+        // sms
+        Toplan\PhpSms\PhpSmsServiceProvider::class,
+        Toplan\Sms\SmsManagerServiceProvider::class,
     ],
 
     /*
@@ -211,5 +215,8 @@ return [
         'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class,
         'Excel'  => Maatwebsite\Excel\Facades\Excel::class,
         'MyHttp' => Vinelab\Http\Facades\Client::class,
+        // sms
+        'PhpSms' => Toplan\PhpSms\Facades\Sms::class,
+        'SmsManager' => Toplan\Sms\Facades\SmsManager::class,
     ],
 ];
