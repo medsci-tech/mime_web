@@ -6,11 +6,21 @@ use Hash;
 use Illuminate\Http\Request;
 use DB;
 use Modules\AirClass\Entities\Student;
-use Modules\Airclass\Http\Requests\UserRegisterRequest;
 use Session;
+use Validator;
 
 class UserPublicController extends Controller
 {
+
+    protected $phone_rules = [
+        'required',
+        'regex:/^1[35789]\d{9}$/',
+    ];
+    protected $validator_msg = [
+        'phone.required' => '手机号不能为空',
+        'phone.regex' => '手机号格式错误',
+        'email.required' => 'xyy号格式错误',
+    ];
 
     /**
      * @return mixed
@@ -34,6 +44,21 @@ class UserPublicController extends Controller
 
     public function register_post(Request $request)
     {
+        $validator = Validator::make(
+            // 参数
+            $request->all(),
+            // 规则
+            [
+                'phone' => $this->phone_rules,
+            ],
+            // 提示语
+            $this->validator_msg
+        );
+        $validator_error_first = $validator->errors()->first();
+        if($validator_error_first){
+            return $this->return_data_format(422, $validator_error_first);
+        }
+        dd($validator_error_first);
         $req_phone = $request->input('phone'); //手机号
         $req_code = $request->input('code'); //手机验证码
         $req_pwd = $request->input('password'); //密码
@@ -44,24 +69,7 @@ class UserPublicController extends Controller
         $req_hospital_name = $request->input('hospital_name'); //医院名称
         $req_office = $request->input('office'); //科室
         $req_title = $request->input('title'); //职称
-        // 检测手机号有效性
-        $validator = \Validator::make(
-            $request->all(),
-            [
-                'phone' => [
-                    'required',
-                    'regex:/^1[35789]\d{9}$/',
-                ],
-            ],
-            [
-                'phone.required' => '手机号不能为空',
-                'phone.regex' => '手机号格式错误',
-            ]
-            );
-        $validator_error_first = $validator->errors()->first();
-        if($validator_error_first){
-            return $this->return_data_format(422, $validator_error_first);
-        }
+
         // 检测手机验证码有效性
         $sms = new SmsController();
         $check_code = $sms->verify_code($req_phone, $req_code);
@@ -144,11 +152,12 @@ class UserPublicController extends Controller
 
     }
 
-    public function login_post(Request $request)
+    // 账号密码登陆
+    public function login_account_post(Request $request)
     {
+        $account = $request->input('account');
         $password = $request->input('password');
-        $username = $request->input('username');
-        $user = Doctor::where('phone', $username)->first();
+        $user = Doctor::where('phone', $account)->first();
         if (Hash::check($password, $user['password'])) {
             Session::set($this->student_login_session_key, [
                 'id' => $user->id,
@@ -167,6 +176,37 @@ class UserPublicController extends Controller
             return $this->return_data_format(501, '用户名或密码错误');
         }
     }
+
+    // 手机验证码登陆
+    public function login_phone_post(Request $request){
+        $account = $request->input('account');
+        $code = $request->input('code');
+        $sms = new SmsController();
+        $check_code = $sms->verify_code($account, $code);
+//        if(){
+//
+//        }
+        $user = Doctor::where('phone', $account)->first();
+        if ($user) {
+            Session::set($this->student_login_session_key, [
+                'id' => $user->id,
+                'nickname' => $user->nickname, // 昵称
+                'headimgurl' => $user->headimgurl, // 头像
+                'phone' => $user->phone,
+                'province' => $user->hospital->province,
+                'city' => $user->hospital->city,
+                'area' => $user->hospital->country,
+                'hospital_name' => $user->hospital, // 医院名称
+                'office' => $user->office, // 科室
+                'title' => $user->title, // 职称
+            ]);
+            return $this->return_data_format(200);
+        } else {
+            return $this->return_data_format(501, '手机号未注册');
+        }
+    }
+
+    // 微信登陆 todo
 
     /**
      * @return mixed
@@ -189,7 +229,7 @@ class UserPublicController extends Controller
         $re_password = $request->input('re_password'); // 重复密码
         // 校验短信验证码
         $sms = new SmsController();
-        $check_code = $sms->verify_code_post($phone, $verify_code);
+        $check_code = $sms->verify_code($phone, $verify_code);
         if($check_code['code'] == 200){
             // 验证两次密码输入是否一致
             if($password == $re_password){
