@@ -5,6 +5,7 @@ use App\Models\Hospital;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
+use Mockery\CountValidator\Exception;
 use Modules\AirClass\Entities\Student;
 use Session;
 use Validator;
@@ -12,17 +13,62 @@ use Validator;
 class UserPublicController extends Controller
 {
 
-    protected $phone_rules = 'required|regex:/^1[35789]\d{9}$/';
-    protected $password_rules = 'required|min:6|max:22|regex:/^[\w\.-]{6,22}$/';
-    protected $validator_msg = [
-        'phone.required' => '手机号不能为空',
-        'phone.regex' => '手机号格式错误',
-        'password.required' => '密码不能为空',
-        'password.regex' => '密码格式只支持6-22位字母数字下划线及-+_.组合',
-    ];
+    /**
+     * 验证参数合法性
+     * @param array $data
+     * @return array
+     */
+    protected function validator_params(array $data){
+        $rules = [];
+        if(array_key_exists('phone', $data)){
+            $rules['phone'] = 'required|regex:/^1[35789]\d{9}$/';
+        }
+        if(array_key_exists('password', $data)){
+            $rules['password'] = 'required|min:6|max:22|regex:/^[\w\.-]{6,22}$/';
+        }
+        $msg = [
+            'phone.required' => '手机号不能为空',
+            'phone.regex' => '手机号格式错误',
+            'password.required' => '密码不能为空',
+            'password.regex' => '密码格式只支持6-22位字母数字下划线及-+_.组合',
+        ];
+        $validator = Validator::make($data, $rules, $msg);
+        $validator_error_first = $validator->errors()->first();
+        if($validator_error_first){
+            return $this->return_data_format(422, $validator_error_first);
+        }else{
+            return $this->return_data_format(200);
+        }
 
-    public function validator_params(){
+    }
 
+    /**
+     * 账号登陆和短信登陆公共方法
+     * @param $user
+     * @return array
+     */
+    protected function login_core($user){
+        $save_data = [
+            'id' => $user->id,
+            'nickname' => $user->nickname, // 昵称
+            'headimgurl' => $user->headimgurl, // 头像
+            'phone' => $user->phone,
+            'office' => $user->office, // 科室
+            'title' => $user->title, // 职称
+        ];
+        if($user->hospital){
+            $save_data['province'] = $user->hospital->province;
+            $save_data['city'] = $user->hospital->city;
+            $save_data['area'] = $user->hospital->country;
+            $save_data['hospital_name'] = $user->hospital->hospital;
+        }else{
+            $save_data['province'] = '';
+            $save_data['city'] = '';
+            $save_data['area'] = '';
+            $save_data['hospital_name'] = '';
+        }
+        Session::set($this->student_login_session_key, $save_data);
+        return $save_data;
     }
 
     /**
@@ -45,21 +91,18 @@ class UserPublicController extends Controller
 
     }
 
+    /**
+     * 注册
+     * @param Request $request
+     * @return array
+     */
     public function register_post(Request $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'phone' => $this->phone_rules,
-                'password' => $this->password_rules,
-            ],
-            $this->validator_msg
-        );
-        $validator_error_first = $validator->errors()->first();
-        if($validator_error_first){
-            return $this->return_data_format(422, $validator_error_first);
+        // 验证参数合法性
+        $validator_params = $this->validator_params($request->all());
+        if($validator_params['code'] != 200){
+            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
         }
-
         $req_phone = $request->input('phone'); //手机号
         $req_code = $request->input('code'); //手机验证码
         $req_pwd = $request->input('password'); //密码
@@ -153,55 +196,56 @@ class UserPublicController extends Controller
 
     }
 
-    // 账号密码登陆
+    /**
+     * 账号密码登陆
+     * @param Request $request
+     * @return array
+     */
     public function login_account_post(Request $request)
     {
-        $account = $request->input('account');
+        // 验证参数合法性
+        $validator_params = $this->validator_params($request->all());
+        if($validator_params['code'] != 200){
+            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
+        }
+        $phone = $request->input('phone');
         $password = $request->input('password');
-        $user = Doctor::where('phone', $account)->first();
-        if (Hash::check($password, $user['password'])) {
-            Session::set($this->student_login_session_key, [
-                'id' => $user->id,
-                'nickname' => $user->nickname, // 昵称
-                'headimgurl' => $user->headimgurl, // 头像
-                'phone' => $user->phone,
-                'province' => $user->hospital->province,
-                'city' => $user->hospital->city,
-                'area' => $user->hospital->country,
-                'hospital_name' => $user->hospital, // 医院名称
-                'office' => $user->office, // 科室
-                'title' => $user->title, // 职称
-            ]);
-            return $this->return_data_format(200);
-        } else {
-            return $this->return_data_format(501, '用户名或密码错误');
+        $user = Doctor::where('phone', $phone)->first();
+        if($user){
+            if (Hash::check($password, $user['password'])) {
+                $save_data = $this->login_core($user);
+                return $this->return_data_format(200,'登陆成功', $save_data);
+            } else {
+                return $this->return_data_format(422, '用户名或密码错误');
+            }
+        }else{
+            return $this->return_data_format(501, '手机号未注册');
         }
     }
 
-    // 手机验证码登陆
+    /**
+     * 手机验证码登陆
+     * @param Request $request
+     * @return array
+     */
     public function login_phone_post(Request $request){
-        $account = $request->input('account');
+        // 验证参数合法性
+        $validator_params = $this->validator_params($request->all());
+        if($validator_params['code'] != 200){
+            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
+        }
+        $phone = $request->input('phone');
         $code = $request->input('code');
         $sms = new SmsController();
-        $check_code = $sms->verify_code($account, $code);
+        $check_code = $sms->verify_code($phone, $code);
         if($check_code['code'] != 200){
             return $this->return_data_format($check_code['code'], $check_code['msg']);
         }
-        $user = Doctor::where('phone', $account)->first();
+        $user = Doctor::where('phone', $phone)->first();
+//        dd($user->hospital);
         if ($user) {
-            Session::set($this->student_login_session_key, [
-                'id' => $user->id,
-                'nickname' => $user->nickname, // 昵称
-                'headimgurl' => $user->headimgurl, // 头像
-                'phone' => $user->phone,
-                'province' => $user->hospital->province,
-                'city' => $user->hospital->city,
-                'area' => $user->hospital->country,
-                'hospital_name' => $user->hospital, // 医院名称
-                'office' => $user->office, // 科室
-                'title' => $user->title, // 职称
-            ]);
-            return $this->return_data_format(200);
+            $save_data = $this->login_core($user);
+            return $this->return_data_format(200,'登陆成功', $save_data);
         } else {
             return $this->return_data_format(501, '手机号未注册');
         }
@@ -224,8 +268,13 @@ class UserPublicController extends Controller
      */
     public function pwd_recover_post(Request $request)
     {
+        // 验证参数合法性
+        $validator_params = $this->validator_params($request->all());
+        if($validator_params['code'] != 200){
+            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
+        }
         $phone = $request->input('phone'); // 手机号
-        $verify_code = $request->input('verify_code'); // 短信验证码
+        $verify_code = $request->input('code'); // 短信验证码
         $password = $request->input('password'); // 密码
         $re_password = $request->input('re_password'); // 重复密码
         // 校验短信验证码
@@ -236,11 +285,12 @@ class UserPublicController extends Controller
         }
         // 验证两次密码输入是否一致
         if($password == $re_password){
-            $user = Student::where('phone', $phone)->update('password', Hash::make($password));
+            $user = Student::where('phone', $phone)->update(['password'=> Hash::make($password)]);
+//            dd($user);
             if($user){
-                return $this->return_data_format(200, '两次密码输入不一致');
+                return $this->return_data_format(200, '操作成功');
             }else{
-                return $this->return_data_format(500, '两次密码输入不一致');
+                return $this->return_data_format(500, '操作失败');
             }
         }else{
             return $this->return_data_format(422, '两次密码输入不一致');
@@ -248,16 +298,25 @@ class UserPublicController extends Controller
 
     }
 
-
+    /**
+     * 短信验证码请求
+     * @param Request $request
+     * @return array
+     */
     public function send_code_post(Request $request)
     {
+        // 验证参数合法性
+        $validator_params = $this->validator_params($request->all());
+        if($validator_params['code'] != 200){
+            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
+        }
         $phone = $request->input('phone');
         $sms = new SmsController();
         $res = $sms->send_sms($phone);
         if($res){
-            return $this->return_data_format(200, '两次密码输入不一致');
+            return $this->return_data_format(200, '发送成功');
         }else{
-            return $this->return_data_format(500, '两次密码输入不一致');
+            return $this->return_data_format($res['code'], $res['msg']);
         }
     }
 
