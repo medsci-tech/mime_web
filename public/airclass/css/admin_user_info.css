@@ -1,0 +1,43 @@
+.user_info label {
+	font-weight: normal;
+}
+.form-control {
+	background: #F9F9F9;
+}
+select.form-control {
+	background: #EEEEEE;
+	color: #999999;
+}
+.user_info .necessary {
+	color: #FF0000;
+}
+.user_info .tips {
+	display: none;
+	color: #FF0000;
+	line-height: 34px;
+}
+.group_code {
+	padding-right: 15px;
+}
+.user_info.step_two {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.col-sm-5 {
+		margin: 10px;
+	}
+	.col-sm-5 .col-sm-4 {
+		margin-top: 5px;
+	}
+	.user_info .tips {
+		margin-left: 10px;
+	}
+	.btn_confirm_wrapper,
+	.btn_next_wrapper {
+		margin: 10px;
+	}
+	.group_code .btn {
+		margin-left: 15px;
+	}
+}

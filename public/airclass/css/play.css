@@ -1,0 +1,344 @@
+body {
+	background: #F9F9F9;
+}
+/* icons */
+.icon_play_chapter {
+	width: 40px;
+	height: 52px;
+	background-position: 0 -60px;
+}
+.icon_play_current,
+.icon_wechat_sm,
+.icon_tencent_sm,
+.icon_weibo_sm {
+	width: 16px;
+	height: 16px;
+}
+.shares_and_thumbs .icon {
+	margin-left: 12px;
+}
+.video_container .icon {
+	position: relative;
+	top: 2px;
+}
+.icon_wechat_sm {
+	background-position: -40px -63px;
+}
+.icon_tencent_sm {
+	background-position: -40px -79px;
+}
+.icon_weibo_sm {
+	background-position: -40px -95px;
+}
+.icon_play_current {
+	margin-right: 4px;
+	background-position: -61px -71px;
+}
+.icon_play_played {
+	width: 14px;
+	height: 11px;
+	background-position: -61px -60px;
+}
+.icon_play_locked {
+	width: 12px;
+	height: 13px;
+	background-position: -61px -87px;
+}
+@media (max-width: 768px) {
+	.modal .modal-dialog {
+		width: 90% !important;
+	}
+	.container>.navbar-header,
+	.container-fluid>.navbar-header,
+	.container>.navbar-collapse,
+	.container-fluid>.navbar-collapse {
+		margin: 0;
+	}
+}
+/* video container */
+.video_wrapper, .chapters {
+	float: left;
+	width: 100%;
+	height: auto;
+}
+.video_container {
+	margin: 0 auto;
+	width: 1200px;
+	height: 500px;
+	background: #333333;
+	overflow: hidden;
+}
+.video {
+	width: 880px;
+	height: 454px;
+	margin: 0 auto;
+}
+.shares_and_thumbs {
+	width: 100%;
+	padding: 14px;
+	background: #FFFFFF;
+	font-size: 12px;
+	color: #999999;
+}
+/* chapter list */
+.chapters {
+	position: relative;
+	height: 100%;
+	background: #555555;
+	color: #F9F9F9;
+	white-space: nowrap;
+}
+.chapters_list {
+	padding: 0;
+	list-style: none;
+}
+.chapters .title {
+	margin: 0 0 0 20px;
+	padding: 10px 0 10px;
+	border-bottom: 1px solid #999999;
+	font-size: 14px;
+}
+.chapters .chapter {
+	overflow: hidden;
+	width: 100%;
+	padding: 10px 20px;
+	background: #555555;
+	font-size: 12px;
+	cursor: pointer;
+}
+.chapters .chapter:hover,
+.chapters .chapter:focus,
+.chapters .chapter.active {
+	background: #333333;
+}
+.btn_chapter {
+	position: absolute;
+	top: 32px;
+	left: -40px;
+}
+/* chapter hidden & shown */
+.video_wrapper {
+	width: 100%;
+	transition: width .5s ease;
+}
+.chapters {
+	width: 0;
+	transition: width .5s ease;
+}
+.video_container.active .video_wrapper {
+	width: 880px;
+	transition: width .5s ease;
+}
+.video_container.active .chapters {
+	width: 320px;
+	transition: width .5s ease;
+}
+
+/* relative info */
+.relative_info {
+	width: 1200px;
+	margin: 20px auto;
+}
+/* asks and answers */
+.asks_and_answers {
+	float: left;
+	box-sizing: border-box;
+	width: 900px;
+	padding: 15px 30px;
+	background: #FFFFFF;
+}
+.asks_and_answers .ask_answer_btns {
+	font-size: 12px;
+}
+.asks_and_answers .ask_answer_btns .btn_ask {
+	color: #00A0E9;
+}
+.asks_and_answers .ask_answer_btns .devider {
+	margin: 0 6px;
+}
+.ask_area_container,
+.answer_area_container {
+	display: none;
+}
+.asks_and_answers .ask_area,
+.asks_and_answers .answer_area {
+	width: 100%;
+	height: 130px;
+	margin-top: 2px;
+	resize: none;
+	border-color: #DDDDDD;
+}
+.asks_and_answers .btn_ask_confirm,
+.asks_and_answers .btn_answer_cancel {
+	margin-top: 2px;
+	margin-left: 10px;
+	padding-left: 24px;
+	padding-right: 24px;
+	border-radius: 0;
+	border-color: #E5E5E5;
+	background: #F9F9F9;
+	color: #999999;
+}
+.asks_and_answers .btn_answer_confirm {
+	margin-top: 2px;
+	padding-left: 24px;
+	padding-right: 24px;
+	border-radius: 0;
+	border-color: #0082BD;
+	background: #00A0E9;
+	color: #FFFFFF;
+}
+/* asks */
+.asks_title {
+	clear: both;
+	margin-top: 20px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #DDDDDD;
+	font-size: 14px;
+	font-weight: bold;
+	color: #00A0E9;
+}
+.asks .pages {
+	padding-right: 0;
+}
+/* answer */
+.answer_box {
+	margin-top: 10px;
+	padding: 5px 20px 10px;
+	background: #F9F9F9;
+}
+.ask .answer {
+	border-bottom: 1px solid #E3E3E3;
+}
+/* recommended videos */
+.recommended_videos {
+	float: right;
+	box-sizing: border-box;
+	padding: 15px 30px;
+	width: 280px;
+	background: #FFFFFF;
+}
+.recommended_videos > .title {
+	padding-bottom: 14px;
+	border-bottom: 1px solid #E3E3E3;
+	font-size: 14px;
+	color: #333333;
+}
+.recommended_videos .lesson {
+	box-sizing: border-box;
+	padding: 8px;
+}
+.lesson img {
+	width: 100%;
+}
+.lesson .title {
+	margin: 12px 0 0;
+	font-size: 14px;
+	color: #333333;
+}
+.lesson .introduction {
+	margin: 0;
+	font-size: 12px;
+	line-height: 21px;
+	color: #999999;
+}
+.lesson a:hover {
+	text-decoration: none;
+}
+.lesson:hover {
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, .4);
+	background: #FFFFFF;
+}
+
+
+/* modals */
+.modal-content {
+	border-radius: 10px;
+}
+/* questions modal */
+.questions_modal .modal-dialog {
+	width: 500px;
+}
+.questions_modal .question_container {
+	position: relative;
+	margin: 10px 12px 0 12px;
+}
+.questions_modal .question {
+	font-size: 12px;
+	color: #333333;
+}
+.questions_modal .choice {
+	font-size: 12px;
+	color: #999999;
+	list-style-type: upper-alpha;
+}
+.questions_modal label {
+	display: block;
+}
+.questions_modal .icon_question {
+	position: absolute;
+	left: -40px;
+}
+.questions_modal .icon_success {
+	position: absolute;
+	left: -40px;
+}
+.questions_modal .radio {
+	position: relative;
+}
+.questions_modal .radio_img {
+	position: absolute;
+	left: -30px;
+	top: 3px;
+}
+.questions_modal .horizontal_list .choice {
+	float: left;
+	margin-right: 50px;
+}
+.questions_modal .btn_questions_modal_confirm {
+	width: 100px;
+	height: 40px;
+	margin: 10px auto;
+}
+/* success modal */
+.success_modal .modal-dialog {
+	width: 260px;
+}
+.success_modal .icon_success {
+	position: absolute;
+}
+.success_modal .tips {
+	margin-left: 25px;
+}
+.success_modal .tips_container {
+	margin: 20px;
+}
+
+@media (max-width: 1199px) {
+	.video_container,
+	.relative_info {
+		width: 100%;
+	}
+	.video_wrapper,
+	.chapters,
+	.asks_and_answers,
+	.recommended_videos {
+		float: none;
+		width: 100%;
+		height: auto;
+	}
+	.video {
+		width: 100%;
+		height: 300px;
+	}
+	.chapters {
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.questions_modal .modal-content {
+		height: 500px;
+		overflow-y: scroll;
+	}
+}

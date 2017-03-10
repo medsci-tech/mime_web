@@ -1,0 +1,107 @@
+.icon_percentage, .icon_time {
+	position: relative;
+	top: 4px;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+.icon_percentage {
+	background-position: -81px -19px;
+}
+.icon_time {
+	margin-left: 18px;
+	background-position: -81px -39px;
+}
+.btn_outline {
+	display: block;
+	width: 80px;
+	height: 34px;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	line-height: 34px;
+	text-align: center;
+	font-size: 14px;
+	color: #DDDDDD;
+}
+.btn_outline:hover,
+.btn_outline:active,
+.btn_outline:visited {
+	text-decoration: none;
+	color: #DDDDDD;
+}
+@media (max-width: 768px) {
+	.btn_outline {
+		display: inline-block;
+		margin-left: 10px;
+	}
+	.lesson {
+		margin-bottom: 10px;
+	}
+	.lesson_img {
+		display: block;
+		margin: 0 auto;
+	}
+	.lesson_info {
+		text-align: center;
+	}
+	.lesson_date {
+		margin-left: 30%;
+	}
+}
+@media (min-width: 768px) {
+	/* lessons */
+	.lessons {
+		position: relative;
+		padding-left: 86px;
+	}
+	.lessons:before {
+		display: block;
+		content: " ";
+		position: absolute;
+		left: 30px;
+		top: 66px;
+		bottom: 66px;
+		border-left: 1px solid #E3E3E3;
+	}
+	.lesson {
+		position: relative;
+		box-sizing: border-box;
+		height: 150px;
+		padding-top: 12px;
+		border-bottom: 1px solid #E3E3E3;
+		font-size: 12px;
+		color: #999999;
+	}
+	.lesson_img, .lesson_info {
+		float: left;
+	}
+	.lesson_img {
+		margin-right: 24px;
+	}
+	.lesson_title {
+		margin-top: 0;
+		font-size: 14px;
+		color: #333333;
+	}
+	.lesson_introduction {
+		width: 210px;
+		line-height: 22px;
+	}
+	.lesson_data {
+		position: absolute;
+		bottom: 12px;
+		margin: 0;
+	}
+	.lesson_date {
+		position: absolute;
+		left: -86px;
+		top: 66px;
+		padding: 2px 0;
+		background: #F9F9F9;
+	}
+	.btn_outline {
+		position: absolute;
+		right: 0;
+		top: 50px;
+	}
+}
