@@ -12,7 +12,7 @@ class VideoController extends Controller
 	protected $user = null;
 	public function __construct()
 	{
-		$user = Session::get($this->student_login_session_key);
+		$user = Session::get($this->user_login_session_key);
 		if($user){
 			$this->user = $user;
 		}

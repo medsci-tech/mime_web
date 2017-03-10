@@ -5,8 +5,6 @@ use App\Models\Hospital;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
-use Mockery\CountValidator\Exception;
-use Modules\AirClass\Entities\Student;
 use Session;
 use Validator;
 
@@ -67,7 +65,7 @@ class UserPublicController extends Controller
             $save_data['area'] = '';
             $save_data['hospital_name'] = '';
         }
-        Session::set($this->student_login_session_key, $save_data);
+        Session::set($this->user_login_session_key, $save_data);
         return $save_data;
     }
 
@@ -285,7 +283,7 @@ class UserPublicController extends Controller
         }
         // 验证两次密码输入是否一致
         if($password == $re_password){
-            $user = Student::where('phone', $phone)->update(['password'=> Hash::make($password)]);
+            $user = Doctor::where('phone', $phone)->update(['password'=> Hash::make($password)]);
 //            dd($user);
             if($user){
                 return $this->return_data_format(200, '操作成功');

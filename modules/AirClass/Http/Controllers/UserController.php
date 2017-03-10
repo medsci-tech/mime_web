@@ -13,7 +13,7 @@ class UserController extends Controller
 	protected $user = null;
 	public function __construct()
 	{
-		$user = Session::get($this->student_login_session_key);
+		$user = Session::get($this->user_login_session_key);
 		if($user){
 			$this->user = $user;
 		}else{
@@ -210,7 +210,7 @@ class UserController extends Controller
 
 	public function logout(Request $request)
 	{
-		Session::forget($this->student_login_session_key);
+		Session::forget($this->user_login_session_key);
 		redirect('/login');
 	}
 	
