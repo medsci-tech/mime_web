@@ -1,0 +1,40 @@
+@media (min-width: 768px) {
+	/* lessons */
+	.msgs {
+		position: relative;
+		padding-left: 86px;
+	}
+	.msgs:before {
+		display: block;
+		content: " ";
+		position: absolute;
+		left: 30px;
+		top: 66px;
+		bottom: 66px;
+		border-left: 1px solid #E3E3E3;
+	}
+	.msg {
+		position: relative;
+		box-sizing: border-box;
+		height: 150px;
+		padding-top: 12px;
+		border-bottom: 1px solid #E3E3E3;
+		font-size: 12px;
+		color: #999999;
+	}
+	.msg_title {
+		margin-top: 0;
+		font-size: 14px;
+		color: #333333;
+	}
+	.msg_content {
+		line-height: 22px;
+	}
+	.msg_date {
+		position: absolute;
+		left: -86px;
+		top: 66px;
+		padding: 2px 0;
+		background: #F9F9F9;
+	}
+}

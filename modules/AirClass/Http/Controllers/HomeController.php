@@ -59,8 +59,6 @@ class HomeController extends Controller
         }
         // 私教课
 
-
-		dd($dyk_courses);
 		return view('airclass::home.index',[
             'banners' => $banners,
             'classes' => $classes,

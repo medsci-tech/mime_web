@@ -1,0 +1,121 @@
+/* common */
+body {
+	position: relative;
+}
+.main_body {
+	position: relative;
+	margin-top: 22px;
+}
+
+@media (min-width: 768px) {
+	/* 隐藏滚动条 */
+	/*body::-webkit-scrollbar{
+		width: 0;
+	}*/
+	
+	html {
+		overflow-x: hidden;
+	}
+	
+	body {
+		overflow: auto;
+		width: calc(100vw + 20px);
+	}
+	
+	/* help nav */
+	#helpNav {
+		position: absolute;
+	}
+	.main_body .navbar-brand {
+		display: none;
+	}
+	.main_body .navbar {
+		background: none;
+	}
+	.main_body .navbar-default {
+		border: none;
+	}
+	.help_nav {
+		position: absolute;
+		width: 130px;
+	}
+	.help_nav>li>a:hover,
+	.help_nav>li>a:focus,
+	.help_nav .active a {
+		padding-left: 11px;
+		border-left: 4px solid #00A0E9;
+		color: #00A0E9;
+		background: #F9F9F9;
+	}
+	/* help content */
+	.help_content {
+		position: relative;
+		margin-left: 230px;
+		margin-top: 15px;
+		height: 400px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
+	.help_content .isolate_module {
+		margin-bottom: 80px;
+	}
+	.help_content h4 {
+		font-size: 14px;
+		color: #333333;
+	}
+	.help_content p {
+		font-size: 12px;
+		color: #999999;
+	}
+	.points_imgs img {
+		float: left;
+	}
+	.points_imgs .qrcode {
+		margin-top: 78px;
+		margin-left: 80px;
+	}
+	.help_content .help_contact p,
+	.help_content .help_contact a {
+		font-size: 14px;
+		color: #333333;
+	}
+	.help_content .margin_top_40 {
+		margin-top: 40px;
+	}
+	.help_content .specialists {
+		margin-top: 20px;
+	}
+	.help_content .specialist img {
+		border-radius: 50%;
+	}
+	.help_content .specialist .name {
+		margin-top: 20px;
+		margin-bottom: 10px;
+		font-size: 16px;
+		color: #333333;
+	}
+	.help_content .specialist .hospital, 
+	.help_content .specialist .title {
+		margin-bottom: 5px;
+		font-size: 14px;
+		color: #999999;
+	}
+}
+
+@media (max-width: 768px) {
+	.help_content {
+	}
+	.help_lessons {
+		width: 100%;
+	}
+	.points_imgs .detail {
+		display: block;
+		width: 90%;
+		margin: 0 auto;
+	}
+	.points_imgs .qrcode {
+		display: block;
+		width: 40%;
+		margin: 10px auto;
+	}
+}

@@ -1,0 +1,128 @@
+body {
+	background: #F9F9F9;
+}
+.main_body {
+	max-width: 900px;
+}
+.title {
+	margin-top: 32px;
+	font-size: 14px;
+	color: #333333;
+}
+.introduction p {
+	margin-top: 32px;
+	font-size: 12px;
+	color: #999999;
+}
+.steps img {
+	margin-top: 40px;
+}
+.apply {
+	width: 300px;
+	margin: 60px auto 0;
+}
+.apply .btn_apply {
+	height: 40px;
+}
+.numbers {
+	margin-top: 10px;
+	font-size: 12px;
+	color: #999999;
+}
+
+/* modal */
+.modal .modal-content {
+	border-radius: 10px;
+}
+
+/* level modal */
+.level_modal .modal-dialog {
+	width: 260px;
+}
+.level_modal .icon_warn {
+	position: absolute;
+}
+.level_modal .tips {
+	margin-left: 25px;
+}
+.level_modal .tips_container {
+	margin-top: 22px;
+	margin-bottom: 20px;
+}
+
+/* choose teacher modal */
+.choose_teacher_modal .modal-dialog {
+	width: 960px;
+}
+.choose_teacher_modal .title {
+	font-size: 20px;
+	margin: 28px auto 30px;
+}
+.choose_teacher_modal .teachers {
+	width: 100%;
+	margin: 0;
+}
+.choose_teacher_modal .devider {
+	width: 34px;
+	margin-top: 11px;
+	border-top: 1px solid #999999;
+}
+.choose_teacher_modal .teacher {
+	border-bottom: 4px solid #01A0E9;
+	background: #F9F9F9;
+	cursor: pointer;
+}
+.choose_teacher_modal .teacher.active,
+.choose_teacher_modal .teacher:hover {
+	border: 2px solid #01A0E9;
+	border-bottom: 4px solid #01A0E9;
+	box-shadow: 0 12px 18px 0 rgba(0, 0, 0, .18);
+}
+.choose_teacher_modal .teacher img {
+	width: 100%;
+}
+.choose_teacher_modal .teacher .name {
+	font-size: 14px;
+	font-weight: bold;
+	color: #333333;
+}
+.choose_teacher_modal .teacher .introduction {
+	margin: 4px;
+	font-size: 12px;
+	color: #999999;
+}
+.choose_teacher_modal .btn_submit {
+	width: 160px;
+	height: 40px;
+	margin: 36px auto 26px;
+}
+/* success modal */
+.success_modal .modal-dialog {
+	width: 500px;
+}
+.success_modal .modal-content {
+	border-radius: 10px;
+}
+.success_modal .icon_success {
+	position: absolute;
+}
+.success_modal .tips {
+	margin-left: 25px;
+}
+.success_modal .tips_container {
+	margin-top: 31px;
+}
+.success_modal .btn_index {
+	width: 160px;
+	height: 40px;
+	margin: 17px auto 16px;
+}
+
+@media (max-width: 768px) {
+	.steps img {
+		width: 90%;
+	}
+	.teachers .col-xs-12 {
+		margin-bottom: 20px;
+	}
+}

@@ -1,0 +1,283 @@
+body {
+	background: #FFFFFF;
+}
+.lesson img {
+	width: 100%;
+}
+/* slider */
+.slider_container {
+	width: 100%;
+	background: #515D77;
+}
+.slide {
+	margin: 0 auto;
+}
+/* main body */
+.main_body {
+	width: 1200px;
+	margin: 0 auto;
+}
+.project {
+	box-sizing: border-box;
+	width: 100%;
+	margin: -1px auto 0;
+	padding: 9px 11px;
+	border: 1px solid #DDDDDD;
+}
+.project_video {
+	/*margin-right: 40px;*/
+	width: 520px !important;
+	height: 280px !important;
+}
+.project_info {
+	width: 600px;
+	margin-left: 40px;
+}
+.project_info .title {
+	font-size: 20px;
+	color: #333333;
+}
+.project_info .info {
+	font-size: 12px;
+	line-height: 21px;
+	color: #999999;
+}
+.project_info .others {
+	font-size: 12px;
+	color: #333333;
+}
+.project_info .others .icon {
+	float: left;
+	margin-right: 2px;
+}
+.project_info .others div {
+	float: left;
+	height: 21px;
+	margin: 10px 30px 10px 0;
+}
+.project_info .btn_project_sign,
+.private_info .btn_check_detail {
+	width: 160px;
+	height: 40px;
+}
+
+/* lessons */
+.lessons {
+	width: 100%;
+}
+.lessons > .title {
+	margin-bottom: 12px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid #CCCCCC;
+	font-size: 20px;
+	color: #333333;
+}
+.lessons .lesson_list {
+	width: 100%;
+	margin: 0;
+}
+.lessons .lesson {
+	box-sizing: border-box;
+	padding: 8px;
+	height: 211px;
+}
+.lessons .caption {
+	position: absolute;
+	bottom: 0;
+	/*width: 100%;*/
+	/*margin-left: -8px;*/
+	padding: 5px;
+	background: rgba(255, 255, 255, .9);
+}
+.lesson .title {
+	margin: 12px 0 !important;
+	font-size: 14px;
+	color: #333333;
+}
+.lesson .caption .introduction {
+	margin: 0;
+	height: 0;
+	overflow: hidden;
+	font-size: 12px;
+	line-height: 21px;
+	color: #999999;
+	transition: height .5s ease;
+}
+.lesson:hover .caption .introduction {
+	height: auto;
+	transition: height .5s ease;
+}
+.lesson .price_and_persons {
+	padding-right: 5px;
+}
+.lesson .price_and_persons .price {
+	color: #FF0000;
+}
+.lesson .price_and_persons .persons {
+	color: #999999;
+}
+.lesson a:hover {
+	text-decoration: none;
+}
+.lesson:hover {
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, .4);
+	background: #FFFFFF;
+}
+.lessons .nav-tabs>.active>a,
+.lessons .nav-tabs>.active>a:focus,
+.lessons .nav-tabs>.active>a:hover {
+	border: 2px solid #fff;
+}
+.lessons .nav-tabs>.active>a,
+.lessons .nav-tabs>.active>a:focus,
+.lessons .nav-tabs>.active>a:hover {
+	border-bottom-color: #00A0E9;
+}
+
+.lessons_public, .lessons_answer {
+	position: relative;
+}
+.lessons_public .title, .lessons_answer .title {
+	border: none;
+	margin-bottom: 3px;
+}
+@media (min-width: 768px) {
+	.lessons .nav-tabs {
+		position: absolute;
+		left: 20%;
+		top: 0;
+		width: 80%;
+	}
+	.lessons .navbar-brand {
+		display: none;
+	}
+	.lessons .navbar {
+		border: none;
+		min-height: 42px;
+	}
+	.lessons .navbar .nav {
+		margin: 0;
+	}
+}
+.lessons .lesson_big {
+	position: relative;
+	padding: 0;
+	height: auto;
+}
+.lessons .lesson_big img {
+	width: 100%;
+}
+.lessons .lesson_big .introduction {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 20px;
+	background: rgba(255, 255, 255, .9);
+	text-align: center;
+	visibility: hidden;
+	transition: visibility .5s ease;
+}
+.lessons .lesson_big:hover .introduction {
+	visibility: visible;
+	transition: visibility .5s ease;
+}
+.lesson_list .tab-content {
+	padding: 10px 20px;
+	min-height: 500px;
+}
+.lessons_private {
+	border-bottom: 1px solid #CCCCCC;
+}
+.lessons_private .title {
+	margin-bottom: 0;
+}
+.lessons_private .lesson_private_img {
+	width: 464px;
+	height: 228px;
+	margin: -1px;
+}
+.lessons_private .project_info {
+	width: 650px;
+}
+.lessons_private .project_info .title {
+	margin-bottom: 10px;
+}
+
+/* index_footer_logo */
+.index_footer_logo {
+	vertical-align: middle;
+	margin-bottom: 10px;
+}
+.index_footer_logo a:hover {
+	text-decoration: none;
+}
+.index_footer_logo .logo_ap {
+	margin-right: 16px;
+	padding-right: 16px;
+	border-right: 1px solid #4F5052;
+}
+
+.title_with_more {
+	border-bottom: 1px solid #ddd !important;
+	margin-bottom: 0 !important;
+}
+.title_with_more .more {
+	font-size: 14px;
+	color: #999999;
+	margin-top: 7px;
+
+}
+
+@media (max-width: 768px) {
+	body {
+		width: 100%;
+	}
+	.main_body {
+		width: 100%;
+		padding-bottom: 300px;
+	}
+	.project_video {
+		width: 100% !important;
+		margin: 0;
+		float: none;
+	}
+	.project_info,
+	.lessons_private .project_info {
+		width: auto;
+		float: none;
+	}
+	.lessons .lesson_big {
+		display: none;
+		/*width: 100%;*/
+		/*padding: 0;*/
+	}
+	.lessons .lesson_big img {
+		width: 100%;
+	}
+	.lesson .title,
+	.lesson .introduction {
+		text-align: center;
+	}
+	.lessons .nav,
+	.lessons .nav li {
+		width: 100%;
+	}
+	.lessons > .title {
+		padding: 10px;
+	}
+	.lessons_private .lesson_private_img {
+		width: 100%;
+		height: auto;
+		margin: 0;
+	}
+	.private_info .btn_check_detail {
+		margin-bottom: 20px;
+	}
+	.private_info {
+		margin: 10px;
+	}
+	.lessons .lesson_list {
+		padding: 5px;
+	}
+}

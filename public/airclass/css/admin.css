@@ -1,0 +1,190 @@
+/* common */
+
+body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	background: #F9F9F9;
+	font-family: "微软雅黑";
+}
+
+
+/* header */
+.header {
+	position: relative;
+	height: 180px;
+	width: 100%;
+	background: url(../img/bg_header.jpg) no-repeat top left;
+	background-size: cover;
+	line-height: 28px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #FFFFFF;
+}
+.header .admin_user {
+	display: flex;
+	position: relative;
+	bottom: -30px;
+	max-width: 1140px;
+	margin: 0 auto;
+}
+.header .user_img {
+	width: 160px;
+	height: 160px;
+	margin-right: 24px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.header .user_info {
+	flex: 1;
+	padding-top: 20px;
+}
+.header .user_info .name {
+	margin-right: 20px;
+	font-size: 24px;
+	font-weight: bold;
+}
+.header .user_info .phone {
+	font-size: 16px;
+}
+.header .user_info .level img {
+	margin-left: 10px;
+}
+.header .user_info .location,
+.header .user_info .hospital,
+.header .user_info .department {
+	margin-right: 10px;
+}
+.header .icon_beans {
+	position: relative;
+	top: 3px;
+	width: 19px;
+	height: 19px;
+	margin-right: 10px;
+	background-position: -81px 0;
+}
+.header .icon_level {
+	position: absolute;
+	top: 0;
+	width: 14px;
+	height: 14px;
+}
+.header .icon_level_one {
+	left: 0;
+	background-position: -93px -60px;
+}
+.header .icon_level_two {
+	left: 50%;
+	margin-left: -7px;
+	background-position: -107px -60px;
+}
+.header .icon_level_three {
+	right: 0;
+	background-position: -121px -60px;
+}
+.header .icon_level_one.active,
+.header .icon_level_two.active,
+.header .icon_level_three.active {
+	background-position-y: -74px;
+}
+
+/* main body */
+.main_body {
+	position: relative;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+@media (min-width: 768px) {
+	.main_body .navbar-brand {
+		display: none;
+	}
+	/* admin nav */
+	.admin_nav {
+		position: absolute;
+		top: 0px;
+		width: 130px;
+		margin-top: 0 !important;
+	}
+	.admin_nav>li>a:hover,
+	.admin_nav>li>a:focus,
+	.admin_nav .active a {
+		padding-left: 11px;
+		border-left: 4px solid #00A0E9;
+		color: #00A0E9;
+		background: #F9F9F9;
+	}
+	.nav-pills>li.active>a,
+	.nav-pills>li.active>a:hover,
+	.nav-pills>li.active>a:focus {
+		color: #00A0E9;
+		background: #F9F9F9;
+	}
+	.nav-pills>li>a {
+		border-radius: 0;
+	}
+	.admin_nav .badge {
+		margin-left: 6px;
+		background: #FF0000;
+	}
+	.main_body .navbar-brand {
+		display: none;
+	}
+	.main_body .navbar {
+		position: absolute;
+		background: none;
+	}
+	.main_body .navbar-default {
+		border: none;
+	}
+	/* admin content */
+	.admin_content {
+		margin-top: 46px;
+		margin-left: 218px;
+	}
+	.admin_content .admin_title {
+		border-bottom: 1px solid #E3E3E3;
+		font-size: 14px;
+		color: #333333;
+		font-weight: normal;
+		line-height: 30px;
+	}
+}
+@media (max-width: 768px) {
+	.header {
+		display: block;
+	}
+	.header .user_img {
+		display: none;
+	}
+	.header .user_info {
+		padding: 10px;
+	}
+	.admin_content {
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+	}
+}
+
+.level_progress {
+	position: relative;
+	top: 7px;
+	width: 114px;
+	height: 14px;
+	overflow: hidden;
+}
+.level_progress_bg {
+	width: 100%;
+	height: 100%;
+	background: #FFFFFF;
+	border-radius: 7px;
+}
+.level_progress_bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background: #97DEFF;
+	border-radius: 7px;
+}
