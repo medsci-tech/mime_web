@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
 
-    protected $table = 'mime_doctors';
+    protected $table = 'doctors';
 
     protected $fillable = [
         'name',
