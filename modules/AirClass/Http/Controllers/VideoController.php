@@ -2,6 +2,7 @@
 
 use App\Models\AnswerLog;
 use App\Models\Comment;
+use App\Models\KZKTClass;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse;
 use Session;
@@ -36,7 +37,11 @@ class VideoController extends Controller
 			//## 评论
 			$comments = [];
 			// 一级评论
-			$one_comments = Comment::where(['status' => 1, 'class_id' => $class->id, 'parent_id' => 0])->orderBy('id', 'desc')->get();
+			$one_comments = Comment::where([
+				'status' => 1,
+				'class_id' => $class->id,
+				'parent_id' => 0,
+			])->orderBy('id', 'desc')->get();
 			if($one_comments){
 				foreach ($one_comments as $key => $one_comment){
 					$comments[$key] = [
@@ -50,7 +55,11 @@ class VideoController extends Controller
 						'content' => $one_comment->content,
 					];
 					// 二级评论
-					$two_comments = Comment::where(['status' => 1, 'class_id' => $class->id, 'parent_id' => $one_comment->id])->orderBy('id', 'desc')->get();
+					$two_comments = Comment::where([
+						'status' => 1,
+						'class_id' => $class->id,
+						'parent_id' => $one_comment->id,
+					])->orderBy('id', 'desc')->get();
 					if($two_comments){
 						foreach ($two_comments as $k => $two_comment){
 							$comments[$key]['child'][$k] = [
@@ -89,15 +98,22 @@ class VideoController extends Controller
 			}
 //			dd($add_recommend_classes);
 			$user = $this->user;
+			//## 答题
+			$answer_logs = [];
 			// 查询用户是否登陆
 			if($user){
 				// 查询用户是否报名  调接口
-				// 如果已答题，显示答题信息和解析，未答题，显示题目
-
-			}else{
-				dd('no login');
+				$sing_up = KZKTClass::where('doctor_id', $user['id'])->first();
+				if($sing_up){
+					// 如果已答题，显示答题信息和解析，未答题，显示题目
+					$answer_logs = AnswerLog::where([
+						'user_id' => $user['id'],
+						'site_id' => $this->site_id,
+						'class_id' => $class->id,
+					])->get();
+				}
 			}
-			dd($class);
+//			dd($class);
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
 				'chapter_classes' => $chapter_classes, // 相关章节列表
@@ -105,6 +121,7 @@ class VideoController extends Controller
 				'recommend_classes' => $recommend_classes, // 推荐课程列表
 				'add_recommend_classes' => $add_recommend_classes, // 追加推荐课程列表
 				'user' => $user, // 登陆用户信息
+				'answer_logs' => $answer_logs, // 答题信息
 			]);
 		}else{
 			abort(404);
@@ -126,11 +143,7 @@ class VideoController extends Controller
 	// 答题
 	public function answer(Request $request){
 		$request_data = $request->all();
-		dd($request_data);
-		$save_data = [
-			'',
-		];
-		$result = AnswerLog::create($save_data);
+		$result = AnswerLog::create($request_data);
 		if($result){
 			return $this->return_data_format(200);
 		}else{
