@@ -12,15 +12,18 @@ use Validator;
 class UserPublicController extends Controller
 {
 
-    protected $phone_rules = [
-        'required',
-        'regex:/^1[35789]\d{9}$/',
-    ];
+    protected $phone_rules = 'required|regex:/^1[35789]\d{9}$/';
+    protected $password_rules = 'required|min:6|max:22|regex:/^[\w\.-]{6,22}$/';
     protected $validator_msg = [
         'phone.required' => '手机号不能为空',
         'phone.regex' => '手机号格式错误',
-        'email.required' => 'xyy号格式错误',
+        'password.required' => '密码不能为空',
+        'password.regex' => '密码格式只支持6-22位字母数字下划线及-+_.组合',
     ];
+
+    public function validator_params(){
+
+    }
 
     /**
      * @return mixed
@@ -45,20 +48,18 @@ class UserPublicController extends Controller
     public function register_post(Request $request)
     {
         $validator = Validator::make(
-            // 参数
             $request->all(),
-            // 规则
             [
                 'phone' => $this->phone_rules,
+                'password' => $this->password_rules,
             ],
-            // 提示语
             $this->validator_msg
         );
         $validator_error_first = $validator->errors()->first();
         if($validator_error_first){
             return $this->return_data_format(422, $validator_error_first);
         }
-        dd($validator_error_first);
+
         $req_phone = $request->input('phone'); //手机号
         $req_code = $request->input('code'); //手机验证码
         $req_pwd = $request->input('password'); //密码
@@ -74,7 +75,7 @@ class UserPublicController extends Controller
         $sms = new SmsController();
         $check_code = $sms->verify_code($req_phone, $req_code);
         if($check_code['code'] != 200){
-            return $this->return_data_format(422, '验证码错误或已失效');
+            return $this->return_data_format($check_code['code'], $check_code['msg']);
         }
         // 检验手机号是否注册
         $doctor = Doctor::where('phone', $req_phone)->first();
@@ -183,9 +184,9 @@ class UserPublicController extends Controller
         $code = $request->input('code');
         $sms = new SmsController();
         $check_code = $sms->verify_code($account, $code);
-//        if(){
-//
-//        }
+        if($check_code['code'] != 200){
+            return $this->return_data_format($check_code['code'], $check_code['msg']);
+        }
         $user = Doctor::where('phone', $account)->first();
         if ($user) {
             Session::set($this->student_login_session_key, [
@@ -230,34 +231,34 @@ class UserPublicController extends Controller
         // 校验短信验证码
         $sms = new SmsController();
         $check_code = $sms->verify_code($phone, $verify_code);
-        if($check_code['code'] == 200){
-            // 验证两次密码输入是否一致
-            if($password == $re_password){
-                $user = Student::where('phone', $phone)->update('password', Hash::make($password));
-                if($user){
-                    return $this->return_data_format(200, '两次密码输入不一致');
-                }else{
-                    return $this->return_data_format(500, '两次密码输入不一致');
-                }
+        if($check_code['code'] != 200) {
+            return $this->return_data_format($check_code['code'], $check_code['msg']);
+        }
+        // 验证两次密码输入是否一致
+        if($password == $re_password){
+            $user = Student::where('phone', $phone)->update('password', Hash::make($password));
+            if($user){
+                return $this->return_data_format(200, '两次密码输入不一致');
             }else{
-                return $this->return_data_format(422, '两次密码输入不一致');
+                return $this->return_data_format(500, '两次密码输入不一致');
             }
         }else{
-            return $this->return_data_format(422, $check_code['msg']);
+            return $this->return_data_format(422, '两次密码输入不一致');
         }
+
     }
 
 
     public function send_code_post(Request $request)
     {
         $phone = $request->input('phone');
-        $code = $request->input('code');
         $sms = new SmsController();
-
-//        $res = $sms->send_sms($phone);
-        $res = $sms->verify_code($phone, $code);
-
-return $res;
+        $res = $sms->send_sms($phone);
+        if($res){
+            return $this->return_data_format(200, '两次密码输入不一致');
+        }else{
+            return $this->return_data_format(500, '两次密码输入不一致');
+        }
     }
 
 

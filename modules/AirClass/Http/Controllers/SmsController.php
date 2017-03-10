@@ -113,7 +113,7 @@ class SmsController extends Controller
         if($session_res && $session_res == $code){
             return $this->return_data_format(200);
         }else{
-            return $this->return_data_format(422, 'check error');
+            return $this->return_data_format(422, '验证码错误或已失效');
         }
     }
 
