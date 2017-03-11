@@ -13,7 +13,7 @@
                     <div class="ask_info media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object" src="img/admin_ask_userimg.png" alt="">
+                                <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                             </a>
                         </div>
                         <div class="media-body">
@@ -34,7 +34,7 @@
                     <div class="ask_info media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object" src="img/admin_ask_userimg.png" alt="">
+                                <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                             </a>
                         </div>
                         <div class="media-body">
@@ -55,7 +55,7 @@
                     <div class="ask_info media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object" src="img/admin_ask_userimg.png" alt="">
+                                <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                             </a>
                         </div>
                         <div class="media-body">
@@ -86,7 +86,7 @@
                                 <div class="answer_info media">
                                     <div class="media-left">
                                         <a href="#">
-                                            <img class="media-object" src="img/admin_ask_userimg.png" alt="">
+                                            <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="media-body">
