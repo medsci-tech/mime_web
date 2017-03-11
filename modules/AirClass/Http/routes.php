@@ -4,10 +4,9 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 {
 	//首页
 	Route::get('/', 'HomeController@index');
-	Route::get('/class_introduce', 'HomeController@class_introduce');
-	Route::get('/class_lists', 'HomeController@class_lists');
-	Route::get('/sjk_class_introduce', 'HomeController@sjk_class_introduce');
-	Route::get('/sjk_class_sign', 'HomeController@sjk_class_sign');
+	Route::get('/public_class', 'HomeController@public_class'); // 公开课
+	Route::get('/private_class', 'HomeController@private_class'); // 私教课
+	Route::get('/answer_class', 'HomeController@answer_class'); // 答疑课
 	Route::get('/help', 'HomeController@help');
 
 	// 搜索
@@ -30,8 +29,11 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/sms/send', 'UserPublicController@send_code_post'); // 发送短信请求
 
 	//用户登录后访问
-	Route::get('/user', 'UserController@index');
+	Route::get('/user', 'UserController@study'); // 学习情况视图
+	Route::get('/user/msg', 'UserController@msg'); // 消息视图
+	Route::get('/user/comment', 'UserController@comment'); // 评论视图
+	Route::get('/user/info_edit', 'UserController@info_edit'); // 修改资料视图
+	Route::get('/user/pwd_edit', 'UserController@pwd_edit'); // 修改密码视图
 	Route::post('/user/info_update', 'UserController@info_update');
 	Route::post('/user/pwd_update', 'UserController@pwd_update');
-	Route::post('/user/comment', 'UserController@comment');
 });

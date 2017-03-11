@@ -11,6 +11,7 @@ use Hash;
 class UserController extends Controller
 {
 	protected $user = null;
+
 	public function __construct()
 	{
 		$user = Session::get($this->user_login_session_key);
@@ -20,30 +21,41 @@ class UserController extends Controller
 			redirect(url('/login'));
 		}
 	}
+
 	public function study()
 	{
-		dd('video');
+        return view('airclass::user.study', [
+            'current_active' => 'study',
+        ]);
 	}
 
 	public function msg()
 	{
-//		$messages =
-		dd('video');
+        return view('airclass::user.msg', [
+            'current_active' => 'msg',
+        ]);
 	}
 
 	public function comment()
 	{
 		$comments = [];
-		dd('comment');
+        return view('airclass::user.comment', [
+            'current_active' => 'comment',
+        ]);
 	}
-	public function edit_info()
+	public function info_edit()
 	{
-		dd('video');
+        return view('airclass::user.info_edit', [
+            'current_active' => 'info_edit',
+        ]);
 	}
-	public function edit_pwd()
+	public function pwd_edit()
 	{
-		dd('video');
+        return view('airclass::user.pwd_edit', [
+            'current_active' => 'pwd_edit',
+        ]);
 	}
+
 
 	public function info_update(Request $request)
 	{
