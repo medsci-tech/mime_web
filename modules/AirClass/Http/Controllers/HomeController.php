@@ -67,44 +67,36 @@ class HomeController extends Controller
 	}
 
     /**
-     * 课程介绍
+     * 公开课
      */
-    public function class_introduce()
+    public function public_class()
     {
-        dd('课程介绍');
+        return view('airclass::home.public_class');
     }
 
     /**
-     * 公开课和答疑课列表页
+     * 答疑课
      */
-    public function class_lists()
+    public function answer_class()
     {
-        dd('公开课和答疑课列表页');
+        return view('airclass::home.answer_class');
     }
 
     /**
-     * 私教课介绍页
+     * 私教课
      */
-    public function sjk_class_introduce()
+    public function private_class()
     {
-        dd('私教课介绍页');
+        return view('airclass::home.private_class');
     }
 
-    /**
-     * 私教课报名申请
-     */
-    public function sjk_class_sign()
-    {
-        dd('私教课报名申请');
-    }
-
-
+    
     /**
      * 帮助
      */
     public function help()
     {
-        dd('help');
+        return view('airclass::home.help');
     }
 	
 }

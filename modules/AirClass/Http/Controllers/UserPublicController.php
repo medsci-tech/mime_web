@@ -74,19 +74,7 @@ class UserPublicController extends Controller
      */
     public function register_view()
     {
-        $save_data = [
-            'phone' => '13554498149',
-            'password' => '123456',
-            'province' => '湖北省',
-            'city' => '武汉市',
-            'area' => '洪山区',
-            'hospital_level' => '一级',
-            'hospital_name' => '同济医院',
-            'office' => '脑神经科',
-            'title' => '主任',
-        ];
-        return csrf_token();
-
+        return view('airclass::user_public.register');
     }
 
     /**
@@ -190,8 +178,7 @@ class UserPublicController extends Controller
      */
     public function login_view()
     {
-        return 'login';
-
+        return view('airclass::user_public.login');
     }
 
     /**
@@ -251,13 +238,7 @@ class UserPublicController extends Controller
 
     // 微信登陆 todo
 
-    /**
-     * @return mixed
-     */
-    public function pwd_recover_view()
-    {
-        return view('airclass::userPublic.pwd_recover');
-    }
+
 
     /**
      * 找回密码--post

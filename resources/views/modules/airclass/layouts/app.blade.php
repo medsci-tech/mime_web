@@ -16,7 +16,10 @@
 	<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="{{asset('airclass/css/common.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{asset('airclass/css/signup.css')}}" />
 	@section('css')
+	@show
+	@section('css_child')
 	@show
 </head>
 <body>
@@ -39,19 +42,19 @@
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="javascript:void(0);">首页</a>
+					<a href="{{url('/')}}">首页</a>
 				</li>
 				<li>
-					<a href="javascript:void(0);">公开课</a>
+					<a href="{{url('public_class')}}">公开课</a>
 				</li>
 				<li>
-					<a href="javascript:void(0);">答疑课</a>
+					<a href="{{url('answer_class')}}">答疑课</a>
 				</li>
 				<li>
-					<a href="javascript:void(0);">私教课</a>
+					<a href="{{url('private_class')}}">私教课</a>
 				</li>
 				<li>
-					<a href="javascript:void(0);">帮助</a>
+					<a href="{{url('help')}}">帮助</a>
 				</li>
 			</ul>
 			<div class="nav navbar-nav navbar-right clearfix">
@@ -82,11 +85,11 @@
 								<span class="badge">2</span>
 							</span>
 					<a class="username" href="javascript:void(0);">小明</a><span class="devider">|</span>
-					<a class="logout" href="javascript:void(0);">退出</a>
+					<a class="logout" href="{{url('logout')}}">退出</a>
 				</div>
 				<div class="handlers pull-right">
-					<a class="btn_login" href="javascript:void(0);" data-toggle="modal" data-target="#loginModal">登录</a><span class="devider">|</span>
-					<a class="btn_signup" href="/airClass/signup.html">注册</a>
+					<a class="btn_login" href="{{url('login')}}" data-toggle="modal" data-target="#loginModal">登录</a><span class="devider">|</span>
+					<a class="btn_signup" href="{{url('register')}}">注册</a>
 				</div>
 			</div>
 		</div>
@@ -96,6 +99,126 @@
 </nav>
 
 @yield('container')
+
+		<!-- Modal -->
+<!-- login modal -->
+<div class="login_modal modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h3 class="title text-center">账号密码登录</h3>
+			<input type="text" class="form-control input_phone" placeholder="手机号">
+			<input type="text" class="form-control input_pwd" placeholder="密码">
+			<div class="form-group checkbox_group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" checked>
+						<span class="checkbox_img"></span>
+						记住密码
+					</label>
+				</div>
+			</div>
+			<button type="button" class="btn btn-block btn_login">登录</button>
+			<p class="text-right links">
+				<a class="btn_msg_login" href="javascript:void(0);">短信快捷登录</a>
+				<span class="devider">|</span>
+				<a class="btn_forget_pwd" href="javascript:void(0);">忘记密码？</a>
+				<span class="devider">|</span>
+				<a href="{{url('register')}}">注册账号</a>
+			</p>
+			<div class="text-right wechat_login_container">
+				其他登录方式：
+				<a href="javascript:void(0);" class="wechat_login pull-right"><span class="icon icon_wechat pull-left"></span>微信登录</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- msg login modal -->
+<div class="login_modal msg_login_modal modal fade" id="msgLoginModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h3 class="title text-center">短信快捷登录</h3>
+			<!--<p class="tips text-center">验证即登录，未注册将自动创建百度帐号</p>-->
+			<input type="text" class="form-control input_phone" placeholder="手机号">
+			<div class="input_code_container form-inline clearfix">
+				<input type="text" class="input_code form-control pull-left" placeholder="密码">
+				<button type="button" class="btn pull-right btnGetCode">获取验证码</button>
+			</div>
+			<button type="button" class="btn btn-block btn_login">登录</button>
+			<div class="others clearfix">
+				<div class="form-group pull-left">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked>
+							<span class="checkbox_img"></span>
+						</label>
+						<a href="#" target="_blank">同意用户协议</a>
+					</div>
+				</div>
+				<a class="btn_username_login pull-right" href="javascript:void(0);">账号密码登录</a>
+			</div>
+			<div class="text-right wechat_login_container">
+				其他登录方式：
+				<a href="javascript:void(0);" class="wechat_login pull-right"><span class="icon icon_wechat pull-left"></span>微信登录</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- wechat login modal -->
+<div class="login_modal modal fade" id="wechatLoginModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h3 class="title text-center">微信登录</h3>
+			<p class="text-center">设计图</p>
+		</div>
+	</div>
+</div>
+
+<!-- login success modal -->
+<div class="success_modal modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<div class="tips_container text-center"><span class="icon icon_success"></span><span class="tips">注册成功</span></div>
+			<button type="button" class="btn btn-block btn_index">确定</button>
+		</div>
+	</div>
+</div>
+
+<!-- forget password modal -->
+<div class="login_modal msg_login_modal forget_pwd_modal modal fade" id="forgetPwdModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h3 class="title text-center">忘记密码</h3>
+			<input type="text" class="form-control input_phone" placeholder="手机号">
+			<div class="input_code_container form-inline clearfix">
+				<input type="text" class="input_code form-control pull-left" placeholder="验证码">
+				<button type="button" class="btn pull-right btnGetCode">获取验证码</button>
+			</div>
+			<input type="text" class="form-control input_pwd" placeholder="设置密码">
+			<input type="text" class="form-control input_pwd2" placeholder="确认密码">
+			<button type="button" class="btn btn-block btn_login">登录</button>
+			<div class="text-right wechat_login_container">
+				其他登录方式：
+				<a href="javascript:void(0);" class="wechat_login pull-right"><span class="icon icon_wechat pull-left"></span>微信登录</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- alert modal -->
+<div class="modal fade alert_modal" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			...
+		</div>
+	</div>
+</div>
 
 <!-- footer -->
 <footer class="footer text-center">
@@ -118,18 +241,177 @@
 <script src="{{asset('airclass/js/bootstrap.min.js')}}"></script>
 <!-- video5 -->
 <script src="{{asset('airclass/plugin/Video5/js/video.min.js')}}"></script>
+
+<script type="text/javascript">
+	function checkEmail (email) {
+		var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+		return reg.test(email);
+	}
+	function checkPhone(phone) {
+		if(phone.length === 11 || /^1[3|4|5|8][0-9]\d{4,8}$/.test(phone)) {
+			return true;
+		}
+		return false;
+	}
+
+	function showAlertModal(msg) {
+		$('#alertModal').find('.modal-content').text(msg);
+		$('#alertModal').modal('show');
+		setTimeout(function() {
+			$('#alertModal').modal('hide');
+		}, 1500);
+	}
+
+	function showTips(dom) {
+		$(dom).parents('.form-group').find('.tips').show();
+		$(dom).focus();
+	}
+
+	$(function() {
+		$('.lessons .nav a').mouseover(function() {
+			console.log($(this));
+			console.log($(this).attr('data-imgSrc'));
+			console.log($(this).attr('data-intro'));
+			$(this).parents('.lessons').find('.lesson_big')
+					.find('img').attr('src', $(this).attr('data-imgSrc')).end()
+					.find('.introduction').html($(this).attr('data-intro'));
+			$(this).tab('show');
+		});
+		$('.login_modal .wechat_login').click(function() {
+			$('.login_modal').modal('hide');
+			$('#wechatLoginModal').modal('show');
+		});
+		$('.login_modal .btn_forget_pwd').click(function() {
+			$('.login_modal').modal('hide');
+			$('#forgetPwdModal').modal('show');
+		});
+		$('.login_modal .btn_msg_login').click(function() {
+			$('.login_modal').modal('hide');
+			$('#msgLoginModal').modal('show');
+		});
+		$('.login_modal .btn_username_login').click(function() {
+			$('.login_modal').modal('hide');
+			$('#loginModal').modal('show');
+		});
+//				$('#btnSignup').click(function() {
+//					$('#successModal').modal('show');
+//				});
+		$('.btn_index').click(function() {
+			window.location.href = '{{url('user')}}';
+		});
+
+
+		// 注册表单
+		// 点击获取验证码
+		$('#signUpForm .btnGetCode').click(function() {
+			$('#signUpForm .tips').hide();
+			if (checkPhone($('#signUpForm #inputPhone').val())) {
+				// ajax获取验证码
+			} else {
+				showTips($('#signUpForm #inputPhone'));
+			}
+		});
+		// 点击注册按钮
+		$('#signUpForm #btnSignup').click(function() {
+			$('#signUpForm .tips').hide();
+			if (!checkPhone($('#signUpForm #inputPhone').val())) {
+				showTips($('#signUpForm #inputPhone'));
+				return;
+			}
+			if ($('#signUpForm #inputCode').val() == '') {
+//						alert('请输入验证码');
+				showTips($('#signUpForm #inputCode'));
+				return;
+			}
+			if ($('#signUpForm #inputPwd').val() == '') {
+//						alert('请输入密码');
+				showTips($('#signUpForm #inputPwd'));
+				return;
+			}
+			if ($('#signUpForm #inputPwd').val() !== $('#signUpForm #inputPwdConfirm').val()) {
+//						alert('请确认两次输入密码一致');
+				showTips($('#signUpForm #inputPwdConfirm'));
+				return;
+			}
+			// ajax请求
+			$('#successModal').modal('show');
+		});
+
+		// 账号密码登录modal
+		$('#loginModal .btn_login').click(function() {
+			if (!checkPhone($('#loginModal .input_phone').val())) {
+				showAlertModal('手机号格式不正确');
+				return;
+			}
+			if ($('#loginModal .input_pwd').val() == '') {
+//						alert('请输入密码');
+				showAlertModal('请输入密码');
+				return;
+			}
+			// ajax请求
+		});
+
+		// 短信快捷登录modal
+		// 获取密码
+		$('#msgLoginModal .btnGetCode').click(function() {
+			if (checkPhone($('#msgLoginModal .input_phone').val())) {
+				// ajax获取验证码
+			} else {
+				showAlertModal('手机号格式不正确');
+			}
+		});
+		//登录
+		$('#msgLoginModal .btn_login').click(function() {
+			if (!checkPhone($('#msgLoginModal .input_phone').val())) {
+				showAlertModal('手机号格式不正确');
+				return;
+			}
+			if ($('#msgLoginModal .input_code').val() == '') {
+//						alert('请输入密码');
+				showAlertModal('请输入验证码');
+				return;
+			}
+			// ajax请求
+		});
+
+		// 忘记密码modal
+		// 获取验证码
+		$('#forgetPwdModal .btnGetCode').click(function() {
+			if (checkPhone($('#forgetPwdModal .input_phone').val())) {
+				// ajax获取验证码
+			} else {
+				showAlertModal('手机号格式不正确');
+			}
+		});
+		//登录
+		$('#forgetPwdModal .btn_login').click(function() {
+			if (!checkPhone($('#forgetPwdModal .input_phone').val())) {
+				showAlertModal('手机号格式不正确');
+				return;
+			}
+			if ($('#forgetPwdModal .input_code').val() == '') {
+//						alert('请输入验证码');
+				showAlertModal('请输入验证码');
+				return;
+			}
+			if ($('#forgetPwdModal .input_pwd').val() == '') {
+//						alert('请输入密码');
+				showAlertModal('请输入密码');
+				return;
+			}
+			if ($('#forgetPwdModal .input_pwd2').val() == '' || $('#forgetPwdModal .input_pwd').val() == '') {
+//						alert('请确认两次输入密码一致');
+				showAlertModal('请确认两次输入密码一致');
+				return;
+			}
+			// ajax请求
+		});
+
+	})
+</script>
 @section('js')
 @show
-<script type="text/javascript">
-	$('.lessons .nav a').mouseover(function() {
-		console.log($(this));
-		console.log($(this).attr('data-imgSrc'));
-		console.log($(this).attr('data-intro'));
-		$(this).parents('.lessons').find('.lesson_big')
-				.find('img').attr('src', $(this).attr('data-imgSrc')).end()
-				.find('.introduction').html($(this).attr('data-intro'));
-		$(this).tab('show');
-	});
-</script>
+@section('js_child')
+@show
 </body>
 </html>
