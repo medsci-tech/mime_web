@@ -8,7 +8,7 @@
         </header>
 
         <!-- main body -->
-        <div class="main_body">
+        <div class="main_body singn_main_body">
             <form class="form-horizontal" role="form" id="signUpForm">
                 <div class="form-group">
                     <label for="inputPhone" class="col-sm-4 control-label"><span class="necessary">＊</span>手机号</label>
