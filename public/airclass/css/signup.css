@@ -1,19 +1,19 @@
 /* form */
-.main_body {
+.singn_main_body {
 	width: 600px;
 	margin-top: 20px;
 }
-.main_body label {
+.singn_main_body label {
 	font-weight: normal;
 }
-.main_body input {
+.singn_main_body input {
 	background: #F9F9F9;
 }
-.main_body .necessary {
+.singn_main_body .necessary {
 	color: #FF0000;
 }
 
-.main_body .tips {
+.singn_main_body .tips {
 	display: none;
 	padding-top: 7px;
 	white-space: nowrap;
@@ -101,7 +101,7 @@
 }
 
 @media (max-width: 768px) {
-	.main_body {
+	.singn_main_body {
 		width: 100%;
 	}
 	.form-horizontal .form-group {
@@ -116,7 +116,7 @@
 }
 
 @media (min-width: 768px) {
-	.main_body {
+	.singn_main_body {
 		position: relative;
 		left: -60px;
 	}
