@@ -8,22 +8,18 @@
         <div id="slider" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#slider" data-slide-to="0" class="active"></li>
-                <li data-target="#slider" data-slide-to="1"></li>
-                <li data-target="#slider" data-slide-to="2"></li>
+                @for($ol = 0; $ol < $banners->count(); $ol++)
+                    <li data-target="#slider" data-slide-to="{{$ol}}" @if($ol == 0) class="active" @endif></li>
+                @endfor
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="{{asset('airclass/img/slider_1.jpg')}}" alt="">
+                @foreach($banners as $key => $banner)
+                <div class="item @if($key == 0) active @endif">
+                    <img width="100%" src="{{$banner->image_url}}" alt="">
                 </div>
-                <div class="item">
-                    <img src="{{asset('airclass/img/slider_1.jpg')}}" alt="">
-                </div>
-                <div class="item">
-                    <img src="{{asset('airclass/img/slider_1.jpg')}}" alt="">
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -73,61 +69,21 @@
         <div class="lessons lessons_recommended">
             <h3 class="title">课程推荐</h3>
             <div class="lesson_list row">
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
+                @foreach($recommend_classes as $recommend_class)
+                <div class="lesson col-xs-6 col-diy-20">
+                    <a href="javascript:void(0);">
+                        <img class="center-block" src="{{$recommend_class->logo_url}}" alt="">
                         <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
+                            <h3 class="title">{{$recommend_class->title}}</h3>
+                            <p class="introduction">{{$recommend_class->comment}}</p>
                             <p class="price_and_persons">
                                 <span class="price">&yen;198.00</span>
                                 <span class="persons pull-right">2123人在学</span>
                             </p>
                         </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
+                    </a>
+                </div>
+                @endforeach
             </div>
         </div>
 
