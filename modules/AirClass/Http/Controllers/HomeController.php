@@ -2,10 +2,10 @@
 
 use App\Models\Banner;
 use App\Models\ThyroidClass;
+use App\Models\CourseApplies;
 use Modules\Admin\Entities\Teacher;
 use Modules\Admin\Entities\ThyroidClassCourse;
 use Modules\Admin\Entities\ThyroidClassPhase;
-
 class HomeController extends Controller
 {
     protected $public_class_id = 1; // 空课项目公开课id
@@ -89,7 +89,12 @@ class HomeController extends Controller
      */
     public function private_class()
     {
-        return view('airclass::home.private_class');
+        $doctor_id = 1;
+        $count = CourseApplies::where('doctor_id',$doctor_id)->count();
+        return view('airclass::home.private_class',[
+            'count' => $count,
+        ]);
+
     }
 
     

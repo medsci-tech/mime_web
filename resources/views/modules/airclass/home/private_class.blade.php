@@ -1,14 +1,12 @@
 @extends('modules.airclass.layouts.app')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/lessons_private.css')}}" />
-    @endsection
-    @section('container')
-
-            <!-- header -->
+@endsection
+@section('container')
+     <!-- header -->
     <header class="header text-center">
         私教课
     </header>
-
     <!-- main body -->
     <div class="main_body">
         <div class="introduction">
@@ -28,7 +26,7 @@
         <div class="apply">
             <button id="btnApply" type="button" class="btn btn-block btn_apply">我要报名</button>
             <p class="numbers clearfix">
-                <span class="pull-left">报名人数：63</span>
+                <span class="pull-left">报名人数：{{ $count }}</span>
                 <span class="pull-right">剩余名额：63</span>
             </p>
         </div>
@@ -51,42 +49,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="title text-center">选择导师</h3>
-                <div class="teachers row">
-                    <div class="col-sm-3 col-xs-12">
-                        <div class="teacher active">
-                            <img class="center-block" src="{{asset('airclass/img/private_teacher.jpg')}}"/>
-                            <p class="devider center-block"></p>
-                            <h4 class="name text-center">杨文英</h4>
-                            <p class="introduction">现为中华医学会内分泌学分会常委暨甲状腺专业学组副组长，中国医师协会内分泌代谢分会常委，美国《Thyroid》杂志及、《国际内分泌代谢杂志》编委</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-xs-12">
-                        <div class="teacher">
-                            <img class="center-block" src="{{asset('airclass/img/private_teacher.jpg')}}"/>
-                            <p class="devider center-block"></p>
-                            <h4 class="name text-center">杨文英</h4>
-                            <p class="introduction">现为中华医学会内分泌学分会常委暨甲状腺专业学组副组长，中国医师协会内分泌代谢分会常委，美国《Thyroid》杂志及、《国际内分泌代谢杂志》编委</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-xs-12">
-                        <div class="teacher">
-                            <img class="center-block" src="{{asset('airclass/img/private_teacher.jpg')}}"/>
-                            <p class="devider center-block"></p>
-                            <h4 class="name text-center">杨文英</h4>
-                            <p class="introduction">现为中华医学会内分泌学分会常委暨甲状腺专业学组副组长，中国医师协会内分泌代谢分会常委，美国《Thyroid》杂志及、《国际内分泌代谢杂志》编委</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-xs-12">
-                        <div class="teacher">
-                            <img class="center-block" src="{{asset('airclass/img/private_teacher.jpg')}}"/>
-                            <p class="devider center-block"></p>
-                            <h4 class="name text-center">杨文英</h4>
-                            <p class="introduction">现为中华医学会内分泌学分会常委暨甲状腺专业学组副组长，中国医师协会内分泌代谢分会常委，美国《Thyroid》杂志及、《国际内分泌代谢杂志》编委</p>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-block btn_submit">提交</button>
+                <h3 class="title text-center">上传病例</h3>
+                <form method="post" enctype="multipart/form-data" action="/file/upload">
+                    <input type="file" name="file">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-block btn_submit">提交</button>
+                </form>
             </div>
         </div>
     </div>
@@ -117,7 +85,7 @@
                 $(this).addClass('active');
             });
 
-            $('#chooseTeacherModal .btn_submit').click(function() {
+            $('#chooseTeacherModal .btn_submit').clickx(function() {
                 $('#chooseTeacherModal').modal('hide');
                 $('#successModal').modal('show');
             });

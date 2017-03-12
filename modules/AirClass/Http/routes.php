@@ -37,4 +37,5 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
     Route::post('/user/pwd_reset', 'UserController@postReset'); // 修改密码
 	Route::post('/user/info_update', 'UserController@info_update');
 	Route::post('/user/pwd_update', 'UserController@pwd_update');
+    Route::post('/file/upload', 'FileController@upload'); // 文件上传
 });

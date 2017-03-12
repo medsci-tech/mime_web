@@ -53,7 +53,11 @@ return [
             'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
-
+        // 新建一个本地端uploads空间（目录） 用于存储上传的文件
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),// 文件将上传到public/uploads目录
+        ],
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',
