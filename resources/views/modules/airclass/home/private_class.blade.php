@@ -27,7 +27,7 @@
             <button id="btnApply" type="button" class="btn btn-block btn_apply">我要报名</button>
             <p class="numbers clearfix">
                 <span class="pull-left">报名人数：{{ $count }}</span>
-                <span class="pull-right">剩余名额：63</span>
+                <span class="pull-right">剩余名额：{{ isset($all) ? $all : '60' }}</span>
             </p>
         </div>
     </div>
