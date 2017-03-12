@@ -45,7 +45,7 @@ class SmsController extends Controller
      * @param string $inscribed
      * @return mixed
      */
-    public function curl($phone, $message, $inscribed = '医学志愿者'){
+    public function curl($phone, $message, $inscribed = '空中课堂'){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "http://sms-api.luosimao.com/v1/send.json");
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);

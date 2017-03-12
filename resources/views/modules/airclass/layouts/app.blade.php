@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<title>首页</title>
 	<!-- Bootstrap -->
 	<link href="{{asset('airclass/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -17,6 +18,7 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="{{asset('airclass/css/common.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{asset('airclass/css/signup.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{asset('vendor/sweetalert/sweetalert.css')}}" />
 	@section('css')
 	@show
 	@section('css_child')
@@ -237,6 +239,9 @@
 </footer>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{asset('airclass/js/jquery-1.11.1.min.js')}}"></script>
+<script src="{{asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
+<script src="{{asset('js/jquery-common-mime-fun.js')}}"></script>
+<script src="{{asset('/js/jquery-common-mime-fun.js')}}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{asset('airclass/js/bootstrap.min.js')}}"></script>
 <!-- video5 -->

@@ -77,7 +77,7 @@ class UserController extends Controller
      * @since 1.0
      * @return array
      */
-    public function postReset(Request $request)
+    public function pwdReset(Request $request)
     {
         $phone = $request->input('phone');
         $password = $request->input('password');
@@ -89,12 +89,18 @@ class UserController extends Controller
         ];
         $messages = [
             'phone.required' => '电话号码不能为空',
-            'code.required' => '验证码必须是6位',
+            'code.required' => '验证码不能为空',
             'password.required' => '密码不能为空',
             'password.between' => '密码必须是6~20位之间',
             'confirmed' => '新密码和确认密码不匹配'
         ];
         $validator = Validator::make($data, $rules, $messages);
+        $validator_error_first = $validator->errors()->first();
+        if($validator_error_first){
+            return $this->return_data_format(422, $validator_error_first);
+        }else{
+            return $this->return_data_format(200);
+        }
 
         $user = Auth::user();
         if (!$validator->fails()) {

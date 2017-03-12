@@ -34,6 +34,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::get('/user/comment', 'UserController@comment'); // 评论视图
 	Route::get('/user/info_edit', 'UserController@info_edit'); // 修改资料视图
 	Route::get('/user/pwd_edit', 'UserController@pwd_edit'); // 修改密码视图
+    Route::post('/user/pwd_reset', 'UserController@postReset'); // 修改密码
 	Route::post('/user/info_update', 'UserController@info_update');
 	Route::post('/user/pwd_update', 'UserController@pwd_update');
 });

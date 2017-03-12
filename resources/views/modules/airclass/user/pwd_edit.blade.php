@@ -36,18 +36,20 @@
 
             <form class="user_info step_two form-horizontal " role="form">
                 <div class="form-group">
-                    <label for="pwdOld" class="col-sm-2 control-label"><span class="necessary">＊</span>原密码</label>
+                    <label for="pwdOld" class="col-sm-2 control-label"><span class="necessary">＊</span>新密码</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="pwdOld" name="pwd" placeholder="请输入原密码">
-                    </div>
-                    <div class="tips col-sm-4">请输入原密码</div>
-                </div>
-                <div class="form-group">
-                    <label for="pwdNew" class="col-sm-2 control-label"><span class="necessary">＊</span>新密码</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="pwdNew" name="pwd2" placeholder="请输入新密码">
+                        <input type="text" class="form-control" id="pwdOld" name="pwd" placeholder="请输入新密码">
                     </div>
                     <div class="tips col-sm-4">请输入新密码</div>
+                </div>
+                <div class="form-group">
+                    <label for="pwdNew" class="col-sm-2 control-label"><span class="necessary">＊</span>确认密码</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="pwdNew" name="pwd2" placeholder="请输入确认密码">
+                    </div>
+                    <div class="tips col-sm-4">请输入确认密码</div>
+                    <div class="tips col-sm-4" id="tipCon">两次输入的密码不一致</div>
+
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-2 btn_confirm_wrapper">
@@ -61,7 +63,6 @@
 
 @section('js_child')
     <script>
-
         $(function () {
             $('#btnGetCode').click(function() {
                 $('.tips').hide();
@@ -89,12 +90,17 @@
 
             $('#btnConfirm').click(function() {
                 $('.tips').hide();
+                $('#tipCon').hide();
                 if ($('#pwdOld').val() === '') {
                     showTips($('#pwdOld'));
                     return;
                 }
                 if ($('#pwdNew').val() === '') {
                     showTips($('#pwdNew'));
+                    return;
+                }
+                if ($('#pwdNew').val() != $('#pwdOld').val()) {
+                    $('#tipCon').show();
                     return;
                 }
                 // ajax请求

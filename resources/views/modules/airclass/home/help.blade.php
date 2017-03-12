@@ -117,7 +117,7 @@
             <p>咨询热线：400-864-8883</p>
             <p>课程QQ群：364666518</p>
             <p>官方微信：空中课堂云课堂</p>
-            <p>官方网站：<a href="http://www.mime.org.cn/airclass">mime.org.cn/airclass</a></p>
+            <p>官方网站：<a href="http://airclass.mime.org.cn">airclass.mime.org.cn</a></p>
         </div>
     </div>
 </div>
