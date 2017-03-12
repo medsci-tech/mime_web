@@ -15,6 +15,8 @@ class CrateCourseClass extends Migration
         Schema::create('course_classes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->comment('名称');
+            $table->string('description')->comment('描述');
+            $table->string('banner_url')->comment('描述');
             $table->tinyInteger('site_id')->default(1)->comment('站点id');
             $table->tinyInteger('status')->default(0)->comment('状态');
             $table->tinyInteger('has_teacher')->default(0)->comment('是否有专家 0：无 1：有');
