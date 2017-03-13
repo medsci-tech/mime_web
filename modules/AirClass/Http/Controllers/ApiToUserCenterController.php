@@ -7,6 +7,12 @@ class ApiToUserCenterController extends Controller
 {
     protected $user_role = 'doctor';
     protected $user_remark = '空中课堂';
+    protected $md_user_api;
+
+    public function __construct()
+    {
+        $this->md_user_api = env('MD_USER_API_URL');
+    }
 
     public function register($req_data)
     {
@@ -19,7 +25,7 @@ class ApiToUserCenterController extends Controller
         $hospital_name = $req_data['hospital_name'];
         // 查询用户信息
         try{
-            $response = \Helper::tocurl(env('API_URL2'). '/query-user-information?phone='.$phone, null,0);
+            $response = \Helper::tocurl($this->md_user_api . '/v2/query-user-information?phone='.$phone, null,0);
         }catch (Exception $e){
             $response = [];
         }
@@ -40,7 +46,7 @@ class ApiToUserCenterController extends Controller
                 'hospital_name'=>$hospital_name, //医院名称
             ];
             try{
-                $res = \Helper::tocurl(env('API_URL'). '/register', $post_data,1);// 同步注册
+                $res = \Helper::tocurl($this->md_user_api . '/v0/register', $post_data,1);// 同步注册
             }catch (\Exception $e) {
                 return $this->return_data_format(404, '服务器异常');
             }

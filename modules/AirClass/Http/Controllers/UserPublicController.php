@@ -6,39 +6,9 @@ use Hash;
 use Illuminate\Http\Request;
 use DB;
 use Session;
-use Validator;
 
 class UserPublicController extends Controller
 {
-
-    /**
-     * 验证参数合法性
-     * @param array $data
-     * @return array
-     */
-    protected function validator_params(array $data){
-        $rules = [];
-        if(array_key_exists('phone', $data)){
-            $rules['phone'] = 'required|regex:/^1[35789]\d{9}$/';
-        }
-        if(array_key_exists('password', $data)){
-            $rules['password'] = 'required|min:6|max:22|regex:/^[\w\.-]{6,22}$/';
-        }
-        $msg = [
-            'phone.required' => '手机号不能为空',
-            'phone.regex' => '手机号格式错误',
-            'password.required' => '密码不能为空',
-            'password.regex' => '密码格式只支持6-22位字母数字下划线及-+_.组合',
-        ];
-        $validator = Validator::make($data, $rules, $msg);
-        $validator_error_first = $validator->errors()->first();
-        if($validator_error_first){
-            return $this->return_data_format(422, $validator_error_first);
-        }else{
-            return $this->return_data_format(200);
-        }
-
-    }
 
     /**
      * 账号登陆和短信登陆公共方法
@@ -92,9 +62,9 @@ class UserPublicController extends Controller
         $req_phone = $request->input('phone'); //手机号
         $req_code = $request->input('code'); //手机验证码
         $req_pwd = $request->input('password'); //密码
-        $req_province = $request->input('province'); //省
-        $req_city = $request->input('city'); //市
-        $req_area = $request->input('area'); //区
+        $req_province = $request->input('save-province'); //省
+        $req_city = $request->input('save-city'); //市
+        $req_area = $request->input('save-area'); //区
         $req_hospital_level = $request->input('hospital_level'); //医院等级
         $req_hospital_name = $request->input('hospital_name'); //医院名称
         $req_office = $request->input('office'); //科室
@@ -277,30 +247,36 @@ class UserPublicController extends Controller
 
     }
 
-    /**
-     * 短信验证码请求
-     * @param Request $request
-     * @return array
-     */
-    public function send_code_post(Request $request)
+    // 获取医院
+    function get_hospital(Request $request)
     {
-        // 验证参数合法性
-        $validator_params = $this->validator_params($request->all());
-        if($validator_params['code'] != 200){
-            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
-        }
-        $phone = $request->input('phone');
-        $sms = new SmsController();
-        $res = $sms->send_sms($phone);
-        if($res){
-            return $this->return_data_format(200, '发送成功');
+        $province = $request->input('province');
+        $city = $request->input('city');
+        $area = $request->input('area');
+        $name = $request->input('name');
+        $where = [];
+        if($province){
+            $where['province'] = $province;
+            if($city){
+                $where['city'] = $city;
+                if($area){
+                    $where['country'] = $area;
+                }
+            }
+            if($name){
+                $list = Hospital::where($where)->where('hospital', 'like', '%' . $name . '%')->get();
+            }else{
+                $list = Hospital::where($where)->get();
+            }
         }else{
-            return $this->return_data_format($res['code'], $res['msg']);
+            $list = null;
+        }
+        if($list){
+            return $this->return_data_format(200, 'success', $list);
+        }else{
+            return $this->return_data_format(201, 'success');
         }
     }
-
-
-
 
 }
 
