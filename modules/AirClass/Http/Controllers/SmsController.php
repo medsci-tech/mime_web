@@ -2,11 +2,12 @@
 
 use App\Models\Doctor;
 use Cache;
+use Illuminate\Http\Request;
 
 class SmsController extends Controller
 {
     protected $code_prefix = 'phone_code_'; // 验证码缓存前缀
-    protected $code_times = 10; // 验证码有效期：分钟
+    protected $code_times = 1000; // 验证码有效期：分钟
 
     /**
      * 生成验证码
@@ -14,7 +15,7 @@ class SmsController extends Controller
      * @param int $end
      * @return mixed
      */
-    public function create_code($start = 000000, $end = 999999){
+    protected function create_code($start = 000000, $end = 999999){
         return sprintf('%06d', random_int($start, $end));
     }
 
@@ -24,11 +25,11 @@ class SmsController extends Controller
      * @param array $data
      * @return string
      */
-    public function sms_model($model_name = 'code', $data = []){
+    protected function sms_model($model_name = 'code', $data = []){
         switch ($model_name){
             // 验证码
             case 'code':
-                $res_data = '验证码：'.$data['code'].',有效期10分钟。';break;
+                $res_data = '验证码：'.$data['code'].',有效期' . $this->code_times . '分钟。';break;
             // 找回密码
             case 'password':
                 $res_data = '手机号'.$data['phone'].'的用户，你的密码为：'.$data['password'].'。';break;
@@ -45,7 +46,7 @@ class SmsController extends Controller
      * @param string $inscribed
      * @return mixed
      */
-    public function curl($phone, $message, $inscribed = '空中课堂'){
+    protected function curl($phone, $message, $inscribed = '空中课堂'){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "http://sms-api.luosimao.com/v1/send.json");
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
@@ -91,13 +92,38 @@ class SmsController extends Controller
                 }else{
                     return ['code' => 500, 'msg'=>'service error'];
                 }
-            }elseif($user){
-                return ['code' => 422, 'msg'=>'not found phone'];
+            }else if($user){
+                return ['code' => 422, 'msg'=>'手机号已存在'];
             }else{
-                return ['code' => 422, 'msg'=>'phone existed'];
+                return ['code' => 422, 'msg'=>'手机号不存在'];
             }
         }else{
-            return ['code' => 422, 'msg'=>'params error'];
+            return ['code' => 422, 'msg'=>'参数错误'];
+        }
+    }
+
+    /**
+     * 短信验证码请求
+     * @param Request $request
+     * @return array
+     */
+    public function send_code_post(Request $request)
+    {
+        // 验证参数合法性
+        $validator_params = $this->validator_params($request->all());
+        if($validator_params['code'] != 200){
+            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
+        }
+        $phone = $request->input('phone');
+        $exist = $request->input('exist');
+        $sms = new SmsController();
+        $res = $sms->send_sms($phone, $exist);
+        if($res['code'] == 200){
+            return $this->return_data_format(200, '发送成功');
+        }else if($res['code'] == 422){
+            return $this->return_data_format($res['code'], $res['msg']);
+        }else{
+            return $this->return_data_format($res['code'], '发送失败');
         }
     }
 

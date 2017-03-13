@@ -180,16 +180,6 @@
 	</div>
 </div>
 
-<!-- login success modal -->
-<div class="success_modal modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<div class="tips_container text-center"><span class="icon icon_success"></span><span class="tips">注册成功</span></div>
-			<button type="button" class="btn btn-block btn_index">确定</button>
-		</div>
-	</div>
-</div>
 
 <!-- forget password modal -->
 <div class="login_modal msg_login_modal forget_pwd_modal modal fade" id="forgetPwdModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">
@@ -239,25 +229,12 @@
 </footer>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{asset('airclass/js/jquery-1.11.1.min.js')}}"></script>
-<script src="{{asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
-<script src="{{asset('js/jquery-common-mime-fun.js')}}"></script>
-<script src="{{asset('/js/jquery-common-mime-fun.js')}}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{asset('airclass/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('airclass/js/jquery.common.js')}}"></script>
 <!-- video5 -->
-<script src="{{asset('airclass/plugin/Video5/js/video.min.js')}}"></script>
 
 <script type="text/javascript">
-	function checkEmail (email) {
-		var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-		return reg.test(email);
-	}
-	function checkPhone(phone) {
-		if(phone.length === 11 || /^1[3|4|5|8][0-9]\d{4,8}$/.test(phone)) {
-			return true;
-		}
-		return false;
-	}
 
 	function showAlertModal(msg) {
 		$('#alertModal').find('.modal-content').text(msg);
@@ -267,10 +244,11 @@
 		}, 1500);
 	}
 
-	function showTips(dom) {
+
+	var showTips = function(dom) {
 		$(dom).parents('.form-group').find('.tips').show();
 		$(dom).focus();
-	}
+	};
 
 	$(function() {
 		$('.lessons .nav a').mouseover(function() {
@@ -303,43 +281,6 @@
 //				});
 		$('.btn_index').click(function() {
 			window.location.href = '{{url('user')}}';
-		});
-
-
-		// 注册表单
-		// 点击获取验证码
-		$('#signUpForm .btnGetCode').click(function() {
-			$('#signUpForm .tips').hide();
-			if (checkPhone($('#signUpForm #inputPhone').val())) {
-				// ajax获取验证码
-			} else {
-				showTips($('#signUpForm #inputPhone'));
-			}
-		});
-		// 点击注册按钮
-		$('#signUpForm #btnSignup').click(function() {
-			$('#signUpForm .tips').hide();
-			if (!checkPhone($('#signUpForm #inputPhone').val())) {
-				showTips($('#signUpForm #inputPhone'));
-				return;
-			}
-			if ($('#signUpForm #inputCode').val() == '') {
-//						alert('请输入验证码');
-				showTips($('#signUpForm #inputCode'));
-				return;
-			}
-			if ($('#signUpForm #inputPwd').val() == '') {
-//						alert('请输入密码');
-				showTips($('#signUpForm #inputPwd'));
-				return;
-			}
-			if ($('#signUpForm #inputPwd').val() !== $('#signUpForm #inputPwdConfirm').val()) {
-//						alert('请确认两次输入密码一致');
-				showTips($('#signUpForm #inputPwdConfirm'));
-				return;
-			}
-			// ajax请求
-			$('#successModal').modal('show');
 		});
 
 		// 账号密码登录modal
