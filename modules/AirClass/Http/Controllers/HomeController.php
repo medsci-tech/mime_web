@@ -1,4 +1,4 @@
-<?php namespace Modules\Airclass\Http\Controllers;
+<?php namespace Modules\AirClass\Http\Controllers;
 use Illuminate\Http\Request;
 use Modules\Airclass\Entities\Banner;
 use Modules\Airclass\Entities\Teacher;
