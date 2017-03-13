@@ -1,13 +1,13 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 use Illuminate\Http\Request;
-use Modules\Airclass\Entities\Banner;
-use Modules\Airclass\Entities\Teacher;
-use Modules\Airclass\Entities\ThyroidClass;
-use Modules\Airclass\Entities\CourseClass;
+use Modules\AirClass\Entities\Banner;
+use Modules\AirClass\Entities\Teacher;
+use Modules\AirClass\Entities\ThyroidClass;
+use Modules\AirClass\Entities\CourseClass;
 
-use Modules\Airclass\Entities\CourseApplies;
-use Modules\Airclass\Entities\ThyroidClassCourse;
-use Modules\Airclass\Entities\ThyroidClassPhase;
+use Modules\AirClass\Entities\CourseApplies;
+use Modules\AirClass\Entities\ThyroidClassCourse;
+use Modules\AirClass\Entities\ThyroidClassPhase;
 
 class HomeController extends Controller
 {
