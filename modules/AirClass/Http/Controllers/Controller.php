@@ -1,4 +1,4 @@
-<?php namespace Modules\Airclass\Http\Controllers;
+<?php namespace Modules\AirClass\Http\Controllers;
 
 use Pingpong\Modules\Routing\Controller as BaseController;
 use \App\Model\Hospital;
