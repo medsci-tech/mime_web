@@ -23,9 +23,9 @@ class CourseController extends Controller
         if($site_id){
             return view('admin::backend.course.index', [
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
-                'phases' => ThyroidClassPhase::all(),
-                'course_classes' => CourseClass::where('status', 1)->get(),
-                'teachers' => Teacher::all(),
+                'phases' => ThyroidClassPhase::where(['site_id' => $site_id])->get(),
+                'course_classes' => CourseClass::where(['status' => 1, 'site_id' => $site_id])->get(),
+                'teachers' => Teacher::where(['site_id' => $site_id])->get(),
             ]);
         }else{
             return redirect('/site');
