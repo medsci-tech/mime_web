@@ -1,4 +1,4 @@
-<?php namespace Modules\Airclass\Http\Controllers;
+<?php namespace Modules\AirClass\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Hospital;
