@@ -49,6 +49,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>名称</th>
+                                    <th>banner</th>
+                                    <th>描述</th>
                                     <th>状态</th>
                                     <th>
                                         数据操作&emsp;
@@ -62,11 +64,21 @@
                                         <tr>
                                             <td>{{$list->id}}</td>
                                             <td>{{$list->name}}</td>
+                                            <td>
+                                                @if($list->banner_url)
+                                                    <img style="max-width: 100px; max-height: 100px" src="{{$list->banner_url}}">
+                                                @else
+                                                    无
+                                                @endif
+                                            </td>
+                                            <td>{{$list->description}}</td>
                                             <td>{{config('params')['status_option'][$list->status]}}</td>
                                             <td style="white-space: nowrap">
                                                 <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
                                                         data-id="{{$list->id}}"
                                                         data-name="{{$list->name}}"
+                                                        data-banner_url="{{$list->banner_url}}"
+                                                        data-description="{{$list->description}}"
                                                         data-status="{{$list->status}}"
                                                 >修改</button>
                                             </td>
@@ -99,15 +111,24 @@
                 var defaltData = '';
                 $('#form-id').val(defaltData);
                 $('#form-name').val(defaltData);
+                $('#form-banner_url').val(defaltData);
+                $('#form-description').val(defaltData);
                 $('#form-status').val(1);
             });
             $('[data-btn="edit"]').click(function () {
                 var id = $(this).attr('data-id');
                 var name = $(this).attr('data-name');
+                var banner_url = $(this).attr('data-banner_url');
+                var description = $(this).attr('data-description');
                 var status = $(this).attr('data-status');
                 /* 编辑初始化 */
                 $('#form-id').val(id);
                 $('#form-name').val(name);
+                if(banner_url){
+                    $('#form-img_url_html').html('<img class="img-responsive" src="'+banner_url+'">');
+                }
+                $('#form-banner_url').val(banner_url);
+                $('#form-description').val(description);
                 $('#form-status').val(status);
 
             });

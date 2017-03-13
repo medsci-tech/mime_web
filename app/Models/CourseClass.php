@@ -11,6 +11,8 @@ class CourseClass extends Model
     protected $fillable = [
         'name',
         'status',
+        'banner_url',
+        'description',
         'site_id',
     ];
 
