@@ -4,7 +4,7 @@ namespace Modules\AirClass\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Modules\AirClass\Scopes\SiteScope;
 /**
  * Class ThyroidClassCourse
  * @package App\Models
@@ -21,6 +21,12 @@ class ThyroidClassCourse extends Model
      * @var string
      */
     protected $table = 'thyroid_class_courses';
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new SiteScope);
+    }
 
     /**
      * The attributes that are mass assignable.

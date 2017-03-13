@@ -19,6 +19,7 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         $site_id = $request->input('site_id');
+
         if($site_id){
             return view('admin::backend.tables.teacher', [
                 'teachers' => Model::where('site_id',$site_id)->paginate(10),

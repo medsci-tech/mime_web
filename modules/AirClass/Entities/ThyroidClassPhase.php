@@ -4,7 +4,7 @@ namespace Modules\AirClass\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Modules\AirClass\Scopes\SiteScope;
 /**
  * Class ThyroidClassPhase
  * @package App\Models
@@ -29,6 +29,18 @@ class ThyroidClassPhase extends Model
         'is_show',
         'site_id',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new SiteScope);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

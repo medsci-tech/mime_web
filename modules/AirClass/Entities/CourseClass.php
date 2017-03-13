@@ -1,21 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace Modules\AirClass\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Scopes\SiteScope;
-
-/**
- * Class Banner
- * @package App\Models
- * @mixin \Eloquent
- */
-class CourseApplies extends Model
+use Modules\AirClass\Scopes\SiteScope;
+class CourseClass extends Model
 {
-    /**
-     * @var string
-     */
-    protected $table = 'course_applies';
+    protected $table = 'course_classes';
     /**
      * The "booting" method of the model.
      *

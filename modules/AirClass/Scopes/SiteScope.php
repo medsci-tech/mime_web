@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Scopes;
+namespace Modules\AirClass\Scopes;
 
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +16,6 @@ class SiteScope implements Scope{
      */
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->where('site_id', '=', 1);
+        return $builder->where('site_id', '=', 2);
     }
 }

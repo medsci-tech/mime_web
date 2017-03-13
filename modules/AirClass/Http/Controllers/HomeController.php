@@ -1,16 +1,16 @@
 <?php namespace Modules\Airclass\Http\Controllers;
+use Illuminate\Http\Request;
+use Modules\Airclass\Entities\Banner;
+use Modules\Airclass\Entities\Teacher;
+use Modules\Airclass\Entities\ThyroidClass;
+use Modules\Airclass\Entities\CourseClass;
 
-use App\Models\Banner;
-use App\Models\ThyroidClass;
-use App\Models\CourseApplies;
-use Modules\Admin\Entities\Teacher;
-use Modules\Admin\Entities\ThyroidClassCourse;
-use Modules\Admin\Entities\ThyroidClassPhase;
+use Modules\Airclass\Entities\CourseApplies;
+use Modules\Airclass\Entities\ThyroidClassCourse;
+use Modules\Airclass\Entities\ThyroidClassPhase;
+
 class HomeController extends Controller
 {
-    protected $public_class_id = 1; // 空课项目公开课id
-    protected $answer_class_id = 2; // 空课项目答疑课id
-    protected $private_class_id = 3; // 空课项目私教课id
 
     /**
      * 首页
@@ -19,69 +19,75 @@ class HomeController extends Controller
 	public function index()
 	{
         // 轮播图
-        $banners = Banner::where(['site_id' => $this->site_id, 'status' => 1, 'page' => 'index'])->get();
+        $banners = Banner::where([ 'status' => 1, 'page' => 'index'])->get();
         // 课程介绍
-        $classes = ThyroidClass::where(['site_id' => $this->site_id])->get();
+        $classes = ThyroidClass::first()->toArray();
         // 课程推荐
-        $recommend_classes = ThyroidClassCourse::where(['site_id' => $this->site_id])->orderBy('recomment_time')->limit(5)->get();
+        $recommend_classes = ThyroidClassCourse::orderBy('recomment_time')->limit(5)->get();
 
         // 公开课
-        $public_class_units = ThyroidClassPhase::where(['site_id' => $this->site_id, 'is_show' => 1])->get(); // 单元列表
-        $public_class_courses = [];
-        if($public_class_units){
-            foreach ($public_class_units as $public_class_unit){
-                $courses = ThyroidClassCourse::where([
-                    'site_id' => $this->site_id,
-                    'is_show' => 1,
-                    'course_class_id' => $this->public_class_id,
-                    'thyroid_class_phase_id' => $public_class_unit->id,
-                ])->get();
-                if($courses->count()){
-                    $public_class_courses[] = $courses;
-                }
-            }
+        $public_class_units = ThyroidClassPhase::limit(8)->where(['is_show' => 1])->get(); // 单元列表
+        foreach($public_class_units as &$val)
+        {
+            $course_list = ThyroidClassPhase::limit(8)->find($val['id'])->thyroidClassCourses()->where(array('course_class_id'=>$this->public_class_id))->get();
+            $val['course_list'] = $course_list;
         }
-        //答疑课
-        $answer_class_teachers = Teacher::where(['site_id' => $this->site_id])->get(); // 讲师列表
-        $answer_class_courses = [];
-        if($answer_class_teachers){
-            foreach ($answer_class_teachers as $answer_class_teacher){
-                $courses = ThyroidClassCourse::where([
-                    'site_id' => $this->site_id,
-                    'is_show' => 1,
-                    'course_class_id' => $this->answer_class_id,
-                    'teacher_id' => $answer_class_teacher->id,
-                ])->get();
-                if($courses->count()){
-                    $answer_class_courses[] = $courses;
-                }
-            }
-        }
-        // 私教课
-//dd($recommend_classes);
+
+        $answer_class_courses = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id))->orderBy('id','desc')->limit(8)->get();//答疑课
+
+        $class_info  = CourseClass::whereIn('id', array(2, 3, 4))->orderBy('id', 'asc')->groupBy('id')->get();
+
 		return view('airclass::home.index',[
             'banners' => $banners,
             'classes' => $classes,
+            'class_info' => $class_info,
             'recommend_classes' => $recommend_classes, // 课程推荐
-            'public_class_courses' => $public_class_courses, // 公开课
+            'public_class_courses' => $public_class_units, // 公开课
             'answer_class_courses' => $answer_class_courses, // 答疑课
         ]);
 	}
 
     /**
-     * 公开课
+     * 公开课列表
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
      */
-    public function public_class()
+    public function public_class(Request $request)
     {
-        return view('airclass::home.public_class');
+        $units = ThyroidClassPhase::where('is_show', 1)->paginate(10);
+        foreach($units as &$val)
+        {
+            $course_list = ThyroidClassPhase::limit(10)->find($val['id'])->thyroidClassCourses()->where('course_class_id', $this->public_class_id)->get();
+            $val['course_list'] = $course_list;
+        }
+        return view('airclass::home.public_class',[
+            'units' => $units,
+        ]);
     }
 
     /**
-     * 答疑课
+     * 答疑课列表
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
      */
-    public function answer_class()
+    public function answer_class(Request $request)
     {
-        return view('airclass::home.answer_class');
+        $units = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id)) //答疑课id
+            ->orderBy('created_at','desc')
+            ->groupBy('teacher_id')
+            ->paginate(10);
+        foreach($units as &$val)
+        {
+            $teach_info = Teacher::limit(10)->find($val['teacher_id'])->first();
+            $val['teach_info'] = $teach_info;
+            $course_list = ThyroidClassCourse::limit(10)->where(array('teacher_id'=>$val['teacher_id']))->orderBy('created_at','desc')->get();
+            $val['course_list'] = $course_list;
+        }
+        return view('airclass::home.answer_class',[
+            'units' => $units,
+        ]);
     }
 
     /**

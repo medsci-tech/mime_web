@@ -4,7 +4,7 @@ namespace Modules\AirClass\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Modules\AirClass\Scopes\SiteScope;
 /**
  * Class Teacher
  * @package App\Models
@@ -32,6 +32,17 @@ class Teacher extends Model
         'site_id',
         'introduction'
     ];
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new SiteScope);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
