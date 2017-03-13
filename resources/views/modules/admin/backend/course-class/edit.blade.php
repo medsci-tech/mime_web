@@ -17,6 +17,19 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label">缩略图</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="banner_url" id="form-banner_url" placeholder="">
+              <div id="form-img_url_html"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">描述</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" name="description" id="form-description"  style="resize:vertical"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">状态</label>
             <div class="col-sm-10">
               <select class="form-control" name="status" id="form-status">
