@@ -120,9 +120,9 @@
                 </div>
                 <p class="tips_login text-right col-sm-10">已有账号？ <a class="btn_login" href="javascript:void(0);" data-toggle="modal" data-target="#loginModal">马上登录</a></p>
                 <!--省市区-->
-                <input id="save-province" name="save-province">
-                <input id="save-city" name="save-city">
-                <input id="save-area" name="save-area">
+                <input id="save-province" type="hidden"  name="save-province">
+                <input id="save-city" type="hidden" name="save-city">
+                <input id="save-area" type="hidden" name="save-area">
             </form>
         </div>
 

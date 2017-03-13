@@ -27,6 +27,7 @@ class Exercise extends Model
         'option',
         'answer',
         'resolve',
+        'site_id',
         'status',
     ];
 

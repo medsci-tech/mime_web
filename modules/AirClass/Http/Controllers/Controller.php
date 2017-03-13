@@ -1,4 +1,4 @@
-<?php namespace Modules\AirClass\Http\Controllers;
+<?php namespace Modules\Airclass\Http\Controllers;
 
 use Pingpong\Modules\Routing\Controller as BaseController;
 
