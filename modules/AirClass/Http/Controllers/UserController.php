@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use PhpParser\Comment\Doc;
-use Session;
 use \App\Models\Doctor;
 use \App\Models\Hospital;
 use Modules\AirClass\Entities\Office;
@@ -11,18 +10,11 @@ use Hash;
 use Cache;
 class UserController extends Controller
 {
-	protected $user = null;
-
-	public function __construct()
-	{
-		$user = Session::get($this->user_login_session_key);
-		if($user){
-			$this->user = $user;
-		}else{
-			redirect(url('/login'));
-		}
-	}
-
+    public function __construct()
+    {
+        $this->middleware('login');
+        parent::__construct();
+    }
 	public function study()
 	{
         return view('airclass::user.study', [

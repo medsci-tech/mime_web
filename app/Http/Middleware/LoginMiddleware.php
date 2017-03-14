@@ -15,11 +15,11 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(\Session::has('studentId')) {
+        if(\Session::has('user_login_session_key')) {
             return $next($request);
         } else {
             \Session::set('return_referer', $request->getRequestUri());
-            return redirect('/home/login');
+            return  redirect(url('/login'));
         }
     }
 }

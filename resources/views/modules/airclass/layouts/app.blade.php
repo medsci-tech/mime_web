@@ -80,17 +80,20 @@
 						</li>
 					</ul>
 				</form>
+				@if(\Session::has('user_login_session_key'))
 				<div class="handlers pull-right">
 					<span class="reminder glyphicon glyphicon-bell">
 						<span class="badge">2</span>
 					</span>
-					<a class="username" href="{{url('user')}}">小明</a><span class="devider">|</span>
+					<a class="username" href="{{url('user')}}">{{ Session::get('user_login_session_key')['phone'] }}</a><span class="devider">|</span>
 					<a class="logout" href="{{url('logout')}}">退出</a>
 				</div>
+				@else
 				<div class="handlers pull-right">
 					<a class="btn_login" href="#" data-toggle="modal" data-target="#loginModal">登录</a><span class="devider">|</span>
 					<a class="btn_signup" href="{{url('register')}}">注册</a>
 				</div>
+				@endif
 			</div>
 		</div>
 		<!-- /.navbar-collapse -->

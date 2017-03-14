@@ -9,7 +9,6 @@ use Session;
 
 class UserPublicController extends Controller
 {
-
     /**
      * 账号登陆和短信登陆公共方法
      * @param $user
@@ -35,7 +34,7 @@ class UserPublicController extends Controller
             $save_data['area'] = '';
             $save_data['hospital_name'] = '';
         }
-        Session::set($this->user_login_session_key, $save_data);
+        \Session::set($this->user_login_session_key, $save_data);
         return $save_data;
     }
 
@@ -53,7 +52,8 @@ class UserPublicController extends Controller
      * @return array
      */
     public function register_post(Request $request)
-    {
+    { \Session::set('studentId', 111111);
+
         // 验证参数合法性
         $validator_params = $this->validator_params($request->all());
         if($validator_params['code'] != 200){
@@ -130,10 +130,11 @@ class UserPublicController extends Controller
             ];
             $api_to_uc = new ApiToUserCenterController();
             $api_to_uc_res = $api_to_uc->register($api_to_uc_data);
+
             if($api_to_uc_res['code'] == 200){
                 DB::commit();
                 $this->save_session($add_doctor);
-                return $this->return_data_format(200);
+                return $this->return_data_format(200,'注册成功!');
             }else{
                 DB::rollback();//事务回滚
                 return $this->return_data_format(500, $api_to_uc_res['msg']);
