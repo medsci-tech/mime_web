@@ -28,18 +28,8 @@
     <div class="main_body">
         <!-- project -->
         <div class="project clearfix">
-            <video id="really-cool-video" class="project_video pull-left video-js vjs-default-skin vjs-big-play-centered" controls
-                   preload="auto" poster="{{asset('airclass/img/slider_1.jpg')}}"
-                   data-setup='{}'>
-                <source src="{{asset('airclass/video/test.mp4')}}" type='video/mp4' />
-                <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
-                <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg'>
-                <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a web browser
-                    that
-                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                </p>
-            </video>
+            <div id="id_video_container" style="width:100%;" class="project_video pull-left video-js vjs-default-skin vjs-big-play-centered" ></div>
+
             <div class="project_info pull-left">
                 <h4 class="title">项目介绍</h4>
                 <p class="info">
@@ -195,5 +185,28 @@
             </div>
         </div>
     </div>
-
     @endsection
+
+
+
+@section('js')
+    <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 腾讯视频
+            var option = {
+                "auto_play": "0",
+                "file_id": "{{$classes['qcloud_file_id']}}",
+                "app_id": "{{$classes['qcloud_app_id']}}",
+                "width": 520,
+                "height": 280
+            };
+            /*调用播放器进行播放*/
+            new qcVideo.Player(
+                    /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
+                "id_video_container",
+                option
+            );
+        });
+    </script>
+@endsection
