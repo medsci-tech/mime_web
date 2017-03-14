@@ -14,173 +14,21 @@
         @if (count($data['course_list']) > 0)
         <!-- lessons -->
         <div class="lessons">
-            <h3 class="title">临床甲减基础</h3>
+            <h3 class="title">{{ $data['teacher_name'] }}</h3>
             <div class="lesson_list row">
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
+                @foreach($data['course_list'] as $val)
+                <div class="lesson col-xs-6 col-diy-20"><a href="{{ URL('video/'.$val->id) }}"">
+                        <img class="center-block" src="{{ $val->logo_url  }}" alt="">
                         <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
+                            <h3 class="title">{{ $val->title }}</h3>
+                            <p class="introduction">{{ str_limit($val->comment, $limit = 100, $end = '...') }}</p>
                             <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
+                                {{--<span class="price">&yen;198.00</span>--}}
+                                <span class="persons pull-right">{{ $val->play_count }}人在学</span>
                             </p>
                         </div>
                     </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
+                @endforeach
             </div>
         </div>
         @endif

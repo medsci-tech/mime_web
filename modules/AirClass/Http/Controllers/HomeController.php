@@ -78,10 +78,11 @@ class HomeController extends Controller
             ->orderBy('created_at','desc')
             ->groupBy('teacher_id')
             ->paginate(10);
+
         foreach($units as &$val)
         {
-            $teach_info = Teacher::limit(10)->find($val['teacher_id'])->first();
-            $val['teach_info'] = $teach_info;
+            $teach_info = Teacher::where(array('id'=>$val['teacher_id']))->first();
+            $val['teacher_name'] = $teach_info->name;
             $course_list = ThyroidClassCourse::limit(10)->where(array('teacher_id'=>$val['teacher_id']))->orderBy('created_at','desc')->get();
             $val['course_list'] = $course_list;
         }
