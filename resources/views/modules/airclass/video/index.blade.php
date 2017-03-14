@@ -8,7 +8,7 @@
     <div class="main_body">
 
         <!-- video container -->
-        <div class="video_container active clearfix">
+        <div class="video_container clearfix">
             <div class="video_wrapper">
                 <div id="id_video_container" style="width: 100%;"></div>
                 <div class="shares_and_thumbs clearfix">
@@ -32,10 +32,7 @@
                 <ul class="chapters_list">
                     @foreach($chapter_classes as $chapter_class)
                     <li class="chapter"><a href="{{url('video', ['id' => $chapter_class->id])}}">{{$chapter_class->title}}</a></li>
-
                     @endforeach
-
-                        <li class="chapter">认识糖尿病<span class="icon icon_play_played pull-right"></span></li>
                 </ul>
             </div>
         </div>
@@ -425,7 +422,9 @@
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript">
         $('#btnChapter').click(function() {
-            $('.video_container').toggleClass('active');
+            var height = $('.video_wrapper').height();
+            console.log(height);
+            $('.video_container').toggleClass('active').find('.chapters').height(height);
         });
 
         $('.test_answer').click(function() {
@@ -477,6 +476,7 @@
         }
 
         $(function () {
+            // 腾讯视频
             var option = {
                 "auto_play": "0",
                 "file_id": "{{$class->qcloud_file_id}}",
