@@ -8,6 +8,7 @@ use \App\Model\Doctor;
 use \App\Model\Hospital;
 use \App\Model\Address;
 use Hash;
+use Cache;
 class UserController extends Controller
 {
 	protected $user = null;
@@ -71,6 +72,39 @@ class UserController extends Controller
     {
         return view('auth.reset');
     }
+
+    /**
+     * 短信发送
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
+    public function send(Request $request)
+    {
+
+        $method=$request->method();
+        if($request->isMethod('post')){
+            $validator = \Validator::make($request->all(), [
+                'phone'   => 'required|digits:11|regex:/^1[35789]\d{9}$/'
+            ]);
+            if ($validator->fails()) {
+                return ['status_code' => 200, 'message' => $validator->errors()->first('phone')];
+            }
+            $phone  = $request->phone;
+            $code   = \MessageSender::generateMessageVerify();
+           // \MessageSender::sendMessageVerify($phone, $code);
+            try {
+                Cache::put($phone, $code,1);
+            } catch (\Exception $e) {
+                return ['status_code' => 0, 'message' => $e->getMessage()];
+            }
+            return ['status_code' => 200, 'message' => '发送成功!','code'=> $code];
+        }
+        else{
+            return ['status_code' => 0, 'message' => '发送失败!','code'=> null];
+        }
+    }
+
     /**
      * 个人密码修改
      * @author      lxhui<772932587@qq.com>
@@ -85,7 +119,7 @@ class UserController extends Controller
         $rules = [
             'phone' => 'required|digits:11',
             'code' => 'required|digits:6',
-            'password'=>'required|between:6,20|confirmed',
+            'password'=>'required|between:6,20|confirmed|regex:/^[\w\.-]{6,22}$/',
         ];
         $messages = [
             'phone.required' => '电话号码不能为空',
@@ -94,21 +128,26 @@ class UserController extends Controller
             'password.between' => '密码必须是6~20位之间',
             'confirmed' => '新密码和确认密码不匹配'
         ];
-        $validator = Validator::make($data, $rules, $messages);
+        $validator = \Validator::make($data, $rules, $messages);
         $validator_error_first = $validator->errors()->first();
         if($validator_error_first){
             return $this->return_data_format(422, $validator_error_first);
-        }else{
-            return $this->return_data_format(200);
+        }
+        /* 验证码验证 */
+        $auth_code = \Cache::get($request->phone);
+        if ($request->code != $auth_code) {
+            return ['code' => 0,'msg' =>'验证码不匹配'];
         }
 
-        $user = Auth::user();
+
+        //$user = Auth::user();
         if (!$validator->fails()) {
-            $user->password = Hash::make($password);
+            return $this->return_data_format(200, '修改成功!');
+            $user->password = \Hash::make($password);
             $user->save();
         }
         else
-            return ['status_code' => 0,'message' =>'修改失败!请完善资料!'];
+            return ['code' => 0,'msg' =>'修改失败!请完善资料!'];
 
         //Auth::logout();  //更改完这次密码后，退出这个用户
         //return redirect('/login');

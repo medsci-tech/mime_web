@@ -7,11 +7,11 @@
         <div class="admin_content">
             <h3 class="admin_title">修改密码</h3>
 
-            <form class="user_info step_one form-horizontal" role="form">
+            <form class="user_info step_one form-horizontal" role="form" id="pwdForm">
                 <div class="form-group">
                     <label for="userPhone" class="col-sm-2 control-label"><span class="necessary">＊</span>手机号</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号">
+                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号" value="15927086090">
                     </div>
                     <div class="tips col-sm-4">请输入正确手机号</div>
                 </div>
@@ -60,15 +60,31 @@
         </div>
 
 @endsection
-
+<script src="/vendor/sweetalert/sweetalert.min.js"></script>
+<link rel="stylesheet" href="/vendor/sweetalert/sweetalert.css">
 @section('js_child')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var code_url = '{{url('user/send')}}';
         $(function () {
             $('#btnGetCode').click(function() {
                 $('.tips').hide();
-                if (checkPhone($('#userPhone').val())) {
-                    // ajax
+                var phone = $('#userPhone').val();
+                if (!checkPhone(phone)) {
+                    showTips($('#userPhone'));
+                    return;
                 }
+                // ajax获取验证码
+                var data = {
+                    'phone': phone,
+                    'exist': '-1'
+                };
+                subSmsAjax(code_url,data, phone);
             });
 
             $('#btnNext').click(function() {
@@ -104,6 +120,29 @@
                     return;
                 }
                 // ajax请求
+                var data = {
+                    'phone': $('#userPhone').val(),
+                    'password': $('#pwdOld').val(),
+                    'password_confirmation': $('#pwdNew').val(),
+                    'code': $('#inputCode').val(),
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '/user/pwd_reset',
+                    data: data,
+                    success: function(res){
+                        if(res.code != 200){
+                            sweetAlert("修改失败!", res.msg, "error");
+                        }
+                        else
+                            sweetAlert("修改成功!")
+                    },
+                    error:function (res) {
+                        sweetAlert("Hello world!")
+                    }
+                });
+
+
             });
         });
     </script>

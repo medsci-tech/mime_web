@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Helpers\Message\Message;
+use App\Message\LuosimaoMessageSender;
 use Illuminate\Support\ServiceProvider;
 
 class MessageServiceProvider extends ServiceProvider
@@ -24,8 +24,8 @@ class MessageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('message', function ($app) {
-            return new Message();
+        $this->app->singleton('message_sender', function ($app) {
+            return new LuosimaoMessageSender();
         });
     }
 }

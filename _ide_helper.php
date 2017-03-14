@@ -6464,7 +6464,45 @@ namespace {
         }
         
     }
+    class MessageSender extends \App\Message\Facades\MessageSender{
 
+        /**
+         *
+         *
+         * @param int $start
+         * @param int $end
+         * @return string
+         * @static
+         */
+        public static function generateMessageVerify($start = 0, $end = 999999){
+            return \App\Message\LuosimaoMessageSender::generateMessageVerify($start, $end);
+        }
+
+        /**
+         *
+         *
+         * @param $phone
+         * @param $verify
+         * @return int
+         * @static
+         */
+        public static function sendMessageVerify($phone, $verify){
+            return \App\Message\LuosimaoMessageSender::sendMessageVerify($phone, $verify);
+        }
+
+        /**
+         *
+         *
+         * @param $phone
+         * @param $message
+         * @return int
+         * @static
+         */
+        public static function sendMessage($phone, $message){
+            return \App\Message\LuosimaoMessageSender::sendMessage($phone, $message);
+        }
+
+    }
 
     class Password extends \Illuminate\Support\Facades\Password{
         

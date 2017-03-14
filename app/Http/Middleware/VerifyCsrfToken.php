@@ -20,5 +20,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/admin/course*',
         '/admin/banner*',
         '/file/upload*',
+        '/user/send*',
+        '/user/pwd_reset*',
     ];
 }
