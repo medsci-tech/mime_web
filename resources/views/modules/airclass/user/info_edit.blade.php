@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label for="userPhone" class="col-sm-2 control-label"><span class="necessary">＊</span>手机号</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号">
+                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号" readonly>
                     </div>
                     <div class="tips col-sm-4">请输入正确手机号</div>
                 </div>
@@ -72,11 +72,9 @@
                     <div class="col-sm-5">
                         <select class="form-control" name="hospitalLevel">
                             <option value="" selected="selected" hidden="hidden">请选择医院等级</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            @foreach(config('params')['doctor_title'] as $ol)
+                                <option value="{{$ol}}">{{$ol}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="tips col-sm-4">请选择医院级别</div>
@@ -86,11 +84,9 @@
                     <div class="col-sm-5">
                         <select class="form-control" name="department">
                             <option value="" selected="selected" hidden="hidden">请选择科室</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            @foreach(config('params')['doctor_office'] as $ol)
+                                <option value="{{$ol}}">{{$ol}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="tips col-sm-4">请选择科室</div>

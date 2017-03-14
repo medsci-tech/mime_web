@@ -33,7 +33,7 @@ class HomeController extends Controller
             $val['course_list'] = $course_list;
         }
 
-        $answer_class_courses = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id))->orderBy('id','desc')->limit(8)->get();//答疑课
+        $answer_class_courses = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id))->orderBy('id','asc')->limit(8)->get();//答疑课
 
         $class_info  = CourseClass::whereIn('id', array(2, 3, 4))->orderBy('id', 'asc')->groupBy('id')->get();
 

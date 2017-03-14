@@ -92,7 +92,7 @@ class UserController extends Controller
             }
             $phone  = $request->phone;
             $code   = \MessageSender::generateMessageVerify();
-           // \MessageSender::sendMessageVerify($phone, $code);
+            \MessageSender::sendMessageVerify($phone, $code);
             try {
                 Cache::put($phone, $code,1);
             } catch (\Exception $e) {
