@@ -23,7 +23,7 @@ class HomeController extends Controller
         // 课程介绍
         $classes = ThyroidClass::first()->toArray();
         // 课程推荐
-        $recommend_classes = ThyroidClassCourse::orderBy('recomment_time')->limit(5)->get();
+        $recommend_classes = ThyroidClassCourse::orderBy('recomment_time','desc')->limit(5)->get();
 
         // 公开课
         $public_class_units = ThyroidClassPhase::orderBy('id','desc')->limit(8)->where(['is_show' => 1])->get(); // 单元列表
