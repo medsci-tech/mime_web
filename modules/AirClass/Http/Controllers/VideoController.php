@@ -20,6 +20,7 @@ class VideoController extends Controller
 
 	/**
 	 * @param $id
+	 * @return bool
 	 */
 	public function index($id)
 	{
