@@ -57,7 +57,7 @@ class UserPublicController extends Controller
         // 验证参数合法性
         $validator_params = $this->validator_params($request->all());
         if($validator_params['code'] != 200){
-            return $this->return_data_format($validator_params['code'], $validator_params['msg']);
+            return $this->return_data_format(444, $validator_params['msg']);
         }
         $req_phone = $request->input('phone'); //手机号
         $req_code = $request->input('code'); //手机验证码
@@ -74,12 +74,12 @@ class UserPublicController extends Controller
         $sms = new SmsController();
         $check_code = $sms->verify_code($req_phone, $req_code);
         if($check_code['code'] != 200){
-            return $this->return_data_format($check_code['code'], $check_code['msg']);
+            return $this->return_data_format(422, ['code' => $check_code['msg']]);
         }
         // 检验手机号是否注册
         $doctor = Doctor::where('phone', $req_phone)->first();
         if($doctor){
-            return $this->return_data_format(422, '手机号已注册');
+            return $this->return_data_format(422, ['phone' =>'手机号已注册']);
         }
         // 检查医院信息，如果不存在则添加医院信息
         $hospital_where = [
@@ -104,7 +104,7 @@ class UserPublicController extends Controller
             if($hospital['code'] == 200){
                 $hospital_id = $hospital['data']['id'];
             }else{
-                return $this->return_data_format(404, $hospital['msg']);
+                return $this->return_data_format(422, ['hospital' => $hospital['msg']]);
             }
         }
         DB::beginTransaction();
@@ -132,7 +132,7 @@ class UserPublicController extends Controller
             $api_to_uc_res = $api_to_uc->register($api_to_uc_data);
             if($api_to_uc_res['code'] == 200){
                 DB::commit();
-                return $this->return_data_format(200, '注册成功');
+                return $this->return_data_format(200);
             }else{
                 DB::rollback();//事务回滚
                 return $this->return_data_format(500, $api_to_uc_res['msg']);
@@ -169,7 +169,7 @@ class UserPublicController extends Controller
         if($user){
             if (Hash::check($password, $user['password'])) {
                 $save_data = $this->login_core($user);
-                return $this->return_data_format(200,'登陆成功', $save_data);
+                return $this->return_data_format(200,'success', $save_data);
             } else {
                 return $this->return_data_format(422, '用户名或密码错误');
             }
@@ -230,7 +230,7 @@ class UserPublicController extends Controller
         $sms = new SmsController();
         $check_code = $sms->verify_code($phone, $verify_code);
         if($check_code['code'] != 200) {
-            return $this->return_data_format($check_code['code'], $check_code['msg']);
+            return $this->return_data_format($check_code['code'], ['code' => $check_code['msg']]);
         }
         // 验证两次密码输入是否一致
         if($password == $re_password){
@@ -247,36 +247,7 @@ class UserPublicController extends Controller
 
     }
 
-    // 获取医院
-    function get_hospital(Request $request)
-    {
-        $province = $request->input('province');
-        $city = $request->input('city');
-        $area = $request->input('area');
-        $name = $request->input('name');
-        $where = [];
-        if($province){
-            $where['province'] = $province;
-            if($city){
-                $where['city'] = $city;
-                if($area){
-                    $where['country'] = $area;
-                }
-            }
-            if($name){
-                $list = Hospital::where($where)->where('hospital', 'like', '%' . $name . '%')->get();
-            }else{
-                $list = Hospital::where($where)->get();
-            }
-        }else{
-            $list = null;
-        }
-        if($list){
-            return $this->return_data_format(200, 'success', $list);
-        }else{
-            return $this->return_data_format(201, 'success');
-        }
-    }
+   
 
 }
 

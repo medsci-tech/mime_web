@@ -1,7 +1,7 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
-use App\Models\Address;
 use App\Models\Hospital;
+use Illuminate\Http\Request;
 
 class HospitalController extends Controller
 {
@@ -29,8 +29,36 @@ class HospitalController extends Controller
         }
     }
 
-
-
+    // 获取医院
+    function get_lists(Request $request)
+    {
+        $province = $request->input('province');
+        $city = $request->input('city');
+        $area = $request->input('area');
+        $name = $request->input('name');
+        $where = [];
+        if($province){
+            $where['province'] = $province;
+            if($city){
+                $where['city'] = $city;
+                if($area){
+                    $where['country'] = $area;
+                }
+            }
+            if($name){
+                $list = Hospital::where($where)->where('hospital', 'like', '%' . $name . '%')->get();
+            }else{
+                $list = Hospital::where($where)->get();
+            }
+        }else{
+            $list = null;
+        }
+        if($list){
+            return $this->return_data_format(200, 'success', $list);
+        }else{
+            return $this->return_data_format(201, 'success');
+        }
+    }
 
 }
 
