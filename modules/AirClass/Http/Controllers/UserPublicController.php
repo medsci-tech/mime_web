@@ -5,7 +5,6 @@ use App\Models\Hospital;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
-use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class UserPublicController extends Controller
