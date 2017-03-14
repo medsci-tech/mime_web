@@ -67,7 +67,7 @@
 									<button class="btn" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
 					</div>
-					<ul class="keywords clearfix">
+					<ul class="keywords clearfix" style="display: none">
 						<li class="keyword pull-left">
 							<a href="javascript:void(0);">关键词</a>
 						</li>

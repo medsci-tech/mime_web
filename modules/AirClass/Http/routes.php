@@ -36,9 +36,10 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::get('/user/msg', 'UserController@msg'); // 消息视图
 	Route::get('/user/comment', 'UserController@comment'); // 评论视图
 	Route::get('/user/info_edit', 'UserController@info_edit'); // 修改资料视图
+    Route::post('/user/save_info', 'UserController@saveInfo'); // 保存修改资料视图
     Route::post('/user/send', 'UserController@send'); // 个人中心发送短信
 	Route::get('/user/pwd_edit', 'UserController@pwd_edit'); // 修改密码视图
-    Route::post('/user/pwd_reset', 'UserController@pwdReset'); // 修改密码
+    Route::post('/user/pwd_reset', 'UserController@pwdReset'); // 保存修改密码
 	Route::post('/user/info_update', 'UserController@info_update');
 	Route::post('/user/pwd_update', 'UserController@pwd_update');
     Route::post('/file/upload', 'FileController@upload'); // 文件上传

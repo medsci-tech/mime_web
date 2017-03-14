@@ -22,5 +22,6 @@ class VerifyCsrfToken extends BaseVerifier
         '/file/upload*',
         '/user/send*',
         '/user/pwd_reset*',
+        '/user/save_info*',
     ];
 }
