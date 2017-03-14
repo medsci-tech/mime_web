@@ -5,6 +5,7 @@ use App\Models\Hospital;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class UserPublicController extends Controller
@@ -15,7 +16,7 @@ class UserPublicController extends Controller
      * @param $user
      * @return array
      */
-    protected function login_core($user){
+    protected function save_session($user){
         $save_data = [
             'id' => $user->id,
             'nickname' => $user->nickname, // 昵称
@@ -132,6 +133,7 @@ class UserPublicController extends Controller
             $api_to_uc_res = $api_to_uc->register($api_to_uc_data);
             if($api_to_uc_res['code'] == 200){
                 DB::commit();
+                $this->save_session($add_doctor);
                 return $this->return_data_format(200);
             }else{
                 DB::rollback();//事务回滚
@@ -140,15 +142,6 @@ class UserPublicController extends Controller
         }else{
             return $this->return_data_format(404, '注册失败');
         }
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function login_view()
-    {
-        return view('airclass::user_public.login');
     }
 
     /**
@@ -164,11 +157,11 @@ class UserPublicController extends Controller
             return $this->return_data_format($validator_params['code'], $validator_params['msg']);
         }
         $phone = $request->input('phone');
-        $password = $request->input('password');
+        $password = $request->input('login_pwd');
         $user = Doctor::where('phone', $phone)->first();
         if($user){
             if (Hash::check($password, $user['password'])) {
-                $save_data = $this->login_core($user);
+                $save_data = $this->save_session($user);
                 return $this->return_data_format(200,'success', $save_data);
             } else {
                 return $this->return_data_format(422, '用户名或密码错误');
@@ -199,7 +192,7 @@ class UserPublicController extends Controller
         $user = Doctor::where('phone', $phone)->first();
 //        dd($user->hospital);
         if ($user) {
-            $save_data = $this->login_core($user);
+            $save_data = $this->save_session($user);
             return $this->return_data_format(200,'登陆成功', $save_data);
         } else {
             return $this->return_data_format(501, '手机号未注册');
@@ -247,7 +240,16 @@ class UserPublicController extends Controller
 
     }
 
-   
+    // 退出
+    public function logout(){
+        Session::forget($this->user_login_session_key);
+        return redirect('/');
+    }
+
+   public function test(){
+       $user = Session::get($this->user_login_session_key);
+       dd($user);
+   }
 
 }
 

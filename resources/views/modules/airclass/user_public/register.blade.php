@@ -24,7 +24,7 @@
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="code" name="code" placeholder="请输入验证码">
                             </div>
-                            <button type="button" id="btnGetCode" class="btn col-sm-3">获取验证码</button>
+                            <button type="button" id="btnDetCodeOfRegister" class="btn col-sm-3">获取验证码</button>
                         </div>
                     </div>
                     <p class="col-sm-2 tips">请输入验证码</p>
@@ -136,15 +136,6 @@
             </div>
         </div>
     </div>
-<div class="error_modal modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="tips_container text-center"><span class="error-content">注册失败</span></div>
-            <button type="button" class="btn btn-block btn_index">确定</button>
-        </div>
-    </div>
-</div>
 
     @endsection
 
@@ -185,7 +176,7 @@
         });
 
         // 点击获取验证码
-        $('#btnGetCode').click(function() {
+        $('#btnDetCodeOfRegister').click(function() {
             $('.tips').hide();
             var phone_val = phone_dom.val();
             if (checkPhone(phone_val)) {

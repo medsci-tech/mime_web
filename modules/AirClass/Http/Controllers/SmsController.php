@@ -79,6 +79,7 @@ class SmsController extends Controller
                 $user = Doctor::where('phone', $phone)->first();
             }
             if(($required == 1 && $user) || ($required == -1 && !$user) || $required == 0){
+                Cache::forget($this->code_prefix . $phone);
                 Cache::add($this->code_prefix . $phone, $code, $this->code_times);
                 $session_res = Cache::get($this->code_prefix . $phone);
                 if($session_res == $code){
