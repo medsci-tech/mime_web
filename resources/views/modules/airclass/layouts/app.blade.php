@@ -67,7 +67,7 @@
 									<button class="btn" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
 					</div>
-					<ul class="keywords clearfix" style="display: none">
+					<ul class="keywords clearfix">
 						<li class="keyword pull-left">
 							<a href="javascript:void(0);">关键词</a>
 						</li>
@@ -243,12 +243,6 @@
 			$('#alertModal').modal('hide');
 		}, 1500);
 	}
-
-
-	var showTips = function(dom) {
-		$(dom).parents('.form-group').find('.tips').show();
-		$(dom).focus();
-	};
 
 	$(function() {
 		$('.lessons .nav a').mouseover(function() {

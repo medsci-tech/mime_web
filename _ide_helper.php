@@ -11504,7 +11504,7 @@ namespace {
         public static function tocurl($url, $data,$method){
             $headers = array(
                 "Content-type: application/json;charset='utf-8'",
-                "Authorization:". env('API_TOKEN'),
+                "Authorization: Bearer " . env('MD_USER_API_TOKEN'),
                 "Accept: application/json",
                 "Cache-Control: no-cache","Pragma: no-cache",
             );

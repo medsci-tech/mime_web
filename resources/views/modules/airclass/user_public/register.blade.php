@@ -13,18 +13,18 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>手机号</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="inputPhone" name="phone" placeholder="请输入手机号">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号">
                     </div>
-                    <p class="col-sm-2 tips"></p>
+                    <p class="col-sm-2 tips">请输入手机号</p>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>验证码</label>
                     <div class="col-sm-7">
                         <div class="row group_code">
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="inputCode" name="code" placeholder="请输入验证码">
+                                <input type="text" class="form-control" id="code" name="code" placeholder="请输入验证码">
                             </div>
-                            <button type="button" class="btn col-sm-3 btnGetCode">获取验证码</button>
+                            <button type="button" id="btnGetCode" class="btn col-sm-3">获取验证码</button>
                         </div>
                     </div>
                     <p class="col-sm-2 tips">请输入验证码</p>
@@ -32,14 +32,14 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>设置密码</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="inputPwd" name="password" placeholder="设置密码">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="设置密码">
                     </div>
                     <p class="col-sm-2 tips">请输入密码</p>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>确认密码</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="inputPwdConfirm" name="re_password"  placeholder="确认密码">
+                        <input type="password" class="form-control" id="re_password" name="re_password"  placeholder="确认密码">
                     </div>
                     <p class="col-sm-2 tips">密码不一致</p>
                 </div>
@@ -72,17 +72,17 @@
                         <div class="dropup">
                             <input type="text" data-toggle="dropdown" class="form-control" id="hospital" name="hospital_name" placeholder="请输入医院">
                             <ul class="dropdown-menu" aria-labelledby="hospital">
-                                <li>请先填完地区</li>
+                                <li><a href="javascript:;">请先填完地区</a></li>
                             </ul>
                         </div>
                     </div>
-                    <p class="col-sm-2 tips"></p>
+                    <p class="col-sm-2 tips">请输入医院</p>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>科室</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="office" name="office">
-                            <option value="0">请选择等级</option>
+                            <option value="">请选择等级</option>
                             @foreach(config('params')['doctor_office'] as $ol)
                                 <option value="{{$ol}}">{{$ol}}</option>
                             @endforeach
@@ -94,7 +94,7 @@
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>职称</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="title" name="title">
-                            <option value="0">请选择等级</option>
+                            <option value="">请选择等级</option>
                             @foreach(config('params')['doctor_title'] as $ol)
                                 <option value="{{$ol}}">{{$ol}}</option>
                             @endforeach
@@ -136,6 +136,15 @@
             </div>
         </div>
     </div>
+<div class="error_modal modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="tips_container text-center"><span class="error-content">注册失败</span></div>
+            <button type="button" class="btn btn-block btn_index">确定</button>
+        </div>
+    </div>
+</div>
 
     @endsection
 
@@ -146,6 +155,13 @@
     $(function () {
         var code_url = '{{url('sms/code')}}';
         var register_url = '{{url('register/post')}}';
+        var phone_dom = $('#phone');
+        var code_dom = $('#code');
+        var pwd_dom = $('#password');
+        var re_pwd_dom = $('#re_password');
+        var hospital_dom = $('#hospital');
+        var office_dom = $('#office');
+        var title_dom = $('#title');
 
         $('#city-select').citys({
             required:false,
@@ -167,49 +183,42 @@
                 get_hospital(lists);
             }
         });
-        // 注册表单
+
         // 点击获取验证码
-        $('#signUpForm .btnGetCode').click(function() {
-            $('#signUpForm .tips').hide();
-            var phone = $('#signUpForm #inputPhone');
-            var phone_val = phone.val();
+        $('#btnGetCode').click(function() {
+            $('.tips').hide();
+            var phone_val = phone_dom.val();
             if (checkPhone(phone_val)) {
                 // ajax获取验证码
                 var data = {
                     'phone': phone_val,
                     'exist': '-1'
                 };
-                subSmsAjax(code_url,data, phone);
+                subSmsAjax(code_url,data, phone_dom);
             } else {
-                validateTips(phone, '手机号格式不正确');
+                validateTips(phone_dom, '手机号格式错误');
             }
         });
         // 点击注册按钮
-        $('#signUpForm #btnSignup').click(function() {
-            $('#signUpForm .tips').hide();
-            if (!checkPhone($('#signUpForm #inputPhone').val())) {
-                showTips($('#signUpForm #inputPhone'));
-                return;
+        $('#btnSignup').on('click',function() {
+            $('.tips').hide();
+            if (!checkPhone(phone_dom.val())) {
+                showTips(phone_dom);
+                return false;
             }
-            if ($('#signUpForm #inputCode').val() == '') {
-//						alert('请输入验证码');
-                showTips($('#signUpForm #inputCode'));
-                return;
+            if (pwd_dom.val() != re_pwd_dom.val()) {
+                showTips(re_pwd_dom);
+                return false;
             }
-            if ($('#signUpForm #inputPwd').val() == '') {
-//						alert('请输入密码');
-                showTips($('#signUpForm #inputPwd'));
-                return;
+            if(validate_required(code_dom) &&
+            validate_required(pwd_dom) &&
+            validate_required(hospital_dom) &&
+            validate_required(office_dom) &&
+            validate_required(title_dom)){
+                // ajax请求
+                var data = $('#signUpForm').serialize();
+                subActionAjax(register_url,data);
             }
-            if ($('#signUpForm #inputPwd').val() !== $('#signUpForm #inputPwdConfirm').val()) {
-//						alert('请确认两次输入密码一致');
-                showTips($('#signUpForm #inputPwdConfirm'));
-                return;
-            }
-            // ajax请求
-            var data = $('#signUpForm').serialize();
-            console.log(data);
-            subActionAjax(register_url,data);
         });
     })
     </script>

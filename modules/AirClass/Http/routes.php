@@ -24,7 +24,9 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/login_phone/post', 'UserPublicController@login_phone_post'); // 短信登陆请求
 	Route::get('/logout', 'UserPublicController@logout'); // 登出
 	Route::post('/pwd_recover/post', 'UserPublicController@pwd_recover_post'); // 找回密码请求
-	Route::post('/get_hospital/post', 'UserPublicController@get_hospital'); // 获取医院请求
+
+	// 医院
+	Route::post('/hospital/get_lists', 'HospitalController@get_lists'); // 获取医院请求
 
 	// 短信
 	Route::post('/sms/code', 'SmsController@send_code_post'); // 发送短信请求
