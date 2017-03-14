@@ -8,20 +8,9 @@
     <div class="main_body">
 
         <!-- video container -->
-        <div class="video_container clearfix">
+        <div class="video_container active clearfix">
             <div class="video_wrapper">
-                <video id="really-cool-video" class="video video-js vjs-default-skin vjs-big-play-centered" controls
-                       preload="auto" poster="{{asset('airclass/img/slider_1.jpg')}}"
-                       data-setup='{}'>
-                    <source src="{{asset('airclass/video/test.mp4')}}" type='video/mp4' />
-                    <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
-                    <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg'>
-                    <p class="vjs-no-js">
-                        To view this video please enable JavaScript, and consider upgrading to a web browser
-                        that
-                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                    </p>
-                </video>
+                <div id="id_video_container" style="width: 100%;"></div>
                 <div class="shares_and_thumbs clearfix">
                     <div class="shares pull-left">
                         分享给朋友：
@@ -431,7 +420,7 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('airclass/plugin/Video5/js/video.min.js')}}"></script>
+    <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript">
         $('#btnChapter').click(function() {
             $('.video_container').toggleClass('active');
@@ -484,5 +473,21 @@
                 $('.answer_area_container').parents('.answer_box').slideUp();
             }
         }
+
+        $(function () {
+            var option = {
+                "auto_play": "0",
+                "file_id": "{{$class->qcloud_file_id}}",
+                "app_id": "{{$class->qcloud_app_id}}",
+                "width": 1280,
+                "height": 720
+            };
+            /*调用播放器进行播放*/
+            new qcVideo.Player(
+                    /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
+                    "id_video_container",
+                    option
+            );
+        });
     </script>
     @endsection

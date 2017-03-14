@@ -64,9 +64,7 @@ body {
 .video_container {
 	margin: 0 auto;
 	width: 1200px;
-	height: 500px;
 	background: #333333;
-	overflow: hidden;
 }
 .video {
 	width: 880px;
@@ -88,11 +86,11 @@ body {
 	color: #F9F9F9;
 	white-space: nowrap;
 }
-.chapters_list {
-	padding: 0;
-	list-style: none;
-}
-.chapters .title {
+/*.chapters_list {*/
+	/*padding: 0;*/
+	/*list-style: none;*/
+/*}*/
+.chapters .title,.chapters .chapters_list {
 	margin: 0 0 0 20px;
 	padding: 10px 0 10px;
 	border-bottom: 1px solid #999999;
@@ -101,10 +99,12 @@ body {
 .chapters .chapter {
 	overflow: hidden;
 	width: 100%;
-	padding: 10px 20px;
 	background: #555555;
 	font-size: 12px;
 	cursor: pointer;
+}
+.video_container.active .chapters .chapter{
+	padding: 10px 20px;
 }
 .chapters .chapter:hover,
 .chapters .chapter:focus,

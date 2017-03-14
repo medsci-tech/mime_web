@@ -9,7 +9,6 @@
 	<!-- Bootstrap -->
 	<link href="{{asset('airclass/css/bootstrap.min.css')}}" rel="stylesheet">
 	<!-- video5 -->
-	<link rel="stylesheet" type="text/css" href="{{asset('airclass/plugin/Video5/css/video-js.min.css')}}"/>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -18,7 +17,6 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="{{asset('airclass/css/common.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{asset('airclass/css/signup.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{asset('vendor/sweetalert/sweetalert.css')}}" />
 	@section('css')
 	@show
 	@section('css_child')
