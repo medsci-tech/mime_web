@@ -82,15 +82,15 @@
 						</li>
 					</ul>
 				</form>
-				<div class="handlers pull-right hidden">
-							<span class="reminder glyphicon glyphicon-bell">
-								<span class="badge">2</span>
-							</span>
-					<a class="username" href="javascript:void(0);">小明</a><span class="devider">|</span>
+				<div class="handlers pull-right">
+					<span class="reminder glyphicon glyphicon-bell">
+						<span class="badge">2</span>
+					</span>
+					<a class="username" href="{{url('user')}}">小明</a><span class="devider">|</span>
 					<a class="logout" href="{{url('logout')}}">退出</a>
 				</div>
 				<div class="handlers pull-right">
-					<a class="btn_login" href="{{url('login')}}" data-toggle="modal" data-target="#loginModal">登录</a><span class="devider">|</span>
+					<a class="btn_login" href="#" data-toggle="modal" data-target="#loginModal">登录</a><span class="devider">|</span>
 					<a class="btn_signup" href="{{url('register')}}">注册</a>
 				</div>
 			</div>
@@ -108,9 +108,10 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<form id="loginForm">
 			<h3 class="title text-center">账号密码登录</h3>
-			<input type="text" class="form-control input_phone" placeholder="手机号">
-			<input type="text" class="form-control input_pwd" placeholder="密码">
+			<input type="text" class="form-control input_phone" name="phone" placeholder="手机号">
+			<input type="password" class="form-control input_pwd" name="login_pwd" placeholder="密码">
 			<div class="form-group checkbox_group">
 				<div class="checkbox">
 					<label>
@@ -121,6 +122,7 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-block btn_login">登录</button>
+			</form>
 			<p class="text-right links">
 				<a class="btn_msg_login" href="javascript:void(0);">短信快捷登录</a>
 				<span class="devider">|</span>
@@ -141,25 +143,24 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<form id="msgLoginForm">
 			<h3 class="title text-center">短信快捷登录</h3>
 			<!--<p class="tips text-center">验证即登录，未注册将自动创建百度帐号</p>-->
-			<input type="text" class="form-control input_phone" placeholder="手机号">
+			<input type="text" class="form-control input_phone" name="phone" placeholder="手机号">
 			<div class="input_code_container form-inline clearfix">
-				<input type="text" class="input_code form-control pull-left" placeholder="密码">
-				<button type="button" class="btn pull-right btnGetCode">获取验证码</button>
+				<input type="text" class="input_code form-control pull-left" name="code" placeholder="验证码">
+				<button type="button" id="btnDetCodeOfMsgLogin" class="btn pull-right btnGetCode">获取验证码</button>
 			</div>
 			<button type="button" class="btn btn-block btn_login">登录</button>
+			</form>
+			<p class="text-right links">
+				<a class="btn_username_login" href="javascript:void(0);">账号密码登录</a>
+				<span class="devider">|</span>
+				<a class="btn_forget_pwd" href="javascript:void(0);">忘记密码？</a>
+				<span class="devider">|</span>
+				<a href="{{url('register')}}">注册账号</a>
+			</p>
 			<div class="others clearfix">
-				<div class="form-group pull-left">
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" checked>
-							<span class="checkbox_img"></span>
-						</label>
-						<a href="#" target="_blank">同意用户协议</a>
-					</div>
-				</div>
-				<a class="btn_username_login pull-right" href="javascript:void(0);">账号密码登录</a>
 			</div>
 			<div class="text-right wechat_login_container">
 				其他登录方式：
@@ -170,15 +171,15 @@
 </div>
 
 <!-- wechat login modal -->
-<div class="login_modal modal fade" id="wechatLoginModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h3 class="title text-center">微信登录</h3>
-			<p class="text-center">设计图</p>
-		</div>
-	</div>
-</div>
+{{--<div class="login_modal modal fade" id="wechatLoginModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">--}}
+	{{--<div class="modal-dialog" role="document">--}}
+		{{--<div class="modal-content">--}}
+			{{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
+			{{--<h3 class="title text-center">微信登录</h3>--}}
+			{{--<p class="text-center">设计图</p>--}}
+		{{--</div>--}}
+	{{--</div>--}}
+{{--</div>--}}
 
 
 <!-- forget password modal -->
@@ -186,15 +187,24 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<form id="forgetPwdForm">
 			<h3 class="title text-center">忘记密码</h3>
-			<input type="text" class="form-control input_phone" placeholder="手机号">
+			<input type="text" class="form-control input_phone" name="phone" placeholder="手机号">
 			<div class="input_code_container form-inline clearfix">
-				<input type="text" class="input_code form-control pull-left" placeholder="验证码">
+				<input type="text" class="input_code form-control pull-left" name="code" placeholder="验证码">
 				<button type="button" class="btn pull-right btnGetCode">获取验证码</button>
 			</div>
-			<input type="text" class="form-control input_pwd" placeholder="设置密码">
+			<input type="text" class="form-control input_pwd" name="" placeholder="设置密码">
 			<input type="text" class="form-control input_pwd2" placeholder="确认密码">
 			<button type="button" class="btn btn-block btn_login">登录</button>
+			</form>
+			<p class="text-right links">
+				<a class="btn_username_login" href="javascript:void(0);">账号密码登录</a>
+				<span class="devider">|</span>
+				<a class="btn_msg_login" href="javascript:void(0);">短信快捷登录</a>
+				<span class="devider">|</span>
+				<a href="{{url('register')}}">注册账号</a>
+			</p>
 			<div class="text-right wechat_login_container">
 				其他登录方式：
 				<a href="javascript:void(0);" class="wechat_login pull-right"><span class="icon icon_wechat pull-left"></span>微信登录</a>
@@ -236,19 +246,8 @@
 
 <script type="text/javascript">
 
-	function showAlertModal(msg) {
-		$('#alertModal').find('.modal-content').text(msg);
-		$('#alertModal').modal('show');
-		setTimeout(function() {
-			$('#alertModal').modal('hide');
-		}, 1500);
-	}
-
 	$(function() {
 		$('.lessons .nav a').mouseover(function() {
-			console.log($(this));
-			console.log($(this).attr('data-imgSrc'));
-			console.log($(this).attr('data-intro'));
 			$(this).parents('.lessons').find('.lesson_big')
 					.find('img').attr('src', $(this).attr('data-imgSrc')).end()
 					.find('.introduction').html($(this).attr('data-intro'));
@@ -277,25 +276,36 @@
 			window.location.href = '{{url('user')}}';
 		});
 
-		// 账号密码登录modal
+		var account_login_url = '{{url('login_account/post')}}';
+		var phone_login_url = '{{url('login_phone/post')}}';
+		var pwd_recover_url = '{{url('pwd_recover/post')}}';
+		var sms_code_url = '{{url('sms/code')}}';
+				// 账号密码登录modal
 		$('#loginModal .btn_login').click(function() {
 			if (!checkPhone($('#loginModal .input_phone').val())) {
 				showAlertModal('手机号格式不正确');
-				return;
+				return false;
 			}
 			if ($('#loginModal .input_pwd').val() == '') {
-//						alert('请输入密码');
 				showAlertModal('请输入密码');
-				return;
+				return false;
 			}
 			// ajax请求
+			var data = $('#loginForm').serialize();
+			subLoginAjax(account_login_url, data);
 		});
 
 		// 短信快捷登录modal
-		// 获取密码
+		// 获取验证码
 		$('#msgLoginModal .btnGetCode').click(function() {
-			if (checkPhone($('#msgLoginModal .input_phone').val())) {
+			var phone_val = $('#msgLoginModal .input_phone').val();
+			if (checkPhone(phone_val)) {
 				// ajax获取验证码
+				var data = {
+					'phone': phone_val,
+					'exist': '1'
+				};
+				subMsgAjax2(sms_code_url, data);
 			} else {
 				showAlertModal('手机号格式不正确');
 			}
@@ -312,18 +322,26 @@
 				return;
 			}
 			// ajax请求
+			var data = $('#msgLoginForm').serialize();
+			subLoginAjax(phone_login_url, data);
 		});
 
 		// 忘记密码modal
 		// 获取验证码
 		$('#forgetPwdModal .btnGetCode').click(function() {
-			if (checkPhone($('#forgetPwdModal .input_phone').val())) {
+			var phone_val = $('#forgetPwdModal .input_phone').val();
+			if (checkPhone(phone_val)) {
 				// ajax获取验证码
+				var data = {
+					'phone': phone_val,
+					'exist': '1'
+				};
+				subMsgAjax2(sms_code_url, data);
 			} else {
 				showAlertModal('手机号格式不正确');
 			}
 		});
-		//登录
+		//修改密码
 		$('#forgetPwdModal .btn_login').click(function() {
 			if (!checkPhone($('#forgetPwdModal .input_phone').val())) {
 				showAlertModal('手机号格式不正确');
@@ -345,6 +363,8 @@
 				return;
 			}
 			// ajax请求
+			var data = $('#forgetPwdForm').serialize();
+			subLoginAjax(pwd_recover_url, data);
 		});
 
 	})

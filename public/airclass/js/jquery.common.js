@@ -62,6 +62,15 @@ var validateTips = function(dom, msg) {
     dom.focus();
 };
 
+
+var showAlertModal = function(msg) {
+    $('#alertModal').find('.modal-content').text(msg);
+    $('#alertModal').modal('show');
+    setTimeout(function() {
+        $('#alertModal').modal('hide');
+    }, 1500);
+};
+
 /**
  * 短信ajax提交
  * @param action
@@ -101,8 +110,50 @@ var subActionAjax = function (action, data, tipDom) {
                     validateTips($('#' + i), res.msg[i]);
                 }
             }else {
-                $('#errorModal').modal('show');
+                showAlertModal('注册失败');
             }
         }
     });
 };
+
+
+var subMsgAjax2 = function (action, data) {
+    $.ajax({
+        type: 'post',
+        url: action,
+        data: data,
+        success: function(res){
+            if(res.code == 200){
+                showAlertModal(res.msg);
+            }else if(res.code == 444) {
+                showAlertModal(res.msg['phone'][0]);
+            }else {
+                showAlertModal(res.msg);
+            }
+        },
+        error:function (res) {
+            showAlertModal('服务器错误');
+        }
+    });
+};
+
+var subLoginAjax = function (action, data) {
+    $.ajax({
+        type: 'post',
+        url: action,
+        data: data,
+        success: function(res){
+            if(res.code == 200){
+                window.location.reload();
+            }else if(res.code == 444) {
+                showAlertModal(res.msg['phone'][0]);
+            }else {
+                showAlertModal(res.msg);
+            }
+        },
+        error:function (res) {
+            showAlertModal('服务器错误');
+        }
+    });
+};
+
