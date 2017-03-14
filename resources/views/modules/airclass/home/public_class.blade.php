@@ -19,7 +19,7 @@
                 @if (count($data['course_list']) > 0)
                     @foreach($data['course_list'] as $val)
                     <div class="lesson col-xs-6 col-diy-20"><a href="{{ URL('video/'.$val->id) }}">
-                            <img class="center-block" src="{{ $data->logo_url  }}" alt="">
+                            <img class="center-block" src="{{ $val->logo_url  }}" alt="">
                             <div class="caption">
                                 <h3 class="title">{{ $val->title }}</h3>
                                 <p class="introduction">{{ str_limit($val->comment, $limit = 100, $end = '...') }}</p>
