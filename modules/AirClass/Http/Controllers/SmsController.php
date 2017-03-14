@@ -120,7 +120,7 @@ class SmsController extends Controller
         $res = $sms->send_sms($phone, $exist);
         if($res['code'] == 200){
             return $this->return_data_format(200, '发送成功');
-        }else if($res['code'] == 422){
+        }else if($res['code'] == 422 || $res['code'] == 444){
             return $this->return_data_format($res['code'], $res['msg']);
         }else{
             return $this->return_data_format($res['code'], '发送失败');

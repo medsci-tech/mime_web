@@ -1,7 +1,7 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
 use Pingpong\Modules\Routing\Controller as BaseController;
-
+use Validator;
 class Controller extends BaseController
 {
     protected $user_login_session_key = 'user_login_session_key'; // 用户登录session key
@@ -26,7 +26,7 @@ class Controller extends BaseController
             $rules['phone'] = 'required|regex:/^1[35789]\d{9}$/';
         }
         if(array_key_exists('password', $data)){
-            $rules['password'] = 'required|min:6|max:22|regex:/^[\w\.-]{6,22}$/';
+            $rules['password'] = 'required|regex:/^[\w\.-]{6,22}$/';
         }
         $msg = [
             'phone.required' => '手机号不能为空',
@@ -35,9 +35,10 @@ class Controller extends BaseController
             'password.regex' => '密码格式只支持6-22位字母数字下划线及-+_.组合',
         ];
         $validator = Validator::make($data, $rules, $msg);
-        $validator_error_first = $validator->errors()->first();
+        $validator_error_first = $validator->errors()->messages();
+//        dd($validator_error_first);
         if($validator_error_first){
-            return $this->return_data_format(422, $validator_error_first);
+            return $this->return_data_format(444, $validator_error_first);
         }else{
             return $this->return_data_format(200);
         }
