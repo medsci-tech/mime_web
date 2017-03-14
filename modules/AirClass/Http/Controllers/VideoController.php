@@ -114,7 +114,7 @@ class VideoController extends Controller
 					])->get();
 				}
 			}
-//			dd($class);
+//			dd($chapter_classes);
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
 				'chapter_classes' => $chapter_classes, // 相关章节列表

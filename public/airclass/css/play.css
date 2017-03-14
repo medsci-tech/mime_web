@@ -79,7 +79,7 @@ body {
 	color: #999999;
 }
 /* chapter list */
-.chapters {
+.chapters{
 	position: relative;
 	height: 100%;
 	background: #555555;
@@ -109,6 +109,16 @@ body {
 .chapters .chapter:hover,
 .chapters .chapter:focus,
 .chapters .chapter.active {
+	background: #333333;
+}
+.chapters .chapter a{
+	color: #F9F9F9;
+	width: 100%;
+	display: inline-block;
+}
+.chapters .chapter:hover a,
+.chapters .chapter:focus a,
+.chapters .chapter.active a {
 	background: #333333;
 }
 .btn_chapter {
