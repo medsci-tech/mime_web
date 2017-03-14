@@ -26,7 +26,7 @@ class HomeController extends Controller
         $recommend_classes = ThyroidClassCourse::orderBy('recomment_time')->limit(5)->get();
 
         // 公开课
-        $public_class_units = ThyroidClassPhase::limit(8)->where(['is_show' => 1])->get(); // 单元列表
+        $public_class_units = ThyroidClassPhase::orderBy('id','desc')->limit(8)->where(['is_show' => 1])->get(); // 单元列表
         foreach($public_class_units as &$val)
         {
             $course_list = ThyroidClassPhase::limit(8)->find($val['id'])->thyroidClassCourses()->where(array('course_class_id'=>$this->public_class_id))->get();
