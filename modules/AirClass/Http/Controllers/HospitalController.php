@@ -11,11 +11,19 @@ class HospitalController extends Controller
         $province = $request['province'];
         $city = $request['city'];
         $country = $request['country'];
+
+        $province_id = $request['province_id'];
+        $city_id = $request['city_id'];
+        $country_id = $request['country_id'];
+
         $hospital_level = $request['hospital_level'];
         $res = Hospital::create([
             'province' => $province,
             'city' => $city,
             'country' => $country,
+            'province_id' => $province_id,
+            'city_id' => $city_id,
+            'country_id' => $country_id,
             'hospital' => $hospital,
             'hospital_level' => $hospital_level,
         ]);
