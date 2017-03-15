@@ -2,6 +2,7 @@
 
 use App\Models\Doctor;
 use App\Models\Hospital;
+use App\Models\Office;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
@@ -18,6 +19,7 @@ class UserPublicController extends Controller
         $save_data = [
             'id' => $user->id,
             'name' => $user->name, // 昵称
+            'email' => $user->email, // 邮箱
             'nickname' => $user->nickname, // 昵称
             'headimgurl' => $user->headimgurl, // 头像
             'phone' => $user->phone,
@@ -29,11 +31,13 @@ class UserPublicController extends Controller
             $save_data['city'] = $user->hospital->city;
             $save_data['area'] = $user->hospital->country;
             $save_data['hospital_name'] = $user->hospital->hospital;
+            $save_data['hospital_level'] = $user->hospital->hospital_level;
         }else{
             $save_data['province'] = '';
             $save_data['city'] = '';
             $save_data['area'] = '';
             $save_data['hospital_name'] = '';
+            $save_data['hospital_level'] = '';
         }
         \Session::set($this->user_login_session_key, $save_data);
         return $save_data;
@@ -44,7 +48,10 @@ class UserPublicController extends Controller
      */
     public function register_view()
     {
-        return view('airclass::user_public.register');
+        $offices = Office::all();
+        return view('airclass::user_public.register', [
+            'offices' => $offices,
+        ]);
     }
 
     /**

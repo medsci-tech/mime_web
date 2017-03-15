@@ -9,22 +9,22 @@
 
             <form class="user_info form-horizontal" role="form">
                 <div class="form-group">
-                    <label for="userName" class="col-sm-2 control-label"><span class="necessary">＊</span>姓名</label>
+                    <label class="col-sm-2 control-label"><span class="necessary">＊</span>姓名</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="userName" name="name" placeholder="请输入姓名">
+                        <input type="text" class="form-control" id="userName" name="name" value="{{$doctor['name']}}" placeholder="请输入姓名">
                     </div>
                     <div class="tips col-sm-4">请填写姓名</div>
                 </div>
                 <div class="form-group">
-                    <label for="userPhone" class="col-sm-2 control-label"><span class="necessary">＊</span>手机号</label>
+                    <label class="col-sm-2 control-label"><span class="necessary">＊</span>手机号</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号" value="{{ Session::get('user_login_session_key')['phone'] }}" readonly>
+                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号" value="{{ $doctor['phone'] }}" readonly>
                     </div>
                     <div class="tips col-sm-4">请输入正确手机号</div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label"><span class="necessary">＊</span>地区</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-5">
                         <div class="row" id="city-select">
                             <div class="col-sm-4">
                                 <select class="form-control" name="province">
@@ -47,55 +47,61 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="userHospital" class="col-sm-2 control-label"><span class="necessary">＊</span>医院名称</label>
+                    <label class="col-sm-2 control-label"><span class="necessary">＊</span>医院名称</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="userHospital" name="hospital_name" placeholder="请输入医院名称" value="{{ Session::get('user_login_session_key')['hospital_name'] }}">
+                        <div class="dropup">
+                            <input type="text" data-toggle="dropdown" class="form-control" id="userHospital" name="hospital_name" placeholder="请输入医院" value="{{ $doctor['hospital_name'] }}">
+                            <ul class="dropdown-menu" aria-labelledby="userHospital">
+                                <li><a href="javascript:;">请先填完地区</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="tips col-sm-4">请填写医院名称</div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-2 control-label"><span class="necessary">＊</span>医院等级</label>
+                    <label class="col-sm-2 control-label"><span class="necessary">＊</span>医院等级</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="hospitalLevel">
-                            <option value="" selected="selected" hidden="hidden">请选择医院等级</option>
                             @foreach(config('params')['hospital_level'] as $ol)
-                                <option value="{{$ol}}">{{$ol}}</option>
+                                <option value="{{$ol}}"  @if($doctor['hospital_level'] == $ol) selected @endif >{{$ol}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="tips col-sm-4">请选择医院级别</div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-2 control-label"><span class="necessary">＊</span>科室</label>
+                    <label class="col-sm-2 control-label"><span class="necessary">＊</span>科室</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="office_id" id="office_id">
-                            <option value="" selected="selected" hidden="hidden">请选择科室</option>
                             @foreach($offices as $office)
-                                <option value="{{$office->office_id}}">{{$office->office_name}}</option>
+                                <option value="{{$office->office_name}}" @if($doctor['office'] == $office->office_name) selected @endif >{{$office->office_name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="tips col-sm-4">请选择科室</div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-2 control-label"><span class="necessary">＊</span>职称</label>
+                    <label class="col-sm-2 control-label"><span class="necessary">＊</span>职称</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="doctorTitle">
-                            <option value="" selected="selected" hidden="hidden">请选择职称</option>
-                            @foreach(config('params')['doctor_title'] as $k => $v)
-                                <option value="{{$k}}">{{$v}}</option>
+                            @foreach(config('params')['doctor_title'] as $v)
+                                <option value="{{$v}}" @if($doctor['title'] == $v) selected @endif >{{$v}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="tips col-sm-4">请选择职称</div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label"><span class="necessary">＊</span>邮箱</label>
+                    <label class="col-sm-2 control-label"><span class="necessary">＊</span>邮箱</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" value="{{ $doctor->email }}">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" value="{{$doctor['email']}}">
                     </div>
                     <div class="tips col-sm-4">请输入邮箱</div>
                 </div>
+
+                <input id="save-province" type="hidden"  name="save-province" value="{{$doctor['province']}}">
+                <input id="save-city" type="hidden" name="save-city" value="{{$doctor['city']}}">
+                <input id="save-area" type="hidden" name="save-area" value="{{$doctor['area']}}">
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-2 btn_confirm_wrapper">
                         <button type="button" id="btnConfirm" class="btn btn-block">确认修改</button>
@@ -115,6 +121,7 @@
         $('#city-select').citys({
             required:false,
             nodata:'',
+            province:'{{$doctor['province']}}',city:'{{$doctor['city']}}',area:'{{$doctor['area']}}',
             onChange:function(data){
                 var lists = {};
                 if(data['direct']){
@@ -172,9 +179,9 @@
             var data = {
                 'hospital_name': $('#userHospital').val(),
                 'name': $('#userName').val(),
-                'province': $('select[name="province"]').val(),
-                'city': $('select[name="city"]').val(),
-                'area': $('select[name="area"]').val(),
+                'province': $('#save-province').val(),
+                'city': $('#save-city').val(),
+                'area': $('#save-area').val(),
                 'hospital_level': $('select[name="hospitalLevel"]').val(), //等级
                 'office': $('select[name="office_id"]').val(), //科室
                 'title': $('select[name="doctorTitle"]').val(), //职称

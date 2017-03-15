@@ -40,10 +40,9 @@ class UserController extends Controller
 	public function info_edit()
 	{
         $offices = Office::all();
-        $doctor = Doctor::find($this->user['id']);
         return view('airclass::user.info_edit', [
             'offices' =>$offices ,
-            'doctor' =>$doctor ,
+            'doctor' =>$this->user ,
             'current_active' => 'info_edit',
         ]);
 	}
