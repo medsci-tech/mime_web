@@ -130,6 +130,7 @@ class VideoController extends Controller
 				'user' => $user, // 登陆用户信息
 				'questions' => $questions, // 答题信息
 				'answer_logs' => $answer_logs, // 答题信息
+				'current_id' => $id, // 答题信息
 			]);
 		}else{
 			abort(404);
