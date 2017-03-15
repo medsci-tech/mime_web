@@ -82,9 +82,9 @@
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>科室</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="office" name="office">
-                            <option value="">请选择等级</option>
-                            @foreach(config('params')['doctor_office'] as $ol)
-                                <option value="{{$ol}}">{{$ol}}</option>
+                            <option value="">请选择科室</option>
+                            @foreach($offices as $ol)
+                                <option value="{{$ol->office_name}}">{{$ol->office_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -94,7 +94,7 @@
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>职称</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="title" name="title">
-                            <option value="">请选择等级</option>
+                            <option value="">请选择职称</option>
                             @foreach(config('params')['doctor_title'] as $ol)
                                 <option value="{{$ol}}">{{$ol}}</option>
                             @endforeach
