@@ -113,6 +113,12 @@
               <input type="text" required class="form-control" name="qcloud_app_id" id="form-qcloud_app_id" placeholder="">
             </div>
           </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">描述</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" name="comment" id="form-comment"  style="resize:vertical"></textarea>
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             <button type="submit" class="btn btn-primary">确认</button>

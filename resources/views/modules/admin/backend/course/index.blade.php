@@ -95,6 +95,7 @@
                                             data-course_class_has_teacher="{{\App\Models\CourseClass::find($list->course_class_id)['has_teacher']}}"
                                             data-course_class_has_phase="{{\App\Models\CourseClass::find($list->course_class_id)['has_children']}}"
                                             data-teacher_id="{{$list->teacher_id}}"
+                                            data-comment="{{$list->comment}}"
                                         >修改</button>
                                         <button class="btn btn-xs btn-warning" data-btn="delete" data-id="{{$list->id}}">删除</button>
                                         <button class="btn btn-xs @if($list->recomment_time > 0) btn-warning @else btn-info @endif"
@@ -194,6 +195,7 @@
             var teacher_id = $(this).attr('data-teacher_id');
             var exercise_ids = $(this).attr('data-exercise_ids');
             var course_type = $(this).attr('data-course_type');
+            var comment = $(this).attr('data-comment');
             /* 编辑初始化 */
             $('#form-id').val(id);
             $('#form-sequence').val(sequence);
@@ -209,6 +211,7 @@
             $('#form-course_class_id').val(course_class_id);
             $('#form-teacher_id').val(teacher_id);
             $('#form_course_type').val(course_type);
+            $('#form-comment').val(comment);
 
             if(course_class_has_teacher == 1){
                 $('#teacher_id_parentDiv').show();
