@@ -6,6 +6,7 @@ use App\Models\KZKTClass;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\Exercise;
 use Modules\Admin\Entities\ThyroidClassCourse;
+use Modules\AirClass\Entities\ThyroidClassPhase;
 use Session;
 
 class VideoController extends Controller
@@ -27,6 +28,7 @@ class VideoController extends Controller
 	{
 		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
+        $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元
 		if($class){
 			//## 章节列表
 			$chapter_classes = ThyroidClassCourse::where([
@@ -35,7 +37,7 @@ class VideoController extends Controller
 				'course_class_id' => $class->course_class_id,
 				'thyroid_class_phase_id' => $class->thyroid_class_phase_id,
 			])->orderBy('sequence')->get();
-//			dd($chapter_classes);
+
 			//## 评论
 			$comments = [];
 			// 一级评论
@@ -120,6 +122,7 @@ class VideoController extends Controller
 //			dd($questions);
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
+                'chapter' => $chapter, // 当前单元信息
 				'chapter_classes' => $chapter_classes, // 相关章节列表
 				'comments' => $comments, // 评论列表
 				'recommend_classes' => $recommend_classes, // 推荐课程列表
