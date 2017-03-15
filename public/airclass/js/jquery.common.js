@@ -157,3 +157,26 @@ var subLoginAjax = function (action, data) {
     });
 };
 
+var subMsgAjax3 = function (action, data) {
+    $.ajax({
+        type: 'post',
+        url: action,
+        data: data,
+        success: function(res){
+            if(res.code == 200){
+                showAlertModal(res.msg);
+                setTimeout(function() {
+                    $('.login_modal').modal('hide');
+                    $('#loginModal').modal('show');
+                }, 1500);
+            }else if(res.code == 444) {
+                showAlertModal(res.msg['phone'][0]);
+            }else {
+                showAlertModal(res.msg);
+            }
+        },
+        error:function (res) {
+            showAlertModal('服务器错误');
+        }
+    });
+};

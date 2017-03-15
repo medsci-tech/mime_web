@@ -195,9 +195,9 @@
 				<input type="text" class="input_code form-control pull-left" name="code" placeholder="验证码">
 				<button type="button" class="btn pull-right btnGetCode">获取验证码</button>
 			</div>
-			<input type="text" class="form-control input_pwd" name="" placeholder="设置密码">
-			<input type="text" class="form-control input_pwd2" placeholder="确认密码">
-			<button type="button" class="btn btn-block btn_login">登录</button>
+			<input type="password" class="form-control input_pwd" name="password" placeholder="设置密码">
+			<input type="password" class="form-control input_pwd2" name="re_password" placeholder="确认密码">
+			<button type="button" class="btn btn-block btn_login">确定</button>
 			</form>
 			<p class="text-right links">
 				<a class="btn_username_login" href="javascript:void(0);">账号密码登录</a>
@@ -365,7 +365,7 @@
 			}
 			// ajax请求
 			var data = $('#forgetPwdForm').serialize();
-			subLoginAjax(pwd_recover_url, data);
+			subMsgAjax3(pwd_recover_url, data);
 		});
 
 	})
