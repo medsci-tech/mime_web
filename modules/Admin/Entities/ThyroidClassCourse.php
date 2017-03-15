@@ -48,6 +48,7 @@ class ThyroidClassCourse extends Model
         'exercise_ids',
         'site_id',
         'course_class_id',
+        'course_type',
         'recomment_time',
     ];
 

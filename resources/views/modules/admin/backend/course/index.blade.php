@@ -84,6 +84,7 @@
                                             data-id="{{$list->id}}"
                                             data-sequence="{{$list->sequence}}"
                                             data-title="{{$list->title}}"
+                                            data-course_type="{{$list->course_type}}"
                                             data-thyroid_class_phase_id="{{$list->thyroid_class_phase_id}}"
                                             data-logo_url="{{$list->logo_url}}"
                                             data-qcloud_file_id="{{$list->qcloud_file_id}}"
@@ -192,6 +193,7 @@
             var course_class_has_phase = $(this).attr('data-course_class_has_phase');
             var teacher_id = $(this).attr('data-teacher_id');
             var exercise_ids = $(this).attr('data-exercise_ids');
+            var course_type = $(this).attr('data-course_type');
             /* 编辑初始化 */
             $('#form-id').val(id);
             $('#form-sequence').val(sequence);
@@ -206,6 +208,7 @@
             $('#form-is_show').val(is_show);
             $('#form-course_class_id').val(course_class_id);
             $('#form-teacher_id').val(teacher_id);
+            $('#form_course_type').val(course_type);
 
             if(course_class_has_teacher == 1){
                 $('#teacher_id_parentDiv').show();

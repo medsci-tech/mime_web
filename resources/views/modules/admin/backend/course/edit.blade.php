@@ -4,7 +4,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">试题管理</h4>
+        <h4 class="modal-title">课程管理</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" action="{{url('/course')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post">
@@ -51,6 +51,16 @@
                 @foreach($phases as $phase)
                   <option value="{{$phase->id}}">{{$phase->title}}</option>
                 @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">课程类型</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="course_type" id="form_course_type">
+                <option value="0">请选择课程类型</option>
+                <option value="1">必修课</option>
+                <option value="2">选修课</option>
               </select>
             </div>
           </div>
