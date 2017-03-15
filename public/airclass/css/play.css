@@ -113,8 +113,12 @@ body {
 }
 .chapters .chapter a{
 	color: #F9F9F9;
-	width: 100%;
+	width: 240px;
 	display: inline-block;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+
 }
 .chapters .chapter:hover a,
 .chapters .chapter:focus a,
