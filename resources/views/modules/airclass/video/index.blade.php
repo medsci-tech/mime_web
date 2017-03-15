@@ -30,6 +30,7 @@
                 <a id="btnChapter" class="btn_chapter" href="javascript:;"><img src="{{asset('airclass/img/icon_play_chapter.jpg')}}"/></a>
                 <h4 class="title">{{$chapter->sequence}}</h4>
                 <ul class="chapters_list">
+                    @if($chapter_classes->count())
                     @foreach($chapter_classes as $chapter_class)
                     <li class="chapter">
                         {{--当前视频--}}
@@ -47,6 +48,7 @@
                         @endif
                     </li>
                     @endforeach
+                    @endif
                 </ul>
             </div>
         </div>
@@ -57,7 +59,7 @@
                 <div class="ask_answer_btns">
                     <a href="javascript:;" class="btn_ask">提问</a>
                     <span class="devider">|</span>
-                    <a href="javascript:;" id="btn_answer" class="btn_answer">答题／解析</a>
+                    <a href="javascript:;" @if($questions->count()) id="btn_answer" @endif class="btn_answer">答题／解析</a>
                 </div>
                 <div class="ask_area_container">
                     <textarea class="ask_area" name=""></textarea>
@@ -198,7 +200,7 @@
             <!-- videos recommended	 -->
             <div class="recommended_videos lessons">
                 <h4 class="title">相关推荐</h4>
-                @if($recommend_classes)
+                @if($recommend_classes->count())
                 @foreach($recommend_classes as $recommend_class)
                 <div class="lesson col-xs-6 col-sm-12"><a href="{{url('video', ['id' => $recommend_class->id])}}">
                     <img class="center-block" src="{{$recommend_class->logo_url}}">
@@ -259,7 +261,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 class="title text-center">答题</h3>
                 <ol class="questions">
-                    @if($questions)
+                    @if($questions->count())
                         @foreach($questions as $question)
                     <li class="question_container">
                         <span class="icon icon_success"></span>
@@ -303,11 +305,10 @@
     <script type="text/javascript">
         $('#btnChapter').click(function() {
             var height = $('.video_wrapper').height();
-            console.log(height);
             $('.video_container').toggleClass('active').find('.chapters').height(height);
         });
 
-        $('.btn_answer').click(function() {
+        $('#btn_answer').click(function() {
             $('#questionsModal').modal('show');
         });
 
