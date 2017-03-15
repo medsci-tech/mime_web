@@ -29,21 +29,12 @@
             <div class="chapters">
                 <a id="btnChapter" class="btn_chapter" href="javascript:;"><img src="{{asset('airclass/img/icon_play_chapter.jpg')}}"/></a>
                 <h4 class="title">课程表</h4>
-
                 <ul class="chapters_list">
                     <li class="chapter">{{$chapter->sequence}}<span class="icon icon_play_played pull-right"></span></li>
                     @foreach($chapter_classes as $chapter_class)
-                        <li class="chapter"><a href="{{url('video', ['id' => $chapter_class->id])}}">{{$chapter_class->title}}</a></li>
-                        @if ($chapter_class->course_type== 2)
-                            <span class="icon icon_play_locked pull-right"></span>
-                        @endif
+                    <li class="chapter"><a href="{{url('video', ['id' => $chapter_class->id])}}">{{$chapter_class->title}}</a></li>
                     @endforeach
-                    {{--<li class="chapter "><span class="icon icon_play_current"></span>认识糖尿病</li>--}}
-                    {{--<li class="chapter">认识糖尿病<span class="pull-right">已学习66％</span></li>--}}
-                    {{--<li class="chapter">糖尿病的控制目标和治疗路径<span class="icon icon_play_locked pull-right"></span></li>--}}
                 </ul>
-
-
             </div>
         </div>
 
