@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class SmsController extends Controller
 {
     protected $code_prefix = 'phone_code_'; // 验证码缓存前缀
-    protected $code_times = 1000; // 验证码有效期：分钟
+    protected $code_times = 10; // 验证码有效期：分钟
 
     /**
      * 生成验证码

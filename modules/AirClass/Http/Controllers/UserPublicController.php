@@ -238,7 +238,7 @@ class UserPublicController extends Controller
         $sms = new SmsController();
         $check_code = $sms->verify_code($phone, $verify_code);
         if($check_code['code'] != 200) {
-            return $this->return_data_format($check_code['code'], ['code' => $check_code['msg']]);
+            return $this->return_data_format($check_code['code'], $check_code['msg']);
         }
         // 验证两次密码输入是否一致
         if($password == $re_password){
