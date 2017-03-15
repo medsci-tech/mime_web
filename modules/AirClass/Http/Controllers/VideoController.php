@@ -4,6 +4,7 @@ use App\Models\AnswerLog;
 use App\Models\Comment;
 use App\Models\KZKTClass;
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Exercise;
 use Modules\Admin\Entities\ThyroidClassCourse;
 use Session;
 
@@ -99,6 +100,8 @@ class VideoController extends Controller
 			}
 //			dd($add_recommend_classes);
 			$user = $this->user;
+			//## 问题
+			$questions  = Exercise::whereIn('id', explode(',', $class->exercise_ids))->get();
 			//## 答题
 			$answer_logs = [];
 			// 查询用户是否登陆
@@ -114,7 +117,7 @@ class VideoController extends Controller
 					])->get();
 				}
 			}
-//			dd($chapter_classes);
+//			dd($questions);
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
 				'chapter_classes' => $chapter_classes, // 相关章节列表
@@ -122,6 +125,7 @@ class VideoController extends Controller
 				'recommend_classes' => $recommend_classes, // 推荐课程列表
 				'add_recommend_classes' => $add_recommend_classes, // 追加推荐课程列表
 				'user' => $user, // 登陆用户信息
+				'questions' => $questions, // 答题信息
 				'answer_logs' => $answer_logs, // 答题信息
 			]);
 		}else{

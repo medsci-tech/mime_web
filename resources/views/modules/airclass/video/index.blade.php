@@ -43,7 +43,7 @@
                 <div class="ask_answer_btns">
                     <a href="javascript:;" class="btn_ask">提问</a>
                     <span class="devider">|</span>
-                    <a href="javascript:;" class="btn_answer">答题／解析</a>
+                    <a href="javascript:;" id="btn_answer" class="btn_answer">答题／解析</a>
                 </div>
                 <div class="ask_area_container">
                     <textarea class="ask_area" name=""></textarea>
@@ -67,7 +67,7 @@
                     <div class="ask">
                         <div class="ask_info media">
                             <div class="media-left">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                                 </a>
                             </div>
@@ -88,7 +88,7 @@
                     <div class="ask">
                         <div class="ask_info media">
                             <div class="media-left">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                                 </a>
                             </div>
@@ -109,7 +109,7 @@
                     <div class="ask">
                         <div class="ask_info media">
                             <div class="media-left">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                                 </a>
                             </div>
@@ -129,7 +129,7 @@
                                     <div class="answer">
                                         <div class="answer_info media">
                                             <div class="media-left">
-                                                <a href="#">
+                                                <a href="javascript:;">
                                                     <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
                                                 </a>
                                             </div>
@@ -184,57 +184,42 @@
             <!-- videos recommended	 -->
             <div class="recommended_videos lessons">
                 <h4 class="title">相关推荐</h4>
-                <div class="lesson col-xs-6 col-sm-12"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-sm-12"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-sm-12"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
-                <div class="lesson col-xs-6 col-sm-12"><a href="javascript:void(0);">
-                        <img class="center-block" src="{{asset('airclass/img/lesson_1.jpg')}}" alt="">
-                        <div class="caption">
-                            <h3 class="title">名师直播公开课</h3>
-                            <p class="introduction">前端极速入门-名师直播公开课【课工场出品】</p>
-                            <p class="price_and_persons">
-                                <span class="price">&yen;198.00</span>
-                                <span class="persons pull-right">2123人在学</span>
-                            </p>
-                        </div>
-                    </a></div>
+                @if($recommend_classes)
+                @foreach($recommend_classes as $recommend_class)
+                <div class="lesson col-xs-6 col-sm-12"><a href="{{url('video', ['id' => $recommend_class->id])}}">
+                    <img class="center-block" src="{{$recommend_class->logo_url}}">
+                    <div class="caption">
+                        <h3 class="title">{{$recommend_class->title}}</h3>
+                        <p class="introduction">{{$recommend_class->comment}}</p>
+                        <p class="price_and_persons">
+                            <span class="price">&yen;198.00</span>
+                            <span class="persons pull-right">{{$recommend_class->play_count}}人在学</span>
+                        </p>
+                    </div>
+                </a></div>
+                @endforeach
+                @endif
+                @if($add_recommend_classes)
+                @foreach($add_recommend_classes as $add_recommend_class)
+                    <div class="lesson col-xs-6 col-sm-12"><a href="{{url('video', ['id' => $add_recommend_class->id])}}">
+                            <img class="center-block" src="{{$add_recommend_class->logo_url}}">
+                            <div class="caption">
+                                <h3 class="title">{{$add_recommend_class->title}}</h3>
+                                <p class="introduction">{{$add_recommend_class->comment}}</p>
+                                <p class="price_and_persons">
+                                    <span class="price">&yen;198.00</span>
+                                    <span class="persons pull-right">{{$add_recommend_class->play_count}}人在学</span>
+                                </p>
+                            </div>
+                        </a></div>
+                @endforeach
+                @endif
             </div>
         </div>
 
 
         <div class="test_btns" style="width: 200px; margin: 60px auto;">
             <h4>modal测试用按钮</h4>
-            <button class="test_answer">答题</button>
             <button class="test_success">加分提醒</button>
         </div>
 
@@ -260,147 +245,28 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 class="title text-center">答题</h3>
                 <ol class="questions">
-
+                    @if($questions)
+                        @foreach($questions as $question)
                     <li class="question_container">
                         <span class="icon icon_success"></span>
-                        <h4 class="question">2007年7月，日本研究人员在染色体中发现了一种使姐妹染色单体连接成十字形的关键蛋白质，并将其命名为“ASURA”。据此判断下列叙述不正确的是？ </h4>
+                        <h4 class="question">{{$question->question}}</h4>
                         <ol class="choices">
+                            @foreach(unserialize($question->option) as $key => $val)
                             <li class="choice">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="question_one" checked>
+                                        <input type="radio" name="q_{{$question->id}}" value="{{$key}}">
                                         <span class="radio_img"></span>
-                                        ASURA合成的场所是细胞质中的核糖体
+                                        {{$val}}
                                     </label>
                                 </div>
                             </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_one">
-                                        <span class="radio_img"></span>
-                                        在减数第一次分裂和第二次分裂之前都有ASURA的大量合成
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_one">
-                                        <span class="radio_img"></span>
-                                        缺少ASURA的细胞，染色体数目可能会发生异常
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_one">
-                                        <span class="radio_img"></span>
-                                        细胞有丝分裂后期的变化与ASURA密切相关
-                                    </label>
-                                </div>
-                            </li>
+                            @endforeach
                         </ol>
                     </li>
-
-                    <li class="question_container">
-                        <span class="icon icon_question"></span>
-                        <h4 class="question">2007年7月，日本研究人员在染色体中发现了一种使姐妹染色单体连接成十字形的关键蛋白质，并将其命名为“ASURA”。据此判断下列叙述不正确的是？ </h4>
-                        <ol class="choices">
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_two">
-                                        <span class="radio_img"></span>
-                                        ASURA合成的场所是细胞质中的核糖体
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_two">
-                                        <span class="radio_img"></span>
-                                        在减数第一次分裂和第二次分裂之前都有ASURA的大量合成
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_two">
-                                        <span class="radio_img"></span>
-                                        缺少ASURA的细胞，染色体数目可能会发生异常
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_two">
-                                        <span class="radio_img"></span>
-                                        细胞有丝分裂后期的变化与ASURA密切相关
-                                    </label>
-                                </div>
-                            </li>
-                        </ol>
-                    </li>
-
-
-                    <li class="question_container">
-                        <span class="icon icon_question"></span>
-                        <h4 class="question">2007年7月，日本研究人员在染色体中发现了一种使姐妹染色单体连接成十字形的关键蛋白质，并将其命名为“ASURA”。据此判断下列叙述不正确的是？ </h4>
-                        <ol class="choices horizontal_list clearfix">
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_three">
-                                        <span class="radio_img"></span>
-                                        1分
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_three">
-                                        <span class="radio_img"></span>
-                                        2分
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_three">
-                                        <span class="radio_img"></span>
-                                        3分
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_three">
-                                        <span class="radio_img"></span>
-                                        4分
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="choice">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="question_three">
-                                        <span class="radio_img"></span>
-                                        5分
-                                    </label>
-                                </div>
-                            </li>
-                        </ol>
-                    </li>
+                        @endforeach
+                    @endif
                 </ol>
-
                 <button type="button" class="btn btn-block btn_questions_modal_confirm">提交</button>
             </div>
         </div>
@@ -427,7 +293,7 @@
             $('.video_container').toggleClass('active').find('.chapters').height(height);
         });
 
-        $('.test_answer').click(function() {
+        $('.btn_answer').click(function() {
             $('#questionsModal').modal('show');
         });
 
