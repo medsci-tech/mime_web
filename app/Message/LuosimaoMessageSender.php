@@ -38,7 +38,7 @@ class LuosimaoMessageSender implements MessageSenderInterface
         curl_setopt($ch, CURLOPT_USERPWD, 'api:key-' . env('SMS_KEY'));
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
-            array('mobile' => $phone, 'message' => '验证码：' . $verify . '【黄埔学堂】'));
+            array('mobile' => $phone, 'message' => '验证码：' . $verify . '【空中课堂】'));
 
         $res = curl_exec($ch);
         curl_close($ch);

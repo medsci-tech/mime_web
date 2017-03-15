@@ -8,6 +8,7 @@ use Modules\AirClass\Entities\Office;
 use \App\Model\Address;
 use Hash;
 use Cache;
+use DB;
 class UserController extends Controller
 {
     public function __construct()
@@ -39,8 +40,10 @@ class UserController extends Controller
 	public function info_edit()
 	{
         $offices = Office::all();
+        $doctor = Doctor::find($this->user['id']);
         return view('airclass::user.info_edit', [
             'offices' =>$offices ,
+            'doctor' =>$doctor ,
             'current_active' => 'info_edit',
         ]);
 	}
@@ -180,10 +183,11 @@ class UserController extends Controller
             $title = $request->title; //职称
             $hospital_level = $request->hospital_level; //等级
             $email = $request->email;
+
             DB::beginTransaction();
             try{
                 /* 同步更新用户中心 */
-                $response = \Helper::tocurl(env('API_URL2'). '/query-user-information?phone='.$request->phone, null,0);
+                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$phone, null,0);
                 if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
                 {
                     if(isset($response['status'])) //电话存在则同步更新
@@ -220,12 +224,11 @@ class UserController extends Controller
                                     'name'=>$name,//姓名
                                     'sex'=>$sex, //性别
                                     'office'=>$office, //科室
-                                    'hospital_level'=>$hospital_level, //等级
                                     'hospital_id'=> $hospital_id, //医院id
                                     'title'=>$title, //职称
                                     'email'=>$email,
                                 );
-                                Doctor::where('phone', $phone)->update($updata);
+                                Doctor::where('id', $this->user['id'])->update($updata);
                             }
 
                         }catch (\Exception $e) {

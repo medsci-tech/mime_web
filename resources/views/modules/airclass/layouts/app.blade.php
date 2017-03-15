@@ -83,7 +83,7 @@
 				@if(\Session::has('user_login_session_key'))
 				<div class="handlers pull-right">
 					<span class="reminder glyphicon glyphicon-bell">
-						<span class="badge">2</span>
+						<span class="badge"></span>
 					</span>
 					<a class="username" href="{{url('user')}}">{{ Session::get('user_login_session_key')['phone'] }}</a><span class="devider">|</span>
 					<a class="logout" href="{{url('logout')}}">退出</a>

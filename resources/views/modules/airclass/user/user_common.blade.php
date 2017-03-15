@@ -21,7 +21,7 @@
                             <span class="icon icon_level icon_level_three"></span>
                         </div>
                     </div>
-                    <p><span class="location">{{ Session::get('user_login_session_key')['province'] }}{{ Session::get('user_login_session_key')['city'] }}{{ Session::get('user_login_session_key')['area'] }}</span><span class="hospital">{{ Session::get('user_login_session_key')['hospital_name'] }}</span><span class="department">{{ Session::get('user_login_session_key')['office'] }}</span><span class="title">{{ Session::get('user_login_session_key')['title'] }}</span><span class="beans pull-right"><i class="icon icon_beans"></i>迈豆：1，000，000</span></p>
+                    <p><span class="location">{{ Session::get('user_login_session_key')['province'] }}{{ Session::get('user_login_session_key')['city'] }}{{ Session::get('user_login_session_key')['area'] }}</span><span class="hospital">{{ Session::get('user_login_session_key')['hospital_name'] }}</span><span class="department">{{ Session::get('user_login_session_key')['office'] }}</span><span class="title">{{ Session::get('user_login_session_key')['title'] }}</span><span class="beans pull-right"><i class="icon icon_beans"></i>迈豆：{{ isset(Session::get('user_login_session_key')['number']) ? Session::get('user_login_session_key')['number'] : 0 }}</span></p>
                 </div>
             </div>
         </header>

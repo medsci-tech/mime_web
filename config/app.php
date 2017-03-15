@@ -208,7 +208,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Helper'        => App\Helpers\Facades\Helper::class,
+        'Helper' => App\Helpers\Helper::class,
         'MessageSender' => App\Message\Facades\MessageSender::class,
         'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class,
         'Excel'  => Maatwebsite\Excel\Facades\Excel::class,

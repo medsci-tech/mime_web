@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label for="userHospital" class="col-sm-2 control-label"><span class="necessary">＊</span>医院名称</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="userHospital" name="hospital_name" placeholder="请输入医院名称">
+                        <input type="text" class="form-control" id="userHospital" name="hospital_name" placeholder="请输入医院名称" value="{{ Session::get('user_login_session_key')['hospital_name'] }}">
                     </div>
                     <div class="tips col-sm-4">请填写医院名称</div>
                 </div>
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <label for="email" class="col-sm-2 control-label"><span class="necessary">＊</span>邮箱</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" value="{{ $doctor->email }}">
                     </div>
                     <div class="tips col-sm-4">请输入邮箱</div>
                 </div>
@@ -107,6 +107,8 @@
 @endsection
 
 @section('js')
+<script src="/vendor/sweetalert/sweetalert.min.js"></script>
+<link rel="stylesheet" href="/vendor/sweetalert/sweetalert.css">
 <script type="text/javascript" src="{{asset('airclass/plugin/area-select/jquery.area.js')}}"></script>
 <script>
     $(function () {

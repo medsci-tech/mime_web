@@ -85,6 +85,7 @@
                     'exist': '-1'
                 };
                 subSmsAjax(code_url,data, phone);
+                sweetAlert("发送成功!")
             });
 
             $('#btnNext').click(function() {
