@@ -10,7 +10,7 @@
         <!-- video container -->
         <div class="video_container clearfix">
             <div class="video_wrapper">
-                <div id="id_video_container" style="width: 100%;"></div>
+                <div id="id_video_container"></div>
                 <div class="shares_and_thumbs clearfix">
                     <div class="shares pull-left">
                         分享给朋友：

@@ -313,19 +313,12 @@ a {
 }
 .alert_modal .modal-dialog {
 	width: 400px;
-	border-radius: ;
+	border-radius: 10px;
 }
 .alert_modal .modal-content {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	border-radius: 10px;
-}
-
-/* video player */
-.video-js .vjs-big-play-button {
-	width: 1.5em;
-	margin-left: -.75em;
-	border-radius: 50%;
 }
 
 @media (max-width: 768px) {

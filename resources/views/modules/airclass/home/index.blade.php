@@ -28,8 +28,7 @@
     <div class="main_body">
         <!-- project -->
         <div class="project clearfix">
-            <div id="id_video_container" style="width:100%;" class="project_video pull-left video-js vjs-default-skin vjs-big-play-centered" ></div>
-
+            <div id="id_video_container" class="project_video pull-left" ></div>
             <div class="project_info pull-left">
                 <h4 class="title">项目介绍</h4>
                 <p class="info">
@@ -198,8 +197,8 @@
                 "auto_play": "0",
                 "file_id": "{{$classes['qcloud_file_id']}}",
                 "app_id": "{{$classes['qcloud_app_id']}}",
-                "width": 520,
-                "height": 280
+                "width": 1280,
+                "height": 720
             };
             /*调用播放器进行播放*/
             new qcVideo.Player(
