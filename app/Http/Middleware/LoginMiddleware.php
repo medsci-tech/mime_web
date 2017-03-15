@@ -19,7 +19,7 @@ class LoginMiddleware
             return $next($request);
         } else {
             \Session::set('return_referer', $request->getRequestUri());
-            return  redirect(url('/login'));
+            return  redirect(url('/register'));
         }
     }
 }

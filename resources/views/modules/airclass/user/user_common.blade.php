@@ -9,7 +9,7 @@
             <div class="admin_user clearfix">
                 <div class="user_img pull-left"><img src="{{asset('airclass/img/admin_user_img.png')}}"/></div>
                 <div class="user_info">
-                    <p><span class="name">CC果冻嘻嘻</span><span class="phone">13800000001</span></p>
+                    <p><span class="name">{{ Session::get('user_login_session_key')['name'] }}</span><span class="phone">{{ Session::get('user_login_session_key')['phone'] }}</span></p>
                     <!--<p class="level">学员等级：<img src="{{asset('airclass/img/admin_user_level.png')}}" /></p>-->
                     <div class="level clearfix">
                         <div class="level_title pull-left">学员等级：</div>
@@ -21,7 +21,7 @@
                             <span class="icon icon_level icon_level_three"></span>
                         </div>
                     </div>
-                    <p><span class="location">湖北省武汉市洪山区</span><span class="hospital">中南医院</span><span class="department">内科</span><span class="title">主任医师</span><span class="beans pull-right"><i class="icon icon_beans"></i>迈豆：1，000，000</span></p>
+                    <p><span class="location">{{ Session::get('user_login_session_key')['province'] }}{{ Session::get('user_login_session_key')['city'] }}{{ Session::get('user_login_session_key')['area'] }}</span><span class="hospital">{{ Session::get('user_login_session_key')['hospital_name'] }}</span><span class="department">{{ Session::get('user_login_session_key')['office'] }}</span><span class="title">{{ Session::get('user_login_session_key')['title'] }}</span><span class="beans pull-right"><i class="icon icon_beans"></i>迈豆：1，000，000</span></p>
                 </div>
             </div>
         </header>

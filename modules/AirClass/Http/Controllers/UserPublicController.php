@@ -17,6 +17,7 @@ class UserPublicController extends Controller
     protected function save_session($user){
         $save_data = [
             'id' => $user->id,
+            'name' => $user->name, // 昵称
             'nickname' => $user->nickname, // 昵称
             'headimgurl' => $user->headimgurl, // 头像
             'phone' => $user->phone,
@@ -52,8 +53,7 @@ class UserPublicController extends Controller
      * @return array
      */
     public function register_post(Request $request)
-    { \Session::set('studentId', 111111);
-
+    {
         // 验证参数合法性
         $validator_params = $this->validator_params($request->all());
         if($validator_params['code'] != 200){
@@ -65,6 +65,11 @@ class UserPublicController extends Controller
         $req_province = $request->input('save-province'); //省
         $req_city = $request->input('save-city'); //市
         $req_area = $request->input('save-area'); //区
+
+        $req_province_code = $request->input('province'); //省code
+        $req_city_code = $request->input('city'); //市code
+        $req_area_code = $request->input('area'); //区code
+
         $req_hospital_level = $request->input('hospital_level'); //医院等级
         $req_hospital_name = $request->input('hospital_name'); //医院名称
         $req_office = $request->input('office'); //科室
@@ -97,6 +102,9 @@ class UserPublicController extends Controller
                 'province' => $req_province,
                 'city' => $req_city,
                 'country' => $req_area,
+                'province_id' => $req_province_code,
+                'city_id' => $req_city_code,
+                'country_id' => $req_area_code,
                 'hospital_level' => $req_hospital_level,
             ];
             $add_hospital = new HospitalController();

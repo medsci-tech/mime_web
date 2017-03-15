@@ -132,12 +132,12 @@ class UserController extends Controller
             return ['code' => 0,'msg' =>'验证码不匹配'];
         }
 
-
-        //$user = Auth::user();
+        $user = $this->user;
         if (!$validator->fails()) {
+            $model = Doctor::find($user['id']);
+            $model->password = \Hash::make($password);
+            $model->save();
             return $this->return_data_format(200, '修改成功!');
-            $user->password = \Hash::make($password);
-            $user->save();
         }
         else
             return ['code' => 0,'msg' =>'修改失败!请完善资料!'];
@@ -172,8 +172,7 @@ class UserController extends Controller
         }
 
         if (!$validator->fails()) {
-            $phone ='15927086090';//session获取
-
+            $phone = $this->user['phone'];//session获取
             $name = $request->name; //姓名
             $hospital = $request->hospital_name; //医院
             $sex = $request->sex;//性别
