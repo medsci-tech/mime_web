@@ -3,6 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
     <link rel="stylesheet" href="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.css">
+    <link rel="stylesheet" href="/admin/plugins/select2/select2.css">
     <style>
         .table .success td, .table .success th {
             background-color: #dff0d8 !important;
@@ -132,6 +133,7 @@
 @section('js')
 
     <script src="{{asset('vendor/layer/layer.js')}}" ></script>
+    <script src="{{asset('admin//plugins/select2/select2.min.js')}}" ></script>
 <script>
     var getExerciseList = function (data) {
         $.ajax({
@@ -172,6 +174,7 @@
             $('#form-sequence').val(defaltData);
             $('#form-title').val(defaltData);
             $('#form-thyroid_class_phase_id').val(0);
+            $('#form-course_type').val(0);
             $('#form-logo_url').val(defaltData);
             $('#form-qcloud_file_id').val(defaltData);
             $('#form-qcloud_app_id').val(defaltData);
