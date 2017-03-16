@@ -59,8 +59,9 @@
             <div class="col-sm-10">
               <select class="form-control" name="course_type" id="form_course_type">
                 <option value="0">请选择课程类型</option>
-                <option value="1">必修课</option>
-                <option value="2">选修课</option>
+                @foreach(config('params')['curse_type'] as $k => $v)
+                <option value="{{$k}}">{{$v}}</option>
+                @endforeach
               </select>
             </div>
           </div>
@@ -70,6 +71,16 @@
               <select class="form-control" name="is_show" id="form-is_show">
                 @foreach(config('params')['status_option'] as $key => $val)
                   <option value="{{$key}}">{{$val}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">关键词</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="keyword_id[]" id="form-keyword_id">
+                @foreach($keywords as $keyword)
+                  <option value="{{$keyword['id']}}">{{$keyword['name']}}</option>
                 @endforeach
               </select>
             </div>

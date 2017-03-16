@@ -8,6 +8,7 @@ use Modules\Admin\Entities\ThyroidClassPhase;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse as Model;
 use App\Http\Requests;
+use Modules\AirClass\Entities\Keyword;
 
 class CourseController extends Controller
 {
@@ -21,11 +22,14 @@ class CourseController extends Controller
     {
         $site_id = $request->input('site_id');
         if($site_id){
+            $keywords = Keyword::where(['site_id' => $site_id])->get();
+//            dd($keywords);
             return view('admin::backend.course.index', [
                 'lists' => Model::where('site_id',$site_id)->paginate(10),
                 'phases' => ThyroidClassPhase::where(['site_id' => $site_id])->get(),
                 'course_classes' => CourseClass::where(['status' => 1, 'site_id' => $site_id])->get(),
                 'teachers' => Teacher::where(['site_id' => $site_id])->get(),
+                'keywords' => $keywords,
             ]);
         }else{
             return redirect('/site');
