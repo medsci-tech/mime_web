@@ -91,7 +91,7 @@
 				@else
 				<div class="handlers pull-right">
 					<a class="btn_login" href="javascript:;" data-toggle="modal" data-target="#loginModal">登录</a><span class="devider">|</span>
-					<a class="btn_signup" href="{{url('register')}}">注册</a>
+					<!--<a class="btn_signup" href="{{url('register')}}">注册</a>-->
 				</div>
 				@endif
 			</div>
