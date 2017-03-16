@@ -65,19 +65,13 @@
 									<button class="btn" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
 					</div>
-					<ul class="keywords clearfix" style="display: none">
+					<ul class="keywords clearfix">
+						@foreach ($keywords as $data)
 						<li class="keyword pull-left">
-							<a href="javascript:void(0);">关键词</a>
+							<a href="/search/{{$data['id']}}">{{$data['name']}}</a>
 						</li>
-						<li class="keyword pull-left">
-							<a href="javascript:void(0);">关键词</a>
-						</li>
-						<li class="keyword pull-left">
-							<a href="javascript:void(0);">关键词</a>
-						</li>
-						<li class="keyword pull-left">
-							<a href="javascript:void(0);">关键词</a>
-						</li>
+						@endforeach
+
 					</ul>
 				</form>
 				@if(\Session::has('user_login_session_key'))

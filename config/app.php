@@ -162,6 +162,9 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Vinelab\Http\HttpServiceProvider::class,
+        //TomLingham\Searchy\SearchyServiceProvider::class,
+        Modules\AirClass\Providers\MyServiceProvider::class,
+
 
     ],
 
@@ -213,5 +216,6 @@ return [
         'Statistics' =>  App\Helpers\Statistics\Facades\Statistics::class,
         'Excel'  => Maatwebsite\Excel\Facades\Excel::class,
         'MyHttp' => Vinelab\Http\Facades\Client::class,
+        //'Searchy' => TomLingham\Searchy\Facades\Searchy::class
     ],
 ];

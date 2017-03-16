@@ -11,6 +11,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 
 	// 搜索
 	Route::get('/search', 'SearchController@index');
+    Route::get('/search/{id}', 'SearchController@keywords');// 关键词搜索
 
 	// 视频播放
 	Route::get('/video/{id}', 'VideoController@index');

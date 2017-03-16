@@ -1,7 +1,7 @@
 <?php namespace Modules\Airclass\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Modules\AirClass\Entities\Keyword;
 class MyServiceProvider extends ServiceProvider {
 
 	/**
@@ -11,7 +11,21 @@ class MyServiceProvider extends ServiceProvider {
 	 */
 	protected $defer = false;
 
-	/**
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        view()->composer('*',function($view){
+            $keywords = Keyword::all()->toArray();
+            $view->with('keywords',$keywords);
+        });
+    }
+
+
+    /**
 	 * Register the service provider.
 	 *
 	 * @return void
