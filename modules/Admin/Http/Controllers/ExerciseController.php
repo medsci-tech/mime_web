@@ -25,7 +25,7 @@ class ExerciseController extends Controller
         $site_id = $request->input('site_id');
         if($site_id){
             return view('admin::backend.exercise.index_table', [
-                'lists' => Model::where(['site_id' => $site_id, 'status' => 1])->paginate(10),
+                'lists' => Model::where(['site_id' => $site_id, 'status' => 1])->get(),
             ]);
         }else{
             return redirect('/site');
