@@ -28,18 +28,19 @@
             </div>
             <div class="chapters">
                 <a id="btnChapter" class="btn_chapter" href="javascript:;"><img src="{{asset('airclass/img/icon_play_chapter.jpg')}}"/></a>
-                <h4 class="title">{{$chapter->sequence}}</h4>
+                <h4 class="title">@if($chapter) {{$chapter->sequence}} @else 课程 @endif</h4>
                 <ul class="chapters_list">
-                    @if($chapter_classes->count())
+                    @if($chapter_classes)
                     @foreach($chapter_classes as $chapter_class)
                     <li class="chapter">
                         {{--当前视频--}}
                         @if($current_id == $chapter_class->id)
-                            {{$chapter_class->title}}<span class="icon icon_play_played pull-right"></span>
+                            <span class="a">{{$chapter_class->title}}</span>
+                            <span class="icon icon_play_played pull-right"></span>
                         @else
                             @if($chapter_class->curse_type == 2)
                                 {{--选修课--}}
-                                {{$chapter_class->title}}
+                                <span class="a">{{$chapter_class->title}}</span>
                                 <span class="icon icon_play_locked pull-right"></span>
                             @else
                                 {{--必修课--}}

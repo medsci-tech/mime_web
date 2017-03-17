@@ -31,12 +31,20 @@ class VideoController extends Controller
         $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元
 		if($class){
 			//## 章节列表
-			$chapter_classes = ThyroidClassCourse::where([
-				'site_id' => $this->site_id,
-				'is_show' => 1,
-				'course_class_id' => $class->course_class_id,
-				'thyroid_class_phase_id' => $class->thyroid_class_phase_id,
-			])->orderBy('sequence')->get();
+			if($chapter){
+				$chapter_classes = ThyroidClassCourse::where([
+					'site_id' => $this->site_id,
+					'is_show' => 1,
+					'course_class_id' => $class->course_class_id,
+					'thyroid_class_phase_id' => $class->thyroid_class_phase_id,
+				])->orderBy('sequence')->get();
+			}else{
+				$chapter_classes = ThyroidClassCourse::where([
+					'site_id' => $this->site_id,
+					'is_show' => 1,
+					'id' => $id,
+				])->orderBy('sequence')->get();
+			}
 
 			//## 评论
 			$comments = [];
@@ -119,7 +127,7 @@ class VideoController extends Controller
 					])->get();
 				}
 			}
-//			dd($questions);
+//			dd($chapter_classes);
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
                 'chapter' => $chapter, // 当前单元信息
@@ -128,7 +136,7 @@ class VideoController extends Controller
 				'recommend_classes' => $recommend_classes, // 推荐课程列表
 				'add_recommend_classes' => $add_recommend_classes, // 追加推荐课程列表
 				'user' => $user, // 登陆用户信息
-				'questions' => $questions, // 答题信息
+				'questions' => $questions, // 问题信息
 				'answer_logs' => $answer_logs, // 答题信息
 				'current_id' => $id, // 答题信息
 			]);
