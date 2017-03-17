@@ -25,8 +25,7 @@ class AnswerLog extends Model
         'exercise_id',
         'answer',
         'user_id',
-        'user_nickname',
-        'status',
         'site_id',
+        'class_id',
     ];
 }

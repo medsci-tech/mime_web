@@ -180,3 +180,35 @@ var subMsgAjax3 = function (action, data) {
         }
     });
 };
+
+// 加积分提示
+var tipsBeansModal = function (msg) {
+    var dom = $('#successModal');
+    dom.find('.tips').text(msg);
+    dom.modal('show');
+    setTimeout(function() {
+        dom.modal('hide');
+    }, 1500);
+};
+
+var subQuestionAjax = function (action, data) {
+    $.ajax({
+        type: 'post',
+        url: action,
+        data: data,
+        success: function(res){
+            if(res.code == 200){
+                tipsBeansModal(res.msg);
+                $('#questionsModal').modal('hide');
+            }else if(res.code == 555) {
+                showAlertModal(res.msg);
+                $('#questionsModal').modal('hide');
+            }else {
+                showAlertModal(res.msg);
+            }
+        },
+        error:function (res) {
+            showAlertModal('服务器错误');
+        }
+    });
+};
