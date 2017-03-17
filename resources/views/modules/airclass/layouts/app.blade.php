@@ -58,12 +58,12 @@
 				</li>
 			</ul>
 			<div class="nav navbar-nav navbar-right clearfix">
-				<form class="navbar-form pull-left" role="search">
+				<form class="navbar-form pull-left" role="search" method="get" action="{{url('search')}}" onsubmit="return validate_form()">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="搜索视频">
-								<span class="input-group-btn">
-									<button class="btn" type="button"><span class="glyphicon glyphicon-search"></span></button>
-								</span>
+						<input type="text" class="form-control" placeholder="搜索视频" name="keyword" id="keyword">
+						<span class="input-group-btn">
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+						</span>
 					</div>
 					<ul class="keywords clearfix">
 						@foreach ($keywords as $data)
@@ -363,6 +363,16 @@
 		});
 
 	})
+
+    function validate_form()
+    {
+		if ($('#keyword').val()=='')
+		{
+            showAlertModal('请输入搜索关键词');
+            $('#keyword').focus();
+            return false
+		}
+    }
 </script>
 @section('js')
 @show

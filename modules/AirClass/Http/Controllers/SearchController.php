@@ -2,28 +2,29 @@
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\ThyroidClassCourse;
 use DB;
+use Modules\AirClass\Entities\Keyword;
 class SearchController extends Controller
 {
 
-    protected $matchers = [
-        'TomLingham\Searchy\Matchers\ExactMatcher'                 => 50,
-        'TomLingham\Searchy\Matchers\StartOfStringMatcher'         => 50,
-        'TomLingham\Searchy\Matchers\AcronymMatcher'               => 42,
-        'TomLingham\Searchy\Matchers\ConsecutiveCharactersMatcher' => 40,
-        'TomLingham\Searchy\Matchers\StartOfWordsMatcher'          => 35,
-        'TomLingham\Searchy\Matchers\StudlyCaseMatcher'            => 32,
-        'TomLingham\Searchy\Matchers\InStringMatcher'              => 30,
-        'TomLingham\Searchy\Matchers\TimesInStringMatcher'         => 8,
-    ];
     /**
-     * @return mixed
+     * 文本关键词搜索
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
      */
 	public function index(Request $request)
 	{
-
-        return view('airclass::home.search',[
-            'units' => 11,
-        ]);
+        $keyword = $request->keyword;
+        $units = DB::table('thyroid_class_courses')
+            ->leftJoin('thyroid_class_phases', function ($join) use ($keyword) {
+                $join->on('thyroid_class_courses.thyroid_class_phase_id', '=', 'thyroid_class_phases.id');
+            })
+            ->where(['thyroid_class_courses.site_id'=>$this->site_id])
+            ->where(['thyroid_class_courses.is_show'=> 1])
+            ->where('thyroid_class_courses.title','like','%'.$keyword.'%')
+            ->orWhere('thyroid_class_phases.title','like','%'.$keyword.'%')
+            ->paginate(20);
+        return view('airclass::home.search', compact('units','keyword'));
 
 	}
 
@@ -33,12 +34,12 @@ class SearchController extends Controller
      * @since 1.0
      * @return array
      */
-    public function keywords($id)
+    public function keywords(Request $request)
     {
-        $units = DB::table('thyroid_class_courses')->whereRaw('FIND_IN_SET(?,keyword_id)', [$id])->get();
-        return view('airclass::home.search',[
-            'units' => $units,
-        ]);
+        $id = $request->id;
+        $keyword =  Keyword::find($id)->name;
+        $units = DB::table('thyroid_class_courses')->where(['site_id'=>$this->site_id,'is_show'=> 1])->whereRaw('FIND_IN_SET(?,keyword_id)', [$id])->paginate(20);
+        return view('airclass::home.search', compact('units','keyword'));
     }
 
 }

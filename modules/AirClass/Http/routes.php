@@ -10,7 +10,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::get('/help', 'HomeController@help');
 
 	// 搜索
-	Route::get('/search', 'SearchController@index');
+    Route::get('/search', 'SearchController@index');// 文本搜索
     Route::get('/search/{id}', 'SearchController@keywords');// 关键词搜索
 
 	// 视频播放
