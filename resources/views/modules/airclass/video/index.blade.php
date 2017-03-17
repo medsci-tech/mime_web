@@ -359,14 +359,20 @@
                 "file_id": "{{$class->qcloud_file_id}}",
                 "app_id": "{{$class->qcloud_app_id}}",
                 "width": 1280,
-                "height": 720
+                "height": 720,
+                @if (!$is_join)"stop_time": 3 @endif
             };
+            var listener = {
+    			playStatus: function (status){
+        		if(status=='stop')
+        			showAlertModal('请报名后观看视频');
+			}
+		};
+
             /*调用播放器进行播放*/
-            new qcVideo.Player(
-                    /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
-                    "id_video_container",
-                    option
-            );
+            new qcVideo.Player("id_video_container",option, listener);
+
+
         });
     </script>
     @endsection

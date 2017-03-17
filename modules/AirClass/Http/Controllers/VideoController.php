@@ -26,6 +26,19 @@ class VideoController extends Controller
 	 */
 	public function index($id)
 	{
+	    /* 临时视频播放验证 */
+	    $user = $this->user;
+	    if($user)
+        {
+            $is_join = KZKTClass::where(['doctor_id'=>$user['id']])->first();
+            if($is_join)
+                $is_join =true;
+            else
+                $is_join=false;
+        }
+	    else
+            $is_join=false;
+
 		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
         $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元
@@ -139,6 +152,7 @@ class VideoController extends Controller
 				'questions' => $questions, // 问题信息
 				'answer_logs' => $answer_logs, // 答题信息
 				'current_id' => $id, // 答题信息
+                'is_join' => $is_join,
 			]);
 		}else{
 			abort(404);
