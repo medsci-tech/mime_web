@@ -78,7 +78,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">关键词</label>
             <div class="col-sm-10">
-              <select class="form-control" name="keyword_id[]" id="form-keyword_id">
+              <select class="form-control" name="keyword_id[]" id="form-keyword_id" multiple="multiple" data-placeholder="请选择关键词">
                 @foreach($keywords as $keyword)
                   <option value="{{$keyword['id']}}">{{$keyword['name']}}</option>
                 @endforeach

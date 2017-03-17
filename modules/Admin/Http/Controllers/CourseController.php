@@ -48,6 +48,7 @@ class CourseController extends Controller
         $data = $request->all();
         $id = $request->input('id');
         $exercise_ids = $request->input('exercise_ids');
+        $keyword_id = $request->input('keyword_id');
         $course_classes = CourseClass::find($data['course_class_id']);
         if(!$course_classes['has_teacher']){
             // 如果类别没有讲师，则teacher_id为空
@@ -61,6 +62,11 @@ class CourseController extends Controller
             $data['exercise_ids'] = implode(',', $exercise_ids);
         }else{
             $data['exercise_ids'] = '';
+        }
+        if($keyword_id){
+            $data['keyword_id'] = implode(',', $keyword_id);
+        }else{
+            $data['keyword_id'] = '';
         }
         if($id){
             $result = Model::find($id)->update($data);
