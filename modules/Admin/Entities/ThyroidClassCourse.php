@@ -50,6 +50,7 @@ class ThyroidClassCourse extends Model
         'course_class_id',
         'course_type',
         'recomment_time',
+        'keyword_id',
     ];
 
     /**

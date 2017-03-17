@@ -3,7 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
     <link rel="stylesheet" href="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.css">
-    <link rel="stylesheet" href="/admin/plugins/select2/select2.css">
+    <link rel="stylesheet" href="/admin/plugins/chosen/chosen.css">
     <style>
         .table .success td, .table .success th {
             background-color: #dff0d8 !important;
@@ -92,6 +92,7 @@
                                             data-qcloud_app_id="{{$list->qcloud_app_id}}"
                                             data-is_show="{{$list->is_show}}"
                                             data-exercise_ids="{{$list->exercise_ids}}"
+                                            data-keyword_id="{{$list->keyword_id}}"
                                             data-course_class_id="{{$list->course_class_id}}"
                                             data-course_class_has_teacher="{{\App\Models\CourseClass::find($list->course_class_id)['has_teacher']}}"
                                             data-course_class_has_phase="{{\App\Models\CourseClass::find($list->course_class_id)['has_children']}}"
@@ -133,7 +134,7 @@
 @section('js')
 
     <script src="{{asset('vendor/layer/layer.js')}}" ></script>
-    <script src="{{asset('admin//plugins/select2/select2.min.js')}}" ></script>
+    <script src="{{asset('admin//plugins/chosen/chosen.jquery.js')}}" ></script>
 <script>
     var getExerciseList = function (data) {
         $.ajax({
@@ -197,6 +198,7 @@
             var course_class_has_phase = $(this).attr('data-course_class_has_phase');
             var teacher_id = $(this).attr('data-teacher_id');
             var exercise_ids = $(this).attr('data-exercise_ids');
+            var keyword_id = $(this).attr('data-keyword_id').split(',');
             var course_type = $(this).attr('data-course_type');
             var comment = $(this).attr('data-comment');
             /* 编辑初始化 */
@@ -227,6 +229,7 @@
                 $('#phase_id_parentDiv').hide();
             }
             getExerciseList({'ids':exercise_ids});
+            $('#form-keyword_id').val(keyword_id).trigger('chosen:updated');
 
         });
 
@@ -306,6 +309,9 @@
                 $('#phase_id_parentDiv').hide();
             }
         });
+
+        // 关键词
+        $('#form-keyword_id').chosen({width: '100%'});
     });
 </script>
 @endsection
