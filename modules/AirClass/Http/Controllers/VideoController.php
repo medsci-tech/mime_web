@@ -158,13 +158,47 @@ class VideoController extends Controller
 	}
 
 	// 答题
-	public function answer(Request $request){
-		$request_data = $request->all();
-		$result = AnswerLog::create($request_data);
-		if($result){
-			return $this->return_data_format(200);
+	public function answer(Request $request, $id){
+		if($id){
+			$request_data = $request->all();
+			// 未填答案
+			if(!$request_data){
+				return $this->return_data_format(500, '请填完所有测试题');
+			}
+			// 用户信息
+			$user = $this->user;
+			if(!$user){
+				return $this->return_data_format(500, '未登陆');
+			}
+			// 已答题
+			$check_answer = AnswerLog::where([
+				'class_id' => $id,
+				'user_id' => $user['id'],
+			])->first();
+			if($check_answer){
+				return $this->return_data_format(555, '已答过题');
+			}
+			$result = [];
+			foreach ($request_data as $key => $val){
+				$save_data = [];
+				$temp_arr = explode('_', $key);
+				$save_data['exercise_id'] = $temp_arr[1];// 试题id
+				$save_data['answer'] = $val;// 答题卡，单选
+				$save_data['class_id'] = $id; // 课程id
+				$save_data['site_id'] = $this->site_id; // 站点id
+				$save_data['user_id'] = $user['id']; // 用户id
+				$result[] = AnswerLog::create($save_data);
+			}
+//			dd($result);
+			if($result){
+				// todo 调用用户中心接口
+				return $this->return_data_format(200, '恭喜您，答题获得15积分');
+			}else{
+				return $this->return_data_format(500, '答题失败');
+			}
 		}else{
-			return $this->return_data_format(500);
+			abort(404);
+			return false;
 		}
 	}
 

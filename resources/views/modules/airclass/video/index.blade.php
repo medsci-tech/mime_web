@@ -234,13 +234,6 @@
             </div>
         </div>
 
-
-        <div class="test_btns" style="width: 200px; margin: 60px auto;">
-            <h4>modal测试用按钮</h4>
-            <button class="test_success">加分提醒</button>
-        </div>
-
-
     </div>
 
     <!-- answer area -->
@@ -261,6 +254,7 @@
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 class="title text-center">答题</h3>
+                <form id="questionForm">
                 <ol class="questions">
                     @if($questions->count())
                         @foreach($questions as $question)
@@ -284,6 +278,7 @@
                         @endforeach
                     @endif
                 </ol>
+                </form>
                 <button type="button" class="btn btn-block btn_questions_modal_confirm">提交</button>
             </div>
         </div>
@@ -304,6 +299,7 @@
 @section('js')
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript">
+        var question_action = '{{url('video/answer', ['id' => $class->id])}}';
         $('#btnChapter').click(function() {
             var height = $('.video_wrapper').height();
             $('.video_container').toggleClass('active').find('.chapters').height(height);
@@ -313,12 +309,11 @@
             $('#questionsModal').modal('show');
         });
 
-        $('.btn_questions_modal_confirm, .test_success').click(function() {
-            $('#questionsModal').modal('hide');
-            $('#successModal').modal('show');
-            setTimeout(function() {
-                $('#successModal').modal('hide');
-            }, 1500);
+        // 答题
+        $('.btn_questions_modal_confirm').click(function() {
+            var data = $('#questionForm').serialize();
+            subQuestionAjax(question_action,data);
+//            tipsBeansModal('hahahha');
         });
 
         $('#questionsModal :radio').change(function() {
