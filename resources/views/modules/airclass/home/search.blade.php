@@ -17,7 +17,7 @@
             <h3 class="title">{{ $keyword }}</h3>
             <div class="lesson_list row">
                 @foreach ($units as $data)
-                <div class="lesson col-xs-6 col-diy-20"><a href="javascript:void(0);">
+                <div class="lesson col-xs-6 col-diy-20"><a href="{{ URL('video/'.$data->id) }}" target="_blank">
                         <img class="center-block" src="{{ $data->logo_url  }}" alt="">
                         <div class="caption">
                             <h3 class="title">{{ $data->title }}</h3>
