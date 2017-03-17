@@ -19,6 +19,7 @@ class SearchController extends Controller
             ->leftJoin('thyroid_class_phases', function ($join) use ($keyword) {
                 $join->on('thyroid_class_courses.thyroid_class_phase_id', '=', 'thyroid_class_phases.id');
             })
+            ->select('thyroid_class_courses.id', 'thyroid_class_courses.title','thyroid_class_courses.logo_url','thyroid_class_courses.comment')
             ->where(['thyroid_class_courses.site_id'=>$this->site_id])
             ->where(['thyroid_class_courses.is_show'=> 1])
             ->where('thyroid_class_courses.title','like','%'.$keyword.'%')
