@@ -13,6 +13,9 @@
         <ul class="treeview-menu menu-open" style="display: block;">
           <li><a href="{{ url('/site') }}"><i class="fa fa-circle-o"></i>站点管理</a></li>
         </ul>
+        <ul class="treeview-menu menu-open" style="display: block;">
+          <li><a href="{{ url('/msg/all') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>站点消息</a></li>
+        </ul>
       </li>
       <li class="active treeview">
         <a href="{{url('#')}}">

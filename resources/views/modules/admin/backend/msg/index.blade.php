@@ -41,7 +41,7 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">站点管理</h3>
+                            <h3 class="box-title">消息管理</h3>
                             <button class="btn btn-xs btn-success pull-right" data-btn="add" data-target="#modal-edit" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;新增</button>
                         </div><!-- /.box-header -->
                         <div class="box-body no-padding" style="overflow: auto">

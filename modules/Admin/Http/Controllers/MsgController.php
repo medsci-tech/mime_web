@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Cache;
+use Redis;
 use Modules\Admin\Entities\Site;
 
 class MsgController extends Controller
