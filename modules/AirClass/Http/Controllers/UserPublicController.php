@@ -61,6 +61,7 @@ class UserPublicController extends Controller
      */
     public function register_post(Request $request)
     {
+        return $this->return_data_format(500, '注册尚未开放'); // 关闭注册
         // 验证参数合法性
         $validator_params = $this->validator_params($request->all());
         if($validator_params['code'] != 200){
@@ -262,8 +263,12 @@ class UserPublicController extends Controller
     }
 
    public function test(){
-       $user = Session::get($this->user_login_session_key);
-       dd($user);
+
+//       $phone = '13554498149';
+//       $bean = config('params')['bean_rules']['watch_video'];
+//       $api = new ApiToUserCenterController();
+//       $res = $api->modify_beans($phone,$bean);
+//       dd($res);
    }
 
 }

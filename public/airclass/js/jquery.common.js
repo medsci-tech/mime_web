@@ -110,8 +110,10 @@ var subActionAjax = function (action, data, tipDom) {
                     validateTips($('#' + i), res.msg[i]);
                 }
             }else {
-                showAlertModal('注册失败');
+                showAlertModal(res.msg);
             }
+        },error:function () {
+            showAlertModal('注册失败');
         }
     });
 };
