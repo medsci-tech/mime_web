@@ -127,9 +127,11 @@ class VideoController extends Controller
 			$questions  = Exercise::whereIn('id', explode(',', $class->exercise_ids))->get();
 			//## 答题
 			$answer_logs = [];
+			//## 答题状态消息
+			$answer_status_mag = '';
 			// 查询用户是否登陆
 			if($user){
-				// 查询用户是否报名  调接口
+				// 查询用户是否报名
 				$sing_up = KZKTClass::where('doctor_id', $user['id'])->first();
 				if($sing_up){
 					// 如果已答题，显示答题信息和解析，未答题，显示题目
@@ -138,7 +140,16 @@ class VideoController extends Controller
 						'site_id' => $this->site_id,
 						'class_id' => $class->id,
 					])->get();
+					if($answer_logs){
+						if ($answer_logs->count()){
+							$answer_status_mag = '已答过题';
+						}
+					}
+				}else{
+					$answer_status_mag = '报名后才能答题';
 				}
+			}else{
+				$answer_status_mag = '登陆后才能答题';
 			}
 //			dd($chapter_classes);
 			return view('airclass::video.index',[
@@ -151,6 +162,7 @@ class VideoController extends Controller
 				'user' => $user, // 登陆用户信息
 				'questions' => $questions, // 问题信息
 				'answer_logs' => $answer_logs, // 答题信息
+				'answer_status_mag' => $answer_status_mag, // 可答题状态
 				'current_id' => $id, // 答题信息
                 'is_join' => $is_join,
 			]);
