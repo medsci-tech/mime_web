@@ -217,3 +217,33 @@ var subQuestionAjax = function (action, data) {
         }
     });
 };
+
+/**
+ * 视频心跳请求
+ * @param player
+ * @param time
+ * @param action
+ * @param data
+ */
+var video_heartbeat = function (player, time, action, data) {
+    var total_time = player.getDuration();
+    setInterval(function () {
+        var current_time = player.getCurrentTime();
+        var play_status = player.isPlaying();
+        if(play_status == true){
+            data.current_time = current_time;
+            data.total_time = total_time;
+            video_heartbeat_ajax(action, data);
+        }
+    }, time);
+};
+var video_heartbeat_ajax = function (action, data) {
+    $.ajax({
+        type: 'post',
+        url: action,
+        data: data,
+        success:function (res) {
+            console.log(res);
+        }
+    });
+};
