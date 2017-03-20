@@ -110,8 +110,10 @@ var subActionAjax = function (action, data, tipDom) {
                     validateTips($('#' + i), res.msg[i]);
                 }
             }else {
-                showAlertModal('注册失败');
+                showAlertModal(res.msg);
             }
+        },error:function () {
+            showAlertModal('注册失败');
         }
     });
 };
@@ -209,6 +211,9 @@ var subQuestionAjax = function (action, data) {
         },
         error:function (res) {
             showAlertModal('服务器错误');
+        },
+        complete:function () {
+            window.location.reload();
         }
     });
 };
