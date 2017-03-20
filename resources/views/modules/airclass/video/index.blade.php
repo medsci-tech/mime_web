@@ -59,8 +59,10 @@
             <div class="asks_and_answers">
                 <div class="ask_answer_btns">
                     <a href="javascript:;" class="btn_ask">提问</a>
-                    <span class="devider">|</span>
-                    <a href="javascript:;" @if($questions->count()) id="btn_answer" @endif class="btn_answer">答题／解析</a>
+                    @if($questions->count())
+                        <span class="devider">|</span>
+                        <a href="javascript:;" id="btn_answer" class="btn_answer">答题</a>
+                    @endif
                 </div>
                 <div class="ask_area_container">
                     <textarea class="ask_area" name=""></textarea>
@@ -306,7 +308,12 @@
         });
 
         $('#btn_answer').click(function() {
-            $('#questionsModal').modal('show');
+            var answer_status_mag = '{{$answer_status_mag}}';
+            if(answer_status_mag){
+                showAlertModal(answer_status_mag);
+            }else {
+                $('#questionsModal').modal('show');
+            }
         });
 
         // 答题
