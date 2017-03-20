@@ -217,8 +217,14 @@ class VideoController extends Controller
 			}
 //			dd($result);
 			if($result){
-				// todo 调用用户中心接口
-				return $this->return_data_format(200, '恭喜您，答题获得15积分');
+				//调用用户中心接口
+				$api = new ApiToUserCenterController();
+				$api_result = $api->modify_beans($user['phone'], config('params')['bean_rules']['watch_video']);
+				if($api_result['code'] == 200){
+					return $this->return_data_format(200, '恭喜您，完成答题获得15积分');
+				}else{
+					return $this->return_data_format(200, '恭喜您，完成答题');
+				}
 			}else{
 				return $this->return_data_format(500, '答题失败');
 			}

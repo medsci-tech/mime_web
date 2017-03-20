@@ -16,13 +16,12 @@ class ApiToUserCenterController extends Controller
 
     /**
      * 发送数据
-     * @param String $url     请求的地址
-     * @param int  $method 1：POST提交，0：get
+     * @param string $url 请求的地址
+     * @param string  $method 请求方式
      * @param array  $data POST的数据
-     * @return String
-     * @author  lxhui
+     * @return string
      */
-    protected static function tocurl($url, $data , $method){
+    protected static function tocurl($url, $data = [] , $method = ''){
         $headers = array(
             "Content-type: application/json;charset='utf-8'",
             "Authorization: Bearer " . env('MD_USER_API_TOKEN'),
@@ -36,7 +35,7 @@ class ApiToUserCenterController extends Controller
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); //从证书中检查SSL加密算法是否存在
         }
         //设置选项，包括URL
-        if($method) // post提交
+        if(strtolower($method) == 'post') // post提交
         {
             curl_setopt($ch, CURLOPT_POST,  True);
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
@@ -53,7 +52,12 @@ class ApiToUserCenterController extends Controller
         return $response;
     }
 
-    public function register($req_data)
+    /**
+     * 注册
+     * @param array $req_data
+     * @return array
+     */
+    public function register(array $req_data)
     {
         $phone = $req_data['phone'];
         $password = $req_data['password'];
@@ -64,12 +68,12 @@ class ApiToUserCenterController extends Controller
         $hospital_name = $req_data['hospital_name'];
         // 查询用户信息
         try{
-            $response = $this::tocurl($this->md_user_api . '/v2/query-user-information?phone='.$phone, null,0);
+            $response = $this::tocurl($this->md_user_api . '/v2/query-user-information?phone='.$phone);
         }catch (Exception $e){
             return $this->return_data_format(500, '服务器请求异常');
         }
         // 服务器返回响应状态码,,当用户手机号不存在于用户中心
-        if($response['status']== 'ok'){
+        if(array_key_exists('status', $response)){
             return $this->return_data_format(200, '手机号已注册');
         }else{
             $post_data = [
@@ -84,15 +88,39 @@ class ApiToUserCenterController extends Controller
                 'hospital_name'=>$hospital_name, //医院名称
             ];
             try{
-                $res = $this::tocurl($this->md_user_api . '/v0/register', $post_data,1);// 同步注册
+                $res = $this::tocurl($this->md_user_api . '/v0/register', $post_data,'post');// 同步注册
             }catch (\Exception $e) {
                 return $this->return_data_format(500, '服务器请求异常');
             }
-            if($res['status'] == 'ok'){// 服务器返回响应状态码
-                return $this->return_data_format(200, '手机号已注册');
+            if(array_key_exists('status', $res)){// 服务器返回响应状态码
+                return $this->return_data_format(200, '成功');
             }else{
                 return $this->return_data_format(500, '服务器请求异常');
             }
+        }
+    }
+
+    /**
+     * 修改迈豆数
+     * @param $phone
+     * @param $bean
+     * @return array
+     */
+    public function modify_beans($phone, $bean){
+        $data = [
+            'phone' => $phone,
+            'bean' => $bean,
+        ];
+        try{
+            $result = $this::tocurl($this->md_user_api . '/v2/modify-bean', $data, 'post');
+        }catch (Exception $e){
+            $result = [];
+        }
+        if(array_key_exists('status',$result)){
+            // 请求成功
+            return $this->return_data_format(200);
+        }else{
+            return $this->return_data_format(500, '服务器请求异常');
         }
     }
 
