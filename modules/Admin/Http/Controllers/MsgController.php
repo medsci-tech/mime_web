@@ -7,21 +7,18 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Cache;
-use Redis;
+use App\Models\Message;
+use App\Models\Doctor;
 use Modules\Admin\Entities\Site;
 
 class MsgController extends Controller
 {
-    protected $all_msg_key = 'all_station_msg';
-    protected $site_msg_key = 'site_station_msg';
-    protected $user_msg_key = 'user_station_msg';
 
     public function all(){
-        $cache = Cache::get($this->all_msg_key);
         $sites = Site::where('status',1)->get();
 
         return view('admin::backend.msg.index',[
-            'lists' => $cache,
+            'lists' => Message::paginate(20),
             'sites' => $sites,
             'list_row' => null,
         ]);
@@ -54,17 +51,45 @@ class MsgController extends Controller
     }
 
     public function setAllMsg(Request $request){
-        $value = [
-            'content' => $request->input('content'),
-            'created_at' => Carbon::now(),
-        ];
-        $exits = Cache::has($this->all_msg_key);
-        if($exits){
-            $cache = Cache::get($this->all_msg_key);
-            array_push($cache,$value);
-            Cache::forever($this->all_msg_key,$cache);
-        }else{
-            Cache::forever($this->all_msg_key,[$value]);
+
+        $msg_type = $request->input('msg_type');
+        $site_id = $request->input('site_id');
+        $content = $request->input('content');
+        if($msg_type ==3) // 个人消息
+        {
+            $phones= $request->input('phones');
+            $phones = preg_replace("/(\n)|(\s)|(\t)|(\')|(')|(，)|(\.)/",',',$phones);
+            $p_arr =explode(',',$phones);
+            foreach($p_arr as $val)
+            {
+                $res = Doctor::where('phone', $val)->first();
+                if($res)
+                {
+                    $data[] = [
+                        'phone' => $val,
+                        'msg_type'=> $msg_type,
+                        'site_id'=> 0,
+                        'content' => $content,
+                        'created_at' => Carbon::now(),
+                    ];
+                }
+            }
+            Message::insert($data);
+        }
+        else // 群发
+        {
+            $res = \DB::table('doctors')->groupBy('phone')->get();
+            foreach($res as $val)
+            {
+                $data[] = [
+                    'phone' => $val->phone,
+                    'msg_type'=> $msg_type,
+                    'site_id'=> $site_id,
+                    'content' => $content,
+                    'created_at' => Carbon::now(),
+                ];
+            }
+            Message::insert($data);
         }
         $this->flash_success();
         return redirect(url('/msg/all'));

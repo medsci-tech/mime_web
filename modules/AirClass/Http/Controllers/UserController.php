@@ -5,7 +5,7 @@ use PhpParser\Comment\Doc;
 use \App\Models\Doctor;
 use \App\Models\Hospital;
 use Modules\AirClass\Entities\Office;
-use \App\Model\Address;
+use \App\Models\{Address, Message};
 use Hash;
 use Cache;
 use DB;
@@ -15,6 +15,7 @@ class UserController extends Controller
     {
         $this->middleware('login');
         parent::__construct();
+
     }
 	public function study()
 	{
@@ -22,10 +23,18 @@ class UserController extends Controller
             'current_active' => 'study',
         ]);
 	}
-
+    /**
+     * 我的消息列表
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
 	public function msg()
 	{
+        Message::where(['phone'=>$this->user['phone']])->update(['read_status' => 1]); // 标记已读状态
+        $lists =  Message::orderBy('id','desc')->where(['phone'=>$this->user['phone']])->paginate(15);
         return view('airclass::user.msg', [
+            'lists' => $lists,
             'current_active' => 'msg',
         ]);
 	}

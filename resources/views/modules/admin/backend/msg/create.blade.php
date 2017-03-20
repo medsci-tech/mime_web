@@ -12,7 +12,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">消息类型</label>
             <div class="col-sm-10">
-              <select class="form-control" id="form-type" name="type">
+              <select class="form-control" id="form-type" name="msg_type">
                 <option>-请选择-</option>
                 @foreach(config('params')['msg_type_option'] as $key => $val)
                   <option value="{{$key}}">{{$val}}</option>
@@ -35,7 +35,7 @@
           <div class="form-group" id="form-phone" style="display: none;">
             <label class="col-sm-2 control-label">手机号</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="phone" placeholder="多个请用|分隔">
+              <input type="text" class="form-control" name="phones" placeholder="多个请用,分隔">
             </div>
           </div>
 

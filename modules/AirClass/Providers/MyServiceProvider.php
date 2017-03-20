@@ -18,10 +18,11 @@ class MyServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        view()->composer('*',function($view){
-            $keywords = Keyword::all()->toArray();
+        $keywords = Keyword::all()->toArray();
+        view()->composer('*',function($view) use ($keywords) {
             $view->with('keywords',$keywords);
         });
+
     }
 
 

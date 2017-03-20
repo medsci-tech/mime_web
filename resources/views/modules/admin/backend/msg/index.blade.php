@@ -80,7 +80,7 @@
 
                         </div><!-- /.box-body -->
                         <div class="box-footer clearfix">
-
+                            {{$lists->appends(['site_id' => $_GET['site_id'] ?? ''])->render()}}
                         </div>
                     </div><!-- /.box -->
                 </div><!-- /.col -->
@@ -111,12 +111,12 @@
                     // 站点消息
                     siteDom.show();
                     phoneDom.hide();
-                    form.attr('action','{{url('/msg/set_site')}}');
+                    //form.attr('action','{{url('/msg/set_site')}}');
                 }else if(this_value == 3){
                     // 个人消息
                     siteDom.hide();
                     phoneDom.show();
-                    form.attr('action','{{url('/msg/set_user')}}');
+                    //form.attr('action','{{url('/msg/set_user')}}');
                 }
             });
         });

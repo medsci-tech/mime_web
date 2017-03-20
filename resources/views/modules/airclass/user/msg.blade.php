@@ -7,25 +7,16 @@
         <div class="admin_content">
             <h3 class="admin_title">我的消息</h3>
             <div class="msgs">
+                @foreach ($lists as $data)
                 <div class="msg clearfix">
                     <h4 class="msg_title">系统消息</h4>
-                    <p class="msg_content"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At earum odio ullam odit deleniti error vel temporibus modi eveniet non. Quos inventore eaque voluptatum suscipit dignissimos eveniet dolores et sapiente?</span>
-                        <span>Eveniet perferendis necessitatibus minima quidem sapiente voluptate blanditiis alias tenetur atque porro adipisci expedita provident omnis autem dolores ipsum odit dolorum laborum doloribus asperiores distinctio hic deleniti inventore. Vitae cupiditate.</span></p>
-                    <span class="msg_date">2017/01/02</span>
+                    <p class="msg_content">
+                        <span>{{ $data->content  }}</span></p>
+                    <span class="msg_date">{{ date("Y/m/d",strtotime($data->created_at)) }}</span>
                 </div>
-                <div class="msg clearfix">
-                    <h4 class="msg_title">系统消息</h4>
-                    <p class="msg_content"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At earum odio ullam odit deleniti error vel temporibus modi eveniet non. Quos inventore eaque voluptatum suscipit dignissimos eveniet dolores et sapiente?</span>
-                        <span>Eveniet perferendis necessitatibus minima quidem sapiente voluptate blanditiis alias tenetur atque porro adipisci expedita provident omnis autem dolores ipsum odit dolorum laborum doloribus asperiores distinctio hic deleniti inventore. Vitae cupiditate.</span></p>
-                    <span class="msg_date">2017/01/02</span>
-                </div>
-                <div class="msg clearfix">
-                    <h4 class="msg_title">系统消息</h4>
-                    <p class="msg_content"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At earum odio ullam odit deleniti error vel temporibus modi eveniet non. Quos inventore eaque voluptatum suscipit dignissimos eveniet dolores et sapiente?</span>
-                        <span>Eveniet perferendis necessitatibus minima quidem sapiente voluptate blanditiis alias tenetur atque porro adipisci expedita provident omnis autem dolores ipsum odit dolorum laborum doloribus asperiores distinctio hic deleniti inventore. Vitae cupiditate.</span></p>
-                    <span class="msg_date">2017/01/02</span>
-                </div>
+                @endforeach
             </div>
+            {{$lists->links()}}
         </div>
 
 @endsection

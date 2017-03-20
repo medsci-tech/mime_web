@@ -71,13 +71,12 @@
 							<a href="/search/{{$data['id']}}">{{$data['name']}}</a>
 						</li>
 						@endforeach
-
 					</ul>
 				</form>
 				@if(\Session::has('user_login_session_key'))
 				<div class="handlers pull-right">
 					<span class="reminder glyphicon glyphicon-bell">
-						<span class="badge"></span>
+						<span class="badge">{{ App\Models\Message::where(['phone'=>Session::get('user_login_session_key')['phone'],'read_status'=>0])->orderBy('id', 'desc')->count() }}</span>
 					</span>
 					<a class="username" href="{{url('user')}}">{{ Session::get('user_login_session_key')['phone'] }}</a><span class="devider">|</span>
 					<a class="logout" href="{{url('logout')}}">退出</a>

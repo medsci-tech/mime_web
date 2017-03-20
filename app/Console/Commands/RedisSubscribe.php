@@ -11,7 +11,7 @@ class RedisSubscribe extends Command{
      *
      * @var string
      */
-    protected $signature = 'redis:subscribe';
+    protected $signature = 'redis:subscribe {user} {--queue}';
 
     /**
      * 控制台命令描述
@@ -27,7 +27,7 @@ class RedisSubscribe extends Command{
      */
     public function handle()
     {
-        Redis::subscribe(['test-channel'], function($message) {
+        Redis::subscribe(['web-channel'], function($message) {
             echo $message;
         });
     }
