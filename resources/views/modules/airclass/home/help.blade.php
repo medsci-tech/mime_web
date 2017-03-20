@@ -54,30 +54,14 @@
         <div class="isolate_module">
             <h4 id="helpSpecialist">授课专家</h4>
             <div class="row specialists">
+                @foreach($teachers as $teacher)
                 <div class="col-sm-3 specialist text-center">
-                    <img src="{{asset('airclass/img/help_teacher_1.jpg')}}"/>
-                    <p class="name">杨文英 教授</p>
-                    <p class="hospital">中日友好医院</p>
-                    <p class="title">内分泌代谢中心主任</p>
+                    <img src="{{$teacher->photo_url}}"/>
+                    <p class="name">{{$teacher->name}} {{$teacher->title}}</p>
+                    <p class="hospital"></p>
+                    <p class="title"></p>
                 </div>
-                <div class="col-sm-3 specialist text-center">
-                    <img src="{{asset('airclass/img/help_teacher_2.jpg')}}"/>
-                    <p class="name">许樟荣 教授</p>
-                    <p class="hospital">解放军306医院</p>
-                    <p class="title">全军糖尿病诊治中心主任</p>
-                </div>
-                <div class="col-sm-3 specialist text-center">
-                    <img src="{{asset('airclass/img/help_teacher_3.jpg')}}"/>
-                    <p class="name">窦京涛 教授</p>
-                    <p class="hospital">解放军总医院</p>
-                    <p class="title">内分泌科副主任</p>
-                </div>
-                <div class="col-sm-3 specialist text-center">
-                    <img src="{{asset('airclass/img/help_teacher_4.jpg')}}"/>
-                    <p class="name">吕朝晖 教授</p>
-                    <p class="hospital">解放军总医院</p>
-                    <p class="title">内分泌科副主任</p>
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="isolate_module">

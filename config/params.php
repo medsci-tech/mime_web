@@ -39,6 +39,9 @@ return [
     // 迈豆规则
     'bean_rules' => [
         'watch_video' => 15, // 观看视频
-    ]
+    ],
+
+    // 视频记录心跳时间
+    'video_heartbeat_times' => 16, //秒数
 
 ];
