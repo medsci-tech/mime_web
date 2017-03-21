@@ -3,6 +3,7 @@
 use App\Models\AnswerLog;
 use App\Models\Comment;
 use App\Models\KZKTClass;
+use App\Models\StudyLog;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\Exercise;
 use Modules\Admin\Entities\ThyroidClassCourse;
@@ -232,20 +233,52 @@ class VideoController extends Controller
 	 */
 	public function video_heartbeat_log(Request $request){
 		$user = $this->user;
-		$save_data = $request->all();
+		$req_data = $request->all();
 		$class_id = $request->input('class_id');
-		$where = [
-			'site_id' => $this->site_id,
-			'user_id' => $user['user_id'],
-			'class_id' => $class_id,
-		];
-		if($user){
+		$save_data = [];
+		if($user && $class_id){
+			$where = [
+				'site_id' => $this->site_id,
+				'doctor_id' => $user['id'],
+				'course_id' => $class_id,
+			];
 			$save_data['site_id'] = $this->site_id;
-			$save_data['user_id'] = $user['user_id'];
+			$save_data['doctor_id'] = $user['id'];
+			$save_data['course_id'] = $class_id;
+			$save_data['study_duration'] = $req_data['times'] * config('params')['video_heartbeat_times'];
+			$save_data['video_duration'] = $req_data['video_duration'];
+			$save_data['progress'] = $req_data['progress'];
 			// 查询是否有过观看记录
-//			$video_logs = Model::where($where)->first();
+			$video_logs = StudyLog::where($where)->first();
+			if($video_logs){
+				StudyLog::where($where)->orderBy('id','desc')->first()->update($save_data);
+			}else{
+				StudyLog::create($save_data);
+			}
 		}
-		return $this->return_data_format(200,$save_data);
+		return $this->return_data_format(200);
+	}
+
+	/**
+	 * 登陆用户记录观看记录
+	 * @param Request $request
+	 * @return array
+	 */
+	public function watch_times_log(Request $request){
+		$class_id = $request->input('class_id');
+		$user = $this->user;
+//		dd($user);
+		$save_data = [];
+		if($user && $class_id){
+			$save_data['site_id'] = $this->site_id;
+			$save_data['doctor_id'] = $user['id'];
+			$save_data['course_id'] = $class_id;
+			// 查询是否有过观看记录
+			$video_logs = StudyLog::create($save_data);
+			return $this->return_data_format(200);
+		}else{
+			return $this->return_data_format(500,'参数缺失无法记录');
+		}
 	}
 
 

@@ -16,6 +16,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	// 视频播放
 	Route::get('/video/{id}', 'VideoController@index');
 	Route::post('/video/heartbeat', 'VideoController@video_heartbeat_log');
+	Route::post('/video/watch_times', 'VideoController@watch_times_log');
 	Route::post('/video/comment/{id}', 'VideoController@comment'); // 评论请求
 	Route::post('/video/answer/{id}', 'VideoController@answer'); // 答题请求
 
