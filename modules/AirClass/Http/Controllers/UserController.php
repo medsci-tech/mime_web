@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use PhpParser\Comment\Doc;
 use \App\Models\Doctor;
 use \App\Models\Hospital;
-use Modules\AirClass\Entities\Office;
+use Modules\AirClass\Entities\{Office,ThyroidClassCourse};
 use \App\Models\{Address, Message};
 use Hash;
 use Cache;
@@ -17,10 +17,29 @@ class UserController extends Controller
         parent::__construct();
 
     }
+    /**
+     * 我的消学习情况
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
 	public function study()
 	{
+        $units = DB::table('study_logs')
+            ->select(DB::raw('sum(study_duration) as duration_count, course_id,progress,video_duration'))
+            ->where(['site_id'=>$this->site_id,'doctor_id'=>$this->user['id']])
+            ->groupBy('course_id')
+            ->orderBy('id', 'desc')
+            ->paginate(15);
+        foreach($units as &$val)
+        {
+           $model = ThyroidClassCourse::find($val->course_id);
+           $val->title=$model->title;
+           $val->logo_url=$model->logo_url;
+        }
         return view('airclass::user.study', [
             'current_active' => 'study',
+            'units' => $units,
         ]);
 	}
     /**

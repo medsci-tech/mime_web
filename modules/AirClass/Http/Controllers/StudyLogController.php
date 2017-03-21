@@ -6,6 +6,12 @@ use App\Models\ThyroidClass;
 class StudyLogController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('login');
+        parent::__construct();
+
+    }
     /**
      * 注册用户学习详细记录
      * @param String $url  用户来源
@@ -16,27 +22,27 @@ class StudyLogController extends Controller
 	{
         $rules = [
             'course_id'=>'required',
+            'times'=>'required',
         ];
         $message = [
             'course_id.required'=>'课程id不能为空!',
+            'times.required'=>'学习时长不能为空!',
         ];
         $validator = \Validator::make($request->all(),$rules,$message);
-        echo $messages->first('email');
-        $response = [
-            'status_code' => 200,
-            'message' =>  $messages.$request->openid,
-        ];
         $messages = $validator->errors();
-        /* 输出错误消息 */
-        foreach ($messages->get('phone') as $message) {
-            return ['status_code' => 0,'message' =>$message];
-        }
-        foreach ($messages->get('code') as $message) {
-            //return ['status_code' => 0,'message' =>$message];
-        }
+        if ($messages->has('course_id'))
+            return ['code' => 0,'message' =>$messages->first('course_id')];
+        if ($messages->has('times'))
+            return ['code' => 0,'message' =>$messages->first('times')];
+        /* 记录用户时长 */
+        $user = App\Post::find(1);
+        $post->comments()->save($comment);
 
 
-	}
+
+
+
+    }
 	
 }
 
