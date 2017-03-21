@@ -22,9 +22,5 @@ class StudyLog extends Model
         'doctor_id',
         'created_at',
         'updated_at',
-        'site_id',
-        'study_duration',
-        'video_duration',
-        'progress',
     ];
 }
