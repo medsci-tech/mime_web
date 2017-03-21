@@ -274,7 +274,7 @@ class VideoController extends Controller
 			$save_data['doctor_id'] = $user['id'];
 			$save_data['course_id'] = $class_id;
 			// 查询是否有过观看记录
-			$video_logs = StudyLog::create($save_data);
+			StudyLog::create($save_data);
 			return $this->return_data_format(200);
 		}else{
 			return $this->return_data_format(500,'参数缺失无法记录');
