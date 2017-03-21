@@ -360,6 +360,13 @@
         }
 
         $(function () {
+            var time = parseInt('{{config('params')['video_heartbeat_times']}}')*1000; // 心跳时间 16s
+            var heartbeat_action = '{{url('video/heartbeat')}}';
+            var watch_times_action = '{{url('video/watch_times')}}';
+            var num = 0; // 视频播放状态为播放的次数
+            var heartbeat_data = {
+                'class_id': '{{$current_id}}' // 课程id
+            };
             // 腾讯视频
             var option = {
                 "auto_play": "0",
@@ -367,19 +374,30 @@
                 "app_id": "{{$class->qcloud_app_id}}",
                 "width": 1280,
                 "height": 720,
-                @if (!$is_join)"stop_time": 3 @endif
+                "remember": 1,
+                "stretch_patch": true,
+                @if ($video_status_mag)"stop_time": 180 @endif
             };
             var listener = {
     			playStatus: function (status){
-        		if(status=='stop')
-        			showAlertModal('请报名后观看视频');
-			}
-		};
+                    if(status == 'stop'){
+                        showAlertModal('{{$video_status_mag}}');
+                    }
+                    if(status == 'playing'){
+                        if(num == 0 && '{{$user['id']}}'){
+                            // 重新载入播放算一次播放次数
+                            video_heartbeat_ajax(watch_times_action, heartbeat_data);
+                        }
+                        num++;
+                    }
+                }
+            };
 
             /*调用播放器进行播放*/
-            new qcVideo.Player("id_video_container",option, listener);
-
-
+            var player = new qcVideo.Player("id_video_container",option, listener);
+            if('{{$user['id']}}'){
+                video_heartbeat(player, time, heartbeat_action, heartbeat_data);
+            }
         });
     </script>
     @endsection

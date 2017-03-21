@@ -110,7 +110,10 @@ class HomeController extends Controller
      */
     public function help()
     {
-        return view('airclass::home.help');
+        $teachers = Teacher::where(['site_id' => $this->site_id])->get();
+        return view('airclass::home.help', [
+            'teachers' => $teachers,
+        ]);
     }
 	
 }

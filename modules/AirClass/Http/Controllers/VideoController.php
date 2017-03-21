@@ -3,6 +3,7 @@
 use App\Models\AnswerLog;
 use App\Models\Comment;
 use App\Models\KZKTClass;
+use App\Models\StudyLog;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\Exercise;
 use Modules\Admin\Entities\ThyroidClassCourse;
@@ -26,19 +27,6 @@ class VideoController extends Controller
 	 */
 	public function index($id)
 	{
-	    /* 临时视频播放验证 */
-	    $user = $this->user;
-	    if($user)
-        {
-            $is_join = KZKTClass::where(['doctor_id'=>$user['id']])->first();
-            if($is_join)
-                $is_join =true;
-            else
-                $is_join=false;
-        }
-	    else
-            $is_join=false;
-
 		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
         $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元
@@ -129,6 +117,8 @@ class VideoController extends Controller
 			$answer_logs = [];
 			//## 答题状态消息
 			$answer_status_mag = '';
+			//## 视频观看状态消息
+			$video_status_mag = '';
 			// 查询用户是否登陆
 			if($user){
 				// 查询用户是否报名
@@ -147,9 +137,11 @@ class VideoController extends Controller
 					}
 				}else{
 					$answer_status_mag = '报名后才能答题';
+					$video_status_mag = '报名后才能观看';
 				}
 			}else{
 				$answer_status_mag = '登陆后才能答题';
+				$video_status_mag = '登陆后才能观看';
 			}
 //			dd($chapter_classes);
 			return view('airclass::video.index',[
@@ -164,7 +156,7 @@ class VideoController extends Controller
 				'answer_logs' => $answer_logs, // 答题信息
 				'answer_status_mag' => $answer_status_mag, // 可答题状态
 				'current_id' => $id, // 答题信息
-                'is_join' => $is_join,
+                'video_status_mag' => $video_status_mag,
 			]);
 		}else{
 			abort(404);
@@ -231,6 +223,61 @@ class VideoController extends Controller
 		}else{
 			abort(404);
 			return false;
+		}
+	}
+
+	/**
+	 * 登陆用户记录视频播放记录
+	 * @param Request $request
+	 * @return array
+	 */
+	public function video_heartbeat_log(Request $request){
+		$user = $this->user;
+		$req_data = $request->all();
+		$class_id = $request->input('class_id');
+		$save_data = [];
+		if($user && $class_id){
+			$where = [
+				'site_id' => $this->site_id,
+				'doctor_id' => $user['id'],
+				'course_id' => $class_id,
+			];
+			$save_data['site_id'] = $this->site_id;
+			$save_data['doctor_id'] = $user['id'];
+			$save_data['course_id'] = $class_id;
+			$save_data['study_duration'] = $req_data['times'] * config('params')['video_heartbeat_times'];
+			$save_data['video_duration'] = $req_data['video_duration'];
+			$save_data['progress'] = $req_data['progress'];
+			// 查询是否有过观看记录
+			$video_logs = StudyLog::where($where)->first();
+			if($video_logs){
+				StudyLog::where($where)->orderBy('id','desc')->first()->update($save_data);
+			}else{
+				StudyLog::create($save_data);
+			}
+		}
+		return $this->return_data_format(200);
+	}
+
+	/**
+	 * 登陆用户记录观看记录
+	 * @param Request $request
+	 * @return array
+	 */
+	public function watch_times_log(Request $request){
+		$class_id = $request->input('class_id');
+		$user = $this->user;
+//		dd($user);
+		$save_data = [];
+		if($user && $class_id){
+			$save_data['site_id'] = $this->site_id;
+			$save_data['doctor_id'] = $user['id'];
+			$save_data['course_id'] = $class_id;
+			// 查询是否有过观看记录
+			$video_logs = StudyLog::create($save_data);
+			return $this->return_data_format(200);
+		}else{
+			return $this->return_data_format(500,'参数缺失无法记录');
 		}
 	}
 

@@ -12,11 +12,14 @@ use Modules\AirClass\Scopes\SiteScope;
  */
 class Teacher extends Model
 {
+    use SoftDeletes;
 
     /**
      * @var string
      */
     protected $table = 'teachers';
+
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
