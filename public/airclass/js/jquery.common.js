@@ -226,24 +226,25 @@ var subQuestionAjax = function (action, data) {
  * @param data
  */
 var video_heartbeat = function (player, time, action, data) {
-    var total_time = player.getDuration();
+    var heartbeat_times = 1; // 心跳次数，可根据心跳次数计算观看时长
     setInterval(function () {
-        var current_time = player.getCurrentTime();
+        var total_time = player.getDuration(); // 视频总时长
+        var progress = player.getCurrentTime(); // 视频进度
         var play_status = player.isPlaying();
+        // 播放的时候才进行心跳统计
         if(play_status == true){
-            data.current_time = current_time;
-            data.total_time = total_time;
+            data.progress = progress;
+            data.times = heartbeat_times;
+            data.video_duration = total_time;
             video_heartbeat_ajax(action, data);
         }
+        heartbeat_times++;
     }, time);
 };
 var video_heartbeat_ajax = function (action, data) {
     $.ajax({
         type: 'post',
         url: action,
-        data: data,
-        success:function (res) {
-            console.log(res);
-        }
+        data: data
     });
 };
