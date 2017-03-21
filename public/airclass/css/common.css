@@ -59,7 +59,7 @@ a {
 }
 
 .navbar .nav {
-	margin: 18px 10px 0 20px;
+	margin: 18px 10px 0 0;
 }
 
 .navbar .nav>li>a {
@@ -106,12 +106,11 @@ a {
 
 .navbar .handlers {
 	margin-top: 15px;
-	margin-left: 20px;
 }
 
 .navbar .reminder {
 	position: relative;
-	margin: 0 24px;
+	margin: 0 4px;
 	font-size: 16px;
 }
 
@@ -145,8 +144,9 @@ a {
 /* footer */
 
 .footer {
-	position: absolute;
-	bottom: 0;
+	/*position: absolute;*/
+	/*bottom: 0;*/
+	clear: both;
 	width: 100%;
 	padding: 30px 12px;
 	background: #444547;
@@ -264,11 +264,13 @@ a {
 	height: 13px;
 	background-position: -101px -13px;
 }
-.icon_msg {
+.icon_msg,
+.icon_msg_sub {
 	position: relative;
-	top: 2px;
+	top: 3px;
 	width: 16px;
 	height: 15px;
+	margin-right: 4px;
 	background-position: -101px -26px;
 	cursor: pointer;
 }
@@ -278,6 +280,16 @@ a {
 	width: 16px;
 	height: 16px;
 	background-position: -81px -88px;
+}
+.icon_more_questions {
+	width: 14px;
+	height: 8px;
+	background-position: -121px 0;
+}
+.icon_more_answers {
+	width: 10px;
+	height: 6px;
+	background-position: -121px -8px;
 }
 
 
@@ -319,6 +331,13 @@ a {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	border-radius: 10px;
+}
+
+/* video player */
+.video-js .vjs-big-play-button {
+	width: 1.5em;
+	margin-left: -.75em;
+	border-radius: 50%;
 }
 
 @media (max-width: 768px) {

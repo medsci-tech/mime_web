@@ -64,7 +64,9 @@ body {
 .video_container {
 	margin: 0 auto;
 	width: 1200px;
+	height: 500px;
 	background: #333333;
+	overflow: hidden;
 }
 .video {
 	width: 880px;
@@ -79,17 +81,17 @@ body {
 	color: #999999;
 }
 /* chapter list */
-.chapters{
+.chapters {
 	position: relative;
 	height: 100%;
 	background: #555555;
 	color: #F9F9F9;
 	white-space: nowrap;
 }
-/*.chapters_list {*/
-	/*padding: 0;*/
-	/*list-style: none;*/
-/*}*/
+.chapters_list {
+	padding: 0;
+	list-style: none;
+}
 .chapters .title,.chapters .chapters_list {
 	margin: 0 0 0 20px;
 	padding: 10px 0 10px;
@@ -99,6 +101,7 @@ body {
 .chapters .chapter {
 	overflow: hidden;
 	width: 100%;
+	padding: 10px 20px;
 	background: #555555;
 	font-size: 12px;
 	cursor: pointer;
@@ -153,55 +156,6 @@ body {
 .relative_info {
 	width: 1200px;
 	margin: 20px auto;
-}
-/* asks and answers */
-.asks_and_answers {
-	float: left;
-	box-sizing: border-box;
-	width: 900px;
-	padding: 15px 30px;
-	background: #FFFFFF;
-}
-.asks_and_answers .ask_answer_btns {
-	font-size: 12px;
-}
-.asks_and_answers .ask_answer_btns .btn_ask {
-	color: #00A0E9;
-}
-.asks_and_answers .ask_answer_btns .devider {
-	margin: 0 6px;
-}
-.ask_area_container,
-.answer_area_container {
-	display: none;
-}
-.asks_and_answers .ask_area,
-.asks_and_answers .answer_area {
-	width: 100%;
-	height: 130px;
-	margin-top: 2px;
-	resize: none;
-	border-color: #DDDDDD;
-}
-.asks_and_answers .btn_ask_confirm,
-.asks_and_answers .btn_answer_cancel {
-	margin-top: 2px;
-	margin-left: 10px;
-	padding-left: 24px;
-	padding-right: 24px;
-	border-radius: 0;
-	border-color: #E5E5E5;
-	background: #F9F9F9;
-	color: #999999;
-}
-.asks_and_answers .btn_answer_confirm {
-	margin-top: 2px;
-	padding-left: 24px;
-	padding-right: 24px;
-	border-radius: 0;
-	border-color: #0082BD;
-	background: #00A0E9;
-	color: #FFFFFF;
 }
 /* asks */
 .asks_title {
@@ -341,6 +295,10 @@ body {
 		float: none;
 		width: 100%;
 		height: auto;
+	}
+	.video {
+		width: 100%;
+		height: 300px;
 	}
 	.chapters {
 		width: 100%;
