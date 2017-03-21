@@ -19,6 +19,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/video/watch_times', 'VideoController@watch_times_log');
 	Route::post('/video/comment/{id}', 'VideoController@comment'); // 评论请求
 	Route::post('/video/answer/{id}', 'VideoController@answer'); // 答题请求
+	Route::post('/video/get_more_comments', 'VideoController@get_more_comments'); // 答题请求
 
 	// 用户公开访问
 	Route::get('/register', 'UserPublicController@register_view'); //注册视图

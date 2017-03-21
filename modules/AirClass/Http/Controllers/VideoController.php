@@ -54,6 +54,7 @@ class VideoController extends Controller
 				'status' => 1,
 				'class_id' => $class->id,
 				'parent_id' => 0,
+				'site_id' => $this->site_id,
 			])->orderBy('id', 'desc')->get();
 			if($one_comments){
 				foreach ($one_comments as $key => $one_comment){
@@ -66,12 +67,15 @@ class VideoController extends Controller
 						'to_id' => $one_comment->to_id,
 						'to_name' => $one_comment->to_name,
 						'content' => $one_comment->content,
+						'created_at' => $one_comment->created_at,
+						'child' => [],
 					];
 					// 二级评论
 					$two_comments = Comment::where([
 						'status' => 1,
 						'class_id' => $class->id,
 						'parent_id' => $one_comment->id,
+						'site_id' => $this->site_id,
 					])->orderBy('id', 'desc')->get();
 					if($two_comments){
 						foreach ($two_comments as $k => $two_comment){
@@ -84,6 +88,7 @@ class VideoController extends Controller
 								'to_id' => $two_comment->to_id,
 								'to_name' => $two_comment->to_name,
 								'content' => $two_comment->content,
+								'created_at' => $two_comment->created_at,
 							];
 						}
 					}
@@ -143,7 +148,7 @@ class VideoController extends Controller
 				$answer_status_mag = '登陆后才能答题';
 				$video_status_mag = '登陆后才能观看';
 			}
-//			dd($chapter_classes);
+//			dd($comments);
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
                 'chapter' => $chapter, // 当前单元信息
@@ -156,7 +161,7 @@ class VideoController extends Controller
 				'answer_logs' => $answer_logs, // 答题信息
 				'answer_status_mag' => $answer_status_mag, // 可答题状态
 				'current_id' => $id, // 答题信息
-                'video_status_mag' => $video_status_mag,
+                'video_status_mag' => $video_status_mag,// 可观看状态
 			]);
 		}else{
 			abort(404);
@@ -281,6 +286,23 @@ class VideoController extends Controller
 		}
 	}
 
+	public function get_more_comments(Request $request){
+		// page,class_id,user_id todo 参数验证
+		$prev_id = $request->input('prev_id');
+		$class_id = $request->input('class_id');
+		$parent_id = $request->input('parent_id');
+		$comments = Comment::where([
+			'status' => 1,
+			'class_id' => $class_id,
+			'parent_id' => $parent_id,
+			['id', '>', $prev_id],
+		])->orderBy('id', 'desc')->get()->toArray();
+		if($comments){
+			return $this->return_data_format(200,null,$comments);
+		}else{
+			return $this->return_data_format(201);
+		}
+	}
 
 	
 }

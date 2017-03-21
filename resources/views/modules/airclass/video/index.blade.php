@@ -70,99 +70,61 @@
                     <textarea class="ask_area" name=""></textarea>
                     <button type="button" class="btn btn-default pull-right btn_ask_confirm">评论</button>
                 </div>
-
                 <h3 class="asks_title">全部评论</h3>
                 <div class="asks">
-                    <div class="ask">
-                        <div class="ask_info media">
-                            <div class="media-left">
-                                <a href="javascript:;">
-                                    <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}"
-                                         alt="">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading"><span class="username">CC果冻嘻嘻</span><span
-                                            class="ask_time">刚刚</span></h4>
-                                <p class="ask_content">互联网金融适合用第三方数据平台吗？担心数据泄露问题？</p>
-                                <div class="ask_params pull-right">
-                                    <span class="icon icon_thumb_up"></span>
-                                    666
-                                    <span class="icon icon_msg"></span>
-                                    0
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ask">
-                        <div class="ask_info media">
-                            <div class="media-left">
-                                <a href="javascript:;">
-                                    <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}"
-                                         alt="">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading"><span class="username">CC果冻嘻嘻</span><span class="ask_time">40分钟前</span>
-                                </h4>
-                                <p class="ask_content">互联网金融适合用第三方数据平台吗？担心数据泄露问题？</p>
-                                <div class="ask_params">
-                                    <span class="icon icon_thumb_up"></span>
-                                    666
-                                    <span class="icon icon_msg"></span>
-                                    0
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ask">
-                        <div class="ask_info media">
-                            <div class="media-left">
-                                <a href="javascript:;">
-                                    <img class="media-object" src="{{asset('airclass/img/admin_ask_userimg.png')}}"
-                                         alt="">
-                                </a>
-                            </div>
-                            <div class="media-body" id="a">
-                                <h4 class="media-heading"><span class="username">CC果冻嘻嘻</span><span class="ask_time">2017-02-12 12:16</span>
-                                </h4>
-                                <p class="ask_content">互联网金融适合用第三方数据平台吗？担心数据泄露问题？</p>
-                                <div class="ask_params pull-right">
-                                    <span class="icon icon_thumb_up"></span>
-                                    666
-                                    <span class="icon icon_msg"></span>
-                                    1
-                                </div>
-                                <div class="answer_box">
-                                    <div class="answer">
-                                        <div class="answer_info media">
-                                            <div class="media-left">
-                                                <a href="javascript:;">
-                                                    <img class="media-object"
-                                                         src="{{asset('airclass/img/admin_ask_userimg.png')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><span class="username">杨文英教授</span><span
-                                                            class="ask_time">2017-02-12 12:16</span></h4>
-                                                <p class="ask_content">
-                                                    据我所知，有技巧的公司會避免直接把核心数据导入第三方，可能先将数据自行处理一下（例如放一些错误数据混淆视听，也可以拿来钓鱼）。利用三方工具无非是要得到一个结果呈现，只要本身计算过程能够提供这种结果就没问题。可能先将数据自行处理一下（例如放一些错误数据混淆视听，也可以拿来钓鱼）。利用三方工具无非是要得到一个结果呈现，只要本身计算过程能够提供这种结果就没问题。</p>
-                                                <div class="ask_params pull-right">
-                                                    <span class="icon icon_thumb_up"></span>
-                                                    666
-                                                    <span class="icon icon_msg_sub"></span>
-                                                    1
+                    @if($comments)
+                    @foreach($comments as $comment)
+                        <div class="ask" data-prev_id="{{$comment['id']}}">
+                            <div class="ask_info media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <span class="username">{{$comment['from_name']}}</span>
+                                        <span class="ask_time">{{$comment['created_at']}}</span>
+                                    </h4>
+                                    <p class="ask_content">{{$comment['content']}}</p>
+                                    <div class="ask_params pull-right">
+                                        <span class="icon icon_thumb_up"></span>
+                                        666
+                                        <span class="icon icon_msg"></span>
+                                        @if($comment['child'])
+                                        {{count($comment['child'])}}
+                                        @else
+                                            0
+                                        @endif
+                                    </div>
+                                    @if($comment['child'])
+                                    <div class="answer_box">
+                                        @foreach($comment['child'] as $comment_child)
+                                        <div class="answer" data-prev_id="{{$comment_child['id']}}" data-parent_id="{{$comment_child['parent_id']}}">
+                                            <div class="answer_info media">
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">
+                                                        <span class="username">{{$comment_child['from_name']}}</span>
+                                                        回复
+                                                        <span class="username">{{$comment_child['to_name']}}</span>
+                                                        <span class="ask_time">{{$comment_child['created_at']}}</span></h4>
+                                                    <p class="ask_content">
+                                                        {{$comment_child['content']}}
+                                                    </p>
+                                                    <div class="ask_params pull-right">
+                                                        <span class="icon icon_thumb_up"></span>
+                                                        666
+                                                        <span class="icon icon_msg_sub"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
+                                        <div class="pages_new more_answers">
+                                            查看更多<span class="icon icon_more_answers"></span>
+                                        </div>
                                     </div>
-                                    <div class="pages_new more_answers">
-                                        更多12条回复<span class="icon icon_more_answers"></span>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+                    @endif
                     <div class="pages_new more_questions">
                         查看更多<span class="icon icon_more_questions"></span>
                     </div>
@@ -209,11 +171,8 @@
 
     </div>
 
-    </div>
-
     <!-- answer area -->
     <div class="answer_area_container">
-        <h4 class="username">CC果冻嘻嘻</h4>
         <textarea class="answer_area" name=""></textarea>
         <div class="clearfix">
             <button type="button" class="btn btn-default pull-right btn_answer_cancel">取消</button>
@@ -222,7 +181,6 @@
     </div>
 
     <div class="sub_answer_area_container">
-        <h4 class="username">CC果冻嘻嘻</h4>
         <textarea class="answer_area" name=""></textarea>
         <div class="clearfix">
             <button type="button" class="btn btn-default pull-right btn_answer_cancel">取消</button>
@@ -354,7 +312,58 @@
             }
         });
 
+        function hideAnswerBox() {
+            $('.answer_area_container').hide();
+            if ($('.answer_area_container').parents('.answer_box').find('.answer').length === 0) {
+                $('.answer_area_container').parents('.answer_box').hide();
+            }
+        }
+
+        function renderAsk() {
+            var $this = $(this);
+            for (var i = 0; i < 1; i++) {
+                var html = '<div class="ask">'
+                        + '<div class="ask_info media">'
+                        + '<div class="media-body">'
+                        + '<h4 class="media-heading"><span class="username">' + questionObj.username + '</span><span class="ask_time">' + questionObj.time + '</span></h4>'
+                        + '<p class="ask_content">' + questionObj.content + '</p>'
+                        + '<div class="ask_params">'
+                        + '<span class="icon icon_thumb_up"></span>'
+                        + questionObj.upCount
+                        + '<span class="icon icon_msg"></span>'
+                        + questionObj.replyCount
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>';
+                $(html).insertBefore($this);
+            }
+        }
+        function renderAnswer(that, obj) {
+            console.log(obj);
+            for (var i = 0; i < obj.length; i++) {
+                var html = '<div class="answer">'
+                        + '<div class="answer_info media">'
+                        + '<div class="media-body">'
+                        + '<h4 class="media-heading">' +
+                        '<span class="username">' + obj.from_name + '</span>' +
+                        '<span class="username">' + obj.to_name + '</span>' +
+                        '<span class="ask_time">' + obj.created_at + '</span>' +
+                        '</h4>'
+                        + '<p class="ask_content">' + obj.content + '</p>'
+                        + '<div class="ask_params pull-right">'
+                        + '<span class="icon icon_thumb_up"></span>'
+                        + '<span class="icon icon_msg_sub"></span>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>';
+                that.before(html);
+            }
+            that.hide();
+        }
         $(function () {
+            var get_comment_action = '{{url('video/get_more_comments')}}';
             var questionObj = {
                 'username': '测试问题',
                 'time': '10分钟前',
@@ -372,6 +381,10 @@
                 'upCount': 11,
                 'replyCount': 0
             };
+
+            $('.btn_ask').click(function() {
+                $('.ask_area_container').slideToggle();
+            });
             $('.asks').on('click', '.icon_msg', function () {
                 hideAnswerBox();
                 var $this = $(this);
@@ -404,8 +417,8 @@
                 } else {
                     $('.areaShown').removeClass('areaShown');
                     $this.addClass('areaShown');
-                    $('.sub_answer_area_container').appendTo(mediaBody);
-                    $('.sub_answer_area_container').slideDown();
+                    $('.answer_area_container').appendTo(mediaBody);
+                    $('.answer_area_container').slideDown();
                 }
             });
 
@@ -419,79 +432,47 @@
             });
 
             $('.asks').on('click', '.more_answers', function () {
-                var count = 12;
-                var $this = $(this);
-                for (var i = 0; i < count; i++) {
-                    var html = '<div class="answer">'
-                            + '<div class="answer_info media">'
-                            + '<div class="media-left">'
-                            + '<a href="#">'
-                            + '<img class="media-object" src="' + answerObj.img + '" alt="">'
-                            + '</a>'
-                            + '</div>'
-                            + '<div class="media-body">'
-                            + '<h4 class="media-heading"><span class="username">' + answerObj.username + '</span><span class="ask_time">' + answerObj.time + '</span></h4>'
-                            + '<p class="ask_content">' + answerObj.content + '</p>'
-                            + '<div class="ask_params pull-right">'
-                            + '<span class="icon icon_thumb_up"></span>'
-                            + answerObj.upCount
-                            + '<span class="icon icon_msg_sub"></span>'
-                            + answerObj.replyCount
-                            + '</div>'
-                            + '</div>'
-                            + '</div>'
-                            + '</div>';
-                    $(html).insertBefore($this);
-                }
-                $this.hide();
+                var prev_dom = $(this).prev('.answer');
+                var perv_id = prev_dom.data('prev_id');
+                var parent_id = prev_dom.data('parent_id');
+                var data = {
+                    'prev_id': 0,
+                    'class_id': '{{$current_id}}',
+                    'parent_id': 1
+                };
+                $.ajax({
+                    type: 'post',
+                    url: get_comment_action,
+                    data: data,
+                    success: function(res){
+                        console.log(res);
+                        console.log((res.data).length);
+                        if(res.code == 200){
+                            var render = renderAnswer($(this), res.data);
+                            render();
+                        }
+                    },
+                    error:function (res) {
+
+                    }
+                });
+
             });
 
             var scrollTimer;
-            $(window).scroll(function () {
-                var scrollTop = $(window).scrollTop();
-                var windowHeight = $('window').height();
-                var totalHeight = parseFloat($(window).height()) + parseFloat(scrollTop);
-                clearTimeout(scrollTimer);
-                if ($('.more_questions').offset().top <= totalHeight) {
-                    scrollTimer = setTimeout(function () {
-                        $('.more_questions').click();
-                    }, 400);
-                }
-            });
+//            $(window).scroll(function () {
+//                var scrollTop = $(window).scrollTop();
+//                var windowHeight = $('window').height();
+//                var totalHeight = parseFloat($(window).height()) + parseFloat(scrollTop);
+//                clearTimeout(scrollTimer);
+//                if ($('.more_questions').offset().top <= totalHeight) {
+//                    scrollTimer = setTimeout(function () {
+//                        $('.more_questions').click();
+//                    }, 400);
+//                }
+//            });
 
-            function hideAnswerBox() {
-                $('.answer_area_container').hide();
-                $('.sub_answer_area_container').hide();
-                if ($('.answer_area_container').parents('.answer_box').find('.answer').length === 0) {
-                    $('.answer_area_container').parents('.answer_box').hide();
-                }
-            }
 
-            function renderAsk() {
-                var $this = $(this);
-                for (var i = 0; i < 10; i++) {
-                    var html = '<div class="ask">'
-                            + '<div class="ask_info media">'
-                            + '<div class="media-left">'
-                            + '<a href="#">'
-                            + '<img class="media-object" src="' + questionObj.img + '" alt="">'
-                            + '</a>'
-                            + '</div>'
-                            + '<div class="media-body">'
-                            + '<h4 class="media-heading"><span class="username">' + questionObj.username + '</span><span class="ask_time">' + questionObj.time + '</span></h4>'
-                            + '<p class="ask_content">' + questionObj.content + '</p>'
-                            + '<div class="ask_params">'
-                            + '<span class="icon icon_thumb_up"></span>'
-                            + questionObj.upCount
-                            + '<span class="icon icon_msg"></span>'
-                            + questionObj.replyCount
-                            + '</div>'
-                            + '</div>'
-                            + '</div>'
-                            + '</div>';
-                    $(html).insertBefore($this);
-                }
-            }
         });
     </script>
 @endsection

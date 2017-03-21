@@ -64,9 +64,9 @@
                 @endforeach
             </div>
         </div>
-        <div class="isolate_module">
+        <div class="isolate_module" style="max-width: 1200px">
             <h4 id="helpLessons">课程表</h4>
-            <img class="center-block help_lessons" src="{{asset('airclass/img/help_lessons.jpg')}}"/>
+            <img width="100%" class="center-block help_lessons" src="{{asset('airclass/img/help_lessons.jpg')}}"/>
         </div>
         <div class="isolate_module">
             <h4 id="helpLearn">学习方式</h4>
