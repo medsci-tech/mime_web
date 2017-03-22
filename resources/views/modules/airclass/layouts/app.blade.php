@@ -33,7 +33,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="javascript:void(0);">
+			<a class="navbar-brand" href="./">
 				<img alt="空中课堂" src="{{asset('airclass/img/logo_nav.png')}}">
 			</a>
 		</div>

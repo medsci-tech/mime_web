@@ -92,7 +92,10 @@ class HomeController extends Controller
     }
 
     /**
-     * 私教课
+     * 私教课列表
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
      */
     public function private_class()
     {

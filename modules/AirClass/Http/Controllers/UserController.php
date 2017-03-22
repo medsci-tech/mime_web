@@ -15,7 +15,6 @@ class UserController extends Controller
     {
         $this->middleware('login');
         parent::__construct();
-
     }
     /**
      * 我的消学习情况
@@ -26,16 +25,20 @@ class UserController extends Controller
 	public function study()
 	{
         $units = DB::table('study_logs')
-            ->select(DB::raw('sum(study_duration) as duration_count, course_id,progress,video_duration'))
+            ->select(DB::raw('sum(study_duration) as duration_count, course_id,progress,video_duration,created_at,truncate(progress/video_duration,2) as percent'))
             ->where(['site_id'=>$this->site_id,'doctor_id'=>$this->user['id']])
             ->groupBy('course_id')
             ->orderBy('id', 'desc')
             ->paginate(15);
         foreach($units as &$val)
         {
-           $model = ThyroidClassCourse::find($val->course_id);
-           $val->title=$model->title;
-           $val->logo_url=$model->logo_url;
+            $model = ThyroidClassCourse::find($val->course_id);
+            $val->title=$model->title;
+            $val->logo_url=$model->logo_url;
+            $val->comment=$model->comment;
+            $val->id=$model->id;
+            $val->date_time=date('Y/m/d',strtotime($val->created_at));
+
         }
         return view('airclass::user.study', [
             'current_active' => 'study',
