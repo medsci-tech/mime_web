@@ -200,14 +200,11 @@ var subQuestionAjax = function (action, data) {
         data: data,
         success: function(res){
             if(res.code == 200){
-                tipsBeansModal(res.msg);
                 $('#questionsModal').modal('hide');
             }else if(res.code == 555) {
-                showAlertModal(res.msg);
                 $('#questionsModal').modal('hide');
-            }else {
-                showAlertModal(res.msg);
             }
+            showAlertModal(res.msg);
         },
         error:function (res) {
             showAlertModal('服务器错误');
@@ -237,8 +234,8 @@ var video_heartbeat = function (player, time, action, data) {
             data.times = heartbeat_times;
             data.video_duration = total_time;
             video_heartbeat_ajax(action, data);
+            heartbeat_times++;
         }
-        heartbeat_times++;
     }, time);
 };
 var video_heartbeat_ajax = function (action, data) {
