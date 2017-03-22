@@ -84,7 +84,6 @@
                                     <p class="ask_content">{{$comment['content']}}</p>
                                     <div class="ask_params pull-right">
                                         <span class="icon icon_thumb_up"></span>
-                                        666
                                         <span class="icon icon_msg"></span>
                                         @if($comment['child'])
                                         {{count($comment['child'])}}
@@ -108,7 +107,6 @@
                                                     </p>
                                                     <div class="ask_params pull-right">
                                                         <span class="icon icon_thumb_up"></span>
-                                                        666
                                                         <span class="icon icon_msg_sub"></span>
                                                     </div>
                                                 </div>
@@ -319,38 +317,77 @@
             }
         }
 
-        function renderAsk() {
-            var $this = $(this);
-            for (var i = 0; i < 1; i++) {
-                var html = '<div class="ask">'
-                        + '<div class="ask_info media">'
-                        + '<div class="media-body">'
-                        + '<h4 class="media-heading"><span class="username">' + questionObj.username + '</span><span class="ask_time">' + questionObj.time + '</span></h4>'
-                        + '<p class="ask_content">' + questionObj.content + '</p>'
-                        + '<div class="ask_params">'
-                        + '<span class="icon icon_thumb_up"></span>'
-                        + questionObj.upCount
-                        + '<span class="icon icon_msg"></span>'
-                        + questionObj.replyCount
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>';
-                $(html).insertBefore($this);
+        function renderAsk(that, obj) {
+            var obj_length = obj.length;
+            if(obj_length > 0){
+                for (var i = 0; i < obj_length; i++) {
+                    var child_obj = obj[i]['child'];
+                    var child_length = child_obj.length;
+                    var html = '';
+                    html += '<div class="ask" data-prev_id="' + obj[i]['id'] + '">';
+                    html += '    <div class="ask_info media">';
+                    html += '        <div class="media-body">';
+                    html += '            <h4 class="media-heading">';
+                    html += '                <span class="username">' + obj[i]['from_name'] + '</span>';
+                    html += '                <span class="ask_time">' + obj[i]['created_at'] + '</span>';
+                    html += '            </h4>';
+                    html += '            <p class="ask_content">' + obj[i]['content'] + '</p>';
+                    html += '            <div class="ask_params pull-right">';
+                    html += '                <span class="icon icon_thumb_up"></span>';
+                    html += '                <span class="icon icon_msg"></span>';
+                    html += child_length;
+                    html += '            </div>';
+                    if(child_length > 0){
+                        html += '            <div class="answer_box">';
+                        for(var j = 0; j < child_length; j++){
+                            html += '                <div class="answer" data-prev_id="' + child_obj[j]['id'] + '" data-parent_id="' + child_obj[j]['parent_id'] + '">';
+                            html += '                    <div class="answer_info media">';
+                            html += '                        <div class="media-body">';
+                            html += '                            <h4 class="media-heading">';
+                            html += '                                <span class="username">' + child_obj[j]['from_name'] + '</span>';
+                            html += '                                回复 ';
+                            html += '                                <span class="username">' + child_obj[j]['to_name'] + '</span>';
+                            html += '                                <span class="ask_time">' + child_obj[j]['created_at'] + '</span></h4>';
+                            html += '                            <p class="ask_content">' + child_obj[j]['content'] + '</p>';
+                            html += '                            <div class="ask_params pull-right">';
+                            html += '                                <span class="icon icon_thumb_up"></span>';
+                            html += '                                <span class="icon icon_msg_sub"></span>';
+                            html += '                            </div>';
+                            html += '                        </div>';
+                            html += '                    </div>';
+                            html += '                </div>';
+                        }
+                        html += '                <div class="pages_new more_answers">';
+                        html += '                    查看更多<span class="icon icon_more_answers"></span>';
+                        html += '                </div>';
+                        html += '            </div>';
+                    }
+                    html += '        </div>';
+                    html += '    </div>';
+                    html += '</div>';
+                    that.after(html);
+                }
+                if(obj_length < 10){
+                    $('.more_questions').html('');
+                }
+            }else {
+                $('.more_questions').html('');
             }
         }
         function renderAnswer(that, obj) {
-            console.log(obj);
-            for (var i = 0; i < obj.length; i++) {
-                var html = '<div class="answer">'
+            var obj_length = obj.length;
+            if(obj_length > 0){
+                for (var i = 0; i < obj_length; i++) {
+                    var html = '<div class="answer">'
                         + '<div class="answer_info media">'
                         + '<div class="media-body">'
                         + '<h4 class="media-heading">' +
-                        '<span class="username">' + obj.from_name + '</span>' +
-                        '<span class="username">' + obj.to_name + '</span>' +
-                        '<span class="ask_time">' + obj.created_at + '</span>' +
+                        '<span class="username">' + obj[i]['from_name'] + '</span>' +
+                                ' 回复 ' +
+                        '<span class="username">' + obj[i]['to_name'] + '</span>' +
+                        '<span class="ask_time">' + obj[i]['created_at'] + '</span>' +
                         '</h4>'
-                        + '<p class="ask_content">' + obj.content + '</p>'
+                        + '<p class="ask_content">' + obj[i]['content'] + '</p>'
                         + '<div class="ask_params pull-right">'
                         + '<span class="icon icon_thumb_up"></span>'
                         + '<span class="icon icon_msg_sub"></span>'
@@ -358,29 +395,18 @@
                         + '</div>'
                         + '</div>'
                         + '</div>';
-                that.before(html);
+                    that.after(html);
+                }
+                if(obj_length < 10){
+                    $('.more_answers').html('');
+                }
+            }else {
+                $('.more_answers').html('');
             }
-            that.hide();
         }
+
         $(function () {
             var get_comment_action = '{{url('video/get_more_comments')}}';
-            var questionObj = {
-                'username': '测试问题',
-                'time': '10分钟前',
-                'img': 'img/admin_ask_userimg.png',
-                'content': '内容内容',
-                'upCount': 11,
-                'replyCount': 0
-            };
-
-            var answerObj = {
-                'username': '测试回复',
-                'time': '10分钟前',
-                'img': 'img/admin_ask_userimg.png',
-                'content': '内容内容',
-                'upCount': 11,
-                'replyCount': 0
-            };
 
             $('.btn_ask').click(function() {
                 $('.ask_area_container').slideToggle();
@@ -427,8 +453,28 @@
             });
 
             $('.asks').on('click', '.more_questions', function () {
-                var render = renderAsk.bind(this);
-                render();
+                var prev_dom = $(this).prev('.ask');
+                var perv_id = prev_dom.data('prev_id');
+                var data = {
+                    'prev_id': perv_id,
+                    'class_id': '{{$current_id}}',
+                    'parent_id': 0
+                };
+                $.ajax({
+                    type: 'post',
+                    url: get_comment_action,
+                    data: data,
+                    success: function(res){
+                        if(res.code == 200){
+                            renderAsk(prev_dom, res.data);
+                        }else {
+                            $('.more_questions').html('');
+                        }
+                    },
+                    error:function (res) {
+                        $('.more_questions').html('');
+                    }
+                });
             });
 
             $('.asks').on('click', '.more_answers', function () {
@@ -436,24 +482,23 @@
                 var perv_id = prev_dom.data('prev_id');
                 var parent_id = prev_dom.data('parent_id');
                 var data = {
-                    'prev_id': 0,
+                    'prev_id': perv_id,
                     'class_id': '{{$current_id}}',
-                    'parent_id': 1
+                    'parent_id': parent_id
                 };
                 $.ajax({
                     type: 'post',
                     url: get_comment_action,
                     data: data,
                     success: function(res){
-                        console.log(res);
-                        console.log((res.data).length);
                         if(res.code == 200){
-                            var render = renderAnswer($(this), res.data);
-                            render();
+                            renderAnswer(prev_dom, res.data);
+                        }else {
+                            $('.more_answers').html('');
                         }
                     },
                     error:function (res) {
-
+                        $('.more_answers').html('');
                     }
                 });
 
