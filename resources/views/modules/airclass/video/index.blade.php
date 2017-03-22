@@ -20,7 +20,7 @@
                     </div>
                     <div class="thumbs pull-right">
                         <span class="icon icon_view_count"></span>
-                        666
+                        {{--666--}}
                         <!--<span class="icon icon_thumb_down"></span>
                         0-->
                     </div>
@@ -67,8 +67,11 @@
                     @endif
                 </div>
                 <div class="ask_area_container">
-                    <textarea class="ask_area" name=""></textarea>
-                    <button type="button" class="btn btn-default pull-right btn_ask_confirm">评论</button>
+                    <form id="form-ask_container">
+                        <input type="hidden" name="parant_id" value="0">
+                        <textarea class="ask_area" name="content" rows="3" placeholder="最多可输入1000个字"></textarea>
+                        <button id="btn_ask_confirm" type="button" class="btn btn-default pull-right btn_ask_confirm">评论</button>
+                    </form>
                 </div>
                 <h3 class="asks_title">全部评论</h3>
                 <div class="asks">
@@ -84,7 +87,7 @@
                                     <p class="ask_content">{{$comment['content']}}</p>
                                     <div class="ask_params pull-right">
                                         <span class="icon icon_thumb_up"></span>
-                                        <span class="icon icon_msg"></span>
+                                        <span class="icon icon_msg" data-id="{{$comment['id']}}" data-to_id="{{$comment['from_id']}}" data-to_name="{{$comment['from_name']}}"></span>
                                         @if($comment['child'])
                                         {{count($comment['child'])}}
                                         @else
@@ -99,7 +102,7 @@
                                                 <div class="media-body">
                                                     <h4 class="media-heading">
                                                         <span class="username">{{$comment_child['from_name']}}</span>
-                                                        回复
+                                                        <span class="reply"> 回复 </span>
                                                         <span class="username">{{$comment_child['to_name']}}</span>
                                                         <span class="ask_time">{{$comment_child['created_at']}}</span></h4>
                                                     <p class="ask_content">
@@ -107,14 +110,16 @@
                                                     </p>
                                                     <div class="ask_params pull-right">
                                                         <span class="icon icon_thumb_up"></span>
-                                                        <span class="icon icon_msg_sub"></span>
+                                                        <span class="icon icon_msg_sub" data-id="{{$comment['id']}}" data-to_id="{{$comment_child['from_id']}}" data-to_name="{{$comment_child['from_name']}}"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         @endforeach
                                         <div class="pages_new more_answers">
-                                            查看更多<span class="icon icon_more_answers"></span>
+                                            @if(count($comment['child']) < 10)
+                                                查看更多
+                                            @endif
                                         </div>
                                     </div>
                                     @endif
@@ -124,7 +129,9 @@
                     @endforeach
                     @endif
                     <div class="pages_new more_questions">
-                        查看更多<span class="icon icon_more_questions"></span>
+                        @if(count($comments) < 10)
+                        查看更多
+                        @endif
                     </div>
                 </div>
             </div>
@@ -171,21 +178,17 @@
 
     <!-- answer area -->
     <div class="answer_area_container">
-        <textarea class="answer_area" name=""></textarea>
-        <div class="clearfix">
-            <button type="button" class="btn btn-default pull-right btn_answer_cancel">取消</button>
-            <button type="button" class="btn btn-default pull-right btn_answer_confirm">回复</button>
-        </div>
+        <form id="form-answer_container">
+            <input type="hidden" name="parent_id">
+            <input type="hidden" name="to_id">
+            <input type="hidden" name="to_name">
+            <textarea class="answer_area" name="content" rows="3" placeholder="最多可输入1000个字"></textarea>
+            <div class="clearfix">
+                <button type="button" class="btn btn-default pull-right btn_answer_cancel">取消</button>
+                <button type="button" class="btn btn-default pull-right btn_answer_confirm" id="btn_answer_confirm">回复</button>
+            </div>
+        </form>
     </div>
-
-    <div class="sub_answer_area_container">
-        <textarea class="answer_area" name=""></textarea>
-        <div class="clearfix">
-            <button type="button" class="btn btn-default pull-right btn_answer_cancel">取消</button>
-            <button type="button" class="btn btn-default pull-right btn_answer_confirm">回复</button>
-        </div>
-    </div>
-
 
     <!-- modals -->
     <!-- questions modal -->
@@ -243,32 +246,35 @@
 @section('js')
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript">
-        var question_action = '{{url('video/answer', ['id' => $class->id])}}';
-        $('#btnChapter').click(function () {
-            var height = $('.video_wrapper').height();
-            $('.video_container').toggleClass('active').find('.chapters').height(height);
-        });
-
-        $('#btn_answer').click(function () {
-            var answer_status_mag = '{{$answer_status_mag}}';
-            if (answer_status_mag) {
-                showAlertModal(answer_status_mag);
-            } else {
-                $('#questionsModal').modal('show');
-            }
-        });
-
         // 答题
-        $('.btn_questions_modal_confirm').click(function () {
-            var data = $('#questionForm').serialize();
-            subQuestionAjax(question_action, data);
+        $(function () {
+            var question_action = '{{url('video/answer', ['id' => $class->id])}}';
+            $('#btnChapter').click(function () {
+                var height = $('.video_wrapper').height();
+                $('.video_container').toggleClass('active').find('.chapters').height(height);
+            });
+
+            $('#btn_answer').click(function () {
+                var answer_status_mag = '{{$answer_status_mag}}';
+                if (answer_status_mag) {
+                    showAlertModal(answer_status_mag);
+                } else {
+                    $('#questionsModal').modal('show');
+                }
+            });
+
+            // 答题
+            $('.btn_questions_modal_confirm').click(function () {
+                var data = $('#questionForm').serialize();
+                subQuestionAjax(question_action, data);
 //            tipsBeansModal('hahahha');
-        });
+            });
 
-        $('#questionsModal :radio').change(function () {
-            $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
+            $('#questionsModal :radio').change(function () {
+                $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
+            });
         });
-
+        // 视频播放
         $(function () {
             var time = parseInt('{{config('params')['video_heartbeat_times']}}') * 1000; // 心跳时间 16s
             var heartbeat_action = '{{url('video/heartbeat')}}';
@@ -316,7 +322,6 @@
                 $('.answer_area_container').parents('.answer_box').hide();
             }
         }
-
         function renderAsk(that, obj) {
             var obj_length = obj.length;
             if(obj_length > 0){
@@ -334,7 +339,7 @@
                     html += '            <p class="ask_content">' + obj[i]['content'] + '</p>';
                     html += '            <div class="ask_params pull-right">';
                     html += '                <span class="icon icon_thumb_up"></span>';
-                    html += '                <span class="icon icon_msg"></span>';
+                    html += '                <span class="icon icon_msg" data-id="' + obj[i]['id'] + '" data-to_id="' + obj[i]['from_id'] + '" data-to_name="' + obj[i]['from_name'] + '"></span>';
                     html += child_length;
                     html += '            </div>';
                     if(child_length > 0){
@@ -345,13 +350,13 @@
                             html += '                        <div class="media-body">';
                             html += '                            <h4 class="media-heading">';
                             html += '                                <span class="username">' + child_obj[j]['from_name'] + '</span>';
-                            html += '                                回复 ';
+                            html += '                                <span class="reply"> 回复 </span> ';
                             html += '                                <span class="username">' + child_obj[j]['to_name'] + '</span>';
                             html += '                                <span class="ask_time">' + child_obj[j]['created_at'] + '</span></h4>';
                             html += '                            <p class="ask_content">' + child_obj[j]['content'] + '</p>';
                             html += '                            <div class="ask_params pull-right">';
                             html += '                                <span class="icon icon_thumb_up"></span>';
-                            html += '                                <span class="icon icon_msg_sub"></span>';
+                            html += '                                <span class="icon icon_msg_sub" data-id="' + obj[i]['id'] + '" data-to_id="' + child_obj[j]['from_id'] + '" data-to_name="' + child_obj[j]['from_name'] + '"></span>';
                             html += '                            </div>';
                             html += '                        </div>';
                             html += '                    </div>';
@@ -367,11 +372,6 @@
                     html += '</div>';
                     that.after(html);
                 }
-                if(obj_length < 10){
-                    $('.more_questions').html('');
-                }
-            }else {
-                $('.more_questions').html('');
             }
         }
         function renderAnswer(that, obj) {
@@ -383,34 +383,53 @@
                         + '<div class="media-body">'
                         + '<h4 class="media-heading">' +
                         '<span class="username">' + obj[i]['from_name'] + '</span>' +
-                                ' 回复 ' +
+                                '<span class="reply"> 回复 </span>' +
                         '<span class="username">' + obj[i]['to_name'] + '</span>' +
                         '<span class="ask_time">' + obj[i]['created_at'] + '</span>' +
                         '</h4>'
                         + '<p class="ask_content">' + obj[i]['content'] + '</p>'
                         + '<div class="ask_params pull-right">'
                         + '<span class="icon icon_thumb_up"></span>'
-                        + '<span class="icon icon_msg_sub"></span>'
+                        + '<span class="icon icon_msg_sub" data-id="' + obj[i]['parent_id'] + '" data-to_id="' + obj[i]['from_id'] + '" data-to_name="' + obj[i]['from_name'] + '"></span>'
                         + '</div>'
                         + '</div>'
                         + '</div>'
                         + '</div>';
                     that.after(html);
                 }
-                if(obj_length < 10){
-                    $('.more_answers').html('');
-                }
-            }else {
-                $('.more_answers').html('');
             }
         }
 
+        var subCommentAjax = function (action, data, show_dom) {
+            $.ajax({
+                type: 'post',
+                url: action,
+                data: data,
+                success: function(res){
+                    if(res.code == 200){
+                        show_dom.show();
+                    }
+                    showAlertModal(res.msg);
+                },
+                error:function (res) {
+                    showAlertModal('服务器错误');
+                }
+            });
+        };
+        // 评论
         $(function () {
             var get_comment_action = '{{url('video/get_more_comments')}}';
-
-            $('.btn_ask').click(function() {
+            var create_comment_action = '{{url('video/comment', ['id' => $current_id])}}';
+            // 一级评论
+            $('.btn_ask').on('click', function() {
                 $('.ask_area_container').slideToggle();
             });
+            $('#btn_ask_confirm').on('click', function () {
+                var form_data = $('#form-ask_container').serialize();
+                var show_dom = $('.more_questions');
+                subCommentAjax(create_comment_action,form_data, show_dom);
+            });
+            // 二级评论
             $('.asks').on('click', '.icon_msg', function () {
                 hideAnswerBox();
                 var $this = $(this);
@@ -432,6 +451,14 @@
                         $('.answer_area_container').slideDown();
                     }
                 }
+                var parent_id = $(this).data('id');
+                var to_id = $(this).data('to_id');
+                var to_name = $(this).data('to_name');
+
+                var form_dom = $('#form-answer_container');
+                form_dom.find('[name="parent_id"]').val(parent_id);
+                form_dom.find('[name="to_id"]').val(to_id);
+                form_dom.find('[name="to_name"]').val(to_name);
             });
 
             $('.asks').on('click', '.icon_msg_sub', function () {
@@ -446,10 +473,26 @@
                     $('.answer_area_container').appendTo(mediaBody);
                     $('.answer_area_container').slideDown();
                 }
+
+                var parent_id = $(this).data('id');
+                var to_id = $(this).data('to_id');
+                var to_name = $(this).data('to_name');
+
+                var form_dom = $('#form-answer_container');
+                form_dom.find('[name="parent_id"]').val(parent_id);
+                form_dom.find('[name="to_id"]').val(to_id);
+                form_dom.find('[name="to_name"]').val(to_name);
             });
 
             $('.btn_answer_cancel').click(function () {
                 hideAnswerBox();
+            });
+
+
+            $('#btn_answer_confirm').on('click', function () {
+                var form_data = $('#form-answer_container').serialize();
+                var show_dom = $('.more_questions');
+                subCommentAjax(create_comment_action,form_data, show_dom);
             });
 
             $('.asks').on('click', '.more_questions', function () {
@@ -466,13 +509,18 @@
                     data: data,
                     success: function(res){
                         if(res.code == 200){
+                            if(res.data.length < 10){
+                                prev_dom.next('.more_questions').hide();
+                            }else {
+                                prev_dom.next('.more_questions').show();
+                            }
                             renderAsk(prev_dom, res.data);
                         }else {
-                            $('.more_questions').html('');
+                            prev_dom.next('.more_questions').hide();
                         }
                     },
                     error:function (res) {
-                        $('.more_questions').html('');
+                        prev_dom.next('.more_questions').hide();
                     }
                 });
             });
@@ -492,19 +540,25 @@
                     data: data,
                     success: function(res){
                         if(res.code == 200){
+                            if(res.data.length < 10){
+                                prev_dom.next('.more_answers').hide();
+                            }else {
+                                prev_dom.next('.more_answers').show();
+                            }
                             renderAnswer(prev_dom, res.data);
                         }else {
-                            $('.more_answers').html('');
+                            prev_dom.next('.more_answers').hide();
                         }
                     },
                     error:function (res) {
-                        $('.more_answers').html('');
+                        prev_dom.next('.more_answers').hide();
                     }
                 });
 
             });
 
-            var scrollTimer;
+            // 滚动加载
+//            var scrollTimer;
 //            $(window).scroll(function () {
 //                var scrollTop = $(window).scrollTop();
 //                var windowHeight = $('window').height();
@@ -516,8 +570,6 @@
 //                    }, 400);
 //                }
 //            });
-
-
         });
     </script>
 @endsection

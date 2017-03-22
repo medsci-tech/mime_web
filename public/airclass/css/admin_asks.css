@@ -35,6 +35,9 @@
 	font-size: 14px;
 	color: #00A0E9;
 }
+.ask_info .reply {
+	font-size: 12px;
+}
 .ask_info .ask_time {
 	margin-left: 20px;
 	font-size: 12px;
@@ -118,10 +121,10 @@
 .asks_and_answers .ask_area,
 .asks_and_answers .answer_area {
 	width: 100%;
-	height: 130px;
 	margin-top: 2px;
 	resize: none;
 	border-color: #DDDDDD;
+	padding: 8px;
 }
 .asks_and_answers .btn_ask_confirm,
 .asks_and_answers .btn_answer_cancel {
