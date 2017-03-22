@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $answer_class_courses = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id))->orderBy('id','asc')->limit(8)->get();//答疑课
 
-        $class_info  = CourseClass::whereIn('id', array(2, 3, 4))->orderBy('id', 'asc')->groupBy('id')->get();
+        $class_info  = CourseClass::whereIn('id', array($this->answer_class_id, $this->private_class_id, $this->public_class_id))->orderBy('id', 'asc')->groupBy('id')->get();
 
 		return view('airclass::home.index',[
             'banners' => $banners,
@@ -96,9 +96,10 @@ class HomeController extends Controller
      */
     public function private_class()
     {
-        $doctor_id = 1;
-        $count = CourseApplies::where('doctor_id',$doctor_id)->count();
+        $class_info  = CourseClass::find($this->private_class_id);
+        $count = CourseApplies::count();
         return view('airclass::home.private_class',[
+            'class_info' => $class_info,
             'count' => $count,
         ]);
 
