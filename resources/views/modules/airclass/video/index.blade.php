@@ -116,10 +116,8 @@
                                             </div>
                                         </div>
                                         @endforeach
-                                        <div class="pages_new more_answers">
-                                            @if(count($comment['child']) < 10)
+                                        <div class="pages_new more_answers" @if(count($comment['child']) < 10) style="display:none;" @endif>
                                                 查看更多
-                                            @endif
                                         </div>
                                     </div>
                                     @endif
@@ -128,10 +126,8 @@
                         </div>
                     @endforeach
                     @endif
-                    <div class="pages_new more_questions">
-                        @if(count($comments) < 10)
+                    <div class="pages_new more_questions" @if(count($comments) < 10) style="display:none;" @endif>
                         查看更多
-                        @endif
                     </div>
                 </div>
             </div>
@@ -317,10 +313,17 @@
         });
 
         function hideAnswerBox() {
-            $('.answer_area_container').hide();
-            if ($('.answer_area_container').parents('.answer_box').find('.answer').length === 0) {
-                $('.answer_area_container').parents('.answer_box').hide();
+            var box = $('.answer_area_container');
+            box.find('textarea').val('');
+            box.hide();
+            if (box.parents('.answer_box').find('.answer').length === 0) {
+                box.parents('.answer_box').hide();
             }
+        }
+        function hideAskBox() {
+            var box = $('.ask_area_container');
+            box.find('textarea').val('');
+            box.hide();
         }
         function renderAsk(that, obj) {
             var obj_length = obj.length;
@@ -362,8 +365,11 @@
                             html += '                    </div>';
                             html += '                </div>';
                         }
-                        html += '                <div class="pages_new more_answers">';
-                        html += '                    查看更多<span class="icon icon_more_answers"></span>';
+                        html += '                <div class="pages_new more_answers" ';
+                        if(child_length < 10){
+                            html += ' style="display:none;" ';
+                        }
+                        html +=    '>查看更多';
                         html += '                </div>';
                         html += '            </div>';
                     }
@@ -378,7 +384,7 @@
             var obj_length = obj.length;
             if(obj_length > 0){
                 for (var i = 0; i < obj_length; i++) {
-                    var html = '<div class="answer">'
+                    var html = '<div class="answer" data-prev_id="' + obj[i]['id'] + '" data-parent_id="' + obj[i]['parent_id'] + '">'
                         + '<div class="answer_info media">'
                         + '<div class="media-body">'
                         + '<h4 class="media-heading">' +
@@ -407,6 +413,8 @@
                 data: data,
                 success: function(res){
                     if(res.code == 200){
+                        hideAnswerBox();
+                        hideAskBox();
                         show_dom.show();
                     }
                     showAlertModal(res.msg);
@@ -491,7 +499,8 @@
 
             $('#btn_answer_confirm').on('click', function () {
                 var form_data = $('#form-answer_container').serialize();
-                var show_dom = $('.more_questions');
+                var show_dom = $(this).parents('.answer_box').find('.more_answers');
+                console.log(show_dom);
                 subCommentAjax(create_comment_action,form_data, show_dom);
             });
 
