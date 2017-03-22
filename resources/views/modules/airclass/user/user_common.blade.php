@@ -15,7 +15,7 @@
                         <div class="level_title pull-left">学员等级：</div>
                         <div class="level_progress pull-left">
                             <div class="level_progress_bg"></div>
-                            <div class="level_progress_bar" style="width: 25%;"></div>
+                            <div class="level_progress_bar" style="width: {{ round(Session::get('user_login_session_key')['rank']/3, 2)*100  }}%;"></div>
                             <span class="icon icon_level icon_level_one active"></span>
                             <span class="icon icon_level icon_level_two"></span>
                             <span class="icon icon_level icon_level_three"></span>

@@ -43,5 +43,10 @@ return [
 
     // 视频记录心跳时间
     'video_heartbeat_times' => 16, //秒数
+    // 学习时长等级限制
+    'study_level' => [
+        'course_duration' => 600, //每节课学习时长等级标准(秒数)10min
+        'course_public_min' => 20, //报名后学完指定20节公开课
+    ],
 
 ];

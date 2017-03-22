@@ -92,7 +92,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 私教课列表
+     * 公开课列表
      * @author      lxhui<772932587@qq.com>
      * @since 1.0
      * @return array

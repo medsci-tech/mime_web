@@ -25,6 +25,7 @@ class UserPublicController extends Controller
             'phone' => $user->phone,
             'office' => $user->office, // 科室
             'title' => $user->title, // 职称
+            'rank' => $user->rank, // 等级
         ];
         if($user->hospital){
             $save_data['province'] = $user->hospital->province;
