@@ -11,7 +11,7 @@
                 <div class="lesson clearfix">
                     <img class="lesson_img" src="{{ $data->logo_url  }}"/>
                     <div class="lesson_info">
-                        <h4 class="lesson_title">名师直播公开课</h4>
+                        <h4 class="lesson_title">{{ $data->title }}</h4>
                         <p class="lesson_introduction">{{ str_limit($data->comment, $limit = 100, $end = '...') }}</p>
                         <p class="lesson_data"><span class="icon icon_percentage"></span>已学{{ isset($data->percent) ? $data->percent*100 : 0 }}%<span class="icon icon_time"></span>用时{{ ceil($data->duration_count/60) }}分钟</p>
                     </div>

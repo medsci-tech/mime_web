@@ -38,7 +38,7 @@ class UserController extends Controller
             $val->comment=$model->comment;
             $val->id=$model->id;
             $val->date_time=date('Y/m/d',strtotime($val->created_at));
-
+            $val->title=$model->title;
         }
         return view('airclass::user.study', [
             'current_active' => 'study',
