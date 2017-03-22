@@ -23,8 +23,7 @@ class Comment extends Model
      */
     protected $fillable = [
         'class_id',
-        'comment_id',
-        'parent_comment_id',
+        'parent_id',
         'from_id',
         'from_name',
         'to_id',

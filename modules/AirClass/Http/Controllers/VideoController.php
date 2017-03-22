@@ -172,13 +172,46 @@ class VideoController extends Controller
 	}
 
 	// 评论
-	public function comment(Request $request){
-		$request_data = $request->all();
-		$result = Comment::create($request_data);
-		if($result){
-			return $this->return_data_format(200);
+	public function comment(Request $request, $id){
+		if($id){
+			// 用户信息
+			$user = $this->user;
+			if(!$user){
+				return $this->return_data_format(401, '未登陆');
+			}
+			$parent_id = $request->input('parent_id', 0);
+			$content = $request->input('content');
+			$form_id = $user['id']; // 回复者id
+			$form_name = mb_substr($user['phone'], 0, 3).'***'.mb_substr($user['phone'], 7); // 回复者昵称
+			$to_id = $request->input('to_id'); // 被回复id
+			$to_name = $request->input('to_name'); // 被回复昵称
+			if(!$content){
+				return $this->return_data_format(401, '评论内容不能为空');
+			}
+			if(mb_strlen($content) > 1000){
+				return $this->return_data_format(401, '评论内容过长');
+			}
+			$save_data = [
+				'class_id' => $id,
+				'parent_id' => $parent_id,
+				'from_id' => $form_id,
+				'from_name' => $form_name,
+				'to_id' => $to_id,
+				'to_name' => $to_name,
+				'content' => $content,
+				'site_id' => $this->site_id,
+				'status' => 1,
+			];
+//			dd($save_data);
+			$result = Comment::create($save_data);
+			if($result){
+				return $this->return_data_format(200, '操作成功');
+			}else{
+				return $this->return_data_format(500, '操作失败');
+			}
 		}else{
-			return $this->return_data_format(500);
+			abort(404);
+			return false;
 		}
 	}
 
