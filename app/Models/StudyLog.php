@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Modules\AirClass\Entities\ThyroidClassCourse;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,4 +27,30 @@ class StudyLog extends Model
         'video_duration',
         'progress',
     ];
+
+    /**
+     * @description 用户等级
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
+    public static  function setUserRank(array $params)
+    {
+        if(!isset($params['course_type']) || !isset($params['id']))
+            return false;
+        $courses = ThyroidClassCourse::where(['course_type'=>$params['course_type'],'is_show'=>1])->get()->toArray(); //  课程类型: 1必修课:
+        $course_type_arr = $courses ?  array_column($courses, 'id') : [];
+        /* 验证等级 */
+        $lists = \DB::table('study_logs')
+            ->select(\DB::raw('sum(study_duration) as study_total, course_id,doctor_id'))
+            ->where(['site_id'=>$params['site_id'],'doctor_id'=>$params['id']])
+            ->whereIn('course_id',$course_type_arr)
+            ->groupBy('course_id')
+            ->having('study_total', '>', config('params')['study_level']['course_duration'])
+            ->get();
+        $lists['course_type_arr']= $course_type_arr;
+        return $lists;
+    }
+
+
 }

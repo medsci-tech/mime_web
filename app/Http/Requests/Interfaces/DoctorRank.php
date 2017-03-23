@@ -4,7 +4,7 @@ namespace App\Http\Requests\Interfaces;
 
 use App\Http\Requests\Request;
 use App\Models\{Doctor,StudyLog};
-use Modules\AirClass\Entities\ThyroidClassCourse;
+
 /**
  * Class DoctorRank
  * @package App\Http\Requests\Interfaces
@@ -50,16 +50,7 @@ trait DoctorRank
         {
             if($this->getUser($params)->rank==1)
             {
-                $courses = ThyroidClassCourse::where(['course_type'=>1,'is_show'=>1])->get()->toArray(); //  课程类型: 1必修课:
-                $course_type_1 = $courses ?  array_column($courses, 'id') : [];
-                /* 验证等级二 */
-                $lists = \DB::table('study_logs')
-                    ->select(\DB::raw('sum(study_duration) as study_total, course_id,doctor_id'))
-                    ->where(['site_id'=>$this->site_id,'doctor_id'=>$params['id']])
-                    ->whereIn('course_id',$course_type_1)
-                    ->groupBy('course_id')
-                    ->having('study_total', '>', config('params')['study_level']['course_duration'])
-                    ->get();
+                $lists = StudyLog::setUserRank(['course_type'=>1,'site_id'=>$this->site_id,'id'=>$params['id']]);
                 if(count($lists)>=config('params')['study_level']['course_public_min'])
                 {
                     Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
@@ -67,20 +58,12 @@ trait DoctorRank
                 }
                 else
                     $this->rank =1;
-
             }
             if($this->getUser($params)->rank==2)
             {
-                $courses = ThyroidClassCourse::where(['course_type'=>2,'is_show'=>1])->get()->toArray(); //  课程类型:2:选修课
-                $course_type_2 = $courses ?  array_column($courses, 'id') : [];
                 /* 验证等级三 */
-                $lists = \DB::table('study_logs')
-                    ->select(\DB::raw('sum(study_duration) as study_total, course_id,doctor_id'))
-                    ->where(['site_id'=>$this->site_id,'doctor_id'=>$params['id']])
-                    ->whereIn('course_id',$course_type_2)
-                    ->groupBy('course_id')
-                    ->having('study_total', '>', config('params')['study_level']['course_duration'])
-                    ->get();
+                $lists = StudyLog::setUserRank(['course_type'=>2,'site_id'=>$this->site_id,'id'=>$params['id']]);
+                $course_type_2 = $lists['course_type_arr'] ?  array_column($lists['course_type_arr'], 'id') : [];
                 if(count($lists)==count($course_type_2))
                 {
                     Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
