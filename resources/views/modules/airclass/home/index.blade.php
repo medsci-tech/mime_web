@@ -30,7 +30,7 @@
         <div class="project clearfix">
             <div id="id_video_container" class="project_video pull-left" ></div>
             <div class="project_info pull-left">
-                <h4 class="title">项目介绍</h4>
+                <h4 class="title">课程介绍</h4>
                 <p class="info">
                     {{ $classes['comment'] }}.
                     <a class="more" href="./">详情&gt;</a>
@@ -198,7 +198,9 @@
                 "file_id": "{{$classes['qcloud_file_id']}}",
                 "app_id": "{{$classes['qcloud_app_id']}}",
                 "width": 1280,
-                "height": 720
+                "height": 720,
+                "remember": 1,
+                "stretch_patch": true
             };
             /*调用播放器进行播放*/
             new qcVideo.Player(
@@ -206,6 +208,10 @@
                 "id_video_container",
                 option
             );
+            
+            $('.btn_project_sign').click(function () {
+                showAlertModal('请联系诺和诺和代表进行报名');
+            });
         });
     </script>
 @endsection

@@ -12,6 +12,9 @@ body {
 .slide {
 	margin: 0 auto;
 }
+.carousel-indicators{
+	bottom: 0;
+}
 /* main body */
 .main_body {
 	width: 1200px;
@@ -84,9 +87,8 @@ body {
 .lessons .caption {
 	position: absolute;
 	bottom: 0;
-	/*width: 100%;*/
-	/*margin-left: -8px;*/
-	padding: 5px;
+	width: 100%;
+	padding: 5px 13px 5px 5px;
 	background: rgba(255, 255, 255, .9);
 }
 .lesson .title {
