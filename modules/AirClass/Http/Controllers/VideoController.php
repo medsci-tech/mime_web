@@ -156,6 +156,7 @@ class VideoController extends Controller
                 'chapter' => $chapter, // 当前单元信息
 				'chapter_classes' => $chapter_classes, // 相关章节列表
 				'comments' => $comments, // 评论列表
+				'get_comment_num' => $this->get_comment_every_time, // 评论列表
 				'recommend_classes' => $recommend_classes, // 推荐课程列表
 				'add_recommend_classes' => $add_recommend_classes, // 追加推荐课程列表
 				'user' => $user, // 登陆用户信息
@@ -205,7 +206,7 @@ class VideoController extends Controller
 //			dd($save_data);
 			$result = Comment::create($save_data);
 			if($result){
-				return $this->return_data_format(200, '操作成功');
+				return $this->return_data_format(200, '操作成功', $result);
 			}else{
 				return $this->return_data_format(500, '操作失败');
 			}
