@@ -17,9 +17,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::get('/video/{id}', 'VideoController@index');
 	Route::post('/video/heartbeat', 'VideoController@video_heartbeat_log');
 	Route::post('/video/watch_times', 'VideoController@watch_times_log');
-	Route::post('/video/comment/{id}', 'VideoController@comment'); // 评论请求
 	Route::post('/video/answer/{id}', 'VideoController@answer'); // 答题请求
-	Route::post('/video/get_more_comments', 'VideoController@get_more_comments'); // 答题请求
 
 	// 用户公开访问
 	Route::get('/register', 'UserPublicController@register_view'); //注册视图
@@ -48,6 +46,10 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/user/pwd_update', 'UserController@pwd_update');
     Route::post('/file/upload', 'FileController@upload'); // 文件上传
 
+	// 评论
+	Route::post('/video/comment/{id}', 'CommentController@videoComment'); // 评论请求
+	Route::post('/video/get_more_comments', 'CommentController@get_more_video_comments'); // 答题请求
+	Route::post('/user/get_more_comments', 'CommentController@get_more_user_comments'); // 答题请求
 
 	// test
 //	Route::get('/test', 'UserPublicController@test');
