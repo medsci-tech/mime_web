@@ -45,22 +45,13 @@ trait DoctorRank
     {
         if(!isset($params['id']))
             return false;
-        $courses = ThyroidClassCourse::whereIn('course_type',[1,2])->where(['is_show'=>1])->get()->toArray(); //  课程类型: 1必修课: 2:选修课
-        foreach($courses as $val)
-        {
-            if($val['course_type']==1)
-                $course_type_1[] = $val['id'];
-            if($val['course_type']==2)
-                $course_type_2[]= $val['id'];
-        }
-        $course_type_1 = isset($course_type_1) ? $course_type_1 : []; // 必修课
-        $course_type_2 = isset($course_type_2) ? $course_type_2 : []; //选修课
-        array_unique($course_type_1);array_unique($course_type_2);
 
         if($this->getUser($params)->rank)
         {
             if($this->getUser($params)->rank==1)
             {
+                $courses = ThyroidClassCourse::where(['course_type'=>1,'is_show'=>1])->get()->toArray(); //  课程类型: 1必修课:
+                $course_type_1 = $courses ?  array_column($courses, 'id') : [];
                 /* 验证等级二 */
                 $lists = \DB::table('study_logs')
                     ->select(\DB::raw('sum(study_duration) as study_total, course_id,doctor_id'))
@@ -80,6 +71,8 @@ trait DoctorRank
             }
             if($this->getUser($params)->rank==2)
             {
+                $courses = ThyroidClassCourse::where(['course_type'=>2,'is_show'=>1])->get()->toArray(); //  课程类型:2:选修课
+                $course_type_2 = $courses ?  array_column($courses, 'id') : [];
                 /* 验证等级三 */
                 $lists = \DB::table('study_logs')
                     ->select(\DB::raw('sum(study_duration) as study_total, course_id,doctor_id'))
