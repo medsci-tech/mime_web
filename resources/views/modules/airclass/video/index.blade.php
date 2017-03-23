@@ -90,8 +90,6 @@
                                         <span class="icon icon_msg" data-id="{{$comment['id']}}" data-to_id="{{$comment['from_id']}}" data-to_name="{{$comment['from_name']}}"></span>
                                         @if($comment['child'])
                                         {{count($comment['child'])}}
-                                        @else
-                                            0
                                         @endif
                                     </div>
                                     @if($comment['child'])

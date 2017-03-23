@@ -1,5 +1,6 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use PhpParser\Comment\Doc;
 use \App\Models\{Doctor,Hospital,Volunteer};
@@ -12,6 +13,9 @@ use App\Http\Requests\Interfaces\DoctorRank;
 class UserController extends Controller
 {
     use DoctorRank;
+
+    protected $get_comment_every_time = 10; // 每次加载评论条数
+
     public function __construct()
     {
         $this->middleware('login');
@@ -68,13 +72,68 @@ class UserController extends Controller
         ]);
 	}
 
-	public function comment()
-	{
-		$comments = [];
-        return view('airclass::user.comment', [
-            'current_active' => 'comment',
-        ]);
-	}
+    public function comment()
+    {
+        $user = $this->user;
+        if($user){
+            //## 评论
+            $comments = [];
+            // 一级评论
+            $one_comments = Comment::where([
+                'status' => 1,
+                'from_id' => $user['id'],
+                'parent_id' => 0,
+                'site_id' => $this->site_id,
+            ])->orderBy('id', 'asc')->paginate($this->get_comment_every_time);
+            if($one_comments){
+                foreach ($one_comments as $key => $one_comment){
+                    $comments[$key] = [
+                        'id' => $one_comment->id,
+                        'class_id' => $one_comment->class_id,
+                        'parent_id' => $one_comment->parent_id,
+                        'from_id' => $one_comment->from_id,
+                        'from_name' => $one_comment->from_name,
+                        'to_id' => $one_comment->to_id,
+                        'to_name' => $one_comment->to_name,
+                        'content' => $one_comment->content,
+                        'created_at' => $one_comment->created_at,
+                        'child' => [],
+                    ];
+                    // 二级评论
+                    $two_comments = Comment::where([
+                        'status' => 1,
+                        'from_id' => $user['id'],
+                        'parent_id' => $one_comment->id,
+                        'site_id' => $this->site_id,
+                    ])->orderBy('id', 'asc')->paginate($this->get_comment_every_time);
+                    if($two_comments){
+                        foreach ($two_comments as $k => $two_comment){
+                            $comments[$key]['child'][$k] = [
+                                'id' => $two_comment->id,
+                                'class_id' => $two_comment->class_id,
+                                'parent_id' => $two_comment->parent_id,
+                                'from_id' => $two_comment->from_id,
+                                'from_name' => $two_comment->from_name,
+                                'to_id' => $two_comment->to_id,
+                                'to_name' => $two_comment->to_name,
+                                'content' => $two_comment->content,
+                                'created_at' => $two_comment->created_at,
+                            ];
+                        }
+                    }
+                }
+            }
+//            dd($comments);
+            return view('airclass::user.comment', [
+                'current_active' => 'comment',
+                'comments' => $comments, // 评论列表
+                'get_comment_num' => $this->get_comment_every_time, // 评论列表
+            ]);
+        }else{
+            abort(404);
+            return false;
+        }
+    }
     /**
      * 修改资料视图
      * @author      lxhui<772932587@qq.com>
