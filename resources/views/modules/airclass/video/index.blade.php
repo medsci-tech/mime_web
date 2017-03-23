@@ -126,7 +126,7 @@
                         </div>
                     @endforeach
                     @endif
-                    <div class="pages_new more_questions" @if(count($comments) < 10) style="display:none;" @endif>
+                    <div class="pages_new more_questions" @if(count($comments) < $get_comment_num) style="display:none;" @endif>
                         查看更多
                     </div>
                 </div>
@@ -320,6 +320,15 @@
                 box.parents('.answer_box').hide();
             }
         }
+        function successAnswerBox() {
+            var box = $('.answer_area_container');
+            box.find('textarea').val('');
+            box.hide();
+            if (box.parents('.answer_box').find('.answer').length === 0) {
+                box.parents('.answer_box').hide();
+                window.location.reload(); // todo 多页刷新会怪怪的
+            }
+        }
         function hideAskBox() {
             var box = $('.ask_area_container');
             box.find('textarea').val('');
@@ -327,6 +336,7 @@
         }
         function renderAsk(that, obj) {
             var obj_length = obj.length;
+            var get_comment_num = parseInt('{{$get_comment_num}}');
             if(obj_length > 0){
                 for (var i = 0; i < obj_length; i++) {
                     var child_obj = obj[i]['child'];
@@ -366,7 +376,7 @@
                             html += '                </div>';
                         }
                         html += '                <div class="pages_new more_answers" ';
-                        if(child_length < 10){
+                        if(child_length < get_comment_num){
                             html += ' style="display:none;" ';
                         }
                         html +=    '>查看更多';
@@ -413,7 +423,7 @@
                 data: data,
                 success: function(res){
                     if(res.code == 200){
-                        hideAnswerBox();
+                        successAnswerBox();
                         hideAskBox();
                         show_dom.show();
                     }
@@ -428,6 +438,7 @@
         $(function () {
             var get_comment_action = '{{url('video/get_more_comments')}}';
             var create_comment_action = '{{url('video/comment', ['id' => $current_id])}}';
+            var get_comment_num = parseInt('{{$get_comment_num}}');
             // 一级评论
             $('.btn_ask').on('click', function() {
                 $('.ask_area_container').slideToggle();
@@ -500,7 +511,6 @@
             $('#btn_answer_confirm').on('click', function () {
                 var form_data = $('#form-answer_container').serialize();
                 var show_dom = $(this).parents('.answer_box').find('.more_answers');
-                console.log(show_dom);
                 subCommentAjax(create_comment_action,form_data, show_dom);
             });
 
@@ -518,7 +528,7 @@
                     data: data,
                     success: function(res){
                         if(res.code == 200){
-                            if(res.data.length < 10){
+                            if(res.data.length < get_comment_num){
                                 prev_dom.next('.more_questions').hide();
                             }else {
                                 prev_dom.next('.more_questions').show();
@@ -549,7 +559,7 @@
                     data: data,
                     success: function(res){
                         if(res.code == 200){
-                            if(res.data.length < 10){
+                            if(res.data.length < get_comment_num){
                                 prev_dom.next('.more_answers').hide();
                             }else {
                                 prev_dom.next('.more_answers').show();
