@@ -63,7 +63,11 @@ a {
 }
 
 .navbar .nav>li>a {
-	font-size: 14px;
+	font-size: 16px;
+	color: #333333;
+}
+.navbar .nav>li>a:hover {
+	color: #00A0E9;
 }
 
 .navbar .navbar-form {
