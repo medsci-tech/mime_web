@@ -2,9 +2,8 @@
 
 use Illuminate\Http\Request;
 use PhpParser\Comment\Doc;
-use \App\Models\Doctor;
-use \App\Models\Hospital;
-use Modules\AirClass\Entities\{Office,ThyroidClassCourse};
+use \App\Models\{Doctor,Hospital,Volunteer};
+use Modules\AirClass\Entities\{Office,ThyroidClassCourse,KZKTClass};
 use \App\Models\{Address, Message};
 use Hash;
 use Cache;
@@ -237,38 +236,49 @@ class UserController extends Controller
                             'province' => $request->province,
                             'city' => $request->city,
                             'country' => $request->area,
+                            'province_id' => $request->province_id,
+                            'city_id' => $request->city_id,
+                            'country_id' => $request->country_id,
                             'hospital_level' => $request->hospital_level,
                         ];
                         $hospital = Hospital::firstOrCreate($hospital_where);
                         $hospital_id = $hospital->id;
 
                         try{
+                            if($class = KZKTClass::where(['doctor_id'=>$this->user['id']])->first())
+                            {
+                                $volunteer_id = $class->volunteer_id;
+                                $upper_user_phone = Volunteer::find($volunteer_id)->phone;
+                            }
                             $post_data = array(
                                 "phone" => $phone,
                                 'role'=>'医生',
                                 'remark'=>'空中课堂',
                                 'province' => $request->province,
                                 'city' => $request->city,
-                                'hospital_name'=>$hospital, //医院名称
-                                'sex'=>$sex, //性别
+                                'hospital_name'=>$request->hospital_name, //医院名称
+                                'upper_user_phone'=>isset($upper_user_phone) ? $upper_user_phone : '', //用户的上级用户电话
                                 'office'=>$office, //科室
                                 'hospital_level'=>$hospital_level, //等级
                                 'title'=>$title, //职称
                             );
-                            /* 同步更新 */
-                            if($doctor)
+                            $res = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-user-information', $post_data,1);
+                            if($res['httpCode']==200)// 服务器返回响应状态码,当电话存在时
                             {
-                                $updata = array(
-                                    'name'=>$name,//姓名
-                                    'sex'=>$sex, //性别
-                                    'office'=>$office, //科室
-                                    'hospital_id'=> $hospital_id, //医院id
-                                    'title'=>$title, //职称
-                                    'email'=>$email,
-                                );
-                                Doctor::where('id', $this->user['id'])->update($updata);
+                                /* 同步更新 */
+                                if($doctor)
+                                {
+                                    $updata = array(
+                                        'name'=>$name,//姓名
+                                        'sex'=>$sex, //性别
+                                        'office'=>$office, //科室
+                                        'hospital_id'=> $hospital_id, //医院id
+                                        'title'=>$title, //职称
+                                        'email'=>$email,
+                                    );
+                                    Doctor::where('id', $this->user['id'])->update($updata);
+                                }
                             }
-
                         }catch (\Exception $e) {
                             return ['status_code' => 0,'message' =>'服务器异常,修改失败!'.$e->getMessage()];
                         }
@@ -284,6 +294,16 @@ class UserController extends Controller
             }
 
         }
+        /* 更新会话 */
+        $this->user['name'] =$name;
+        $this->user['title'] =$title;
+        $this->user['office'] =$request->office_id;
+        $this->user['province'] =$request->province;
+        $this->user['city'] =$request->city;
+        $this->user['area'] =$request->area;
+        $this->user['hospital_name'] =$request->hospital_name;
+        $this->user['hospital_level'] =$hospital_level;
+        \Session::set($this->user_login_session_key, $this->user);
         return ['code' => 200, 'message'=>'保存成功!'];
 
     }

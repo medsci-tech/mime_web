@@ -180,8 +180,11 @@
                 'hospital_name': $('#userHospital').val(),
                 'name': $('#userName').val(),
                 'province': $('#save-province').val(),
+                'province_id': $('select[name="province"]').val(),
                 'city': $('#save-city').val(),
+                'city_id': $('select[name="city"]').val(),
                 'area': $('#save-area').val(),
+                'country_id': $('select[name="area"]').val(),
                 'hospital_level': $('select[name="hospitalLevel"]').val(), //等级
                 'office': $('select[name="office_id"]').val(), //科室
                 'title': $('select[name="doctorTitle"]').val(), //职称
