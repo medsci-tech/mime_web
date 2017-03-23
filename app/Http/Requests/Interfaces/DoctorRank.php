@@ -51,6 +51,7 @@ trait DoctorRank
             if($this->getUser($params)->rank==1)
             {
                 $lists = StudyLog::setUserRank(['course_type'=>1,'site_id'=>$this->site_id,'id'=>$params['id']]);
+                unset($lists['course_type_count']);
                 if(count($lists)>=config('params')['study_level']['course_public_min'])
                 {
                     Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
@@ -63,8 +64,9 @@ trait DoctorRank
             {
                 /* 验证等级三 */
                 $lists = StudyLog::setUserRank(['course_type'=>2,'site_id'=>$this->site_id,'id'=>$params['id']]);
-                $course_type_2 = $lists['course_type_arr'] ?  array_column($lists['course_type_arr'], 'id') : [];
-                if(count($lists)==count($course_type_2))
+                $course_count = $lists['course_type_count'];
+                unset($lists['course_type_count']);
+                if(count($lists)==$course_count)
                 {
                     Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
                     $this->rank =3;
