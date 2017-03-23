@@ -75,6 +75,12 @@ class UserController extends Controller
             'current_active' => 'comment',
         ]);
 	}
+    /**
+     * 修改资料视图
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
 	public function info_edit()
 	{
         $offices = Office::all();

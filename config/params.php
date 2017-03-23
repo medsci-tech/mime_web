@@ -39,6 +39,15 @@ return [
     // 迈豆规则
     'bean_rules' => [
         'watch_video' => 15, // 观看视频
+        'required_course' => 80, // 必修课每期课件学习时长≥ 10分钟
+        'required_course' => 30, // 答疑课每期课件学习时长≥ 10分钟
+        'apply_course' => 100, // 私教课申请
+        'click_course' => 1, // 视频1积分/点击次数,每节课点击可获得积分上限：4积分 ,即单节课最多加4次
+        'ask_question' => 10, // 提问问题,10积分/问题
+        'ask_question_max' => 20, // 提问问题,每节课提问问题可获得积分上限：20积分
+        'answer_question' => 15, // 回答问题,15积分/问题
+        'answer_question_max' => 30, // 回答问题,每节课提问问题可获得积分上限：30积分
+        'rank_level' => 100, // 晋升一个阶段将获得100积分
     ],
 
     // 视频记录心跳时间
