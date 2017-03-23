@@ -21,8 +21,8 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
-          {{--<li><a href="{{ url('/msg/all') }}"><i class="fa fa-circle-o"></i>平台消息</a></li>--}}
-          <li><a href="{{ url('/msg/site') }}"><i class="fa fa-circle-o"></i>站点消息</a></li>
+          <li><a href="{{ url('/msg/all') }}"><i class="fa fa-circle-o"></i>平台消息</a></li>
+          {{--<li><a href="{{ url('/msg/site') }}"><i class="fa fa-circle-o"></i>站点消息</a></li>--}}
           {{--<li><a href="{{ url('/msg/user') }}"><i class="fa fa-circle-o"></i>个人消息</a></li>--}}
         </ul>
       </li>
