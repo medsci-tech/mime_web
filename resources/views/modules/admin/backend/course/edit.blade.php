@@ -26,6 +26,7 @@
             <label class="col-sm-2 control-label">课程类别</label>
             <div class="col-sm-10">
               <select class="form-control" name="course_class_id" id="form-course_class_id">
+                <option value="0">请选择课程类别</option>
                 @foreach($course_classes as $course_class)
                   <option value="{{$course_class->id}}" data-has_teacher="{{$course_class->has_teacher}}" data-has_phase="{{$course_class->has_children}}">{{$course_class->name}}</option>
                 @endforeach
@@ -54,7 +55,7 @@
               </select>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" id="course_type_parentDiv">
             <label class="col-sm-2 control-label">课程类型</label>
             <div class="col-sm-10">
               <select class="form-control" name="course_type" id="form_course_type">

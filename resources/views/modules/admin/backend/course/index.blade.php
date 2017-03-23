@@ -298,6 +298,14 @@
         /*课程类型*/
         $('#form-course_class_id').on('change', function () {
             var selected_option = this.options[this.selectedIndex];
+            if($(this).val()==4)
+                $('#course_type_parentDiv').show();
+           else
+            {
+                $('#form_course_type').val(0);
+                $('#course_type_parentDiv').hide();
+            }
+
             if(selected_option.getAttribute('data-has_teacher') == 1){
                 $('#teacher_id_parentDiv').show();
             }else {
