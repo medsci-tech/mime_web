@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $this->middleware('login');
         parent::__construct();
-        $rank = $this->setRank(['id'=>$this->user['id']])->rank;
+        $rank = $this->setRank(['id'=>$this->user['id'],'phone'=>$this->user['phone']])->rank;
         if($this->user['rank']!=$rank)
         {
             $this->user['rank'] = $rank;

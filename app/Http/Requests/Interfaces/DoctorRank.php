@@ -54,8 +54,20 @@ trait DoctorRank
                 unset($lists['course_type_count']);
                 if(count($lists)>=config('params')['study_level']['course_public_min'])
                 {
-                    Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
-                    $this->rank =2;
+                    try{
+                        //赠送迈豆积分
+                        $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
+                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+                        if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                        {
+                            Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
+                            $this->rank =2;
+                        }
+                    }
+                    catch (\Exception $e){
+                        return $this->rank =$this->getUser($params)->rank;
+                    }
+
                 }
                 else
                     $this->rank =1;
@@ -68,8 +80,22 @@ trait DoctorRank
                 unset($lists['course_type_count']);
                 if(count($lists)==$course_count)
                 {
-                    Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
-                    $this->rank =3;
+                    try
+                    {
+                        //赠送迈豆积分
+                        $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
+                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+                        if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                        {
+                            Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
+                            $this->rank =3;
+                        }
+
+                    } catch (\Exception $e){
+
+                        return $this->rank =$this->getUser($params)->rank;
+                    }
+
                 }
                 else
                     $this->rank =2;
