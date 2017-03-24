@@ -30,6 +30,9 @@ class VideoController extends Controller
 	 */
 	public function index($id)
 	{
+	    //test
+        $rank = $this->setQuestionBean(['id'=>$this->user['id'],'course_id'=>$id,'phone'=>$this->user['phone']]);
+
 		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
         $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元

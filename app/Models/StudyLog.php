@@ -79,5 +79,20 @@ class StudyLog extends Model
         return $lists;
     }
 
+    /**
+     * @description  1积分/点击观看视频次数    每节课点击可获得积分上限：4积分 ,即单节课最多加4次
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
+    public static  function setUserVideoBean(array $params)
+    {
+        if(!isset($params['course_id']) || !isset($params['id']))
+            return false;
+
+
+        return true;
+    }
+
 
 }

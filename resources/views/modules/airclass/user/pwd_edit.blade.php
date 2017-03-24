@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="userPhone" class="col-sm-2 control-label"><span class="necessary">＊</span>手机号</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号" value="15927086090">
+                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号" value="{{ Session::get('user_login_session_key')['phone'] }}">
                     </div>
                     <div class="tips col-sm-4">请输入正确手机号</div>
                 </div>
