@@ -17,7 +17,7 @@
             <h3 class="title">{{ $data['teacher_name'] }}</h3>
             <div class="lesson_list row">
                 @foreach($data['course_list'] as $val)
-                <div class="lesson col-xs-6 col-diy-20"><a href="{{ URL('video/'.$val->id) }}"">
+                <div class="lesson col-xs-6 col-diy-20"><a class="a_list" href="{{ url('video/'.$val->id) }}">
                         <img class="center-block" src="{{ $val->logo_url  }}" alt="">
                         <div class="caption">
                             <h3 class="title">{{ $val->title }}</h3>

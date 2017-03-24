@@ -135,8 +135,8 @@
                 <h4 class="title">相关推荐</h4>
                 @if($recommend_classes->count())
                     @foreach($recommend_classes as $recommend_class)
-                        <div class="lesson col-xs-6 col-sm-12"><a
-                                    href="{{url('video', ['id' => $recommend_class->id])}}">
+                        <div class="lesson col-xs-6 col-sm-12">
+                            <a class="a_list" href="{{url('video', ['id' => $recommend_class->id])}}">
                                 <img class="center-block" src="{{$recommend_class->logo_url}}">
                                 <div class="caption caption_w210">
                                     <h3 class="title">{{$recommend_class->title}}</h3>
@@ -146,13 +146,14 @@
                                         <span class="persons pull-right">{{$recommend_class->play_count}}人在学</span>
                                     </p>
                                 </div>
-                            </a></div>
+                            </a>
+                        </div>
                     @endforeach
                 @endif
                 @if($add_recommend_classes)
                     @foreach($add_recommend_classes as $add_recommend_class)
-                        <div class="lesson col-xs-6 col-sm-12"><a
-                                    href="{{url('video', ['id' => $add_recommend_class->id])}}">
+                        <div class="lesson col-xs-6 col-sm-12">
+                            <a class="a_list" href="{{url('video', ['id' => $add_recommend_class->id])}}">
                                 <img class="center-block" src="{{$add_recommend_class->logo_url}}">
                                 <div class="caption caption_w210">
                                     <h3 class="title">{{$add_recommend_class->title}}</h3>
@@ -162,7 +163,8 @@
                                         <span class="persons pull-right">{{$add_recommend_class->play_count}}人在学</span>
                                     </p>
                                 </div>
-                            </a></div>
+                            </a>
+                        </div>
                     @endforeach
                 @endif
             </div>
