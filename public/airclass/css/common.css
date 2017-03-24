@@ -1,9 +1,5 @@
 /* common */
 
-html {
-	width: 100%;
-}
-
 body {
 	position: relative;
 	width: 100%;
@@ -16,7 +12,7 @@ body {
 .main_body {
 	min-height: 600px;
 	margin: 0 auto;
-	padding-bottom: 260px;
+	padding-bottom: 40px;
 }
 
 .btn {
@@ -63,7 +59,11 @@ a {
 }
 
 .navbar .nav>li>a {
-	font-size: 14px;
+	font-size: 16px;
+	color: #333333;
+}
+.navbar .nav>li>a:hover {
+	color: #00A0E9;
 }
 
 .navbar .navbar-form {
