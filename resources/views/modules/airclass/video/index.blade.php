@@ -138,7 +138,7 @@
                         <div class="lesson col-xs-6 col-sm-12"><a
                                     href="{{url('video', ['id' => $recommend_class->id])}}">
                                 <img class="center-block" src="{{$recommend_class->logo_url}}">
-                                <div class="caption">
+                                <div class="caption caption_w210">
                                     <h3 class="title">{{$recommend_class->title}}</h3>
                                     <p class="introduction">{{$recommend_class->comment}}</p>
                                     <p class="price_and_persons">
@@ -154,7 +154,7 @@
                         <div class="lesson col-xs-6 col-sm-12"><a
                                     href="{{url('video', ['id' => $add_recommend_class->id])}}">
                                 <img class="center-block" src="{{$add_recommend_class->logo_url}}">
-                                <div class="caption">
+                                <div class="caption caption_w210">
                                     <h3 class="title">{{$add_recommend_class->title}}</h3>
                                     <p class="introduction">{{$add_recommend_class->comment}}</p>
                                     <p class="price_and_persons">
