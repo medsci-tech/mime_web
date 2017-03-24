@@ -291,7 +291,6 @@ body {
 	.chapters,
 	.asks_and_answers,
 	.recommended_videos {
-		float: none;
 		width: 100%;
 		height: auto;
 	}

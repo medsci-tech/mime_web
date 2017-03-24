@@ -1,14 +1,4 @@
-/**
- * functions
- */
-$(function () {
-    // ajax 添加csrf
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-});
+
 
 /**
  *
@@ -245,3 +235,16 @@ var video_heartbeat_ajax = function (action, data) {
         data: data
     });
 };
+
+/**
+ * functions
+ */
+$(function () {
+    // ajax 添加csrf
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+});
