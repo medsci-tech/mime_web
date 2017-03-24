@@ -29,6 +29,10 @@ a {
 	color: #333333;
 	font-size: 12px;
 }
+.a_list{
+	width: 100%;
+	display: block;
+}
 @media (min-width: 1000px) {
 	.col-diy-20 {
 		float: left;

@@ -18,7 +18,7 @@
             <div class="lesson_list row">
                 @if (count($data['course_list']) > 0)
                     @foreach($data['course_list'] as $val)
-                    <div class="lesson col-xs-6 col-diy-20"><a href="{{ URL('video/'.$val->id) }}" target="_blank">
+                    <div class="lesson col-xs-6 col-diy-20"><a class="a_list" href="{{ url('video/'.$val->id) }}" target="_blank">
                             <img class="center-block" src="{{ $val->logo_url  }}" alt="">
                             <div class="caption">
                                 <h3 class="title">{{ $val->title }}</h3>
