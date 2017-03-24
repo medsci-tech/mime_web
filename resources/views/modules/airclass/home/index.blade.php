@@ -210,7 +210,7 @@
             );
             
             $('.btn_project_sign').click(function () {
-                showAlertModal('请联系诺和诺和代表进行报名');
+                showAlertModal('请联系诺和志愿者进行报名');
             });
         });
     </script>
