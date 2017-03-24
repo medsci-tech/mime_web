@@ -142,7 +142,7 @@
                                     <h3 class="title">{{$recommend_class->title}}</h3>
                                     <p class="introduction">{{$recommend_class->comment}}</p>
                                     <p class="price_and_persons">
-                                        <span class="price">&yen;198.00</span>
+                                        <span class="price"></span>
                                         <span class="persons pull-right">{{$recommend_class->play_count}}人在学</span>
                                     </p>
                                 </div>
@@ -299,6 +299,13 @@
                             video_heartbeat_ajax(watch_times_action, heartbeat_data);
                         }
                         num++;
+                    }
+                    // 播放完，并且是登陆状态
+                    if(status == 'playEnd' && '{{$user['id']}}'){
+                        // 没有答过题
+                        if('{{$answer_logs->count()}}' == 0){
+                            $('#btn_answer').click();
+                        }
                     }
                 }
             };

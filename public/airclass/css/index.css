@@ -87,8 +87,8 @@ body {
 .lessons .caption {
 	position: absolute;
 	bottom: 0;
-	width: 100%;
-	padding: 5px 13px 5px 5px;
+	width: 210px;
+	padding: 5px;
 	background: rgba(255, 255, 255, .9);
 }
 .lesson .title {
