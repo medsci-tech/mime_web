@@ -1,8 +1,8 @@
 @extends('modules.airclass.layouts.app')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/index.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/play.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/admin_asks.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/play.css')}}"/>
 @endsection
 @section('container')
     <div class="main_body">

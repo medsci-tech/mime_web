@@ -16,7 +16,7 @@
                         <p class="lesson_data"><span class="icon icon_percentage"></span>已学{{ isset($data->percent) ? $data->percent*100 : 0 }}%<span class="icon icon_time"></span>用时{{ ceil($data->duration_count/60) }}分钟</p>
                     </div>
                     <span class="lesson_date">{{ $data->date_time  }}</span>
-                    <a class="btn_outline" href="{{ URL('video/'.$data->id) }}" target="_blank">继续学习</a>
+                    <a class="btn_outline" href="{{ url('video/'.$data->id) }}" target="_blank">继续学习</a>
                 </div>
                 @endforeach
             </div>
