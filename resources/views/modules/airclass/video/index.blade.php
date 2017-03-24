@@ -303,7 +303,7 @@
                     // 播放完，并且是登陆状态
                     if(status == 'playEnd' && '{{$user['id']}}'){
                         // 没有答过题
-                        if('{{$answer_logs->count()}}' == 0){
+                        if('{{count($answer_logs)}}' == 0){
                             $('#btn_answer').click();
                         }
                     }
