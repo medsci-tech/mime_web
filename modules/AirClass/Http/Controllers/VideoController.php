@@ -10,9 +10,10 @@ use Modules\Admin\Entities\Exercise;
 use Modules\Admin\Entities\ThyroidClassCourse;
 use Modules\AirClass\Entities\ThyroidClassPhase;
 use Session;
-
+use App\Http\Requests\Interfaces\DoctorBean;
 class VideoController extends Controller
 {
+    use DoctorBean;
 	protected $user = null;
 	protected $get_comment_every_time = 10; // 每次加载评论条数
 	public function __construct()
@@ -150,7 +151,7 @@ class VideoController extends Controller
 				$answer_status_mag = '登陆后才能答题';
 				$video_status_mag = '登陆后才能观看';
 			}
-//			dd($comments);
+
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
                 'chapter' => $chapter, // 当前单元信息
@@ -253,6 +254,10 @@ class VideoController extends Controller
 				StudyLog::create($save_data);
 			}
 		}
+
+		if(ThyroidClassCourse::find($class_id)->course_class_id==$this->answer_class_id)
+            $this->setBean(['id'=>$this->user['id'],'phone'=>$this->user['phone']]); //统计答疑课积分
+
 		return $this->return_data_format(200);
 	}
 

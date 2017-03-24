@@ -1,5 +1,6 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
+use App\Http\Requests\Interfaces\DoctorBean;
 use Pingpong\Modules\Routing\Controller as BaseController;
 use Validator;
 use App\Http\Requests\Interfaces\DoctorRank;

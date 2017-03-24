@@ -75,7 +75,7 @@ class StudyLog extends Model
             ->groupBy('course_id')
             ->having('study_total', '>', config('params')['study_level']['course_duration'])
             ->get();
-        $lists = json_decode(json_encode($lists),true);
+        $lists = json_decode(json_encode($lists ? $lists : []),true);
         return $lists;
     }
 
