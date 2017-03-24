@@ -5,7 +5,7 @@
     @section('user_container')
 
         <div class="admin_content">
-            <h3 class="admin_title">学习情况用户名:{{$user['name']}}</h3>
+            <h3 class="admin_title">学习情况</h3>
             <div class="lessons">
                 @foreach ($units as $data)
                 <div class="lesson clearfix">
