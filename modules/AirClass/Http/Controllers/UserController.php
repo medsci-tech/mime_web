@@ -8,20 +8,13 @@ use \App\Models\{Address, Message};
 use Hash;
 use Cache;
 use DB;
-use App\Http\Requests\Interfaces\DoctorRank;
 class UserController extends Controller
 {
-    use DoctorRank;
+
     public function __construct()
     {
         $this->middleware('login');
         parent::__construct();
-        $rank = $this->setRank(['id'=>$this->user['id'],'phone'=>$this->user['phone']])->rank;
-        if($this->user['rank']!=$rank)
-        {
-            $this->user['rank'] = $rank;
-            \Session::set($this->user_login_session_key, $this->user);
-        }
     }
     /**
      * 我的消学习情况
@@ -178,9 +171,8 @@ class UserController extends Controller
             return ['code' => 0,'msg' =>'验证码不匹配'];
         }
 
-        $user = $this->user;
         if (!$validator->fails()) {
-            $model = Doctor::find($user['id']);
+            $model = Doctor::find($this->user['id']);
             $model->password = \Hash::make($password);
             $model->save();
             return $this->return_data_format(200, '修改成功!');

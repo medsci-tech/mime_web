@@ -2,8 +2,10 @@
 
 use Pingpong\Modules\Routing\Controller as BaseController;
 use Validator;
+use App\Http\Requests\Interfaces\DoctorRank;
 class Controller extends BaseController
 {
+    use DoctorRank;
     protected $user;
     protected $user_login_session_key = 'user_login_session_key'; // 用户登录session key
     protected $site_id = 2; // airClass site_id
@@ -14,6 +16,12 @@ class Controller extends BaseController
     public function __construct()
     {
         $this->user = \Session::get($this->user_login_session_key);
+        $rank = $this->setRank(['id'=>$this->user['id'],'phone'=>$this->user['phone']])->rank;
+        if($this->user['rank']!=$rank)
+        {
+            $this->user['rank'] = $rank;
+            \Session::set($this->user_login_session_key, $this->user);
+        }
     }
 
     public function return_data_format($code = 200, $msg = null, $data = null)

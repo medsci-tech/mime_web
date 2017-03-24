@@ -17,7 +17,8 @@ class SearchController extends Controller
         $keyword = $request->keyword;
         $units = DB::table('thyroid_class_courses')
             ->leftJoin('thyroid_class_phases', function ($join) use ($keyword) {
-                $join->on('thyroid_class_courses.thyroid_class_phase_id', '=', 'thyroid_class_phases.id');
+                $join->on('thyroid_class_courses.thyroid_class_phase_id', '=', 'thyroid_class_phases.id')
+                ->where('thyroid_class_phases.site_id', '=', $this->site_id);
             })
             ->select('thyroid_class_courses.id', 'thyroid_class_courses.title','thyroid_class_courses.logo_url','thyroid_class_courses.comment')
             ->where(['thyroid_class_courses.site_id'=>$this->site_id])
@@ -26,7 +27,6 @@ class SearchController extends Controller
             ->orWhere('thyroid_class_phases.title','like','%'.$keyword.'%')
             ->paginate(20);
         return view('airclass::home.search', compact('units','keyword'));
-
 	}
 
     /**

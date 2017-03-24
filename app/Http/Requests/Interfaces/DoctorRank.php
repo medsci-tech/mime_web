@@ -44,7 +44,10 @@ trait DoctorRank
     public function setRank(array $params)
     {
         if(!isset($params['id']))
-            return false;
+        {
+            $this->rank=0;
+            return $this;
+        }
 
         if($this->getUser($params)->rank)
         {
@@ -52,6 +55,29 @@ trait DoctorRank
             {
                 $lists = StudyLog::setUserRank(['course_type'=>1,'site_id'=>$this->site_id,'id'=>$params['id']]);
                 unset($lists['course_type_count']);
+                /* 如果必修课每期课件学习时长≥10分钟,赠送积分begin */
+                if($lists)
+                {
+                    foreach($lists as $val)
+                    {
+                        $key = "user:".$params['id'].':course_id:'.$val['course_id'];
+                        if(!\Redis::exists($key)){
+                            try{
+                                //赠送迈豆积分
+                                $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['required_course']);
+                                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+                                if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                                    \Redis::set($key,$post_data['bean']);
+                            }
+                            catch (\Exception $e){
+                                $this->rank =$this->getUser($params)->rank;
+                            }
+                        }
+                    }
+
+                }
+                /* 如果必修课每期课件学习时长≥10分钟,赠送积分end */
+
                 if(count($lists)>=config('params')['study_level']['course_public_min'])
                 {
                     try{
@@ -65,9 +91,8 @@ trait DoctorRank
                         }
                     }
                     catch (\Exception $e){
-                        return $this->rank =$this->getUser($params)->rank;
+                        $this->rank =$this->getUser($params)->rank;
                     }
-
                 }
                 else
                     $this->rank =1;
@@ -90,19 +115,16 @@ trait DoctorRank
                             Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
                             $this->rank =3;
                         }
-
                     } catch (\Exception $e){
-
-                        return $this->rank =$this->getUser($params)->rank;
+                        $this->rank =$this->getUser($params)->rank;
                     }
-
                 }
                 else
                     $this->rank =2;
             }
         }
         else
-            return $this->rank =0; // 未报名
+            $this->rank =0; // 未报名
 
         return $this;
     }
