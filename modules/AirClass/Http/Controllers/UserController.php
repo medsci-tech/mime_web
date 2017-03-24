@@ -9,15 +9,23 @@ use \App\Models\{Address, Message};
 use Hash;
 use Cache;
 use DB;
+use App\Http\Requests\Interfaces\DoctorBean;
 class UserController extends Controller
 {
-
+    use DoctorBean;
     protected $get_comment_every_time = 10; // 每次加载评论条数
-
+    protected $bean = 0; // 积分数
     public function __construct()
     {
         $this->middleware('login');
         parent::__construct();
+        $bean_key = "user:".$this->user['id'].':bean';
+        if(!\Redis::exists($bean_key)){
+            $this->bean = $this->getBean(['id'=>$this->user['id'],'phone'=>$this->user['phone']])->bean; // 用户积分
+            \Redis::setex($bean_key,60,$this->bean);
+        }
+        else
+            $this->bean =  \Redis::get($bean_key);
     }
     /**
      * 我的消学习情况

@@ -27,15 +27,17 @@ trait DoctorBean
     public function getBean(array $params)
     {
         if(!isset($params['id']) || !isset($params['phone']))
-            return false;
-        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$params['phone'], null,0);
-
-        if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+            $this->bean = 0;
+        try
         {
-           // dd($response['result']['bean']['number']);
-
+            $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$params['phone'], null,0);
+            if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                $this->bean = isset($response['result']['bean']['number']) ? $response['result']['bean']['number'] : 0;
         }
-
+        catch (\Exception $e){
+            $this->bean = 0;
+        }
+        return $this;
 
     }
 
@@ -58,7 +60,7 @@ trait DoctorBean
                 $key = "user:".$params['id'].':course_id:'.$val['course_id'];
                 if(!\Redis::exists($key)){
                     try{
-                        /* 如果答疑课每期课件学习时长≥10分钟,赠送积分end */
+                        /* 如果答疑课每期课件学习时长≥10分钟,赠送积分 */
                         $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['answer_course']);
                         $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
                         if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
