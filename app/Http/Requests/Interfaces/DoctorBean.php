@@ -106,27 +106,22 @@ trait DoctorBean
     }
 
     /**
-     * @description 提问问题,每节课提问问题可获得积分上限：20积分
+     * @description 提问问题,每节课提问问题可获得积分上限：20积分/次
      * @author      lxhui<772932587@qq.com>
      * @since 1.0
      * @return array
      */
     public function setQuestionBean(array $params)
     {
-        //\Redis::del('me1');exit;
-        //\Redis::lPush('me1',10,'mycomment');
-
-       // dd(\Redis::lLen('me1'));
-
         if(!isset($params['id']) || !isset($params['course_id']) || !isset($params['phone']))
             return false;
         $key = "user:".$params['id'].':course_id:'.$params['course_id'].':question';
         if(!\Redis::exists($key)){
-            if(\Redis::lLen('me')<=4) //积分上限：4次积分
+            if(\Redis::get($key)<=2) //积分上限：2次积分
             {
                 try{
                     /* 视频点击数,赠送积分 */
-                    $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['click_course']);
+                    $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['ask_question_max']);
                     $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
                     if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
                         \Redis::incrBy($key, 1);

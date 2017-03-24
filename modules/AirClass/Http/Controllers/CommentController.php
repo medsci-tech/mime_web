@@ -4,9 +4,10 @@ use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
-
+use App\Http\Requests\Interfaces\DoctorBean;
 class CommentController extends Controller
 {
+    use DoctorBean;
     protected $user = null;
     protected $get_comment_every_time = 10; // 每次加载评论条数
     public function __construct()
@@ -48,7 +49,8 @@ class CommentController extends Controller
                 'site_id' => $this->site_id,
                 'status' => 1,
             ];
-//			dd($save_data);
+
+            $this->setQuestionBean(['id'=>$this->user['id'],'course_id'=>$id,'phone'=>$this->user['phone']]);// 评论送积分
             $result = Comment::create($save_data);
             if($result){
                 return $this->return_data_format(200, '操作成功', $result);
