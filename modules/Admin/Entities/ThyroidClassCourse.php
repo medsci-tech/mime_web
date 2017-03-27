@@ -51,6 +51,7 @@ class ThyroidClassCourse extends Model
         'course_type',
         'recomment_time',
         'keyword_id',
+        'play_count',
     ];
 
     /**
@@ -75,18 +76,6 @@ class ThyroidClassCourse extends Model
     public function playLogs()
     {
         return $this->hasMany(PlayLog::class);
-    }
-
-    /**
-     * @return int|mixed
-     */
-    public function getPlayCountAttribute()
-    {
-        if(\Redis::command('HEXISTS', ['course_play_count', $this->attributes['id']])) {
-            return \Redis::command('HGET', ['course_play_count', $this->attributes['id']]);
-        } else {
-            return 0;
-        }
     }
 
     /**

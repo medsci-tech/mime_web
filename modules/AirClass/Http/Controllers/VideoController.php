@@ -4,7 +4,6 @@ use App\Models\AnswerLog;
 use App\Models\Comment;
 use App\Models\KZKTClass;
 use App\Models\StudyLog;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\Exercise;
 use Modules\Admin\Entities\ThyroidClassCourse;
@@ -252,6 +251,7 @@ class VideoController extends Controller
 				StudyLog::where($where)->orderBy('id','desc')->first()->update($save_data);
 			}else{
 				StudyLog::create($save_data);
+				ThyroidClassCourse::find($class_id)->increment('play_count');
 			}
 		}
 
@@ -271,14 +271,16 @@ class VideoController extends Controller
 	public function watch_times_log(Request $request){
 		$class_id = $request->input('class_id');
 		$user = $this->user;
-//		dd($user);
-		$save_data = [];
-		if($user && $class_id){
-			$save_data['site_id'] = $this->site_id;
-			$save_data['doctor_id'] = $user['id'];
-			$save_data['course_id'] = $class_id;
-			// 查询是否有过观看记录
-			StudyLog::create($save_data);
+		if($class_id){
+			$save_data = [
+				'site_id' => $this->site_id,
+				'course_id' => $class_id,
+			];
+			if($user){
+				$save_data['doctor_id'] = $user['id'];
+				StudyLog::create($save_data);
+			}
+			ThyroidClassCourse::find($class_id)->increment('play_count');
 			return $this->return_data_format(200);
 		}else{
 			return $this->return_data_format(500,'参数缺失无法记录');

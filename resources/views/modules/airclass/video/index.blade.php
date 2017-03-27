@@ -20,9 +20,7 @@
                     </div>
                     <div class="thumbs pull-right">
                         <span class="icon icon_view_count"></span>
-                        {{--666--}}
-                        <!--<span class="icon icon_thumb_down"></span>
-                        0-->
+                        <span id="video_view_count">{{$class->play_count}}</span>
                     </div>
                 </div>
             </div>
@@ -296,9 +294,11 @@
                         showAlertModal('{{$video_status_mag}}');
                     }
                     if (status == 'playing') {
-                        if (num == 0 && '{{$user['id']}}') {
+                        if (num == 0) {
                             // 重新载入播放算一次播放次数
                             video_heartbeat_ajax(watch_times_action, heartbeat_data);
+                            var view_count_dom = $('#video_view_count');
+                            view_count_dom.text(parseInt(view_count_dom.text()) + 1);
                         }
                         num++;
                     }
