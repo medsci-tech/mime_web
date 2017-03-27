@@ -36,10 +36,10 @@ class UserController extends Controller
 	public function study()
 	{
         $units = DB::table('study_logs')
-            ->select(DB::raw('sum(study_duration) as duration_count, course_id,progress,video_duration,created_at,truncate(progress/video_duration,2) as percent'))
+            ->select(DB::raw('sum(study_duration) as duration_count, course_id,progress,video_duration,created_at,truncate(max(progress)/max(video_duration),2) as percent'))
             ->where(['site_id'=>$this->site_id,'doctor_id'=>$this->user['id']])
             ->groupBy('course_id')
-            ->orderBy('id', 'desc')
+            ->orderBy('percent', 'desc')
             ->paginate(15);
         foreach($units as &$val)
         {
