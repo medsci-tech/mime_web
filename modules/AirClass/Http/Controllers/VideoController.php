@@ -144,11 +144,11 @@ class VideoController extends Controller
 					}
 				}else{
 					$answer_status_mag = '报名后才能答题';
-					$video_status_mag = '报名后才能观看';
+					$video_status_mag = '报名后继续观看';
 				}
 			}else{
 				$answer_status_mag = '登陆后才能答题';
-				$video_status_mag = '登陆后才能观看';
+				$video_status_mag = '登陆后继续观看';
 			}
 
 			return view('airclass::video.index',[
