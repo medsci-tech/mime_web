@@ -31,6 +31,11 @@ class VideoController extends Controller
 	{
 		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
+        if($class->course_type==2)//达到等级二才能看选修课
+        {
+            if($this->user['rank']<2)
+                exit('<script>alert("请升级您的会员等级后观看哦!");history.back(-1);</script>');
+        }
         $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元
 		if($class){
 			//## 章节列表

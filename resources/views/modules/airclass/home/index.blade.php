@@ -59,7 +59,7 @@
             <div class="lesson_list row">
                 @foreach($recommend_classes as $recommend_class)
                 <div class="lesson col-xs-6 col-diy-20">
-                    <a class="a_list" href="{{ url('video/'.$recommend_class->id) }}">
+                    <a class="a_list" href="{{ url('video/'.$recommend_class->id) }}" target="_blank">
                         <img class="center-block" src="{{$recommend_class->logo_url}}" alt="">
                         <div class="caption">
                             <h3 class="title">{{$recommend_class->title}}</h3>
@@ -117,7 +117,7 @@
                     @foreach ($public_class_courses as $key=> $data)
                     <div role="tabpanel" class="tab-pane row fade @if ($key==0)in active @endif" id="publicTab{{$key+1}}">
                         @foreach($data['course_list'] as $val)
-                        <div class="lesson col-xs-6 col-sm-3"><a class="a_list" href="{{ url('video/'.$val->id) }}">
+                        <div class="lesson col-xs-6 col-sm-3"><a class="a_list" href="{{ url('video/'.$val->id) }}" target="_blank">
                                 <img class="center-block" src="{{ $val->logo_url  }}" alt="">
                                 <div class="caption">
                                     <h3 class="title">{{ $val->title }}</h3>
@@ -153,7 +153,7 @@
                 <div class="tab-content col-diy-80">
                     <div role="tabpanel" class="tab-pane row fade in active" id="answerTab1">
                         @foreach($answer_class_courses as $data)
-                        <div class="lesson col-xs-6 col-sm-3"><a class="a_list" href="{{ url('video/'.$data->id) }}">
+                        <div class="lesson col-xs-6 col-sm-3"><a class="a_list" href="{{ url('video/'.$data->id) }}" target="_blank">
                                 <img class="center-block" src="{{ $data->logo_url  }}" alt="">
                                 <div class="caption">
                                     <h3 class="title">{{$data->title}}</h3>
