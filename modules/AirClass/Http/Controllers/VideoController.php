@@ -31,10 +31,14 @@ class VideoController extends Controller
 	{
 		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
+
+		$view_auth = true;// 初始化观看权限
         if($class->course_type==2)//达到等级二才能看选修课
         {
             if($this->user['rank']<2)
-                exit('<script>alert("请升级您的会员等级后观看哦!");history.back(-1);</script>');
+                $view_auth =false;
+            else
+                $view_auth =true;
         }
         $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元
 		if($class){
@@ -170,6 +174,7 @@ class VideoController extends Controller
 				'answer_status_mag' => $answer_status_mag, // 可答题状态
 				'current_id' => $id, // 答题信息
                 'video_status_mag' => $video_status_mag,// 可观看状态
+                'view_auth' => $view_auth
 			]);
 		}else{
 			abort(404);
