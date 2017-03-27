@@ -308,6 +308,7 @@
                         if('{{count($answer_logs)}}' == 0){
                             $('#btn_answer').click();
                         }
+                        num = 0;
                     }
                 }
             };
