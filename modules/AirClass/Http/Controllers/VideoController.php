@@ -31,15 +31,6 @@ class VideoController extends Controller
 	{
 		//## 当前课程信息
 		$class = ThyroidClassCourse::where(['site_id' => $this->site_id, 'is_show' => 1, 'id' => $id])->first();
-
-		$view_auth = true;// 初始化观看权限
-        if($class->course_type==2)//达到等级二才能看选修课
-        {
-            if($this->user['rank']<2)
-                $view_auth =false;
-            else
-                $view_auth =true;
-        }
         $chapter = ThyroidClassPhase::where(['id'=>$class['thyroid_class_phase_id']])->first(); // 当前单元
 		if($class){
 			//## 章节列表
@@ -151,6 +142,9 @@ class VideoController extends Controller
 							$answer_status_mag = '已答过题';
 						}
 					}
+					if($class->course_type == 2 && $user['rank'] < 2){
+						$video_status_mag = '达到等级二才能观看选修课';
+					}
 				}else{
 					$answer_status_mag = '报名后才能答题';
 					$video_status_mag = '报名后继续观看';
@@ -159,7 +153,7 @@ class VideoController extends Controller
 				$answer_status_mag = '登陆后才能答题';
 				$video_status_mag = '登陆后继续观看';
 			}
-
+//			dd($chapter_classes);
 			return view('airclass::video.index',[
 				'class' => $class, // 当前课程信息
                 'chapter' => $chapter, // 当前单元信息
@@ -174,7 +168,6 @@ class VideoController extends Controller
 				'answer_status_mag' => $answer_status_mag, // 可答题状态
 				'current_id' => $id, // 答题信息
                 'video_status_mag' => $video_status_mag,// 可观看状态
-                'view_auth' => $view_auth
 			]);
 		}else{
 			abort(404);
