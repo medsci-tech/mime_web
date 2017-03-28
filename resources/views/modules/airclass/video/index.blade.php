@@ -37,9 +37,11 @@
                                     <span class="a">{{$chapter_class->title}}</span>
                                     <span class="icon icon_play_played pull-right"></span>
                                 @else
-                                    @if($chapter_class->curse_type == 2)
+                                    @if($chapter_class->course_type == 2)
                                         {{--选修课--}}
-                                        <span class="a">{{$chapter_class->title}}</span>
+{{--                                        <span class="a">{{$chapter_class->title}}</span>--}}
+                                        <a href="{{url('video', ['id' => $chapter_class->id])}}"
+                                           title="{{$chapter_class->title}}">{{$chapter_class->title}}</a>
                                         <span class="icon icon_play_locked pull-right"></span>
                                     @else
                                         {{--必修课--}}
