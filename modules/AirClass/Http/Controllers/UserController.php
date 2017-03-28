@@ -22,7 +22,7 @@ class UserController extends Controller
         $bean_key = "user:".$this->user['id'].':bean';
         if(!\Redis::exists($bean_key)){
             $this->bean = $this->getBean(['id'=>$this->user['id'],'phone'=>$this->user['phone']])->bean; // 用户积分
-            \Redis::setex($bean_key,30,$this->bean);
+            \Redis::setex($bean_key,3,$this->bean);
         }
         else
             $this->bean =  \Redis::get($bean_key);
