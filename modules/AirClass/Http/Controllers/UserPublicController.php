@@ -3,6 +3,7 @@
 use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Office;
+use App\Models\Volunteer;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
@@ -62,7 +63,6 @@ class UserPublicController extends Controller
      */
     public function register_post(Request $request)
     {
-        return $this->return_data_format(500, '注册将在4月1日进行开放，敬请期待。'); // 关闭注册
         // 验证参数合法性
         $validator_params = $this->validator_params($request->all());
         if($validator_params['code'] != 200){
@@ -89,6 +89,11 @@ class UserPublicController extends Controller
         $check_code = $sms->verify_code($req_phone, $req_code);
         if($check_code['code'] != 200){
             return $this->return_data_format(422, ['code' => $check_code['msg']]);
+        }
+
+        // 不允许代表用户注册
+        if(Volunteer::where('phone', $req_phone)->first()){
+            return $this->return_data_format(500, '代表用户无法完成注册!');
         }
         // 检验手机号是否注册
         $doctor = Doctor::where('phone', $req_phone)->first();
