@@ -16,9 +16,9 @@
                         <div class="level_progress pull-left">
                             <div class="level_progress_bg"></div>
                             <div class="level_progress_bar" style="width: {{ round(Session::get('user_login_session_key')['rank']/3, 2)*100  }}%;"></div>
-                            <span class="icon icon_level icon_level_one active"></span>
-                            <span class="icon icon_level icon_level_two"></span>
-                            <span class="icon icon_level icon_level_three"></span>
+                            <span class="icon icon_level icon_level_one @if (Session::get('user_login_session_key')['rank']== 1)active @endif"></span>
+                            <span class="icon icon_level icon_level_two @if (Session::get('user_login_session_key')['rank']== 2)active @endif"></span>
+                            <span class="icon icon_level icon_level_three @if (Session::get('user_login_session_key')['rank']== 3)active @endif"></span>
                         </div>
                     </div>
                     <p><span class="location">{{ Session::get('user_login_session_key')['province'] }}{{ Session::get('user_login_session_key')['city'] }}{{ Session::get('user_login_session_key')['area'] }}</span><span class="hospital">{{ Session::get('user_login_session_key')['hospital_name'] }}</span><span class="department">{{ Session::get('user_login_session_key')['office'] }}</span><span class="title">{{ Session::get('user_login_session_key')['title'] }}</span><span class="beans pull-right"><i class="icon icon_beans"></i>迈豆：{{ Redis::get('user:'.Session::get('user_login_session_key')['id'].':bean') }}</span></p>
