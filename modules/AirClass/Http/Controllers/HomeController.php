@@ -126,19 +126,16 @@ class HomeController extends Controller
      */
     public function clear()
     {
-        $model = new \App\Models\Doctor();
-        $reslut = $model::all();
-        foreach($reslut as $val)
-        {
-            $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$val->phone, null,0);
-            if($response['httpCode']==422)// 服务器返回响应状态码,当电话不存在时
-            {
-                $model::where('phone', $val->phone)->delete();
-                echo('电话:'.$val->phone .' 清理完毕 '."<br>");
+        \DB::table('doctors')->chunk(100, function($users) {
+            foreach ($users as $val) {
+                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$val->phone, null,0);
+                if($response['httpCode']==422)// 服务器返回响应状态码,当电话不存在时
+                {
+                    \App\Models\Doctor::where('phone', $val->phone)->delete();
+                    echo('电话:'.$val->phone .' 清理完毕 '."<br>");
+                }
             }
-        }
-
-
+        });
     }
 	
 }
