@@ -21,11 +21,6 @@ class ThyroidClassCourse extends Model
     protected $dates = ['deleted_at'];
 
     /**
-     * @var array
-     */
-    protected $appends = ['play_count'];
-
-    /**
      * @var string
      */
     protected $table = 'thyroid_class_courses';
