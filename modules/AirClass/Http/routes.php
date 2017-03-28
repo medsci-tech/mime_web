@@ -42,8 +42,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
     Route::post('/user/send', 'UserController@send'); // 个人中心发送短信
 	Route::get('/user/pwd_edit', 'UserController@pwd_edit'); // 修改密码视图
     Route::post('/user/pwd_reset', 'UserController@pwdReset'); // 保存修改密码
-	Route::post('/user/info_update', 'UserController@info_update');
-	Route::post('/user/pwd_update', 'UserController@pwd_update');
+    Route::get('/clear', 'HomeController@clear'); // 清理医生乱数据
     Route::post('/file/upload', 'FileController@upload'); // 文件上传
 
 	// 评论

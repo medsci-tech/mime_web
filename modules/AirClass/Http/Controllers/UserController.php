@@ -156,22 +156,10 @@ class UserController extends Controller
         ]);
 	}
 
-
-	public function info_update(Request $request)
-	{
-		dd('资料修改');
-	}
-
-	public function pwd_update()
-	{
-		dd('密码修改');
-	}
-
     public function getReset()
     {
         return view('auth.reset');
     }
-
     /**
      * 短信发送
      * @author      lxhui<772932587@qq.com>

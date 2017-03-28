@@ -105,10 +105,8 @@ class HomeController extends Controller
             'class_info' => $class_info,
             'count' => $count,
         ]);
-
     }
 
-    
     /**
      * 帮助
      */
@@ -118,6 +116,29 @@ class HomeController extends Controller
         return view('airclass::home.help', [
             'teachers' => $teachers,
         ]);
+    }
+
+    /**
+     * 清理医生乱数据
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
+    public function clear()
+    {
+        $model = new \App\Models\Doctor();
+        $reslut = $model::all();
+        foreach($reslut as $val)
+        {
+            $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$val->phone, null,0);
+            if($response['httpCode']==422)// 服务器返回响应状态码,当电话不存在时
+            {
+                $model::where('phone', $val->phone)->delete();
+                echo('电话:'.$val->phone .' 清理完毕 '."<br>");
+            }
+        }
+
+
     }
 	
 }

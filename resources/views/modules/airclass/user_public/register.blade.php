@@ -145,8 +145,8 @@
     <script type="text/javascript">
     $(function () {
          // 关闭注册
-        $('#alertModal').find('.modal-content').text('注册将在4月1日进行开放，敬请期待。');
-        $('#alertModal').modal('show');
+        //$('#alertModal').find('.modal-content').text('注册将在4月1日进行开放，敬请期待。');
+        //$('#alertModal').modal('show');
 
         var code_url = '{{url('sms/code')}}';
         var register_url = '{{url('register/post')}}';
