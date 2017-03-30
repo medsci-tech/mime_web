@@ -294,7 +294,7 @@
             var listener = {
                 playStatus: function (status) {
                     if (status == 'stop') {
-                        showAlertModal('{{$video_status_mag}}');
+                        showAlertModal2('{{$video_status_mag}}');
                     }
                     if (status == 'playing') {
                         if (num == 0) {
