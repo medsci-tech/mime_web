@@ -344,6 +344,14 @@ a {
 	border-radius: 50%;
 }
 
+.class_list_lock_icon{
+	background: url("../img/lock_13x16.png") no-repeat center;
+	width: 13px;
+	height: 16px;
+	margin: 0 5px;
+	display: inline-block;
+}
+
 @media (max-width: 768px) {
 	.modal .modal-dialog {
 		width: 90% !important;
