@@ -143,6 +143,7 @@
                                     <p class="introduction">{{$recommend_class->comment}}</p>
                                     <p class="price_and_persons">
                                         <span class="price"></span>
+                                        @if($recommend_class->course_type == 2)<span class="class_list_lock_icon pull-right"></span>@endif
                                         <span class="persons pull-right">{{$recommend_class->play_count}}人在学</span>
                                     </p>
                                 </div>
