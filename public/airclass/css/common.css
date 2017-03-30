@@ -29,6 +29,14 @@ a {
 	color: #333333;
 	font-size: 12px;
 }
+.msg_tips{
+	display: inline-block;
+
+}
+.msg_tips:hover{
+	text-decoration: none;
+
+}
 .a_list{
 	width: 100%;
 	display: block;
@@ -120,10 +128,14 @@ a {
 
 .navbar .reminder .badge {
 	position: absolute;
-	right: -10px;
-	top: -10px;
-	padding: 2px 5px;
+	right: -5px;
+	top: -5px;
+	padding: 4px;
 	background: #FF0000;
+	width: 5px;
+	height: 5px;
+	display: block;
+	min-width: 0;
 }
 
 .navbar .devider {

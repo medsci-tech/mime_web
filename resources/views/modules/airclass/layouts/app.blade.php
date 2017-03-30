@@ -75,9 +75,13 @@
 				</form>
 				@if(\Session::has('user_login_session_key'))
 				<div class="handlers pull-right">
-					<span class="reminder glyphicon glyphicon-bell">
-						<span class="badge">{{ App\Models\Message::where(['phone'=>Session::get('user_login_session_key')['phone'],'read_status'=>0])->orderBy('id', 'desc')->count() }}</span>
-					</span>
+					<a class="msg_tips" href="{{url('user/msg')}}">
+						<span class="reminder glyphicon glyphicon-bell">
+							@if(App\Models\Message::where(['phone'=>Session::get('user_login_session_key')['phone'],'read_status'=>0])->orderBy('id', 'desc')->count() > 0)
+							<span class="badge"></span>
+								@endif
+						</span>
+					</a>
 					<a class="username" href="{{url('user')}}">{{ Session::get('user_login_session_key')['phone'] }}</a><span class="devider">|</span>
 					<a class="logout" href="{{url('logout')}}">退出</a>
 				</div>

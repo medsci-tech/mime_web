@@ -60,6 +60,15 @@ var showAlertModal = function(msg) {
         $('#alertModal').modal('hide');
     }, 1500);
 };
+var showAlertModal2 = function(msg,time) {
+    $('#alertModal').find('.modal-content').text(msg);
+    $('#alertModal').modal('show');
+    if(time){
+        setTimeout(function() {
+            $('#alertModal').modal('hide');
+        }, time);
+    }
+};
 
 /**
  * 短信ajax提交
