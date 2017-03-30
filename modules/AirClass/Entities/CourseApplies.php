@@ -17,6 +17,17 @@ class CourseApplies extends Model
      */
     protected $table = 'course_applies';
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'file',
+        'doctor_id',
+        'site_id',
+    ];
+
+    /**
      * The "booting" method of the model.
      *
      * @return void

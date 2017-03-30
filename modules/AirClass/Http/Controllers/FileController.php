@@ -2,8 +2,15 @@
 use Illuminate\Http\Request;
 use Storage;
 use App\Http\Requests;
+use Modules\AirClass\Entities\CourseApplies;
 class FileController  extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+        parent::__construct();
+    }
+
     /**
      * 文件上传方法
      * @author      lxhui<772932587@qq.com>
@@ -13,6 +20,9 @@ class FileController  extends Controller
     public function upload(Request $request)
     {
         if ($request->isMethod('post')) {
+            $file_info = CourseApplies::where(['doctor_id'=>$this->user['id']])->first();
+            if($file_info)
+                exit('您已经申请过了!');
             if(!$request->hasFile('file')){
                 exit('上传文件为空!');
             }
@@ -28,6 +38,8 @@ class FileController  extends Controller
                 // 使用新建的uploads本地存储空间（目录）
                 $bool = Storage::disk('uploads')->put($fileName, file_get_contents($realPath));
 
+                CourseApplies::create(['file' =>$fileName,'doctor_id'=>$this->user['id'],'site_id'=>$this->site_id]);
+                exit('上传成功!');
             }
         }
 
