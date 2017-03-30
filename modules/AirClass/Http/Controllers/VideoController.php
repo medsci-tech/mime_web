@@ -211,7 +211,7 @@ class VideoController extends Controller
 			if($result){
 				//调用用户中心接口
 				$api = new ApiToUserCenterController();
-				$api_result = $api->modify_beans($user['phone'], config('params')['bean_rules']['watch_video']);
+				$api_result = $api->modify_beans($user['phone'], config('params')['bean_rules']['answer_question']);
 				if($api_result['code'] == 200){
 					return $this->return_data_format(200, '恭喜您，完成答题获得15积分');
 				}else{
