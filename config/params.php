@@ -46,7 +46,6 @@ return [
         'ask_question' => 10, // 提问问题,10积分/问题
         'ask_question_max' => 20, // 提问问题,每节课提问问题可获得积分上限：20积分
         'answer_question' => 15, // 回答问题,15积分/问题
-        'answer_question_max' => 30, // 回答问题,每节课提问问题可获得积分上限：30积分
         'rank_level' => 100, // 晋升一个阶段将获得100积分
     ],
 
