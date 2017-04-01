@@ -23,6 +23,10 @@ body {
 .btn:hover, .btn:focus {
 	color: #FFFFFF;
 }
+.btn[disabled]{
+	background-color: #428bca;
+	border-color: #357ebd;
+}
 
 
 a {
