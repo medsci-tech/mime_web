@@ -1,4 +1,5 @@
 <?php namespace Modules\AirClass\Http\Controllers;
+use App\Models\KZKTClass;
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Banner;
 use Modules\AirClass\Entities\Teacher;
@@ -37,6 +38,11 @@ class HomeController extends Controller
 
         $class_info  = CourseClass::whereIn('id', array($this->answer_class_id, $this->private_class_id, $this->public_class_id))->orderBy('id', 'asc')->groupBy('id')->get();
 
+        if($this->user){
+            $sing_up = KZKTClass::where('doctor_id', $this->user['id'])->first();
+        }else{
+            $sing_up = null;
+        };
 		return view('airclass::home.index',[
             'banners' => $banners,
             'classes' => $classes,
@@ -44,6 +50,7 @@ class HomeController extends Controller
             'recommend_classes' => $recommend_classes, // 课程推荐
             'public_class_courses' => $public_class_units, // 公开课
             'answer_class_courses' => $answer_class_courses, // 答疑课
+            'sing_up' => $sing_up, // 答疑课
         ]);
 	}
 

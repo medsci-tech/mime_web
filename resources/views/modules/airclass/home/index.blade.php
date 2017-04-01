@@ -49,7 +49,7 @@
                         开课时间：2017年04月01日- 2017年11月30日
                     </div>
                 </div>
-                <button type="button" class="btn btn_project_sign">课程报名</button>
+                <button type="button" class="btn btn_project_sign" @if($sing_up) disabled @endif>@if($sing_up) 已报名 @else 课程报名 @endif</button>
             </div>
         </div>
 
@@ -213,7 +213,7 @@
             );
             
             $('.btn_project_sign').click(function () {
-                showAlertModal('请联系诺空课愿者进行报名');
+                showAlertModal('请联系空课志愿者进行报名');
             });
         });
     </script>
