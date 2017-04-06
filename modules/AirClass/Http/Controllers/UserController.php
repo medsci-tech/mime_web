@@ -248,13 +248,11 @@ class UserController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'name' => 'required|max:25',
-           // 'sex' => 'required|in:男,女',
             'hospital_name' => 'required',
             'province' => 'required',
             'city' => 'required',
             'office' => 'required',
             'hospital_level' => 'required',
-            'office' => 'required',
             'title' => 'required',
             'email' => 'required',
         ]);
@@ -267,7 +265,6 @@ class UserController extends Controller
             $phone = $this->user['phone'];//session获取
             $name = $request->name; //姓名
             $hospital = $request->hospital_name; //医院
-            $sex = $request->sex;//性别
             $office = $request->office; //科室
             $title = $request->title; //职称
             $hospital_level = $request->hospital_level; //等级
@@ -322,7 +319,6 @@ class UserController extends Controller
                                 {
                                     $updata = array(
                                         'name'=>$name,//姓名
-                                        'sex'=>$sex, //性别
                                         'office'=>$office, //科室
                                         'hospital_id'=> $hospital_id, //医院id
                                         'title'=>$title, //职称
@@ -349,7 +345,7 @@ class UserController extends Controller
         /* 更新会话 */
         $this->user['name'] =$name;
         $this->user['title'] =$title;
-        $this->user['office'] =$request->office_id;
+        $this->user['office'] =$request->office;
         $this->user['province'] =$request->province;
         $this->user['city'] =$request->city;
         $this->user['area'] =$request->area;

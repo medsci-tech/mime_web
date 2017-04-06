@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label"><span class="necessary">＊</span>科室</label>
                     <div class="col-sm-5">
-                        <select class="form-control" name="office_id" id="office_id">
+                        <select class="form-control" name="office" id="office">
                             @foreach($offices as $office)
                                 <option value="{{$office->office_name}}" @if($doctor['office'] == $office->office_name) selected @endif >{{$office->office_name}}</option>
                             @endforeach
@@ -163,8 +163,8 @@
                 showTips($('select[name="hospitalLevel"]'));
                 return;
             }
-            if ($('select[name="office_id"]').val() === '') {
-                showTips($('select[name="office_id"]'));
+            if ($('select[name="office"]').val() === '') {
+                showTips($('select[name="office"]'));
                 return;
             }
             if ($('select[name="doctorTitle"]').val() === '') {
@@ -186,7 +186,7 @@
                 'area': $('#save-area').val(),
                 'country_id': $('select[name="area"]').val(),
                 'hospital_level': $('select[name="hospitalLevel"]').val(), //等级
-                'office': $('select[name="office_id"]').val(), //科室
+                'office': $('select[name="office"]').val(), //科室
                 'title': $('select[name="doctorTitle"]').val(), //职称
                 'email': $('#email').val(),
             };
