@@ -35,7 +35,7 @@ trait DoctorRank
 
     /**
      * @description 等级一：学员报名成功后即为等级一级别，可学习任意所有必修课；
-     * 等级二：学员学习20节必修课程且每节课学习时长均>=10分钟后，进度到达等级二；
+     * 等级二：学员学习所有必修课程且每节课学习时长均>=10分钟后，进度到达等级二；
      * 等级三：在等级二的基础上，学完所有的选修课，且每节课学习时长>=10分钟，升级至等级三；
      * @author      lxhui<772932587@qq.com>
      * @since 1.0
@@ -54,6 +54,7 @@ trait DoctorRank
             if($this->getUser($params)->rank==1)
             {
                 $lists = StudyLog::setUserRank(['course_type'=>1,'site_id'=>$this->site_id,'id'=>$params['id']]);
+                $course_count= $lists['course_type_count'];
                 unset($lists['course_type_count']);
                 /* 如果必修课每期课件学习时长≥10分钟,赠送积分begin */
                 if($lists)
@@ -77,8 +78,8 @@ trait DoctorRank
 
                 }
                 /* 如果必修课每期课件学习时长≥10分钟,赠送积分end */
-
-                if(count($lists)>=config('params')['study_level']['course_public_min'])
+                //if(count($lists)>=config('params')['study_level']['course_public_min'])
+                if(count($lists)==$course_count)
                 {
                     try{
                         //赠送迈豆积分

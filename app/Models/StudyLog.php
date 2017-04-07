@@ -39,7 +39,7 @@ class StudyLog extends Model
         if(!isset($params['course_type']) || !isset($params['id']))
             return false;
 
-        $courses = ThyroidClassCourse::where(['course_type'=>$params['course_type'],'is_show'=>1])->get()->toArray(); //  课程类型: 1必修课:
+        $courses = ThyroidClassCourse::where(['course_type'=>$params['course_type'],'is_show'=>1,'course_class_id'=>4])->get()->toArray(); //  课程类型:空开课 1必修课:
         $course_type_arr = $courses ?  array_column($courses, 'id') : [];
         /* 验证等级 */
         $lists = \DB::table('study_logs')
