@@ -36,7 +36,7 @@ class UserController extends Controller
 	public function study()
 	{
         $units = DB::table('study_logs')
-            ->select(DB::raw('sum(study_duration) as duration_count,max(created_at) as study_date, course_id,progress,video_duration,created_at,truncate(max(progress)/max(video_duration),2) as percent'))
+            ->select(DB::raw('sum(study_duration) as duration_count,max(created_at) as study_date, course_id,progress,video_duration,created_at,truncate(max(progress)/max(video_duration),3) as percent'))
             ->where(['site_id'=>$this->site_id,'doctor_id'=>$this->user['id']])
             ->groupBy('course_id')
             //->orderBy('percent', 'desc')
@@ -52,6 +52,7 @@ class UserController extends Controller
             $val->id=$model->id;
             $val->date_time=date('Y/m/d',strtotime($val->study_date));
             $val->title=$model->title;
+            $val->percent = $val->percent>1 ? 1: $val->percent ;
         }
         return view('airclass::user.study', [
             'current_active' => 'study',

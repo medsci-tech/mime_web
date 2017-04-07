@@ -13,7 +13,7 @@
                     <div class="lesson_info">
                         <h4 class="lesson_title">{{ $data->title }}</h4>
                         <p class="lesson_introduction">{{ str_limit($data->comment, $limit = 100, $end = '...') }}</p>
-                        <p class="lesson_data"><span class="icon icon_percentage"></span>已学{{ isset($data->percent) ? $data->percent*100 : 0 }}%<span class="icon icon_time"></span>用时{{ ceil($data->duration_count/60) }}分钟</p>
+                        <p class="lesson_data"><span class="icon icon_percentage"></span>已学{{ isset($data->percent) ? round($data->percent,2)*100 : 0 }}%<span class="icon icon_time"></span>用时{{ ceil($data->duration_count/60) }}分钟</p>
                     </div>
                     <span class="lesson_date">{{ $data->date_time  }}</span>
                     <a class="btn_outline" href="{{ url('video/'.$data->id) }}" target="_blank">继续学习</a>
