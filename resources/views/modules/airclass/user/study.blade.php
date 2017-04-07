@@ -20,6 +20,7 @@
                 </div>
                 @endforeach
             </div>
+            {!! $units->links() !!}
         </div>
 
 @endsection
