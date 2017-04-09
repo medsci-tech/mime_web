@@ -20,7 +20,7 @@ class SearchController extends Controller
                 $join->on('thyroid_class_courses.thyroid_class_phase_id', '=', 'thyroid_class_phases.id')
                 ->where('thyroid_class_phases.site_id', '=', $this->site_id);
             })
-            ->select('thyroid_class_courses.id', 'thyroid_class_courses.title','thyroid_class_courses.logo_url','thyroid_class_courses.comment','thyroid_class_courses.course_type')
+            ->select('thyroid_class_courses.id', 'thyroid_class_courses.play_count','thyroid_class_courses.title','thyroid_class_courses.logo_url','thyroid_class_courses.comment','thyroid_class_courses.course_type')
             ->where(['thyroid_class_courses.site_id'=>$this->site_id])
             ->where(['thyroid_class_courses.is_show'=> 1])
             ->where('thyroid_class_courses.title','like','%'.$keyword.'%')
