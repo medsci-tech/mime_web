@@ -60,13 +60,13 @@ class ThyroidClassPhase extends Model
     /**
      * @return int|mixed
      */
-    public function getPlayCountAttribute()
-    {
-        $courses = ThyroidClassCourse::where('thyroid_class_phase_id', $this->attributes['id'])->get();
-        $count = 0;
-        foreach($courses as $course) {
-            $count += \Redis::command('HGET', ['course_play_count', $course->id]);
-        }
-        return $count;
-    }
+//    public function getPlayCountAttribute()
+//    {
+//        $courses = ThyroidClassCourse::where('thyroid_class_phase_id', $this->attributes['id'])->get();
+//        $count = 0;
+//        foreach($courses as $course) {
+//            $count += \Redis::command('HGET', ['course_play_count', $course->id]);
+//        }
+//        return $count;
+//    }
 }
