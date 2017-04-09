@@ -15,7 +15,7 @@ class ThyroidClassCourse extends Model
     /**
      * @var array
      */
-    protected $appends = ['play_count'];
+    //protected $appends = ['play_count'];
 
     /**
      * @var string
@@ -74,12 +74,12 @@ class ThyroidClassCourse extends Model
     /**
      * @return int|mixed
      */
-    public function getPlayCountAttribute()
-    {
-        if(\Redis::command('HEXISTS', ['course_play_count', $this->attributes['id']])) {
-            return \Redis::command('HGET', ['course_play_count', $this->attributes['id']]);
-        } else {
-            return 0;
-        }
-    }
+//    public function getPlayCountAttribute()
+//    {
+//        if(\Redis::command('HEXISTS', ['course_play_count', $this->attributes['id']])) {
+//            return \Redis::command('HGET', ['course_play_count', $this->attributes['id']]);
+//        } else {
+//            return 0;
+//        }
+//    }
 }
