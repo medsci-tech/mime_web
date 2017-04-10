@@ -328,15 +328,27 @@ class UserController extends Controller
                                         'email'=>$email,
                                     );
                                     Doctor::where('id', $this->user['id'])->update($updata);
+
+                                    /* 更新会话 */
+                                    $this->user['name'] =$name;
+                                    $this->user['title'] =$title;
+                                    $this->user['office'] =$request->office;
+                                    $this->user['province'] =$request->province;
+                                    $this->user['city'] =$request->city;
+                                    $this->user['area'] =$request->area;
+                                    $this->user['hospital_name'] =$request->hospital_name;
+                                    $this->user['hospital_level'] =$hospital_level;
+                                    \Session::set($this->user_login_session_key, $this->user);
                                 }
                             }
                         }catch (\Exception $e) {
-                            return ['status_code' => 0,'message' =>'服务器异常,修改失败!'.$e->getMessage()];
+                            return ['code' => 0,'message' =>'服务器异常,修改失败!'.$e->getMessage()];
                         }
                     }
                 }
-                else
+                else{
                     return ['code' => 0,'message' =>'服务器异常哦,修改失败!'];
+                }
 
                 DB::commit();
             } catch (\Exception $e){
@@ -345,18 +357,8 @@ class UserController extends Controller
             }
 
         }
-        /* 更新会话 */
-        $this->user['name'] =$name;
-        $this->user['title'] =$title;
-        $this->user['office'] =$request->office;
-        $this->user['province'] =$request->province;
-        $this->user['city'] =$request->city;
-        $this->user['area'] =$request->area;
-        $this->user['hospital_name'] =$request->hospital_name;
-        $this->user['hospital_level'] =$hospital_level;
-        \Session::set($this->user_login_session_key, $this->user);
-        return ['code' => 200, 'message'=>'保存成功!'];
 
+        return ['code' => 200, 'message'=>'保存成功!'];
     }
 
 	public function logout(Request $request)
