@@ -147,6 +147,7 @@ class UserPublicController extends Controller
                 'office' => $req_office,
                 'title' => $req_title,
                 'province' => $req_province,
+                'role'=>'doctor',
                 'city' => $req_city,
                 'hospital_name' => $req_hospital_name,
             ];
