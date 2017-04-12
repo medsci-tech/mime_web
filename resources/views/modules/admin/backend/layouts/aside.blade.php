@@ -71,6 +71,7 @@
           <li><a href="{{ url('/statistic/area-map') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>用户分布</a></li>
           <li><a href="{{ url('/statistic/province-map') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>地区分布</a></li>
           <li><a href="{{ url('/statistic/register-bar') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>注册统计</a></li>
+          <li><a href="{{ url('/report') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>报表导出</a></li>
         </ul>
       </li>
       <li class="active treeview">
