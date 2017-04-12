@@ -57,4 +57,8 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
     Route::post('/msg/set_user', 'MsgController@setUserMsg');
     Route::get('/msg/delete', 'MsgController@delete');
 
+
+    Route::get('/report', 'ReportController@index');
+    Route::get('/report/byProvince', 'ReportController@export2ExcelByProvince');
+
 });
