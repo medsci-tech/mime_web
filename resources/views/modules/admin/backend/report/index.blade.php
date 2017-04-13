@@ -59,6 +59,20 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                        <img src="{{asset('admin/images/report-icon2.png')}}" alt="...">
+                                        <div class="caption">
+                                            <h3 class="text-center">学员信息</h3>
+                                            <p>学员信息批量分页导出</p>
+                                            <p>
+                                                @for($i = 0; $i < $sign_info_page; $i++)
+                                                <a href="{{url('report/byDoctorInfo?page=' . ($i + 1))}}" class="btn btn-default" role="button">第{{$i+1}}页</a>
+                                                    @endfor
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div><!-- /.box -->
