@@ -60,5 +60,6 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
 
     Route::get('/report', 'ReportController@index');
     Route::get('/report/byProvince', 'ReportController@export2ExcelByProvince');
+    Route::get('/report/byDoctorInfo', 'ReportController@export2ExcelDoctorInfo');
 
 });

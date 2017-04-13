@@ -12,5 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 class Volunteer extends Model
 {
     protected $table = 'volunteers';
+    
+    public function represent(){
+        return $this->belongsTo(RepresentInfo::class, 'number', 'initial');
+    }
 
 }
