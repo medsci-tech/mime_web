@@ -22,8 +22,10 @@ class ReportController extends Controller
     public function index(){
 
         $sign_info_counts = KZKTClass::where(['site_id' => $this->site_id, 'status' => 1])->count();
+        $hospital_groups = Hospital::groupBy('province')->get();
         return view('admin::backend.report.index', [
             'sign_info_page' => ceil($sign_info_counts / $this->export_sign_info),
+            'hospital_groups' => $hospital_groups,
         ]);
     }
 
@@ -44,15 +46,16 @@ class ReportController extends Controller
         return $course_lists;
     }
 
-    public function export2ExcelByProvince(){
+    public function export2ExcelByProvince(Request $request){
         set_time_limit(0);
-        $data[] = ['省份','学员总数','总时长', '答疑课', '理论课', '点击量', '等级一', '等级二', '等级三'];
+        $province  = $request->input('province');
+        if(empty($province)){
+            abort(404);
+        }
+        $data = [['省份','学员总数','总时长', '答疑课', '理论课', '点击量', '等级一', '等级二', '等级三']];
         $course_lists = $this->course_category();
 //        dd($course_lists);
 
-        $hospital_groups = Hospital::groupBy('province')->get();
-//        dd($hospital_groups);
-        foreach ($hospital_groups as $key => $hospital_group){
             $doctor_total = 0; // 医生总数
             // 医生等级
             $doctor_level = [
@@ -68,13 +71,12 @@ class ReportController extends Controller
             ];
             // 点击量
             $click_num = 0;
-            $province_hospitals = Hospital::where('province', $hospital_group->province)->get();
+            $province_hospitals = Hospital::where('province', $province)->get();
             foreach ($province_hospitals as $province_hospital){
                 if($province_hospital){
                     $hospital_doctors = Doctor::where('hospital_id',$province_hospital->id)->get();
                     $doctor_total += $hospital_doctors->count();
 //                dd($hospital_doctors);
-                    var_dump($province_hospital->id);
                     foreach ($hospital_doctors as $hospital_doctor){
                         if($hospital_doctor){
                             // 等级统计
@@ -100,17 +102,15 @@ class ReportController extends Controller
 
             $study_duration['total'] = $study_duration['public'] + $study_duration['answer'];
 
-            $data[$key + 1][] = $hospital_group->province;
-            $data[$key + 1][] = $doctor_total;
-            $data[$key + 1][] = $study_duration['total'];
-            $data[$key + 1][] = $study_duration['answer'];
-            $data[$key + 1][] = $study_duration['public'];
-            $data[$key + 1][] = $click_num;
-            $data[$key + 1][] = $doctor_level[1];
-            $data[$key + 1][] = $doctor_level[2];
-            $data[$key + 1][] = $doctor_level[3];
-//            dd($data);
-        }
+            $data[1][] = $province;
+            $data[1][] = $doctor_total;
+            $data[1][] = $study_duration['total'];
+            $data[1][] = $study_duration['answer'];
+            $data[1][] = $study_duration['public'];
+            $data[1][] = $click_num;
+            $data[1][] = $doctor_level[1];
+            $data[1][] = $doctor_level[2];
+            $data[1][] = $doctor_level[3];
 //dd($data);
         Excel::create(date('Y-m-d') . '导出报表',function($excel) use ($data){
             $excel->sheet('Sheet1', function($sheet) use ($data){

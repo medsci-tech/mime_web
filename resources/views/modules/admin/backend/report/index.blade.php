@@ -53,7 +53,9 @@
                                             <h3 class="text-center">按省份</h3>
                                             <p>统计学员情况</p>
                                             <p>
-                                                <a href="{{url('report/byProvince')}}" class="btn btn-default" role="button">导出</a>
+                                                @foreach($hospital_groups as $hospital_group)
+                                                <a href="{{url('report/byProvince?province='. $hospital_group->province)}}" class="btn btn-default" role="button">{{$hospital_group->province}}</a>
+                                                @endforeach
                                             </p>
                                         </div>
                                     </div>
