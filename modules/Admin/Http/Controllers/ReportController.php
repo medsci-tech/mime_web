@@ -123,7 +123,7 @@ class ReportController extends Controller
     public function export2ExcelDoctorInfo(){
         set_time_limit(0);
         $data = [[
-            '手机号', '学员姓名', '大区', '省', '市', '县', '医院', '医院等级', '科室', '职称','邮箱',
+            '手机号', '学员姓名', '大区', '省', '市', '县', '医院', '医院等级', '科室', '职称','邮箱', '学员等级',
             '是否电话外呼', '大区经理', '代表', '代表手机号',
             '总时长', '答疑课时长', '理论课时长', '点击总数', '答疑课点击数','理论课点击数',
         ]];
@@ -144,6 +144,7 @@ class ReportController extends Controller
             $data[$key + 1][] = $val->doctor->office ?? '';
             $data[$key + 1][] = $val->doctor->title ?? '';
             $data[$key + 1][] = $val->doctor->email;
+            $data[$key + 1][] = $val->doctor->rank;
             $data[$key + 1][] = $val->style == 'phone' ? '是' : '否';
             $data[$key + 1][] = $val->volunteer->represent->belong_dbm ?? '';
             $data[$key + 1][] = $val->volunteer->name ?? '';
