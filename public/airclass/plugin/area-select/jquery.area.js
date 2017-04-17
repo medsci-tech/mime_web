@@ -34,7 +34,7 @@
 			getApi = getApi||function(){};
 		}
 		var defaults = {
-			dataUrl:'/airclass/plugin/area-select/area.data.json',     //数据库地址
+			dataUrl:'/airclass/plugin/area-select/data.json',     //数据库地址
 			dataType:'json',          //数据库类型:'json'或'jsonp'
 			provinceField:'province', //省份字段名
 			cityField:'city',         //城市字段名
