@@ -16,9 +16,9 @@
                         <div class="level_progress pull-left">
                             <div class="level_progress_bg"></div>
                             <div class="level_progress_bar" style="width: {{ round(Session::get('user_login_session_key')['rank']/3, 2)*100  }}%;"></div>
-                            <span class="icon icon_level icon_level_one @if (Session::get('user_login_session_key')['rank']== 1)active @endif"></span>
-                            <span class="icon icon_level icon_level_two @if (Session::get('user_login_session_key')['rank']== 2)active @endif"></span>
-                            <span class="icon icon_level icon_level_three @if (Session::get('user_login_session_key')['rank']== 3)active @endif"></span>
+                            <span class="icon icon_level icon_level_one @if (Session::get('user_login_session_key')['rank'] >= 1) active @endif"></span>
+                            <span class="icon icon_level icon_level_two @if (Session::get('user_login_session_key')['rank'] >= 2) active @endif"></span>
+                            <span class="icon icon_level icon_level_three @if (Session::get('user_login_session_key')['rank'] >= 3) active @endif"></span>
                         </div>
                     </div>
                     <p>
