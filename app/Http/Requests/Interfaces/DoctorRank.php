@@ -67,7 +67,7 @@ trait DoctorRank
                                 //赠送迈豆积分
                                 $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['required_course']);
                                 $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                                if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                                if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
                                     \Redis::set($key,$post_data['bean']);
                             }
                             catch (\Exception $e){
@@ -85,7 +85,7 @@ trait DoctorRank
                         //赠送迈豆积分
                         $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
                         $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                        if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
                         {
                             Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
                             $this->rank =2;
@@ -111,7 +111,7 @@ trait DoctorRank
                         //赠送迈豆积分
                         $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
                         $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                        if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
                         {
                             Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
                             $this->rank =3;
@@ -122,6 +122,9 @@ trait DoctorRank
                 }
                 else
                     $this->rank =2;
+            }
+            if($this->getUser($params)->rank==3){
+                $this->rank = 3;
             }
         }
         else

@@ -19,6 +19,7 @@ class Doctor extends Model
         'office',
         'email',
         'title',
+        'rank',
     ];
 
     public function hospital()
