@@ -88,7 +88,7 @@ a {
 }
 
 .navbar .navbar-form input {
-	height: 40px;
+	/*height: 40px;*/
 	border: 2px solid #00A0E9;
 	border-radius: 0;
 }
@@ -99,11 +99,11 @@ a {
 }
 
 .navbar .navbar-form .btn {
-	height: 40px;
+	height: 34px;
 	border-radius: 0;
 	background: #00A0E9;
 	color: #FFFFFF;
-	font-size: 20px;
+	font-size: 16px;
 }
 
 .navbar .keywords {

@@ -39,8 +39,7 @@
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="navbar-collapse">
-			<ul class="nav navbar-nav">
+			<ul class="collapse navbar-collapse nav navbar-nav" id="navbar-collapse">
 				<li>
 					<a href="{{url('/')}}">首页</a>
 				</li>
@@ -57,42 +56,41 @@
 					<a href="{{url('help')}}">帮助</a>
 				</li>
 			</ul>
-			<div class="nav navbar-nav navbar-right clearfix">
-				<form class="navbar-form pull-left" role="search" method="get" action="{{url('search')}}" onsubmit="return validate_form()">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="搜索视频" name="keyword" id="keyword">
+		<div class="nav navbar-nav navbar-right clearfix">
+			<form class="navbar-form pull-left" role="search" method="get" action="{{url('search')}}" onsubmit="return validate_form()">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="搜索视频" name="keyword" id="keyword">
 						<span class="input-group-btn">
 							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
 						</span>
-					</div>
-					<ul class="keywords clearfix">
-						@foreach ($keywords as $data)
+				</div>
+				<ul class="keywords clearfix">
+					@foreach ($keywords as $data)
 						<li class="keyword pull-left">
 							<a href="/search/{{$data['id']}}">{{$data['name']}}</a>
 						</li>
-						@endforeach
-					</ul>
-				</form>
-				@if(\Session::has('user_login_session_key'))
+					@endforeach
+				</ul>
+			</form>
+			@if(\Session::has('user_login_session_key'))
 				<div class="handlers pull-right">
 					<a class="msg_tips" href="{{url('user/msg')}}">
 						<span class="reminder glyphicon glyphicon-bell">
 							@if(App\Models\Message::where(['phone'=>Session::get('user_login_session_key')['phone'],'read_status'=>0])->orderBy('id', 'desc')->count() > 0)
-							<span class="badge"></span>
-								@endif
+								<span class="badge"></span>
+							@endif
 						</span>
 					</a>
 					<a class="username" href="{{url('user')}}">{{ Session::get('user_login_session_key')['phone'] }}</a><span class="devider">|</span>
 					<a class="logout" href="{{url('logout')}}">退出</a>
 				</div>
-				@else
+			@else
 				<div class="handlers pull-right">
 					<a class="btn_login" href="javascript:;" data-toggle="modal" data-target="#loginModal">登录</a>
 					<span class="devider">|</span>
 					<a class="btn_signup" href="{{url('register')}}">注册</a>
 				</div>
-				@endif
-			</div>
+			@endif
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
@@ -129,10 +127,6 @@
 				<span class="devider">|</span>
 				<a href="{{url('register')}}">注册账号</a>
 			</p>
-			<div class="text-right wechat_login_container">
-				其他登录方式：
-				<a href="javascript:void(0);" class="wechat_login pull-right"><span class="icon icon_wechat pull-left"></span>微信登录</a>
-			</div>
 		</div>
 	</div>
 </div>
@@ -161,25 +155,9 @@
 			</p>
 			<div class="others clearfix">
 			</div>
-			<div class="text-right wechat_login_container">
-				其他登录方式：
-				<a href="javascript:void(0);" class="wechat_login pull-right"><span class="icon icon_wechat pull-left"></span>微信登录</a>
-			</div>
 		</div>
 	</div>
 </div>
-
-<!-- wechat login modal -->
-{{--<div class="login_modal modal fade" id="wechatLoginModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">--}}
-	{{--<div class="modal-dialog" role="document">--}}
-		{{--<div class="modal-content">--}}
-			{{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
-			{{--<h3 class="title text-center">微信登录</h3>--}}
-			{{--<p class="text-center">设计图</p>--}}
-		{{--</div>--}}
-	{{--</div>--}}
-{{--</div>--}}
-
 
 <!-- forget password modal -->
 <div class="login_modal msg_login_modal forget_pwd_modal modal fade" id="forgetPwdModal" tabindex="-1" role="dialog" aria-labelledby="msgLoginModal">
@@ -204,10 +182,6 @@
 				<span class="devider">|</span>
 				<a href="{{url('register')}}">注册账号</a>
 			</p>
-			<div class="text-right wechat_login_container">
-				其他登录方式：
-				<a href="javascript:void(0);" class="wechat_login pull-right"><span class="icon icon_wechat pull-left"></span>微信登录</a>
-			</div>
 		</div>
 	</div>
 </div>
