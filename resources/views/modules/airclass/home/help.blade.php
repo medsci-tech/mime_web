@@ -67,32 +67,32 @@
                 <div class="lesson_content">
                     <table>
                         <tr>
-                            <th>课程类型</th>
                             <th>课程编号</th>
+                            <th>课程类型</th>
                             <th>课程题目</th>
                             <th>授课专家</th>
                             <th>医院</th>
                             <th>日期</th>
                         </tr>
-                        <tr>
-                            <td class="table_title" colspan="6">糖尿病基础知识</td>
-                        </tr>
-                        <tr>
-                            <td>必修课</td>
-                            <td>1</td>
-                            <td>糖尿病的基层管理现状及问题</td>
-                            <td>杨建梅</td>
-                            <td>北京大学第一医院</td>
-                            <td>2017-05-12</td>
-                        </tr>
-                        <tr class="color1">
-                            <td>必修课</td>
-                            <td>1</td>
-                            <td>糖尿病的基层管理现状及问题</td>
-                            <td>杨建梅</td>
-                            <td>北京大学第一医院</td>
-                            <td>2017-05-12</td>
-                        </tr>
+
+                        @if($class_lists)
+                            @foreach($class_lists as $list)
+                                <tr>
+                                    <td class="table_title" colspan="6">{{$list['unit_name']}}</td>
+                                </tr>
+                                @foreach($list['unit_list'] as $key => $value)
+                                    <tr @if($key % 2 == 1) class="color1" @endif>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$value['type']}}</td>
+                                        <td>{{$value['name']}}</td>
+                                        <td>{{$value['lecturer']}}</td>
+                                        <td>{{$value['hospital']}}</td>
+                                        <td>{{$value['published_at']}}</td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        @else
+                        @endif
                     </table>
                 </div>
             </div>
