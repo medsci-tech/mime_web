@@ -29,7 +29,7 @@ trait DoctorRank
     {
         if(!isset($params['id']))
             return false;
-        $this->doctor_user = doctor::where('id', $params['id'])->firstOrFail();
+        $this->doctor_user = Doctor::where('id', $params['id'])->firstOrFail();
         return $this->doctor_user ;
     }
 
