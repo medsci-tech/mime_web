@@ -112,7 +112,7 @@
 			<div class="form-group checkbox_group">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" checked>
+						<input type="checkbox" name="remember" checked>
 						<span class="checkbox_img"></span>
 						记住密码
 					</label>

@@ -1,4 +1,5 @@
 <?php namespace Modules\AirClass\Http\Controllers;
+use App\Models\ClassDetails;
 use App\Models\KZKTClass;
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Banner;
@@ -120,8 +121,17 @@ class HomeController extends Controller
     public function help()
     {
         $teachers = Teacher::where(['site_id' => $this->site_id])->get();
+        $class_lists = [];
+        foreach (config('params')['kzkt_class_unit'] as $key => $val){
+            $units = ClassDetails::where('unit',$key)->get();
+            $class_lists[] = [
+                'unit_name' => $val,
+                'unit_list' => $units,
+            ];
+        }
         return view('airclass::home.help', [
             'teachers' => $teachers,
+            'class_lists' => $class_lists,
         ]);
     }
 

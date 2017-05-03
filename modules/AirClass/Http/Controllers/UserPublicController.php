@@ -11,39 +11,6 @@ use Session;
 
 class UserPublicController extends Controller
 {
-    /**
-     * 账号登陆和短信登陆公共方法
-     * @param $user
-     * @return array
-     */
-    protected function save_session($user){
-        $save_data = [
-            'id' => $user->id,
-            'name' => $user->name, // 昵称
-            'email' => $user->email, // 邮箱
-            'nickname' => $user->nickname, // 昵称
-            'headimgurl' => $user->headimgurl, // 头像
-            'phone' => $user->phone,
-            'office' => $user->office, // 科室
-            'title' => $user->title, // 职称
-            'rank' => $user->rank, // 等级
-        ];
-        if($user->hospital){
-            $save_data['province'] = $user->hospital->province;
-            $save_data['city'] = $user->hospital->city;
-            $save_data['area'] = $user->hospital->country;
-            $save_data['hospital_name'] = $user->hospital->hospital;
-            $save_data['hospital_level'] = $user->hospital->hospital_level;
-        }else{
-            $save_data['province'] = '';
-            $save_data['city'] = '';
-            $save_data['area'] = '';
-            $save_data['hospital_name'] = '';
-            $save_data['hospital_level'] = '';
-        }
-        \Session::set($this->user_login_session_key, $save_data);
-        return $save_data;
-    }
 
     /**
      * @return mixed
@@ -157,7 +124,9 @@ class UserPublicController extends Controller
             if($api_to_uc_res['code'] == 200){
                 DB::commit();
                 $this->save_session($add_doctor);
-                return $this->return_data_format(200,'注册成功!');
+                $tempCookie = \Cookie::forever($this->user_login_code, $req_phone);
+                return \Response::make(['code' => 200, 'msg' => '注册成功'])->withCookie($tempCookie);
+//                return $this->return_data_format(200,'注册成功!');
             }else{
                 DB::rollback();//事务回滚
                 return $this->return_data_format(500, $api_to_uc_res['msg']);
@@ -180,12 +149,18 @@ class UserPublicController extends Controller
             return $this->return_data_format($validator_params['code'], $validator_params['msg']);
         }
         $phone = $request->input('phone');
+        $remember = $request->input('remember');
         $password = $request->input('login_pwd');
         $user = Doctor::where('phone', $phone)->first();
         if($user){
             if (Hash::check($password, $user['password'])) {
                 $save_data = $this->save_session($user);
-                return $this->return_data_format(200,'success', $save_data);
+                if($remember){
+                    $tempCookie = \Cookie::forever($this->user_login_code, $phone);
+                    return \Response::make(['code' => 200, 'msg' => '登陆成功','data' => $save_data])->withCookie($tempCookie);
+                }else{
+                    return $this->return_data_format(200,'登陆成功', $save_data);
+                }
             } else {
                 return $this->return_data_format(422, '用户名或密码错误');
             }
@@ -206,6 +181,7 @@ class UserPublicController extends Controller
             return $this->return_data_format($validator_params['code'], $validator_params['msg']);
         }
         $phone = $request->input('phone');
+        $remember = $request->input('remember');
         $code = $request->input('code');
         $sms = new SmsController();
         $check_code = $sms->verify_code($phone, $code);
@@ -216,7 +192,12 @@ class UserPublicController extends Controller
 //        dd($user->hospital);
         if ($user) {
             $save_data = $this->save_session($user);
-            return $this->return_data_format(200,'登陆成功', $save_data);
+            if($remember){
+                $tempCookie = \Cookie::forever($this->user_login_code, $phone);
+                return \Response::make(['code' => 200, 'msg' => '登陆成功','data' => $save_data])->withCookie($tempCookie);
+            }else{
+                return $this->return_data_format(200,'登陆成功', $save_data);
+            }
         } else {
             return $this->return_data_format(501, '手机号未注册');
         }
@@ -266,6 +247,7 @@ class UserPublicController extends Controller
     // 退出
     public function logout(){
         Session::forget($this->user_login_session_key);
+        \Cookie::queue($this->user_login_code,null);
         return redirect('/');
     }
 

@@ -1,6 +1,7 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
 use App\Http\Requests\Interfaces\DoctorBean;
+use App\Models\Doctor;
 use Pingpong\Modules\Routing\Controller as BaseController;
 use Validator;
 use App\Http\Requests\Interfaces\DoctorRank;
@@ -9,6 +10,7 @@ class Controller extends BaseController
     use DoctorRank;
     protected $user;
     protected $user_login_session_key = 'user_login_session_key'; // 用户登录session key
+    protected $user_login_code = 'user_login_code'; // 用户登录session key
     protected $site_id = 2; // airClass site_id
     protected $public_class_id = 4; // 公开课id
     protected $answer_class_id = 2; // 答疑课id
@@ -16,7 +18,14 @@ class Controller extends BaseController
 
     public function __construct()
     {
+        $user_cookie = \Cookie::get($this->user_login_code);
         $this->user = \Session::get($this->user_login_session_key);
+        if(!$this->user && $user_cookie){
+            $user = Doctor::where('phone', $user_cookie)->first();
+            if($user){
+                $this->save_session($user);
+            }
+        }
         $rank = $this->setRank(['id'=>$this->user['id'],'phone'=>$this->user['phone']])->rank;
         if($this->user['rank']!=$rank)
         {
@@ -57,6 +66,40 @@ class Controller extends BaseController
         }else{
             return $this->return_data_format(200);
         }
+    }
+
+    /**
+     * 账号登陆和短信登陆公共方法
+     * @param $user
+     * @return array
+     */
+    public function save_session($user){
+        $save_data = [
+            'id' => $user->id,
+            'name' => $user->name, // 昵称
+            'email' => $user->email, // 邮箱
+            'nickname' => $user->nickname, // 昵称
+            'headimgurl' => $user->headimgurl, // 头像
+            'phone' => $user->phone,
+            'office' => $user->office, // 科室
+            'title' => $user->title, // 职称
+            'rank' => $user->rank, // 等级
+        ];
+        if($user->hospital){
+            $save_data['province'] = $user->hospital->province;
+            $save_data['city'] = $user->hospital->city;
+            $save_data['area'] = $user->hospital->country;
+            $save_data['hospital_name'] = $user->hospital->hospital;
+            $save_data['hospital_level'] = $user->hospital->hospital_level;
+        }else{
+            $save_data['province'] = '';
+            $save_data['city'] = '';
+            $save_data['area'] = '';
+            $save_data['hospital_name'] = '';
+            $save_data['hospital_level'] = '';
+        }
+        \Session::set($this->user_login_session_key, $save_data);
+        return $save_data;
     }
 
 	
