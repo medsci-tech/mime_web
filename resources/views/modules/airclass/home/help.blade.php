@@ -82,7 +82,7 @@
                                 </tr>
                                 @foreach($list['unit_list'] as $key => $value)
                                     <tr @if($key % 2 == 1) class="color1" @endif>
-                                        <td>{{$key+1}}</td>
+                                        <td class="text-center">{{$key+1}}</td>
                                         <td>{{$value['type']}}</td>
                                         <td>{{$value['name']}}</td>
                                         <td>{{$value['lecturer']}}</td>
@@ -103,7 +103,7 @@
                 <p>第二步：在右上角公众号信息中点击"查看历史消息"</p>
                 <p>第三步：找到想要学习的课程，点击学习</p>
                 <p class="margin_top_40">网页学习</p>
-                <p>第一步：登陆网址：http://mime.org.cn/airclass</p>
+                <p>第一步：登陆网址：http://airclass.mime.org.cn</p>
                 <p>第二步：点击公开课专题目录，学习课程</p>
                 <p>电话学习</p>
                 <p>接听010-56161166的来电，或自行拨打400-680-8263，输入密码6688入会。（凡自行拨打电话接入的学员都由自己承担电话费用）</p>
@@ -129,7 +129,7 @@
                 <p>咨询热线：400-864-8883</p>
                 <p>课程QQ群：364666518</p>
                 <p>官方微信：空中课堂云课堂</p>
-                <p>官方网站：<a href="http://www.mime.org.cn/airclass">mime.org.cn/airclass</a></p>
+                <p>官方网站：<a href="http://airclass.mime.org.cn">http://airclass.mime.org.cn</a></p>
             </div>
         </div>
     </div>
