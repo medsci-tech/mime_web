@@ -72,7 +72,7 @@
                             <th>课程题目</th>
                             <th>授课专家</th>
                             <th>医院</th>
-                            <th>日期</th>
+                            <th>外呼日期</th>
                         </tr>
 
                         @if($class_lists)
