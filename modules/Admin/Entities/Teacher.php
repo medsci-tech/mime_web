@@ -28,13 +28,13 @@ class Teacher extends Model
      * @var array
      */
     protected $fillable = [
-        'nickname',
         'photo_url',
         'name',
         'office',
         'title',
         'site_id',
-        'introduction'
+        'introducion',
+        'is_pt',
     ];
 
     /**

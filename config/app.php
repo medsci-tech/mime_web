@@ -165,7 +165,7 @@ return [
         //TomLingham\Searchy\SearchyServiceProvider::class,
         Modules\AirClass\Providers\MyServiceProvider::class,
 
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+        zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class
 
     ],
 
@@ -218,6 +218,5 @@ return [
         'Excel'  => Maatwebsite\Excel\Facades\Excel::class,
         'MyHttp' => Vinelab\Http\Facades\Client::class,
         //'Searchy' => TomLingham\Searchy\Facades\Searchy::class
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 ];
