@@ -29,6 +29,7 @@
           <li><a href="{{ url('/phase') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>单元信息</a></li>
           <li><a href="{{ url('/course') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>课程信息</a></li>
           <li><a href="{{ url('/banner') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>Banner</a></li>
+          <li><a href="{{ url('/private-class') }}?site_id={{$_GET['site_id'] ?? ''}}"><i class="fa fa-circle-o"></i>私教课</a></li>
         </ul>
       </li>
       <li class="active treeview">
