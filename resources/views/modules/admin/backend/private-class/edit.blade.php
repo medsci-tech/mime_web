@@ -7,13 +7,31 @@
         <h4 class="modal-title">编辑</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" action="{{url('/private-class')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post">
+        <form class="form-horizontal" role="form" action="{{url('/private-class/save')}}?site_id={{$_GET['site_id'] ?? ''}}" method="post" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="id" id="form-id" value="">
           <div class="form-group">
+            <label class="col-sm-2 control-label">期数</label>
+            <div class="col-sm-10">
+              <input class="form-control" disabled id="form-term">
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">医生</label>
             <div class="col-sm-10">
-              <input class="form-control" disabled id="form-doctor_id">
+              <input class="form-control" disabled id="form-doctor">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">讲师</label>
+            <div class="col-sm-10">
+              <input class="form-control" disabled id="form-teacher">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">预约时间</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="form-bespoke_at" type="date" name="bespoke_at">
             </div>
           </div>
           <div class="form-group">

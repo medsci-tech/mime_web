@@ -68,12 +68,16 @@
                                             <td>{{$list->term}}</td>
                                             <td>{{$list->doctor->name}}</td>
                                             <td>{{$list->teacher->name}}</td>
-                                            <td>{{$list->upload->old_name}}</td>
+                                            <td><a href="#" >{{$list->upload->old_name}}</a></td>
                                             <td>{{$list->bespoke_at}}</td>
-                                            <td>{{config('params')['private_class_status_option'][$list->status]}}</td>
+                                             <td>{{config('params')['private_class_status_option'][$list->status]}}</td>
                                             <td style="white-space: nowrap">
                                                 <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
                                                         data-id="{{$list->id}}"
+                                                        data-term="{{$list->term}}"
+                                                        data-doctor="{{$list->doctor->name}}"
+                                                        data-teacher="{{$list->teacher->name}}"
+                                                        data-bespoke_at="{{$list->bespoke_at}}"
                                                         data-status="{{$list->status}}"
                                                 >修改</button>
                                             </td>
@@ -102,28 +106,19 @@
     <script>
 
         $(function () {
-            $('[data-btn="add"]').click(function(){
-                var defaltData = '';
-                $('#form-id').val(defaltData);
-                $('#form-name').val(defaltData);
-                $('#form-banner_url').val(defaltData);
-                $('#form-description').val(defaltData);
-                $('#form-status').val(1);
-            });
             $('[data-btn="edit"]').click(function () {
                 var id = $(this).attr('data-id');
-                var name = $(this).attr('data-name');
-                var banner_url = $(this).attr('data-banner_url');
-                var description = $(this).attr('data-description');
+                var term = $(this).attr('data-term');
+                var doctor = $(this).attr('data-doctor');
+                var teacher = $(this).attr('data-teacher');
+                var bespoke_at = $(this).attr('data-bespoke_at');
                 var status = $(this).attr('data-status');
                 /* 编辑初始化 */
                 $('#form-id').val(id);
-                $('#form-name').val(name);
-                if(banner_url){
-                    $('#form-img_url_html').html('<img class="img-responsive" src="'+banner_url+'">');
-                }
-                $('#form-banner_url').val(banner_url);
-                $('#form-description').val(description);
+                $('#form-term').val(term);
+                $('#form-doctor').val(doctor);
+                $('#form-teacher').val(teacher);
+                $('#form-bespoke_at').val(bespoke_at);
                 $('#form-status').val(status);
 
             });
