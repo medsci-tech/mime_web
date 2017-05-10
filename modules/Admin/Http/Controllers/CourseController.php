@@ -3,7 +3,9 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Models\CourseClass;
+use App\Models\StudyLog;
 use Modules\Admin\Entities\Teacher;
+use Modules\Admin\Entities\ThyroidClassCourse;
 use Modules\Admin\Entities\ThyroidClassPhase;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\ThyroidClassCourse as Model;
@@ -124,6 +126,17 @@ class CourseController extends Controller
             $this->flash_error();
         }
         return redirect('/course?site_id='.$site_id);
+    }
+
+
+    public function refresh_video_duration(){
+        $courses = ThyroidClassCourse::where([
+            'site_id' => 2,
+        ])->get();
+        foreach ($courses as $course){
+            StudyLog::where('course_id',$course->id)->update(['video_duration' => $course->video_duration]);
+        }
+        dd('ok');
     }
 
 }
