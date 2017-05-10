@@ -38,6 +38,7 @@ class ThyroidClassCourse extends Model
         'thyroid_class_phase_id',
         'qcloud_file_id',
         'qcloud_app_id',
+        'video_duration',
         'is_show',
         'sequence',
         'exercise_ids',

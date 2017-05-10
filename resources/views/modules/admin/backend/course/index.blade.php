@@ -56,6 +56,7 @@
                                     <th>缩略图</th>
                                     <th>腾讯云file_id</th>
                                     <th>腾讯云app_id</th>
+                                    <th>视频时长</th>
                                     <th>
                                         数据操作&emsp;
                                         <button class="btn btn-xs btn-success" data-btn="add" data-target="#modal-edit" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;新增</button>
@@ -80,6 +81,7 @@
                                     </td>
                                     <td>{{$list->qcloud_file_id}}</td>
                                     <td>{{$list->qcloud_app_id}}</td>
+                                    <td>{{$list->video_duration}}</td>
                                     <td style="white-space: nowrap">
                                         <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
                                             data-id="{{$list->id}}"
@@ -90,6 +92,7 @@
                                             data-logo_url="{{$list->logo_url}}"
                                             data-qcloud_file_id="{{$list->qcloud_file_id}}"
                                             data-qcloud_app_id="{{$list->qcloud_app_id}}"
+                                            data-video_duration="{{$list->video_duration}}"
                                             data-is_show="{{$list->is_show}}"
                                             data-exercise_ids="{{$list->exercise_ids}}"
                                             data-keyword_id="{{$list->keyword_id}}"
@@ -179,6 +182,7 @@
             $('#form-logo_url').val(defaltData);
             $('#form-qcloud_file_id').val(defaltData);
             $('#form-qcloud_app_id').val(defaltData);
+            $('#form-video_duration').val(defaltData);
             $('#form-is_show').val(1);
             $('#form-course_class_id').val(defaltData);
             $('#form-teacher_id').val(0);
@@ -192,6 +196,7 @@
             var logo_url = $(this).attr('data-logo_url');
             var qcloud_file_id = $(this).attr('data-qcloud_file_id');
             var qcloud_app_id = $(this).attr('data-qcloud_app_id');
+            var video_duration = $(this).attr('data-video_duration');
             var is_show = $(this).attr('data-is_show');
             var course_class_id = $(this).attr('data-course_class_id');
             var course_class_has_teacher = $(this).attr('data-course_class_has_teacher');
@@ -212,6 +217,7 @@
             $('#form-logo_url').val(logo_url);
             $('#form-qcloud_file_id').val(qcloud_file_id);
             $('#form-qcloud_app_id').val(qcloud_app_id);
+            $('#form-video_duration').val(video_duration);
             $('#form-is_show').val(is_show);
             $('#form-course_class_id').val(course_class_id);
             $('#form-teacher_id').val(teacher_id);

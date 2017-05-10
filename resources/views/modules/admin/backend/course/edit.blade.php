@@ -126,6 +126,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label">视频时长（秒数）</label>
+            <div class="col-sm-10">
+              <input type="text" required class="form-control" name="video_duration" id="form-video_duration" placeholder="">
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">描述</label>
             <div class="col-sm-10">
               <textarea class="form-control" name="comment" id="form-comment"  style="resize:vertical"></textarea>
