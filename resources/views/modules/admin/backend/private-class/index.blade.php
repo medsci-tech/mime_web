@@ -55,8 +55,7 @@
                                     <th>预约时间</th>
                                     <th>状态</th>
                                     <th>
-                                        数据操作&emsp;
-                                        <button class="btn btn-xs btn-success" data-btn="add" data-target="#modal-edit" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                                        数据操作
                                     </th>
                                 </tr>
                                 </thead>
@@ -68,7 +67,7 @@
                                             <td>{{$list->term}}</td>
                                             <td>{{$list->doctor->name}}</td>
                                             <td>{{$list->teacher->name}}</td>
-                                            <td><a href="#" >{{$list->upload->old_name}}</a></td>
+                                            <td><a href="{{$list->upload->path}}?attname={{$list->upload->old_name}}" >{{$list->upload->old_name}}</a></td>
                                             <td>{{$list->bespoke_at}}</td>
                                              <td>{{config('params')['private_class_status_option'][$list->status]}}</td>
                                             <td style="white-space: nowrap">
