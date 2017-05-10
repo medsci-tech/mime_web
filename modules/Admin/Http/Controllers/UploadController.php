@@ -30,7 +30,7 @@ class UploadController extends Controller
                 'size' => $file->getSize(),
             ]);
             if($model){
-                return ['code' => 200, 'upload_id' => $model->id];
+                return ['code' => 200, 'id' => $model->id];
             }else{
                 return ['code' => 500];
             }
