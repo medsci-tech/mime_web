@@ -23,6 +23,7 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
     Route::resource('thyroid', 'ThyroidController');
     Route::resource('phase', 'PhaseController');
     Route::get('course', 'CourseController@index');
+    Route::get('course/refresh_video_duration', 'CourseController@refresh_video_duration');
     Route::post('course', 'CourseController@store');
     Route::delete('course', 'CourseController@destroy');
     Route::post('course/status', 'CourseController@status');

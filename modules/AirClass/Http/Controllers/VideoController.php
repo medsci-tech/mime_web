@@ -246,15 +246,16 @@ class VideoController extends Controller
 			$save_data['doctor_id'] = $user['id'];
 			$save_data['course_id'] = $class_id;
 			$save_data['study_duration'] = $req_data['times'] * config('params')['video_heartbeat_times'];
-			$save_data['video_duration'] = $req_data['video_duration'];
 			$save_data['progress'] = $req_data['progress'];
 			// 查询是否有过观看记录
 			$video_logs = StudyLog::where($where)->first();
+			$course = ThyroidClassCourse::find($class_id);
+			$save_data['video_duration'] = $course->video_duration;
 			if($video_logs){
 				StudyLog::where($where)->orderBy('id','desc')->first()->update($save_data);
 			}else{
 				StudyLog::create($save_data);
-				ThyroidClassCourse::find($class_id)->increment('play_count');
+				$course->increment('play_count');
 			}
 		}
 
@@ -280,10 +281,12 @@ class VideoController extends Controller
 				'course_id' => $class_id,
 			];
 			if($user){
+				$course = ThyroidClassCourse::find($class_id);
+				$save_data['video_duration'] = $course->video_duration;
 				$save_data['doctor_id'] = $user['id'];
 				StudyLog::create($save_data);
 			}
-			ThyroidClassCourse::find($class_id)->increment('play_count');
+			$course->increment('play_count');
 			return $this->return_data_format(200);
 		}else{
 			return $this->return_data_format(500,'参数缺失无法记录');
