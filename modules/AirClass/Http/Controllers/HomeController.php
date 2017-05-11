@@ -1,6 +1,7 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 use App\Models\ClassDetails;
 use App\Models\KZKTClass;
+use App\Models\PrivateClass;
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Banner;
 use Modules\AirClass\Entities\Teacher;
@@ -108,12 +109,48 @@ class HomeController extends Controller
     public function private_class()
     {
         $class_info  = CourseClass::find($this->private_class_id);
-        $count = CourseApplies::count();
+        $sign_count = PrivateClass::where([
+            ['status', '>=', 0], 
+            'term' => config('params')['private_class_term'],
+        ])->count();
+
+        // 点击报名提示
+        $return_msg = '';
+        $sign_status = false;
+        if($this->user){
+            if($this->user < 3){
+                $return_msg = '晋升到等级三即可报名';
+            }
+            $my_sign = PrivateClass::where([
+                ['status', '>=', 0],
+                'term' => config('params')['private_class_term'],
+                'doctor_id' => $this->user['id'],
+            ])->first();
+            if($my_sign){
+                $sign_status = true;
+            }
+        }else{
+            $return_msg = '登陆后才可报名';
+        }
         return view('airclass::home.private_class',[
             'class_info' => $class_info,
-            'count' => $count,
+            'sign_count' => $sign_count,
+            'count' => config('params')['private_class_count'],
+            'return_msg' => $return_msg,
+            'sign_status' => $sign_status,
         ]);
     }
+
+    // 病例下载
+    public function private_class_download(){
+        $file = storage_path('file') .'/case_template.zip';
+        if(file_exists($file)){
+            return response()->download($file);
+        }else{
+            abort(404);
+        }
+    }
+
 
     /**
      * 帮助
