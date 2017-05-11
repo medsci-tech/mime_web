@@ -1,7 +1,9 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
+use App\Models\KZKTClass;
 use App\Models\PrivateClass;
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Teacher;
 use Modules\Admin\Http\Controllers\UploadController;
 
 class PrivateClassController extends Controller
@@ -16,9 +18,20 @@ class PrivateClassController extends Controller
 	}
 
 	public function index(){
-		return view('airclass::private-class.index');
+		$sign_check = $this->private_sign_check();
+		if($sign_check['status']){
+			$teachers = Teacher::where([
+				'site_id' => $this->site_id,
+				'is_pt' => 1,
+				'belong_area' => $sign_check['data']['belong_area'],
+			])->get();
+			return view('airclass::private-class.index', [
+				'teachers' => $teachers,
+			]);
+		}else{
+			abort(404);
+		}
 	}
-
 
 	public function sign(Request $request){
 		$req_data = $request->all();
@@ -53,6 +66,49 @@ class PrivateClassController extends Controller
 		}else{
 			return $this->return_data_format(500, '病例上传失败');
 		}
+	}
+
+	/**
+	 * @return array
+	 */
+	public function private_sign_check(){
+		$status = false;
+		$return_msg = '';
+		$belong_area = '';
+		if($this->user){
+			if($this->user < 3){
+				$return_msg = '晋升到等级三即可报名';
+			}else{
+				$kzkt_classes = KZKTClass::where([
+					'site_id' => $this->site_id,
+					'status' => 1,
+					'doctor_id' => $this->user['id'],
+				])->orderBy('id','desc')->first();
+				if($kzkt_classes){
+					$belong_area = $kzkt_classes->volunteer->represent->belong_area;
+				}
+				if($belong_area){
+					$my_sign = PrivateClass::where([
+						['status', '>=', 0],
+						'term' => config('params')['private_class_term'],
+						'doctor_id' => $this->user['id'],
+						'site_id' => $this->site_id,
+						'belong_area' => $belong_area,
+					])->first();
+					if($my_sign){
+						$return_msg = '已报名';
+					}else{
+						$status = true;
+					}
+				}else{
+					$return_msg = '找不到对应代表';
+				}
+			}
+		}else{
+			$return_msg = '登陆后才可报名';
+		}
+
+		return ['code' => $status, 'msg' => $return_msg, 'data' => ['belong_area' => $belong_area]];
 	}
 
 

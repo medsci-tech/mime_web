@@ -115,29 +115,13 @@ class HomeController extends Controller
         ])->count();
 
         // 点击报名提示
-        $return_msg = '';
-        $sign_status = false;
-        if($this->user){
-            if($this->user < 3){
-                $return_msg = '晋升到等级三即可报名';
-            }
-            $my_sign = PrivateClass::where([
-                ['status', '>=', 0],
-                'term' => config('params')['private_class_term'],
-                'doctor_id' => $this->user['id'],
-            ])->first();
-            if($my_sign){
-                $sign_status = true;
-            }
-        }else{
-            $return_msg = '登陆后才可报名';
-        }
+        $sign_check = (new PrivateClassController())->private_sign_check();
+
         return view('airclass::home.private_class',[
             'class_info' => $class_info,
             'sign_count' => $sign_count,
             'count' => config('params')['private_class_count'],
-            'return_msg' => $return_msg,
-            'sign_status' => $sign_status,
+            'sign_check' => $sign_check,
         ]);
     }
 
