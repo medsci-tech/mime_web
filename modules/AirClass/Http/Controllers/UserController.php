@@ -361,6 +361,10 @@ class UserController extends Controller
         return ['code' => 200, 'message'=>'保存成功!'];
     }
 
+    public function private_class(){
+        return 'sijiaoke';
+    }
+
 	public function logout(Request $request)
 	{
 		Session::forget($this->user_login_session_key);

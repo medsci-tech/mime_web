@@ -35,6 +35,7 @@ class Teacher extends Model
         'site_id',
         'introducion',
         'is_pt',
+        'belong_area',
     ];
 
     /**

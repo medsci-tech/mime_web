@@ -6,6 +6,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::get('/', 'HomeController@index');
 	Route::get('/public_class', 'HomeController@public_class'); // 公开课
 	Route::get('/private_class', 'HomeController@private_class'); // 私教课
+	Route::get('/private_class/default', 'HomeController@private_class_download'); // 私教课病例模板下载
 	Route::get('/answer_class', 'HomeController@answer_class'); // 答疑课
 	Route::get('/help', 'HomeController@help');
 
@@ -49,6 +50,10 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/video/comment/{id}', 'CommentController@videoComment'); // 评论请求
 	Route::post('/video/get_more_comments', 'CommentController@get_more_video_comments'); // 答题请求
 	Route::post('/user/get_more_comments', 'CommentController@get_more_user_comments'); // 答题请求
+
+	// 私教课报名
+	Route::get('/private_class/index', 'PrivateClassController@index');
+	Route::post('/private_class/sign', 'PrivateClassController@sign');
 
 	// test
 //	Route::get('/test', 'UserPublicController@test');
