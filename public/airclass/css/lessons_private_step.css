@@ -1,0 +1,158 @@
+@media (min-width: 768px) {
+    .private_content .sign_step .slide .content{
+        width: 92%;
+    }
+}
+@media (max-width: 768px) {
+    .private_content .sign_step .slide .content{
+        width: 83%;
+    }
+}
+.overflow{display: inline-block;overflow: hidden;white-space:nowrap;text-overflow:ellipsis;}
+/*头部步骤*/
+.private_head{
+    margin: 40px 0;
+    border-top: 1px solid #333333;
+
+}
+.private_head .private_head_li div{
+    text-align: center;
+    margin: 0 auto;
+    font-size: 14px;
+}
+.private_head .private_num{
+    position: relative;
+    top: -15px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    border: solid 1px #333333;
+    background-color: #f9f9f9;
+    color: #333333;
+}
+.private_head .active .private_num{
+    border: none;
+    background-color: #00a0e9;
+    color: #ffffff;
+}
+.private_head .private_title{
+    color: #333333;
+
+}
+.private_head .active .private_title{
+    color: #00a0e9;
+}
+
+/*标签页内容*/
+.private_content{
+    margin: 20px 0;
+}
+/* step 1 */
+.private_content .sign_step .slide .prev,
+.private_content .sign_step .slide .content,
+.private_content .sign_step .slide .next
+{
+    float: left;
+}
+.private_content .sign_step .slide .prev,
+.private_content .sign_step .slide .next
+{
+    padding: 0 2px;
+    width: 30px;
+    height: 172px;
+    line-height: 160px;
+    cursor: pointer;
+}
+
+.private_content .sign_step .slide .next{
+    float: right;
+}
+
+.private_content .sign_step .slide .content{
+    overflow: hidden;
+    padding: 0;
+    width:-moz-calc(100% - (30px + 4px) * 2);
+    width:-webkit-calc(100% - (30px + 4px) * 2);
+    width: calc(100% - (30px + 4px) * 2);
+}
+.private_content .sign_step .teacher_list{
+    min-width: 900px;
+    list-style: none;
+    padding: 0;
+    position: relative;
+}
+.private_content .sign_step .teacher_list li{
+    float: left;
+    width: 160px;
+    height: 172px;
+    margin: 0 3px;
+    text-align: center;
+    background-color: #efefef;
+    border-bottom: solid 2px #01a0e9;
+    cursor: pointer;
+}
+
+.private_content .sign_step .teacher_list li.active{
+    border: solid 2px #01a0e9;
+}
+.private_content .sign_step .teacher_list li .teacher_pic{
+    height: 103px;
+}
+
+.private_content .sign_step .btn-list{
+    text-align: center;
+    margin: 15px 0;
+}
+.private_content .sign_step .btn-list .btn{
+    width: 20%;
+    margin: 10px;
+}
+/* step 2 */
+.private_content .sign_step .upload_file{
+    width: 80%;
+    margin: 0 auto 40px auto;
+}
+.private_content .sign_step .upload_file .row{
+    margin: 20px 0;
+}
+.private_content .sign_step .upload_file label{
+    line-height: 30px;
+    overflow: hidden;
+}
+.private_content .sign_step .upload_file label.text-primary{
+    font-weight: normal;
+    height: 30px;
+    font-size: 13px;
+}
+.private_content .sign_step .upload_file .file-input,
+.private_content .sign_step .upload_file .date-input
+{
+    height: 30px;
+    border-radius: 4px;
+}
+.private_content .sign_step .upload_file .file-input{
+    background-color: #01a0e9;
+    border: none;
+}
+.private_content .sign_step .upload_file .date-input{
+    border: solid 1px #333333;
+}
+.private_content .sign_step .upload_file .row p{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    color: #666666;
+    font-size: 12px;
+}
+
+@media (min-width: 768px) {
+    .private_content .sign_step .teacher_list{
+        min-width: 832px;
+    }
+}
+@media (max-width: 768px) {
+    .private_content .sign_step .teacher_list{
+        min-width: 332px;
+    }
+}

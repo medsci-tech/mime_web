@@ -28,6 +28,14 @@ body {
 	border-color: #357ebd;
 }
 
+.btn-default{
+	background-color: #fff;
+    border-color: #ccc;
+    color: #999999;
+}
+.btn-default:hover, .btn-default:focus {
+	color: #999999;
+}
 
 a {
 	color: #333333;
@@ -320,7 +328,7 @@ a {
 
 .modal-content {
 	position: relative;
-	border-radius: 0;
+	/*border-radius: 0;*/
 }
 .modal-content .close {
 	position: absolute;
