@@ -23,10 +23,23 @@
             <img class="center-block" src="{{asset('airclass/img/private_lessons_steps.png')}}"/>
         </div>
         <div class="apply">
-            <button id="btnApply" type="button" class="btn btn-block btn_apply">我要报名</button>
+            <div class="form-group col-xs-7">
+                <button id="sign_btn" class="btn btn-primary form-control">我要报名</button>
+            </div>
+            <div class="form-group col-xs-5">
+                <a href="{{url('private_class/default')}}" class="btn btn-default form-control">下载病例模板</a>
+            </div>
+
+            <div class="checkbox" style="padding: 0 15px;position: static">
+                <label>
+                    <input type="checkbox" checked id="agreement">
+                    <span class="checkbox_img"></span>
+                </label>
+                <a href="javascript:;" target="_blank">同意用户协议</a>
+            </div>
             <p class="numbers clearfix">
-                <span class="pull-left">报名人数：{{ $sign_count }}</span>
-                <span class="pull-right">剩余名额：{{ $count - $sign_count }}</span>
+                <span>报名人数：{{$sign_count}}</span><br>
+                <span>剩余名额：{{$count - $sign_count}}</span>
             </p>
         </div>
     </div>
@@ -42,52 +55,30 @@
         </div>
     </div>
 
-
-    <!-- choose teacher modal -->
-    <div class="choose_teacher_modal modal fade" id="chooseTeacherModal" tabindex="-1" role="dialog" aria-labelledby="chooseTeacherModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="title text-center">上传病例</h3>
-                <form method="post" enctype="multipart/form-data" action="/file/upload">
-                    <input type="file" name="file">
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-block btn_submit">提交</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- success modal -->
-    <div class="success_modal modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="tips_container text-center"><span class="icon icon_success"></span><span class="tips">申请成功，我们将会在两个工作日内与您进行联系，并安排课程</span></div>
-                <button type="button" class="btn btn-block btn_index">返回私教课首页</button>
-            </div>
-        </div>
-    </div>
-
 @endsection
 
 @section('js')
     <script type="text/javascript">
-        $(function() {
-            $('#btnApply').click(function() {
-//					$('#levelModal').modal('show');
-                $('#chooseTeacherModal').modal('show');
+        $(function () {
+            var sign_check_status = '{{$sign_check['status']}}';
+            var sign_check_msg = '{{$sign_check['msg']}}';
+            //报名跳转
+            $('#sign_btn').click(function(){
+                if(sign_check_status){
+                    window.location.href = '{{url('private_class/index')}}';
+                }else {
+                    $('#levelModal').modal('show').find('.tips').text(sign_check_msg);
+                }
             });
-
-            $('#chooseTeacherModal .teacher').click(function() {
-                $('#chooseTeacherModal .teacher').removeClass('active');
-                $(this).addClass('active');
+            $('#agreement').change(function () {
+                var check = $(this)[0].checked;
+                var sign_btn = $('#sign_btn');
+                if(check){
+                    sign_btn.attr('disabled',false);
+                }else {
+                    sign_btn.attr('disabled',true);
+                }
             });
-
-            $('#chooseTeacherModal .btn_submit').clickx(function() {
-                $('#chooseTeacherModal').modal('hide');
-                $('#successModal').modal('show');
-            });
-        })
+        });
     </script>
 @endsection

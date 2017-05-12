@@ -25,7 +25,7 @@ class PrivateClassController extends Controller
 				'is_pt' => 1,
 				'belong_area' => $sign_check['data']['belong_area'],
 			])->get();
-			return view('airclass::private-class.index', [
+			return view('airclass::private_class.index', [
 				'teachers' => $teachers,
 			]);
 		}else{
@@ -39,10 +39,10 @@ class PrivateClassController extends Controller
 		if(!$file){
 			return $this->return_data_format(422, '请添加病例文件');
 		}
-		if($req_data['teacher_id']){
+		if(!$req_data['teacher_id']){
 			return $this->return_data_format(422, '请选择讲师');
 		}
-		if($req_data['bespoke_at']){
+		if(!$req_data['bespoke_at']){
 			return $this->return_data_format(422, '请选择预约时间');
 		}
 		$upload = new UploadController();
@@ -76,7 +76,7 @@ class PrivateClassController extends Controller
 		$return_msg = '';
 		$belong_area = '';
 		if($this->user){
-			if($this->user < 3){
+			if($this->user['rank'] < 3){
 				$return_msg = '晋升到等级三即可报名';
 			}else{
 				$kzkt_classes = KZKTClass::where([
@@ -107,7 +107,7 @@ class PrivateClassController extends Controller
 			$return_msg = '登陆后才可报名';
 		}
 
-		return ['code' => $status, 'msg' => $return_msg, 'data' => ['belong_area' => $belong_area]];
+		return ['status' => $status, 'msg' => $return_msg, 'data' => ['belong_area' => $belong_area]];
 	}
 
 
