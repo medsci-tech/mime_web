@@ -9,10 +9,10 @@
 @section('tables_data')
   <script>
     var data = {
-        table_head: ['id', '姓名', '宣传照', '科室', '职称','是否参与私教课', '介绍'],
+        table_head: ['id', '姓名', '宣传照', '科室', '职称','是否参与私教课','所属大区', '介绍'],
         table_data: [
           @foreach($teachers as $teacher)
-            ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}','{{$teacher->is_pt ?'参与' :'不参与'}}', '{!!$teacher->introduction!!}'],
+            ['{{$teacher->id}}', '{{$teacher->name}}', '{{$teacher->photo_url}}', '{{$teacher->office}}', '{{$teacher->title}}','{{$teacher->is_pt ?'参与' :'不参与'}}', '{{$teacher->belong_area}}', '{!!$teacher->introduction!!}'],
           @endforeach
         ],
         pagination: '{{$teachers->render()}}',
@@ -49,6 +49,11 @@
                     '参与': '1',
                     '不参与': '0'
                 }
+            },
+            {
+                box_type: 'input',
+                name: 'belong_area',
+                type: 'text'
             },
           {
             box_type: 'textarea',
