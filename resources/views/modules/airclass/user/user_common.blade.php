@@ -57,6 +57,7 @@
                             <li @if($current_active == 'comment') class="active" @endif ><a href="{{url('user/comment')}}">我的提问</a></li>
                             <li @if($current_active == 'info_edit') class="active" @endif ><a href="{{url('user/info_edit')}}">资料修改</a></li>
                             <li @if($current_active == 'pwd_edit') class="active" @endif ><a href="{{url('user/pwd_edit')}}">修改密码</a></li>
+                            <li @if($current_active == 'private_class') class="active" @endif ><a href="{{url('user/private_class')}}">私教课</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

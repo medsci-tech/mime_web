@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="private_content">
-            <form id="private-form" enctype="multipart/form-data">
+            <form enctype="multipart/form-data">
                 <div class="sign_step">
                     <div class="slide clearfix" id="slide">
                         <div class="prev"><img width="100%" src="{{asset('airclass/img/private_list_pre.png')}}"></div>
@@ -102,7 +102,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="tips_container text-center"><span class="icon icon_warn"></span><span class="tips">达到第三等级方可报名</span></div>
+                <div class="tips_container text-center"><span class="tips">达到第三等级方可报名</span></div>
             </div>
         </div>
     </div>

@@ -1,7 +1,9 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\PrivateClass;
 use Illuminate\Http\Request;
+use Modules\Admin\Http\Controllers\UploadController;
 use PhpParser\Comment\Doc;
 use \App\Models\{Doctor,Hospital,Volunteer};
 use Modules\AirClass\Entities\{Office,ThyroidClassCourse,KZKTClass};
@@ -362,7 +364,33 @@ class UserController extends Controller
     }
 
     public function private_class(){
-        return 'sijiaoke';
+        $lists = PrivateClass::where(['doctor_id' => $this->user['id']])->get();
+//        dd($lists);
+        return view('airclass::user.private_class', [
+            'lists' => $lists,
+            'current_active' => 'private_class',
+        ]);
+    }
+
+    public function private_class_save(Request $request){
+        $id = $request->input('id');
+        $file = $request->file('file');
+        if(!$file){
+            return $this->return_data_format(422, '请添加病例文件');
+        }
+        $upload = new UploadController();
+        $file_save_name =  config('params')['private_class_term'] . '-' . $this->user['phone'];
+        $upload_res = $upload->create($file, $file_save_name);
+        if($upload_res['code'] == 200){
+            $private = PrivateClass::find($id)->update(['upload_id' => $upload_res['id']]);
+            if($private){
+                return $this->return_data_format(200, '病例修改成功');
+            }else{
+                return $this->return_data_format(500, '病例修改失败');
+            }
+        }else{
+            return $this->return_data_format(500, '病例上传失败');
+        }
     }
 
 	public function logout(Request $request)
