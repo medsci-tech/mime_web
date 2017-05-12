@@ -93,7 +93,6 @@ class PrivateClassController extends Controller
 						'term' => config('params')['private_class_term'],
 						'doctor_id' => $this->user['id'],
 						'site_id' => $this->site_id,
-						'belong_area' => $belong_area,
 					])->first();
 					if($my_sign){
 						$return_msg = '已报名';
