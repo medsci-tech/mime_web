@@ -127,7 +127,7 @@ class HomeController extends Controller
 
     // 病例下载
     public function private_class_download(){
-        $file = storage_path('file') .'/case_template.zip';
+        $file = public_path('file') .'/case_template.zip';
         if(file_exists($file)){
             return response()->download($file);
         }else{
