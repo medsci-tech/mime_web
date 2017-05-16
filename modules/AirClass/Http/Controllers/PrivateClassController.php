@@ -29,7 +29,7 @@ class PrivateClassController extends Controller
 				'teachers' => $teachers,
 			]);
 		}else{
-			abort(404);
+			return redirect(url('private_class'));
 		}
 	}
 
