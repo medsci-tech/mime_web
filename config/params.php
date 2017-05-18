@@ -78,6 +78,6 @@ return [
     // 私教课期数
     'private_class_term' => 1,
     // 私教课名额
-    'private_class_count' => 60,
+    'private_class_count' => 30,
 
 ];
