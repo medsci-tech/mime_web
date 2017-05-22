@@ -32,7 +32,7 @@
                                 <li data-teacher_id="{{$teacher->id}}">
                                     <div class="teacher_pic"><img width="100%" height="100%" src="{{$teacher->photo_url}}"></div>
                                     <h5>{{$teacher->name}}{{$teacher->教授}}</h5>
-                                    <p>{{$teacher->introduction}}</p>
+                                    <p>{!! $teacher->introduction !!}</p>
                                 </li>
                                 @endforeach
                             </ul>

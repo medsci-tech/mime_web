@@ -19,12 +19,15 @@ class PrivateClassController extends Controller
 
 	public function index(){
 		$sign_check = $this->private_sign_check();
+		$exists_ids = PrivateClass::select('teacher_id')->get()->toArray();
+		$ids = array_column($exists_ids, 'teacher_id');
+
 		if($sign_check['status']){
 			$teachers = Teacher::where([
 				'site_id' => $this->site_id,
 				'is_pt' => 1,
 				'belong_area' => $sign_check['data']['belong_area'],
-			])->get();
+			])->whereNotIn('id', $ids)->get();
 			return view('airclass::private_class.index', [
 				'teachers' => $teachers,
 			]);
