@@ -4,6 +4,7 @@ namespace App\Http\Requests\Interfaces;
 
 use App\Http\Requests\Request;
 use App\Models\{Doctor,StudyLog};
+use PhpParser\Comment\Doc;
 
 /**
  * Class DoctorRank
@@ -16,7 +17,9 @@ trait DoctorBean
      * @var array
      */
     protected $bean;
+    protected $user;
     protected $site_id = 2; // airClass site_id
+    protected $user_login_session_key = 'user_login_session_key'; // 用户登录session key
 
     /**
      * @description 获取用户的积分迈豆
@@ -30,9 +33,11 @@ trait DoctorBean
             $this->bean = 0;
         try
         {
-            $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$params['phone'], null,0);
-            if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
-                $this->bean = isset($response['result']['bean']['number']) ? $response['result']['bean']['number'] : 0;
+            $this->user = \Session::get($this->user_login_session_key);
+            $this->bean = isset($this->user->credit) ? $this->user->credit: 0;
+//            $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$params['phone'], null,0);
+//            if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+//                $this->bean = isset($response['result']['bean']['number']) ? $response['result']['bean']['number'] : 0;
         }
         catch (\Exception $e){
             $this->bean = 0;
@@ -52,6 +57,7 @@ trait DoctorBean
         if(!isset($params['id']))
             return false;
 
+        $this->user = \Session::get($this->user_login_session_key);
         $lists = StudyLog::getUserAnswer(['course_class_id'=>2,'site_id'=>$this->site_id,'id'=>$params['id']]);
         if($lists)
         {
@@ -62,8 +68,9 @@ trait DoctorBean
                     try{
                         /* 如果答疑课每期课件学习时长≥10分钟,赠送积分 */
                         $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['answer_course']);
-                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                        if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                        Doctor::find($this->user['id'])->increment('credit', $post_data['bean']);
+//                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+//                        if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
                             \Redis::set($key,$post_data['bean']);
                     }
                     catch (\Exception $e){
@@ -86,6 +93,7 @@ trait DoctorBean
     {
         if(!isset($params['id']) || !isset($params['course_id']) || !isset($params['phone']))
             return false;
+        $this->user = \Session::get($this->user_login_session_key);
         $key = "user:".$params['id'].':course_id:'.$params['course_id'].':video';
 
         if(\Redis::get($key)<=4) //积分上限：4次积分
@@ -93,8 +101,9 @@ trait DoctorBean
             try{
                 /* 视频点击数,赠送积分 */
                 $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['click_course']);
-                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+//                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+//                if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                Doctor::find($this->user['id'])->increment('credit', $post_data['bean']);
                     \Redis::incrBy($key, 1);
             }
             catch (\Exception $e){
@@ -115,6 +124,7 @@ trait DoctorBean
     {
         if(!isset($params['id']) || !isset($params['course_id']) || !isset($params['phone']))
             return false;
+        $this->user = \Session::get($this->user_login_session_key);
         $key = "user:".$params['id'].':course_id:'.$params['course_id'].':question';
 
         if(\Redis::get($key)<=2) //积分上限：2次积分
@@ -122,8 +132,9 @@ trait DoctorBean
             try{
                 /* 视频点击数,赠送积分 */
                 $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['ask_question_max']);
-                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
+                Doctor::find($this->user['id'])->increment('credit', $post_data['bean']);
+//                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+//                if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
                     \Redis::incrBy($key, 1);
             }
             catch (\Exception $e){

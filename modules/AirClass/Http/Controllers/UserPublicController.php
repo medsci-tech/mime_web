@@ -108,30 +108,36 @@ class UserPublicController extends Controller
         $add_doctor = Doctor::create($add_doctor_data);
         if($add_doctor){
             /* 同步注册用户中心 */
-            $api_to_uc_data = [
-                'phone' => $req_phone,
-                'password' => $req_pwd,
-                'office' => $req_office,
-                'title' => $req_title,
-                'province' => $req_province,
-                'role'=>'doctor',
-                'city' => $req_city,
-                'hospital_name' => $req_hospital_name,
-            ];
-            $api_to_uc = new ApiToUserCenterController();
-            $api_to_uc_res = $api_to_uc->register($api_to_uc_data);
+//            $api_to_uc_data = [
+//                'phone' => $req_phone,
+//                'password' => $req_pwd,
+//                'office' => $req_office,
+//                'title' => $req_title,
+//                'province' => $req_province,
+//                'role'=>'doctor',
+//                'city' => $req_city,
+//                'hospital_name' => $req_hospital_name,
+//            ];
+//            $api_to_uc = new ApiToUserCenterController();
+//            $api_to_uc_res = $api_to_uc->register($api_to_uc_data);
 
-            if($api_to_uc_res['code'] == 200){
-                DB::commit();
-                $this->save_session($add_doctor);
-                $tempCookie = \Cookie::forever($this->user_login_code, $req_phone);
-                return \Response::make(['code' => 200, 'msg' => '注册成功'])->withCookie($tempCookie);
-//                return $this->return_data_format(200,'注册成功!');
-            }else{
-                DB::rollback();//事务回滚
-                return $this->return_data_format(500, $api_to_uc_res['msg']);
-            }
+            DB::commit();
+            $this->save_session($add_doctor);
+            $tempCookie = \Cookie::forever($this->user_login_code, $req_phone);
+            return \Response::make(['code' => 200, 'msg' => '注册成功'])->withCookie($tempCookie);
+
+//            if($api_to_uc_res['code'] == 200){
+//                DB::commit();
+//                $this->save_session($add_doctor);
+//                $tempCookie = \Cookie::forever($this->user_login_code, $req_phone);
+//                return \Response::make(['code' => 200, 'msg' => '注册成功'])->withCookie($tempCookie);
+////                return $this->return_data_format(200,'注册成功!');
+//            }else{
+//                DB::rollback();//事务回滚
+//                return $this->return_data_format(500, $api_to_uc_res['msg']);
+//            }
         }else{
+            DB::rollback();//事务回滚
             return $this->return_data_format(404, '注册失败');
         }
     }

@@ -278,7 +278,8 @@ class UserController extends Controller
             DB::beginTransaction();
             try{
                 /* 同步更新用户中心 */
-                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$phone, null,0);
+                //$response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$phone, null,0);
+                $response=['httpCode'=>200,'status'=>true];
                 if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
                 {
                     if(isset($response['status'])) //电话存在则同步更新
@@ -316,7 +317,8 @@ class UserController extends Controller
                                 'hospital_level'=>$hospital_level, //等级
                                 'title'=>$title, //职称
                             );
-                            $res = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-user-information', $post_data,1);
+                            //$res = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-user-information', $post_data,1);
+                            $res=['httpCode'=>200,'status'=>true];
                             if($res['httpCode']==200)// 服务器返回响应状态码,当电话存在时
                             {
                                 /* 同步更新 */
@@ -338,6 +340,7 @@ class UserController extends Controller
                                     $this->user['province'] =$request->province;
                                     $this->user['city'] =$request->city;
                                     $this->user['area'] =$request->area;
+                                    $this->user['email'] =$request->email;
                                     $this->user['hospital_name'] =$request->hospital_name;
                                     $this->user['hospital_level'] =$hospital_level;
                                     \Session::set($this->user_login_session_key, $this->user);

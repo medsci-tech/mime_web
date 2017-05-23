@@ -84,6 +84,7 @@ class Controller extends BaseController
             'office' => $user->office, // 科室
             'title' => $user->title, // 职称
             'rank' => $user->rank, // 等级
+            'credit' => $user->credit, // 积分
         ];
         if($user->hospital){
             $save_data['province'] = $user->hospital->province;

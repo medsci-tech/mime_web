@@ -66,8 +66,9 @@ trait DoctorRank
                             try{
                                 //赠送迈豆积分
                                 $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['required_course']);
-                                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                                if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
+                                $this->getUser($params)->increment('credit', $post_data['bean']);
+//                                $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+//                                if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
                                     \Redis::set($key,$post_data['bean']);
                             }
                             catch (\Exception $e){
@@ -84,12 +85,15 @@ trait DoctorRank
                     try{
                         //赠送迈豆积分
                         $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
-                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
-                        {
-                            Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
-                            $this->rank =2;
-                        }
+                        //$response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+                        $this->getUser($params)->increment('credit', $post_data['bean'], array('rank' => 2));
+                        //Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
+                        $this->rank =2;
+//                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
+//                        {
+//                            Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
+//                            $this->rank =2;
+//                        }
                     }
                     catch (\Exception $e){
                         $this->rank =$this->getUser($params)->rank;
@@ -110,12 +114,14 @@ trait DoctorRank
                     {
                         //赠送迈豆积分
                         $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
-                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
-                        {
-                            Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
-                            $this->rank =3;
-                        }
+                        $this->getUser($params)->increment('credit', $post_data['bean'], array('rank' => 3));
+                        $this->rank =3;
+//                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
+//                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
+//                        {
+//                            Doctor::where('id', $params['id'])->update(['rank' => 3]); // 升级为三级
+//                            $this->rank =3;
+//                        }
                     } catch (\Exception $e){
                         $this->rank =$this->getUser($params)->rank;
                     }
