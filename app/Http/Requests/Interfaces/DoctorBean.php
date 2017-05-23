@@ -34,7 +34,7 @@ trait DoctorBean
         try
         {
             $this->user = \Session::get($this->user_login_session_key);
-            $this->bean = isset($this->user->credit) ? $this->user->credit: 0;
+            $this->bean = isset($this->user['credit']) ? $this->user['credit']: 0;
 //            $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$params['phone'], null,0);
 //            if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
 //                $this->bean = isset($response['result']['bean']['number']) ? $response['result']['bean']['number'] : 0;
@@ -42,6 +42,7 @@ trait DoctorBean
         catch (\Exception $e){
             $this->bean = 0;
         }
+
         return $this;
 
     }
