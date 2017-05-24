@@ -83,18 +83,19 @@ class HomeController extends Controller
      */
     public function answer_class(Request $request)
     {
-        $units = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id)) //答疑课id
+        $where = array('course_class_id'=>$this->answer_class_id);
+        $units = ThyroidClassCourse::where($where) //答疑课id
             ->orderBy('created_at','desc')
-            ->groupBy('teacher_id')
-            ->paginate(10);
+           // ->groupBy('teacher_id')
+            ->paginate(20);
 
-        foreach($units as &$val)
-        {
-            $teach_info = Teacher::where(array('id'=>$val['teacher_id']))->first();
-            $val['teacher_name'] = $teach_info->name;
-            $course_list = ThyroidClassCourse::limit(10)->where(array('teacher_id'=>$val['teacher_id']))->orderBy('created_at','asc')->get();
-            $val['course_list'] = $course_list;
-        }
+//        foreach($units as &$val)
+//        {
+//            $teach_info = Teacher::where(array('id'=>$val['teacher_id']))->first();
+//            $val['teacher_name'] = $teach_info->name;
+//            $course_list = ThyroidClassCourse::limit(10)->where(array('teacher_id'=>$val['teacher_id']))->orderBy('created_at','asc')->get();
+//            $val['course_list'] = $course_list;
+//        }
         return view('airclass::home.answer_class',[
             'units' => $units,
         ]);
