@@ -85,7 +85,7 @@ class HomeController extends Controller
     {
         $where = array('course_class_id'=>$this->answer_class_id);
         $units = ThyroidClassCourse::where($where) //答疑课id
-            ->orderBy('created_at','desc')
+            ->orderBy('created_at','asc')
            // ->groupBy('teacher_id')
             ->paginate(20);
 
