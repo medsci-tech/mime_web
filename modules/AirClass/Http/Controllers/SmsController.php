@@ -1,6 +1,7 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Volunteer;
 use Cache;
 use Illuminate\Http\Request;
 
@@ -142,6 +143,48 @@ class SmsController extends Controller
         }else{
             return $this->return_data_format(422, '验证码错误或已失效');
         }
+    }
+
+    /**
+     * 通用短信发送
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
+    public function send(Request $request)
+    {
+        $method=$request->method();
+        if($request->isMethod('post')){
+            $validator = \Validator::make($request->all(), [
+                'phone'   => 'required|digits:11|regex:/^1[3456789]\d{9}$/'
+            ]);
+            if ($validator->fails()) {
+                return ['status_code' => 0, 'message' => '无效的电话号码'];
+            }
+            $phone  = $request->phone;
+            /* 验证用户合法性 */
+            if(!Doctor::where('phone', $phone)->first() && !Volunteer::where('phone', $phone)->first())
+                return ['status_code' => 0, 'message' => '该账号不存在!'];
+
+            try {
+                $code   = \MessageSender::generateMessageVerify();
+                \MessageSender::sendMessageVerify($phone, $code);
+                Cache::put($this->code_prefix.$phone, $code,10);
+            } catch (\Exception $e) {
+                return ['status_code' => 0, 'message' => $e->getMessage()];
+            }
+            return ['status_code' => 200, 'message' => '发送成功!','code'=> $code];
+        }
+        else{
+            return ['status_code' => 0, 'message' => '发送失败!','code'=> null];
+        }
+    }
+
+    public function checkCode(Request $request)
+    {
+        $phone = $request->phone;
+        $code = $request->code;
+        return $this->verify_code($phone, $code);
     }
 
 }

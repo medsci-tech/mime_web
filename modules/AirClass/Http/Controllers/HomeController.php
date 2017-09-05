@@ -36,7 +36,7 @@ class HomeController extends Controller
             $val['course_list'] = $course_list;
         }
 
-        $answer_class_courses = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id))->orderBy('id','asc')->limit(8)->get();//答疑课
+        $answer_class_courses = ThyroidClassCourse::where(array('course_class_id'=>$this->answer_class_id,'is_show'=>1))->orderBy('id','asc')->limit(8)->get();//答疑课
 
         $class_info  = CourseClass::whereIn('id', array($this->answer_class_id, $this->private_class_id, $this->public_class_id))->orderBy('id', 'asc')->groupBy('id')->get();
 
@@ -83,7 +83,7 @@ class HomeController extends Controller
      */
     public function answer_class(Request $request)
     {
-        $where = array('course_class_id'=>$this->answer_class_id);
+        $where = array('course_class_id'=>$this->answer_class_id,'is_show'=>1);
         $units = ThyroidClassCourse::where($where) //答疑课id
             ->orderBy('created_at','asc')
            // ->groupBy('teacher_id')

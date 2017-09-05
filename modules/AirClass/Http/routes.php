@@ -33,7 +33,8 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 
 	// 短信
 	Route::post('/sms/code', 'SmsController@send_code_post'); // 发送短信请求
-
+    Route::post('/sms/send', 'SmsController@send');
+    Route::post('/sms/check-code', 'SmsController@checkCode');
 	//用户登录后访问
 	Route::get('/user', 'UserController@study'); // 学习情况视图
 	Route::get('/user/msg', 'UserController@msg'); // 消息视图
@@ -45,7 +46,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
     Route::post('/user/pwd_reset', 'UserController@pwdReset'); // 保存修改密码
     Route::get('/user/private_class', 'UserController@private_class'); // 保存修改密码
     Route::post('/user/private_class/save', 'UserController@private_class_save'); // 保存修改密码
-
+    Route::get('/user/study-rank/{id}', 'UserController@studyRank'); // 评论请求
     Route::get('/test', 'TestController@index'); // 清理乱数据
     Route::post('/file/upload', 'FileController@upload'); // 文件上传
 

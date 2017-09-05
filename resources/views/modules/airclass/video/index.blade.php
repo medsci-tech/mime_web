@@ -160,7 +160,7 @@
                                     <h3 class="title">{{$add_recommend_class->title}}</h3>
                                     <p class="introduction">{{$add_recommend_class->comment}}</p>
                                     <p class="price_and_persons">
-                                        <span class="price">&yen;198.00</span>
+                                        <!--<span class="price">&yen;198.00</span>-->
                                         <span class="persons pull-right">{{$add_recommend_class->play_count}}人在学</span>
                                     </p>
                                 </div>

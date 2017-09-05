@@ -22,7 +22,7 @@ class TeacherController extends Controller
 
         if($site_id){
             return view('admin::backend.tables.teacher', [
-                'teachers' => Model::where('site_id',$site_id)->paginate(10),
+                'teachers' => Model::where('site_id',$site_id)->paginate(100),
             ]);
         }else{
             return redirect('/site');
