@@ -99,6 +99,7 @@ var subActionAjax = function (action, data, tipDom) {
         data: data,
         success: function(res){
             if(res.code == 200){
+                $('#successModal').find('.tips').show();
                 $('#successModal').modal('show');
             }else if(res.code == 444) {
                 for(var i in res.msg){
