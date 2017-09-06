@@ -4,6 +4,7 @@ use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Office;
 use App\Models\Volunteer;
+use App\Models\KZKTClass;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
@@ -50,6 +51,10 @@ class UserPublicController extends Controller
         $req_hospital_name = $request->input('hospital_name'); //医院名称
         $req_office = $request->input('office'); //科室
         $req_title = $request->input('title'); //职称
+        $name = $request->input('name'); //姓名
+        $learnMode = $request->input('learn_mode'); //学习模式
+        $email = $request->input('email'); //学习模式
+        $qq = $request->input('qq'); //学习模式
 
         // 检测手机验证码有效性
         $sms = new SmsController();
@@ -77,6 +82,11 @@ class UserPublicController extends Controller
         $hospital = Hospital::where($hospital_where)->first();
         if($hospital){
             $hospital_id = $hospital->id;
+            if (empty($hospital->hospital_level)){
+                $hospital->hospital_level = $req_hospital_level;
+                $hospital->save();
+            }
+           // Hospital::whereNull('hospital_level')->where('id',$hospital_id) ->update(['hospital_level' => $req_hospital_level]);
         }else{
             $add_hospital_data = [
                 'hospital' => $req_hospital_name,
@@ -100,6 +110,9 @@ class UserPublicController extends Controller
         /* 保存医生信息 */
         $add_doctor_data = [
             'phone' => $req_phone,
+            'name' => $name,
+            'email' => $email,
+            'qq' => $qq,
             'password' => Hash::make($req_pwd),
             'hospital_id' => $hospital_id,
             'office' => $req_office,
@@ -120,7 +133,15 @@ class UserPublicController extends Controller
 //            ];
 //            $api_to_uc = new ApiToUserCenterController();
 //            $api_to_uc_res = $api_to_uc->register($api_to_uc_data);
-
+            //注册成功即报名
+            $doctor_id = $add_doctor->id;
+            KZKTClass::create([
+                'volunteer_id'=>0,
+                'doctor_id'=>$doctor_id,
+                'site_id'=>2,
+                'status'=>1,
+                'style'=> $learnMode
+            ]);
             DB::commit();
             $this->save_session($add_doctor);
             $tempCookie = \Cookie::forever($this->user_login_code, $req_phone);

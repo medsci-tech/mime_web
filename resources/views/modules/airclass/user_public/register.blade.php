@@ -44,6 +44,13 @@
                     <p class="col-sm-2 tips">密码不一致</p>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-3 control-label"><span class="necessary">＊</span>姓名</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="name" name="name"  placeholder="请输入姓名">
+                    </div>
+                    <p class="col-sm-2 tips">请输入姓名</p>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>地区</label>
                     <div class="col-sm-7">
                         <div class="row" id="city-select">
@@ -79,6 +86,18 @@
                     <p class="col-sm-2 tips">请输入医院</p>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-3 control-label"><span class="necessary">＊</span>医院等级</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" id="hospital_level" name="hospital_level">
+                            <option value="">请选择医院等级</option>
+                            @foreach(config('params')['hospital_level'] as $ol)
+                                <option value="{{$ol}}">{{$ol}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <p class="col-sm-2 tips">请输入医院等级</p>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label"><span class="necessary">＊</span>科室</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="office" name="office">
@@ -101,6 +120,36 @@
                         </select>
                     </div>
                     <p class="col-sm-2 tips">请输入职称</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><span class="necessary">＊</span>邮箱</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱">
+                    </div>
+                    <p class="col-sm-2 tips">请输入邮箱</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><span class="necessary"></span>QQ</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="qq" name="qq" placeholder="请输入QQ">
+                    </div>
+                    <p class="col-sm-2 tips">请输入QQ</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><span class="necessary">＊</span>学习方式</label>
+                    <div class="col-sm-7">
+                        
+                        <label style="padding:6px 15px;">
+                            <input type="radio" value="web" name="learnMode" >
+                            <span style="margin-left:8px;">网络</sapn>
+                        </label>
+                        <label style="padding:6px 15px;">
+                            <input type="radio" value="phone"  name="learnMode" >
+                            <span style="margin-left:8px;">电话</sapn>
+                        </label>
+                        <input type="hidden" value="" id="learn_mode" name="learn_mode"/>
+                    </div>
+                    <p class="col-sm-2 tips">请选择学习方式</p>
                 </div>
                 <div class="form-group checkbox_group">
                     <div class="col-sm-offset-3 col-sm-7">
@@ -154,9 +203,13 @@
         var code_dom = $('#code');
         var pwd_dom = $('#password');
         var re_pwd_dom = $('#re_password');
+        var name_dom = $('#name');
         var hospital_dom = $('#hospital');
+        var hospital_level_dom = $('#hospital_level');
         var office_dom = $('#office');
         var title_dom = $('#title');
+        var email_dom = $('#email');
+        var learnMode_dom = $("#learn_mode");
 
         $('#city-select').citys({
             required:false,
@@ -194,6 +247,10 @@
                 validateTips(phone_dom, '手机号格式错误');
             }
         });
+
+        $("input[name='learnMode']").click(function() {
+            $('#learn_mode').val($(this).val());
+        });
         // 点击注册按钮
         $('#btnSignup').on('click',function() {
             $('.tips').hide();
@@ -207,9 +264,13 @@
             }
             if(validate_required(code_dom) &&
             validate_required(pwd_dom) &&
+            validate_required(name_dom) &&
             validate_required(hospital_dom) &&
+            validate_required(hospital_level_dom) &&
             validate_required(office_dom) &&
-            validate_required(title_dom)){
+            validate_required(title_dom) &&
+            validate_required(email_dom) &&
+            validate_required(learnMode_dom)){
                 // ajax请求
                 var data = $('#signUpForm').serialize();
                 subActionAjax(register_url,data);

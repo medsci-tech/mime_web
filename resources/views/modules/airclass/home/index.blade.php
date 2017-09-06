@@ -213,7 +213,8 @@
             );
             
             $('.btn_project_sign').click(function () {
-                showAlertModal('请联系空课志愿者进行报名');
+                //showAlertModal('请联系空课志愿者进行报名');
+                window.open("/register","_self");
             });
         });
     </script>
