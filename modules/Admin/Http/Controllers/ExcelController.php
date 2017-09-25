@@ -2,6 +2,8 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\Doctor;
+use Illuminate\Support\Facades\DB;
 use Modules\Admin\Entities\PlayLog;
 use Modules\Admin\Entities\Student;
 use Modules\Admin\Entities\ThyroidClassCourse;
@@ -226,18 +228,21 @@ class ExcelController extends Controller
 //    }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function logs2Excel(Request $request)
+    /*public function logs2Excel(Request $request)
     {
+
         $site_id = $request->input('site_id');
         $courses = ThyroidClassCourse::where('site_id',$site_id)->get();
         $coursesArray = array();
         foreach ($courses as $course) {
             $coursesArray[$course->id] = [
                 'course' => $course->sequence . $course->title,
-                'phase' => $course->thyroidClassPhase->title
+                'phase' => $course->thyroid_class_phase_id?$course->thyroidClassPhase->title:''
             ];
+            //dd($course->thyroidClassPhase->title);
         }
 
         $students = Student::where('site_id',$site_id)->get(['id', 'phone', 'name']);
@@ -263,11 +268,154 @@ class ExcelController extends Controller
             }
         }
         \Excel::create('公开课观看日志', function ($excel) use ($cellData) {
-            $excel->sheet(date('Y-M-D'), function ($sheet) use ($cellData) {
+            $excel->sheet(date('Y-m-d'), function ($sheet) use ($cellData) {
                 $sheet->rows($cellData);
             });
-        })->
-        export('xls');
+        })->export('xls');
+
+        return redirect('/admin/student');
+    }*/
+
+    public function logs2Excel(Request $request)
+    {
+        set_time_limit(0);
+        $site_id = $request->input('site_id');
+        $courses = DB::table('thyroid_class_courses')->where(['site_id'=>$site_id,'is_show'=>1])->select('title','id','course_class_id','course_type')->get();
+        //所有课程的id
+        $course_id = DB::table('thyroid_class_courses')->where(['site_id'=>$site_id,'is_show'=>1])->pluck('id');
+        //dd($courses);
+        //导出表的第一行
+        $cellData = [['手机号', '学员姓名', '大区', '省', '市', '区', '医院', '医院等级', '科室', '职称', '邮箱', '学员等级', '是否电话', '大区经理', '代表', '代表手机']];
+        //占位数组
+        $tmparr = [];
+        foreach ($courses as $course) {
+            $cellData[0][] = $course->title.'(学习时长/min)';
+            $cellData[0][] = $course->title.'(点击次数/次)';
+        }
+        $cellData[0][] = '必修课学习时长/min';
+        $cellData[0][] = '选修课学习时长/min';
+        $cellData[0][] = '理论课总时长/min';
+        $cellData[0][] = '答疑课学习时长/min';
+        $cellData[0][] = '学习总时长/min';
+        $cellData[0][] = '理论课点击数';
+        $cellData[0][] = '答疑课点击数';
+        $cellData[0][] = '总点击数';
+        //课程的总数
+        $course_num = count($course_id);
+        for ($i=0;$i<8+$course_num*2;$i++){
+            $tmparr[] = '';
+        }
+
+        //dd($cellData);
+        $doctors = Db::table('doctors')
+            ->join('hospitals','doctors.hospital_id','=','hospitals.id')
+            ->leftjoin('kzkt_classes','doctors.id','=','kzkt_classes.doctor_id')
+            ->leftjoin('volunteers','kzkt_classes.volunteer_id','=','volunteers.id')
+            ->leftjoin('represent_info as r','volunteers.number','=','r.initial')
+            ->select('doctors.id','doctors.hospital_id','doctors.name as dname','doctors.phone as dp','doctors.email','doctors.office','doctors.title','doctors.rank','hospitals.hospital','hospitals.hospital_level','hospitals.province','hospitals.city','hospitals.country','volunteers.name','volunteers.phone','kzkt_classes.style','r.belong_area','r.belong_dbm')->get();
+        //dd($doctors);
+        foreach ($doctors as $doctor) {
+            //dd($doctor);
+            $item = [
+                ' '.$doctor->dp,
+                $doctor->dname,
+                $doctor->belong_area,
+                $doctor->province,
+                $doctor->city,
+                $doctor->country,
+                $doctor->hospital,
+                $doctor->hospital_level,
+                $doctor->office,
+                $doctor->title,
+                $doctor->email,
+                $doctor->rank,
+                $doctor->style && in_array('phone',explode(',',$doctor->style)) ?'是':'否',
+                $doctor->belong_dbm,
+                $doctor->name,
+                ' '.$doctor->phone,
+
+            ];
+            $item = array_merge($item,$tmparr);
+            //dd($item);
+            //统计必修课观看时长、选修课时长、答疑课时长、总学习时长、理论课点击次数、答疑课点击次数
+            $rq_course = $op_course = $aq_course = $total = $th_click = $aq_click = 0;
+            //学员观看课程的记录
+            $play_log = DB::table('play_logs')->where(['student_id'=>$doctor->id])->get();
+            //dd($play_log);
+            //如果存在观看记录，写入表中
+            foreach ($play_log as $play){
+                $lac = array_search($play->thyroid_class_course_id,$course_id);
+                if($lac!==false){
+                    $item[16+$lac*2] = sprintf('%0.2f',$play->play_duration);
+                    $item[17+$lac*2] = $play->play_times;
+                    //公开课
+                    if($courses[$lac]->course_class_id==4){
+                        //必修课
+                        if($courses[$lac]->course_type==1){
+                            //必修课观看时长
+                            $rq_course += $play->play_duration;
+                        }elseif($courses[$lac]->course_type==1){
+                            //选修课观看时长
+                            $op_course += $play->play_duration;
+                        }
+                        //理论课点击次数
+                        $th_click += $play->play_times;
+
+                    }elseif($courses[$lac]->course_class_id==2){//答疑课
+                        $aq_course += $play->play_duration;
+                        $aq_click += $play->play_times;
+                    }
+                }
+            }
+
+
+            /*foreach ($courses as $course){
+                //dd($course);
+                $play = DB::table('play_logs')->where(['student_id'=>$doctor->id,'thyroid_class_course_id'=>$course->id])->first();
+                if($play){
+                    $item[] = sprintf('%0.2f',$play->play_duration/60);
+                    $item[] = $play->play_times;
+
+                    //公开课
+                    if($course->course_class_id==4){
+                        //必修课
+                        if($course->course_type==1){
+                            //必修课观看时长
+                            $rq_course += $play->play_duration;
+                        }elseif($course->course_type==1){
+                            //选修课观看时长
+                            $op_course += $play->play_duration;
+                        }
+                        //理论课点击次数
+                        $th_click += $play->play_times;
+
+                    }elseif($course->course_class_id==2){//答疑课
+                        $aq_course += $play->play_duration;
+                        $aq_click += $play->play_times;
+                    }
+                }else{
+                    $item[] = 0;
+                    $item[] = 0;
+                }
+            }*/
+            //dd($tmp);
+            $item[16+$course_num*2] = sprintf('%0.2f',$rq_course/60);//必修课时长
+            $item[17+$course_num*2] = sprintf('%0.2f',$op_course/60);//选修课时长
+            $item[18+$course_num*2] = sprintf('%0.2f',($op_course+$rq_course)/60);//理论课时长
+            $item[19+$course_num*2] = sprintf('%0.2f',$aq_course);//答疑课时长
+            $item[20+$course_num*2] = sprintf('%0.2f',($aq_course+$op_course+$rq_course)/60);//学习总时长
+            $item[21+$course_num*2] = $th_click;//理论课点击次数
+            $item[22+$course_num*2] = $aq_click;//答疑课点击次数
+            $item[23+$course_num*2] = $aq_click + $th_click;//总点击次数
+            array_push($cellData, $item);
+            //dd($cellData);
+
+        }
+        \Excel::create('学员观看信息记录', function ($excel) use ($cellData) {
+            $excel->sheet(date('Y-m-d'), function ($sheet) use ($cellData) {
+                $sheet->rows($cellData);
+            });
+        })->export('xls');
 
         return redirect('/admin/student');
     }

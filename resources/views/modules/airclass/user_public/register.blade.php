@@ -178,10 +178,10 @@
                 get_hospital(lists);
             }
         });
-
+        var wait=60;
         // 点击获取验证码
         $('#btnDetCodeOfRegister').click(function() {
-            $('.tips').hide();
+            $(this).parent().parent().next().hide();
             var phone_val = phone_dom.val();
             if (checkPhone(phone_val)) {
                 // ajax获取验证码
@@ -189,11 +189,30 @@
                     'phone': phone_val,
                     'exist': '-1'
                 };
-                subSmsAjax(code_url,data, phone_dom);
+                //设置定时器
+
+                time($(this));
+                //subSmsAjax(code_url,data, phone_dom);
+
             } else {
                 validateTips(phone_dom, '手机号格式错误');
             }
         });
+        //定时器
+        function time(o) {
+            if (wait == 0) {
+                o.removeClass("disabled");
+                o.text("获取验证码");
+                wait = 60;
+            } else {
+                o.addClass("disabled");
+                o.text("重新发送(" + wait + ")");
+                wait--;
+                setTimeout(function() {
+                    time(o)
+                },1000)
+            }
+        }
         // 点击注册按钮
         $('#btnSignup').on('click',function() {
             $('.tips').hide();

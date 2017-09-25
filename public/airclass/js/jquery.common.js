@@ -208,9 +208,9 @@ var subQuestionAjax = function (action, data) {
         error:function (res) {
             showAlertModal('服务器错误');
         },
-        complete:function () {
+        /*complete:function () {
             window.location.reload();
-        }
+        }*/
     });
 };
 

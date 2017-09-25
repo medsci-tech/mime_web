@@ -55,6 +55,9 @@
 				<li>
 					<a href="{{url('help')}}">帮助</a>
 				</li>
+				<li>
+					<a href="{{'/shop/index.php'}}">微商城</a>
+				</li>
 			</ul>
 		<div class="nav navbar-nav navbar-right clearfix">
 			<form class="navbar-form pull-left" role="search" method="get" action="{{url('search')}}" onsubmit="return validate_form()">
@@ -185,7 +188,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- alert modal -->
 <div class="modal fade alert_modal" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-sm" role="document">

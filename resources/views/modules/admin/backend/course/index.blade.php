@@ -81,7 +81,7 @@
                                     </td>
                                     <td>{{$list->qcloud_file_id}}</td>
                                     <td>{{$list->qcloud_app_id}}</td>
-                                    <td>{{$list->video_duration}}</td>
+                                    <td>{{ sprintf('%02u',$list->video_duration/3600).':'.sprintf('%02u',intval($list->video_duration%3600/60)) .':'.sprintf('%02u',$list->video_duration%60)}}</td>
                                     <td style="white-space: nowrap">
                                         <button class="btn btn-xs btn-primary" data-btn="edit" data-target="#modal-edit" data-toggle="modal"
                                             data-id="{{$list->id}}"

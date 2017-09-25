@@ -3,6 +3,10 @@
         <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/index.css')}}" />
         @endsection
     @section('container')
+    @if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
+        <button class="btn-primary" id="btn_answer" style="position: fixed;top:50%;right: 0;width: 50px;height: 50px;font-size: 12px;border-radius: 25px;z-index: 1000;">点我答题</button>
+    @endif
+    @include('modules.airclass.layouts.questions')
     <!-- slider -->
     <div class="slider_container">
         <div id="slider" class="carousel slide" data-ride="carousel">
@@ -216,5 +220,32 @@
                 showAlertModal('请联系空课志愿者进行报名');
             });
         });
+    </script>
+@endsection
+
+@section('js_child')
+    <script>
+        // 答题
+        $(function () {
+            var question_action = '{{url('video/answer',['id'=>0])}}';
+
+            $('#btn_answer').click(function () {
+
+                $('#questionsModal').modal('show');
+
+            });
+
+            // 答题
+            $('.btn_questions_modal_confirm').click(function () {
+                var data = $('#questionForm').serialize();
+                subQuestionAjax(question_action, data);
+//            tipsBeansModal('hahahha');
+            });
+
+            $('#questionsModal :radio').change(function () {
+                $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
+            });
+        })
+
     </script>
 @endsection

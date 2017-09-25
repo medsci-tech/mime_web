@@ -3,6 +3,7 @@ use App\Models\ClassDetails;
 use App\Models\KZKTClass;
 use App\Models\PrivateClass;
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Exercise;
 use Modules\AirClass\Entities\Banner;
 use Modules\AirClass\Entities\Teacher;
 use Modules\AirClass\Entities\ThyroidClass;
@@ -42,9 +43,13 @@ class HomeController extends Controller
 
         if($this->user){
             $sing_up = KZKTClass::where('doctor_id', $this->user['id'])->first();
+            $exec = Exercise::where('site_id',$this->site_id)->inRandomOrder()->limit(10)->get();//dd($exec);
         }else{
             $sing_up = null;
+            $exec = null;
         };
+//        dd(session('user_login_session_key'));
+
 		return view('airclass::home.index',[
             'banners' => $banners,
             'classes' => $classes,
@@ -53,6 +58,7 @@ class HomeController extends Controller
             'public_class_courses' => $public_class_units, // 公开课
             'answer_class_courses' => $answer_class_courses, // 答疑课
             'sing_up' => $sing_up, // 答疑课
+            'questions' => $exec, // 答疑课
         ]);
 	}
 

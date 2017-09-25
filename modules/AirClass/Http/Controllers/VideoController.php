@@ -177,8 +177,8 @@ class VideoController extends Controller
 	}
 
 	// 答题
-	public function answer(Request $request, $id){
-		if($id){
+	public function answer(Request $request, $id=null){
+		if($id!==null){
 			$request_data = $request->all();
 			// 未填答案
 			if(!$request_data){
@@ -194,10 +194,11 @@ class VideoController extends Controller
 				'class_id' => $id,
 				'user_id' => $user['id'],
 			])->first();
-			if($check_answer){
+			if($id && $check_answer){//id不为0
 				return $this->return_data_format(555, '已答过题');
 			}
 			$result = [];
+			$right_ans =  0;//答对问题的总数
 			foreach ($request_data as $key => $val){
 				$save_data = [];
 				$temp_arr = explode('_', $key);
@@ -207,6 +208,8 @@ class VideoController extends Controller
 				$save_data['site_id'] = $this->site_id; // 站点id
 				$save_data['user_id'] = $user['id']; // 用户id
 				$result[] = AnswerLog::create($save_data);
+				$res = Exercise::where(['id'=>$temp_arr[1],'answer'=>$val])->count();
+                $right_ans += $res;
 			}
 
 			if($result){
@@ -215,6 +218,12 @@ class VideoController extends Controller
 				//$api_result = $api->modify_beans($user['phone'], config('params')['bean_rules']['answer_question']);
                 $res = Doctor::find($user['id'])->increment('credit', config('params')['bean_rules']['answer_question']);
 				if($res){
+				    if(!$id && $right_ans>=config('params')['question_num']*0.8){
+                        //正确率80%以上通过
+                        Doctor::find($user['id'])->increment('rank');
+                        session(['user_login_session_key.rank'=>$user['rank']+1]);
+                        return $this->return_data_format(200, '恭喜您，学员等级升级成功');
+                    }
 					return $this->return_data_format(200, '恭喜您，完成答题获得15积分');
 				}else{
 					return $this->return_data_format(200, '恭喜您，完成答题');
@@ -247,8 +256,8 @@ class VideoController extends Controller
 			$save_data['site_id'] = $this->site_id;
 			$save_data['doctor_id'] = $user['id'];
 			$save_data['course_id'] = $class_id;
-			$save_data['study_duration'] = $req_data['times'] * config('params')['video_heartbeat_times'];
-			$save_data['progress'] = $req_data['progress'];
+			$save_data['study_duration'] = $req_data['times'] * config('params')['video_heartbeat_times'];//观看视频总时长
+			$save_data['progress'] = $req_data['progress'];//视频进度
 			// 查询是否有过观看记录
 			$video_logs = StudyLog::where($where)->first();
 			$course = ThyroidClassCourse::find($class_id);
@@ -264,7 +273,7 @@ class VideoController extends Controller
 		if(ThyroidClassCourse::find($class_id)->course_class_id==$this->answer_class_id)
             $this->setBean(['id'=>$this->user['id'],'phone'=>$this->user['phone']]); //统计答疑课积分
 
-        $this->setVideoBean(['id'=>$this->user['id'],'course_id'=>$class_id,'phone'=>$this->user['phone']]);// 观看视频积分
+        $this->setVideoBean(['id'=>$this->user['id'],'course_id'=>$class_id,'phone'=>$this->user['phone']]);// 观看点击视频积分
 
 		return $this->return_data_format(200);
 	}
@@ -288,7 +297,7 @@ class VideoController extends Controller
 				$save_data['doctor_id'] = $user['id'];
 				StudyLog::create($save_data);
 			}
-			$course->increment('play_count');
+			$course->increment('play_count');//视频播放量+1
 			return $this->return_data_format(200);
 		}else{
 			return $this->return_data_format(500,'参数缺失无法记录');

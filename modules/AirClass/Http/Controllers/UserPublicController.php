@@ -104,6 +104,7 @@ class UserPublicController extends Controller
             'hospital_id' => $hospital_id,
             'office' => $req_office,
             'title' => $req_title,
+            'rank'=>1
         ];
         $add_doctor = Doctor::create($add_doctor_data);
         if($add_doctor){

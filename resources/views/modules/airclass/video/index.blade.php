@@ -189,42 +189,7 @@
 
     <!-- modals -->
     <!-- questions modal -->
-    <div class="questions_modal modal fade" id="questionsModal" tabindex="-1" role="dialog"
-         aria-labelledby="successModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h3 class="title text-center">答题</h3>
-                <form id="questionForm">
-                    <ol class="questions">
-                        @if($questions->count())
-                            @foreach($questions as $question)
-                                <li class="question_container">
-                                    <span class="icon icon_success"></span>
-                                    <h4 class="question">{{$question->question}}</h4>
-                                    <ol class="choices">
-                                        @foreach(unserialize($question->option) as $key => $val)
-                                            <li class="choice">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="q_{{$question->id}}" value="{{$key}}">
-                                                        <span class="radio_img"></span>
-                                                        {{$val}}
-                                                    </label>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ol>
-                                </li>
-                            @endforeach
-                        @endif
-                    </ol>
-                </form>
-                <button type="button" class="btn btn-block btn_questions_modal_confirm">提交</button>
-            </div>
-        </div>
-    </div>
+    @include('modules.airclass.layouts.questions')
     <!-- success modal -->
     <div class="success_modal modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal">
         <div class="modal-dialog" role="document">
@@ -243,34 +208,7 @@
 @section('js')
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript">
-        // 答题
-        $(function () {
-            var question_action = '{{url('video/answer', ['id' => $class->id])}}';
-            $('#btnChapter').click(function () {
-                var height = $('.video_wrapper').height();
-                $('.video_container').toggleClass('active').find('.chapters').height(height);
-            });
 
-            $('#btn_answer').click(function () {
-                var answer_status_mag = '{{$answer_status_mag}}';
-                if (answer_status_mag) {
-                    showAlertModal(answer_status_mag);
-                } else {
-                    $('#questionsModal').modal('show');
-                }
-            });
-
-            // 答题
-            $('.btn_questions_modal_confirm').click(function () {
-                var data = $('#questionForm').serialize();
-                subQuestionAjax(question_action, data);
-//            tipsBeansModal('hahahha');
-            });
-
-            $('#questionsModal :radio').change(function () {
-                $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
-            });
-        });
         // 视频播放
         $(function () {
             var time = parseInt('{{config('params')['video_heartbeat_times']}}') * 1000; // 心跳时间 16s
@@ -301,7 +239,7 @@
                             // 重新载入播放算一次播放次数
                             video_heartbeat_ajax(watch_times_action, heartbeat_data);
                             var view_count_dom = $('#video_view_count');
-                            view_count_dom.text(parseInt(view_count_dom.text()) + 1);
+                            view_count_dom.text(parseInt(view_count_dom.text()) + 1);//视频播放次数
                         }
                         num++;
                     }
@@ -601,5 +539,38 @@
 //                }
 //            });
         });
+    </script>
+@endsection
+@section('js_child')
+    <script>
+        // 答题
+        $(function () {
+            var question_action = '{{url('video/answer', ['id' => $class->id])}}';
+            $('#btnChapter').click(function () {
+                var height = $('.video_wrapper').height();
+                $('.video_container').toggleClass('active').find('.chapters').height(height);
+            });
+
+            $('#btn_answer').click(function () {
+                var answer_status_mag = '{{$answer_status_mag}}';
+                if (answer_status_mag) {
+                    showAlertModal(answer_status_mag);
+                } else {
+                    $('#questionsModal').modal('show');
+                }
+            });
+
+            // 答题
+            $('.btn_questions_modal_confirm').click(function () {
+                var data = $('#questionForm').serialize();
+                subQuestionAjax(question_action, data);
+//            tipsBeansModal('hahahha');
+            });
+
+            $('#questionsModal :radio').change(function () {
+                $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
+            });
+        })
+
     </script>
 @endsection
