@@ -34,9 +34,9 @@ class Controller extends BaseController
         }
     }
 
-    public function return_data_format($code = 200, $msg = null, $data = null)
+    public function return_data_format($code = 200, $msg = null, $data = null,$url=null)
     {
-        return ['code' => $code, 'msg' => $msg, 'data' => $data];
+        return ['code' => $code, 'msg' => $msg, 'data' => $data,'url'=>$url];
     }
 
     /**

@@ -1,6 +1,6 @@
 <div class="questions_modal modal fade" id="questionsModal" tabindex="-1" role="dialog"
      aria-labelledby="successModal" style="overflow: scroll;">
-    <div class="modal-dialog" role="document" style="">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h3 class="title text-center">答题</h3>

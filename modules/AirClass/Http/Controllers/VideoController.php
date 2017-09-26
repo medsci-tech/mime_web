@@ -176,6 +176,14 @@ class VideoController extends Controller
 		}
 	}
 
+	public function questions(){
+        $exec = Exercise::where('site_id',$this->site_id)->inRandomOrder()->limit(10)->get();//dd($exec);
+        foreach ($exec as &$val){
+            $val['option'] = unserialize($val['option']);
+        }
+        return response()->json($exec);
+    }
+
 	// 答题
 	public function answer(Request $request, $id=null){
 		if($id!==null){
@@ -216,14 +224,20 @@ class VideoController extends Controller
 				//调用用户中心接口
 				//$api = new ApiToUserCenterController();
 				//$api_result = $api->modify_beans($user['phone'], config('params')['bean_rules']['answer_question']);
-                $res = Doctor::find($user['id'])->increment('credit', config('params')['bean_rules']['answer_question']);
-				if($res){
-				    if(!$id && $right_ans>=config('params')['question_num']*0.8){
+                if(!$id){
+                    if($right_ans>=config('params')['question_num']*0.8){
                         //正确率80%以上通过
-                        Doctor::find($user['id'])->increment('rank');
+                        Doctor::find($user['id'])->increment('rank');//晋升
                         session(['user_login_session_key.rank'=>$user['rank']+1]);
                         return $this->return_data_format(200, '恭喜您，学员等级升级成功');
+                    }else{
+                        //未达标
+                        return $this->return_data_format(200, '晋升失败！请再次尝试');
                     }
+                }
+                $res = Doctor::find($user['id'])->increment('credit', config('params')['bean_rules']['answer_question']);
+				if($res){
+
 					return $this->return_data_format(200, '恭喜您，完成答题获得15积分');
 				}else{
 					return $this->return_data_format(200, '恭喜您，完成答题');
