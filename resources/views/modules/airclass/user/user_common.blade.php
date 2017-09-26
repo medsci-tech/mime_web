@@ -17,8 +17,8 @@
                             <div class="level_progress_bg"></div>
                             <div class="level_progress_bar" style="width: {{ round(Session::get('user_login_session_key')['rank']/3, 2)*100  }}%;"></div>
                             <span class="icon icon_level icon_level_one @if (Session::get('user_login_session_key')['rank'] >= 1) active @endif"></span>
-                            <span class="icon icon_level icon_level_two @if (Session::get('user_login_session_key')['rank'] >= 2) active @endif"></span>
-                            <span class="icon icon_level icon_level_three @if (Session::get('user_login_session_key')['rank'] >= 3) active @endif"></span>
+                            <span class="icon icon_level icon_level_two @if (Session::get('user_login_session_key')['rank'] >= 2) active @endif"  onclick="window.location.href='/user/study-rank/2';" style="cursor: pointer"></span>
+                            <span class="icon icon_level icon_level_three @if (Session::get('user_login_session_key')['rank'] >= 3) active @endif" onclick="window.location.href='/user/study-rank/3';" style="cursor: pointer"></span>
                         </div>
                     </div>
                     <p>

@@ -25,6 +25,8 @@ class VerifyCsrfToken extends BaseVerifier
         '/user/save_info*',
         '/login_account/post*',
         '/sms/code*',
+        '/sms/send',
+        '/sms/check-code',
         '/hospital/get_lists*',
         '/register/post*',
     ];

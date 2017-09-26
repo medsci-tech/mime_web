@@ -111,10 +111,7 @@ class PrivateClassController extends Controller
 		}
 
 		// 上线后删除
-		if($status == true && $this->user['phone'] != '13871000454'){
-			$status = false;
-			$return_msg = '私教课尚未开放';
-		}
+
 
 		return ['status' => $status, 'msg' => $return_msg, 'data' => ['belong_area' => $belong_area]];
 	}

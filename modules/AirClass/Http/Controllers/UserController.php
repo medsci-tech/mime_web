@@ -2,6 +2,7 @@
 
 use App\Models\Comment;
 use App\Models\PrivateClass;
+use App\Models\StudyLog;
 use Illuminate\Http\Request;
 use Modules\Admin\Http\Controllers\UploadController;
 use PhpParser\Comment\Doc;
@@ -29,6 +30,40 @@ class UserController extends Controller
         else
             $this->bean =  \Redis::get($bean_key);
     }
+    /**
+     * unstudy
+     * @author      lxhui<772932587@qq.com>
+     * @since 1.0
+     * @return array
+     */
+    public function studyRank($id)
+    {
+        if (!in_array($id, [2,3]))
+            return redirect('/user');
+
+        $model = new StudyLog();
+        $data = $model::getStudyLog(['site_id'=>2,'rank'=>$id,'id'=>$this->user['id']]);
+        $list = ThyroidClassCourse::select(['id','title','logo_url','logo_url','comment'])->whereIn('id',$data)->get();
+        foreach($list as &$val)
+        {
+            $units = DB::table('study_logs')
+                ->select(DB::raw('sum(study_duration) as duration_count,max(created_at) as study_date, course_id,progress,video_duration,created_at,truncate(max(progress)/max(video_duration),3) as percent'))
+                ->where(['doctor_id'=>$this->user['id'],'course_id'=>$val->id])
+                ->orderBy('created_at', 'desc')
+                ->orderBy('percent', 'desc')->first();
+
+            $val->date_time=$units->study_date ? date('Y/m/d',strtotime($units->study_date)) : null;
+            $val->percent = $units->percent>1 ? 1: $units->percent ;
+            $val->duration_count = $units->duration_count ? $units->duration_count: 0 ;
+            $val->study_date = $units->study_date  ? $units->study_date: null ;
+        }
+
+        return view('airclass::user.study_log', [
+            'current_active' => 'study',
+            'units' => $list,
+        ]);
+    }
+
     /**
      * 我的消学习情况
      * @author      lxhui<772932587@qq.com>

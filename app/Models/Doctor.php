@@ -18,6 +18,7 @@ class Doctor extends Model
         'hospital_id',
         'office',
         'email',
+        'qq',
         'title',
         'rank',
         'credit',

@@ -33,7 +33,10 @@ var show_hospital_list = function (list) {
 
 var select_hospital = function (hospital, hospital_level) {
     $('#hospital').val(hospital);
-    $('#hospital_level').val(hospital_level);
+    if (hospital_level!='null') {
+        $('#hospital_level').val(hospital_level);
+    }
+    
 };
 var clear_hospital = function () {
     var n = '';

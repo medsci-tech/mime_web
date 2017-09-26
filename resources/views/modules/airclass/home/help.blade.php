@@ -1,4 +1,4 @@
-@extends('modules.airclass.layouts.app')
+*@extends('modules.airclass.layouts.app')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/help.css')}}" />
     @endsection
@@ -123,7 +123,7 @@
                 <p>3.学员积分指标及分值表</p>
                 <div class="points_imgs clearfix">
                     <img class="detail" src="{{asset('airclass/img/help_points.jpg')}}"/>
-                    <img class="qrcode" src="{{asset('airclass/img/help_qrcode.png')}}"/>
+                    {{--<img class="qrcode" src="{{asset('airclass/img/help_qrcode.png')}}"/>--}}
                 </div>
             </div>
             <div class="isolate_module help_contact">

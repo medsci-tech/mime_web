@@ -78,7 +78,7 @@ return [
     // 私教课期数
     'private_class_term' => 1,
     // 私教课名额
-    'private_class_count' => 30,
+    'private_class_count' => 26,
 
     //学员晋升A：学习时长
     'up_to_second'=>180,//学习总时长累计180分钟达到二级学员
