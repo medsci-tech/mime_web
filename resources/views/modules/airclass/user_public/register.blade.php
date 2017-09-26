@@ -24,7 +24,7 @@
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="code" name="code" placeholder="请输入验证码">
                             </div>
-                            <button type="button" id="btnDetCodeOfRegister" class="btn col-sm-3">获取验证码</button>
+                            <button type="button" id="btnDetCodeOfRegister" class="btn col-sm-4">获取验证码</button>
                         </div>
                     </div>
                     <p class="col-sm-2 tips">请输入验证码</p>
@@ -245,7 +245,7 @@
                 //设置定时器
 
                 time($(this));
-                //subSmsAjax(code_url,data, phone_dom);
+                subSmsAjax(code_url,data, phone_dom);
 
             } else {
                 validateTips(phone_dom, '手机号格式错误');
