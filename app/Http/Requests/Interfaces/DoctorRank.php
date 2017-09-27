@@ -118,11 +118,11 @@ trait DoctorRank
                 $course_type_arr = $courses ?  array_column($courses, 'id') : [];
                 //选修课学习总时长
                 $study_time = \DB::table('study_logs')
-                    ->where(['site_id'=>$params['site_id'],'doctor_id'=>$params['id']])
+                    ->where(['site_id'=>$this->site_id,'doctor_id'=>$params['id']])
                     ->whereIn('course_id',$course_type_arr)
                     ->sum('study_duration');
                 //选修课累计达到190分钟成为3级学员
-                if($study_time/60 >= config['param']['up_to_third'])
+                if($study_time/60 >= config('param')['up_to_third'])
                 {
                     try
                     {
