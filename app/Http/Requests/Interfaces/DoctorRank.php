@@ -4,6 +4,7 @@ namespace App\Http\Requests\Interfaces;
 
 use App\Http\Requests\Request;
 use App\Models\{Doctor,StudyLog};
+use Modules\Admin\Entities\ThyroidClassCourse;
 
 /**
  * Class DoctorRank

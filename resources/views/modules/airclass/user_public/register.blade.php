@@ -141,11 +141,11 @@
                         
                         <label style="padding:6px 15px;">
                             <input type="radio" value="web" name="learnMode" >
-                            <span style="margin-left:8px;">网络</sapn>
+                            <span style="margin-left:8px;">网络</span>
                         </label>
                         <label style="padding:6px 15px;">
                             <input type="radio" value="phone"  name="learnMode" >
-                            <span style="margin-left:8px;">电话</sapn>
+                            <span style="margin-left:8px;">电话</span>
                         </label>
                         <input type="hidden" value="" id="learn_mode" name="learn_mode"/>
                     </div>
@@ -244,8 +244,8 @@
                 };
                 //设置定时器
 
-                time($(this));
                 subSmsAjax(code_url,data, phone_dom);
+                time($(this));
 
             } else {
                 validateTips(phone_dom, '手机号格式错误');
