@@ -84,7 +84,13 @@ trait DoctorRank
                 /* 如果必修课每期课件学习时长≥10分钟,赠送积分end */
                 //if(count($lists)>=config('params')['study_level']['course_public_min'])
                 //总学习时长
-                $study_time = StudyLog::where(['site_id'=>$this->site_id,'doctor_id'=>$params['id']])->sum('study_duration');
+                $courses = ThyroidClassCourse::where(['course_type'=>1,'is_show'=>1,'course_class_id'=>4])->get()->toArray(); //  课程类型: 1.必修课
+                $course_type_arr = $courses ?  array_column($courses, 'id') : [];
+                $study_time = \DB::table('study_logs')
+                    ->where(['site_id'=>$this->site_id,'doctor_id'=>$params['id']])
+                    ->whereIn('course_id',$course_type_arr)
+                    ->sum('study_duration');
+
                 //学习总时长累计180分钟达到二级学员
                 if($study_time/60 >= config('params')['up_to_second'])
                 {
@@ -114,6 +120,7 @@ trait DoctorRank
                 //$lists = StudyLog::setUserRank(['course_type'=>2,'site_id'=>$this->site_id,'id'=>$params['id']]);
                 /*$course_count = $lists['course_type_count'];
                 unset($lists['course_type_count']);*/
+
                 $courses = ThyroidClassCourse::where(['course_type'=>2,'is_show'=>1,'course_class_id'=>4])->get()->toArray(); //  课程类型: 2.选修课
                 $course_type_arr = $courses ?  array_column($courses, 'id') : [];
                 //选修课学习总时长
@@ -121,8 +128,9 @@ trait DoctorRank
                     ->where(['site_id'=>$this->site_id,'doctor_id'=>$params['id']])
                     ->whereIn('course_id',$course_type_arr)
                     ->sum('study_duration');
+
                 //选修课累计达到190分钟成为3级学员
-                if($study_time/60 >= config('param')['up_to_third'])
+                if($study_time/60 >= config('params')['up_to_third'])
                 {
                     try
                     {

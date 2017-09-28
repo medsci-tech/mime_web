@@ -3,26 +3,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/index.css')}}" />
         @endsection
     @section('container')
-    @if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
-        <button class="btn-primary" id="btn_answer" style="position: fixed;top:50%;right: 0;width: 60px;height: 50px;font-size: 12px;border-radius: 25px;z-index: 1000;">点我答题晋升</button>
-    @endif
 
-    {{--答题试题 开始--}}
-    <div class="questions_modal modal fade" id="questionsModal" tabindex="-1" role="dialog"
-         aria-labelledby="successModal" style="overflow: scroll;">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="title text-center">答题</h3>
-                <form id="questionForm">
-                    <ol class="questions">
-                    </ol>
-                </form>
-                <button type="button" class="btn btn-block btn_questions_modal_confirm">提交</button>
-            </div>
-        </div>
-    </div>
-    {{--答题试题 结束--}}
     <!-- slider -->
     <div class="slider_container">
         <div id="slider" class="carousel slide" data-ride="carousel">
@@ -237,52 +218,5 @@
                 window.open("/register","_self");
             });
         });
-    </script>
-@endsection
-
-@section('js_child')
-    <script>
-        // 答题
-        $(function () {
-            var question_action = '{{url('video/answer',['id'=>0])}}';
-
-            $('#btn_answer').click(function () {
-                $.ajax({
-                    type:'post',
-                    url:'{{url('video/questions')}}',
-                    success:function(data){
-                        console.log(data);
-                        //填充试题
-                        var html = '';
-                        for(var i in data){
-                            html +='<li class="question_container">';
-                            html +='<h4 class="question">'+data[i].question+'</h4>';
-                            html +='<ol class="choices">';
-                            var op = data[i].option;
-                            for(var itm in op){
-                                html += '<li class="choice"><div class="radio"><label><input type="radio" name="q_'+ data[i].id +'" value="'+itm+'"><span class="radio_img"></span>'+op[itm]+'</label></div></li>'
-                            }
-                            html += '</ol></li>'
-                        }
-                        $('.questions').html(html);
-                        $('#questionsModal').modal('show');
-                    }
-                });
-
-
-            });
-
-            // 答题
-            $('.btn_questions_modal_confirm').click(function () {
-                var data = $('#questionForm').serialize();
-                subQuestionAjax(question_action, data);
-//            tipsBeansModal('hahahha');
-            });
-
-            $('#questionsModal :radio').change(function () {
-                $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
-            });
-        })
-
     </script>
 @endsection

@@ -173,6 +173,7 @@ class UserPublicController extends Controller
      */
     public function login_account_post(Request $request)
     {
+//        header('Access-Control-allow-origin');
         // 验证参数合法性
         $validator_params = $this->validator_params($request->all());
         if($validator_params['code'] != 200){

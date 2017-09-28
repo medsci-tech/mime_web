@@ -99,7 +99,26 @@
 	</div>
 	<!-- /.container-fluid -->
 </nav>
+@if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
+	<img src="{{ asset('airclass/img/upgrade.png') }}" class="img-circle" style="position: fixed;bottom:0;right: -40px;width: 160px;height: 120px;z-index: 1000;" id="btn_upgrade">
+@endif
 
+{{--答题试题 开始--}}
+<div class="questions_modal modal fade" id="upgradeModal" tabindex="-1" role="dialog"
+	 aria-labelledby="successModal" style="overflow: scroll;">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h3 class="title text-center">答题</h3>
+			<form id="questionForm">
+				<ol class="questions">
+				</ol>
+			</form>
+			<button type="button" class="btn btn-block btn_questions_modal_confirm">提交</button>
+		</div>
+	</div>
+</div>
+{{--答题试题 结束--}}
 @yield('container')
 
 		<!-- Modal -->
@@ -353,6 +372,50 @@
             return false
 		}
     }
+</script>
+<script>
+    // 答题
+    $(function () {
+        var question_action = '{{url('video/answer',['id'=>0])}}';
+
+        $('#btn_upgrade').click(function () {
+            $.ajax({
+                type:'post',
+                url:'{{url('video/questions')}}',
+                success:function(data){
+                    console.log(data);
+                    //填充试题
+                    var html = '';
+                    for(var i in data){
+                        html +='<li class="question_container">';
+                        html +='<h4 class="question">'+data[i].question+'</h4>';
+                        html +='<ol class="choices">';
+                        var op = data[i].option;
+                        for(var itm in op){
+                            html += '<li class="choice"><div class="radio"><label><input type="radio" name="q_'+ data[i].id +'" value="'+itm+'"><span class="radio_img"></span>'+op[itm]+'</label></div></li>'
+                        }
+                        html += '</ol></li>'
+                    }
+                    $('.questions').html(html);
+                    $('#upgradeModal').modal('show');
+                }
+            });
+
+
+        });
+
+        // 答题
+        $('.btn_questions_modal_confirm').click(function () {
+            var data = $('#questionForm').serialize();
+            subQuestionAjax(question_action, data);
+//            tipsBeansModal('hahahha');
+        });
+
+        $('#questionsModal :radio').change(function () {
+            $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
+        });
+    })
+
 </script>
 @section('js')
 @show

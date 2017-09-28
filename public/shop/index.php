@@ -7,6 +7,9 @@ if(!file_exists(str_replace("\\",'/', dirname(__FILE__)).'/config/install.link')
 		  exit;
 	}
 }
+
+//define('DEVELOPMENT',1);
+
 if(defined('SYSTEM_ACT')&&SYSTEM_ACT=='mobile')
 {
 	$mod='mobile';

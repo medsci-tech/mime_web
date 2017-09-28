@@ -50,6 +50,7 @@ function tocurl($url, $data,$method =0){
     }
     return $response;
 }
+//var_dump($_GP);die;
 		if (checksubmit("submit")) {
 			$mobile=$_GP['mobile'];
 	
