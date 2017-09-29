@@ -22,7 +22,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/video/questions', 'VideoController@questions'); // 试题
 
 	// 用户公开访问
-	Route::get('/register', 'UserPublicController@register_view'); //注册视图
+	Route::get('/register/{phone?}', 'UserPublicController@register_view'); //注册视图
 	Route::post('/register/post', 'UserPublicController@register_post'); // 注册请求
 	Route::post('/login_account/post', 'UserPublicController@login_account_post'); // 账号登陆请求
 	Route::post('/login_phone/post', 'UserPublicController@login_phone_post'); // 短信登陆请求
@@ -45,7 +45,8 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
     Route::post('/user/send', 'UserController@send'); // 个人中心发送短信
 	Route::get('/user/pwd_edit', 'UserController@pwd_edit'); // 修改密码视图
     Route::post('/user/pwd_reset', 'UserController@pwdReset'); // 保存修改密码
-    Route::get('/user/private_class', 'UserController@private_class'); // 保存修改密码
+    Route::get('/user/private_class', 'UserController@private_class');
+    Route::get('/user/qrcode', 'UserController@qrcode');//个人二维码
     Route::post('/user/private_class/save', 'UserController@private_class_save'); // 保存修改密码
     Route::get('/user/study-rank/{id}', 'UserController@studyRank'); // 评论请求
     Route::get('/test', 'TestController@index'); // 清理乱数据

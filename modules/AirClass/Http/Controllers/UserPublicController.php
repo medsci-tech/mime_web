@@ -16,11 +16,12 @@ class UserPublicController extends Controller
     /**
      * @return mixed
      */
-    public function register_view()
+    public function register_view($phone=null)
     {
         $offices = Office::all();
         return view('airclass::user_public.register', [
             'offices' => $offices,
+            'phone'=>$phone
         ]);
     }
 

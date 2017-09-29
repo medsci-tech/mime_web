@@ -146,7 +146,7 @@ var subLoginAjax = function (action, data) {
         data: data,
         success: function(res){
             if(res.code == 200){
-                window.location.reload();
+                window.location.href = window.location.href +'?v=' + Math.random();
             }else if(res.code == 444) {
                 showAlertModal(res.msg['phone'][0]);
             }else {

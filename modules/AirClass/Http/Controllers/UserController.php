@@ -4,6 +4,7 @@ use App\Models\Comment;
 use App\Models\PrivateClass;
 use App\Models\StudyLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Modules\Admin\Http\Controllers\UploadController;
 use PhpParser\Comment\Doc;
 use \App\Models\{Doctor,Hospital,Volunteer};
@@ -13,6 +14,7 @@ use Hash;
 use Cache;
 use DB;
 use App\Http\Requests\Interfaces\DoctorBean;
+
 class UserController extends Controller
 {
     use DoctorBean;
@@ -399,6 +401,27 @@ class UserController extends Controller
         }
 
         return ['code' => 200, 'message'=>'保存成功!'];
+    }
+
+    /**
+     * 个人二维码
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function qrcode(){
+        //dd($this->user);
+        $phone = $this->user['phone'];//用户手机号
+        if(!file_exists(public_path('airclass/qrcodes/'.$phone.'.png'))){
+            if(!file_exists(public_path('airclass/qrcodes'))) mkdir(public_path('airclass/qrcodes'));
+            \QrCode::format('png')->size(500)->generate(url('/register',['phone'=>$phone]), public_path('airclass/qrcodes/'.$phone.'.png'));
+        }
+        $img = 'airclass/qrcodes/'.$phone.'.png';
+
+        //dd($img);
+//        dd($lists);
+        return view('airclass::user.qrcode', [
+            'img' => $img,
+            'current_active' => 'qrcode',
+        ]);
     }
 
     public function private_class(){

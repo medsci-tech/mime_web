@@ -14,7 +14,8 @@
         "vinelab/http": "dev-master",
         "nesbot/carbon": "^1.22",
         "curl/curl": "^1.6",
-        "zgldh/qiniu-laravel-storage": "^0.6.5"
+        "zgldh/qiniu-laravel-storage": "^0.6.5",
+        "simplesoftwareio/simple-qrcode": "^1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

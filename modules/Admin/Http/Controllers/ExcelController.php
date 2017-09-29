@@ -303,7 +303,7 @@ class ExcelController extends Controller
         //课程的总数
         $course_num = count($course_id);
         for ($i=0;$i<8+$course_num*2;$i++){
-            $tmparr[] = '';
+            $tmparr[] = '';//每节课两列 + 最后总的统计的8列
         }
 
         //dd($cellData);
@@ -339,31 +339,31 @@ class ExcelController extends Controller
             //dd($item);
             //统计必修课观看时长、选修课时长、答疑课时长、总学习时长、理论课点击次数、答疑课点击次数
             $rq_course = $op_course = $aq_course = $total = $th_click = $aq_click = 0;
-            //学员观看课程的记录
-            $play_log = DB::table('play_logs')->where(['student_id'=>$doctor->id])->get();
+            //学员观看课程次数
+            $play_log = DB::table('study_logs')->select('course_id',DB::raw('sum(study_duration) as study_time,count(1) as study_num'))->where(['doctor_id'=>$doctor->id])->groupBy('doctor_id','course_id')->get();
             //dd($play_log);
             //如果存在观看记录，写入表中
             foreach ($play_log as $play){
-                $lac = array_search($play->thyroid_class_course_id,$course_id);
+                $lac = array_search($play->course_id,$course_id);
                 if($lac!==false){
-                    $item[16+$lac*2] = sprintf('%0.2f',$play->play_duration);
-                    $item[17+$lac*2] = $play->play_times;
+                    $item[16+$lac*2] = sprintf('%0.2f',$play->study_time);
+                    $item[17+$lac*2] = $play->study_num;
                     //公开课
                     if($courses[$lac]->course_class_id==4){
                         //必修课
                         if($courses[$lac]->course_type==1){
                             //必修课观看时长
-                            $rq_course += $play->play_duration;
+                            $rq_course += $play->study_time;
                         }elseif($courses[$lac]->course_type==1){
                             //选修课观看时长
-                            $op_course += $play->play_duration;
+                            $op_course += $play->study_time;
                         }
                         //理论课点击次数
-                        $th_click += $play->play_times;
+                        $th_click += $play->study_num;
 
                     }elseif($courses[$lac]->course_class_id==2){//答疑课
-                        $aq_course += $play->play_duration;
-                        $aq_click += $play->play_times;
+                        $aq_course += $play->study_time;
+                        $aq_click += $play->study_num;
                     }
                 }
             }
@@ -373,25 +373,25 @@ class ExcelController extends Controller
                 //dd($course);
                 $play = DB::table('play_logs')->where(['student_id'=>$doctor->id,'thyroid_class_course_id'=>$course->id])->first();
                 if($play){
-                    $item[] = sprintf('%0.2f',$play->play_duration/60);
-                    $item[] = $play->play_times;
+                    $item[] = sprintf('%0.2f',$play->study_time/60);
+                    $item[] = $play->study_num;
 
                     //公开课
                     if($course->course_class_id==4){
                         //必修课
                         if($course->course_type==1){
                             //必修课观看时长
-                            $rq_course += $play->play_duration;
+                            $rq_course += $play->study_time;
                         }elseif($course->course_type==1){
                             //选修课观看时长
-                            $op_course += $play->play_duration;
+                            $op_course += $play->study_time;
                         }
                         //理论课点击次数
-                        $th_click += $play->play_times;
+                        $th_click += $play->study_num;
 
                     }elseif($course->course_class_id==2){//答疑课
-                        $aq_course += $play->play_duration;
-                        $aq_click += $play->play_times;
+                        $aq_course += $play->study_time;
+                        $aq_click += $play->study_num;
                     }
                 }else{
                     $item[] = 0;
