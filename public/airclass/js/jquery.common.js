@@ -54,11 +54,11 @@ var validateTips = function(dom, msg) {
 
 
 var showAlertModal = function(msg) {
-    $('#alertModal').find('.modal-content').text(msg);
+    $('#alertModal').css('z-index',1041).find('.modal-content').text(msg);
     $('#alertModal').modal('show');
     setTimeout(function() {
         $('#alertModal').modal('hide');
-    }, 1500);
+    }, 2000);
 };
 var showAlertModal2 = function(msg,time) {
     $('#alertModal').find('.modal-content').text(msg);
@@ -200,14 +200,15 @@ var subQuestionAjax = function (action, data) {
         data: data,
         success: function(res){
             if(res.code == 200){
-                $('#questionsModal').modal('hide');
-                $('#upgradeModal').modal('hide');
-                if(res.data.rank && res.data.rank>2){
+                // $('#questionsModal').modal('hide');
+                // $('#upgradeModal').modal('hide');
+                $('.icon_success').show();
+                if(res.data && res.data.rank && res.data.rank>2){
                     $('#btn_upgrade').hide();
                 }
             }else if(res.code == 555) {
-                $('#questionsModal').modal('hide');
-                $('#upgradeModal').modal('hide');
+                // $('#questionsModal').modal('hide');
+                // $('#upgradeModal').modal('hide');
             }
             showAlertModal(res.msg);
         },

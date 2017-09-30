@@ -279,6 +279,7 @@ class ExcelController extends Controller
     public function logs2Excel(Request $request)
     {
         set_time_limit(0);
+        ini_set('memory_limit','1024M');
         $site_id = $request->input('site_id');
         $courses = DB::table('thyroid_class_courses')->where(['site_id'=>$site_id,'is_show'=>1])->select('title','id','course_class_id','course_type')->get();
         //所有课程的id

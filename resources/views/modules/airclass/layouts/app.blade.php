@@ -100,7 +100,7 @@
 	<!-- /.container-fluid -->
 </nav>
 @if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
-	<img src="{{ asset('airclass/img/click_answer.png') }}" class="img-circle" style="position: fixed;bottom:0;right: 0;width: 120px;height: 90px;z-index: 1000;" id="btn_upgrade">
+	<img src="{{ asset('airclass/img/upgrade1.png') }}" style="position: fixed;bottom:0;right: 0;width: 20%;z-index: 1000;" id="btn_upgrade">
 @endif
 
 {{--答题试题 开始--}}
@@ -392,12 +392,18 @@
                         html +='<ol class="choices">';
                         var op = data[i].option;
                         for(var itm in op){
-                            html += '<li class="choice"><div class="radio"><label><input type="radio" name="q_'+ data[i].id +'" value="'+itm+'"><span class="radio_img"></span>'+op[itm]+'</label></div></li>'
+                            html += '<li class="choice"><div class="radio"><label><input type="radio" name="q_'+ data[i].id +'" value="'+itm+'"><span class="radio_img"></span>'+op[itm]+'</label>';
+                            if(itm == data[i].answer ){
+                                html += '<span class="icon icon_success"></span>';
+                            }
+							html +='</div></li>';
                         }
                         html += '</ol></li>'
                     }
                     $('.questions').html(html);
+                    $('.btn_ans_modal_confirm').attr('disabled',false);
                     $('#upgradeModal').modal('show');
+                    $('.icon_success').hide();
                 }
             });
 
@@ -406,12 +412,13 @@
 
         // 答题
         $('.btn_ans_modal_confirm').click(function () {
+            $(this).attr('disabled',true);
             var data = $('#questionForm_app').serialize();
             subQuestionAjax(question_action, data);
 //            tipsBeansModal('hahahha');
         });
 
-        $('#questionsModal :radio').change(function () {
+        $('#upgradeModal :radio').change(function () {
             $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
         });
     })
