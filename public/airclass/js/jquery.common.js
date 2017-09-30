@@ -201,8 +201,13 @@ var subQuestionAjax = function (action, data) {
         success: function(res){
             if(res.code == 200){
                 $('#questionsModal').modal('hide');
+                $('#upgradeModal').modal('hide');
+                if(res.data.rank && res.data.rank>2){
+                    $('#btn_upgrade').hide();
+                }
             }else if(res.code == 555) {
                 $('#questionsModal').modal('hide');
+                $('#upgradeModal').modal('hide');
             }
             showAlertModal(res.msg);
         },

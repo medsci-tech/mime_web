@@ -110,11 +110,11 @@
 		<div class="modal-content">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h3 class="title text-center">答题</h3>
-			<form id="questionForm">
+			<form id="questionForm_app">
 				<ol class="questions">
 				</ol>
 			</form>
-			<button type="button" class="btn btn-block btn_questions_modal_confirm">提交</button>
+			<button type="button" class="btn btn-block btn_ans_modal_confirm">提交</button>
 		</div>
 	</div>
 </div>
@@ -405,8 +405,8 @@
         });
 
         // 答题
-        $('.btn_questions_modal_confirm').click(function () {
-            var data = $('#questionForm').serialize();
+        $('.btn_ans_modal_confirm').click(function () {
+            var data = $('#questionForm_app').serialize();
             subQuestionAjax(question_action, data);
 //            tipsBeansModal('hahahha');
         });
