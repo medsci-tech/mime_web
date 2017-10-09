@@ -412,7 +412,7 @@ class ExcelController extends Controller
             //dd($cellData);
 
         }
-        \Excel::create('学员观看信息记录', function ($excel) use ($cellData) {
+        \Excel::create('学员学习记录'.date('Y-m-d'), function ($excel) use ($cellData) {
             $excel->sheet(date('Y-m-d'), function ($sheet) use ($cellData) {
                 $sheet->rows($cellData);
             });

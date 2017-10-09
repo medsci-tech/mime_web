@@ -14,7 +14,7 @@
       data: [
         @foreach($students as $student)
         {
-          table_data: ['{{$student->id}}', '{{$student->phone}}', '{{$student->email}}','{{$student->name}}', '{{$student->province}}', '{{$student->city}}', '{{$student->area}}', '{{$student->hospital_name}}', '{{$student->office}}', '{{$student->title}}', '{{$student->created_at}}', '{{$student->entered_at}}'],
+          table_data: ['{{$student->id}}', '{{$student->phone}}', '{{$student->email}}','{{$student->name}}', '{{$student->hospital->province}}', '{{$student->hospital->city}}', '{{$student->hospital->area}}', '{{$student->hospital->hospital_name}}', '{{$student->office}}', '{{$student->title}}', '{{$student->created_at}}', '{{$student->entered_at}}'],
           log_data: [
             @foreach($student->playLogs as $log)
               @foreach($log->details as $key => $value)

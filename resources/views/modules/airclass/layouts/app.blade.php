@@ -300,6 +300,7 @@
 					'exist': '1'
 				};
 				subMsgAjax2(sms_code_url, data);
+                time($(this),60);
 			} else {
 				showAlertModal('手机号格式不正确');
 			}
@@ -331,6 +332,7 @@
 					'exist': '1'
 				};
 				subMsgAjax2(sms_code_url, data);
+                time($(this),60);
 			} else {
 				showAlertModal('手机号格式不正确');
 			}

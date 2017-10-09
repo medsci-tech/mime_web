@@ -1,5 +1,21 @@
 
 
+//定时器
+function time(o,wait) {
+    if (wait == 0) {
+        o.removeClass("disabled");
+        o.text("获取验证码");
+        wait = 60;
+    } else {
+        o.addClass("disabled");
+        o.text("重新发送(" + wait + ")");
+        wait--;
+        setTimeout(function() {
+            time(o,wait)
+        },1000)
+    }
+}
+
 /**
  *
  * @param email
@@ -126,7 +142,7 @@ var subMsgAjax2 = function (action, data) {
         data: data,
         success: function(res){
             if(res.code == 200){
-                showAlertModal(res.msg);
+                //showAlertModal(res.msg);
             }else if(res.code == 444) {
                 showAlertModal(res.msg['phone'][0]);
             }else {

@@ -231,7 +231,7 @@
                 get_hospital(lists);
             }
         });
-        var wait=60;
+
         // 点击获取验证码
         $('#btnDetCodeOfRegister').click(function() {
             $(this).parent().parent().next().hide();
@@ -245,28 +245,13 @@
                 //设置定时器
 
                 subSmsAjax(code_url,data, phone_dom);
-                time($(this));
+                time($(this),60);
 
             } else {
                 validateTips(phone_dom, '手机号格式错误');
             }
         });
 
-        //定时器
-        function time(o) {
-            if (wait == 0) {
-                o.removeClass("disabled");
-                o.text("获取验证码");
-                wait = 60;
-            } else {
-                o.addClass("disabled");
-                o.text("重新发送(" + wait + ")");
-                wait--;
-                setTimeout(function() {
-                    time(o)
-                },1000)
-            }
-        }
 
         $("input[name='learnMode']").click(function() {
             $('#learn_mode').val($(this).val());
