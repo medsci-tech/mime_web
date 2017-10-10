@@ -14,7 +14,7 @@ class Doctor extends Model
         'password',
         'province',
         'city',
-        'area',
+        'country',
         'hospital_id',
         'office',
         'email',
@@ -29,4 +29,8 @@ class Doctor extends Model
         return $this->belongsTo(Hospital::class);
     }
 
+    public function playLogs()
+    {
+        return $this->hasMany(StudyLog::class);
+    }
 }

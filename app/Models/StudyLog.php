@@ -28,6 +28,10 @@ class StudyLog extends Model
         'progress',
     ];
 
+    public function course()
+    {
+        return $this->belongsTo(ThyroidClassCourse::class, 'course_id');
+    }
     /**
      * @description 用户等级
      * @author      lxhui<772932587@qq.com>

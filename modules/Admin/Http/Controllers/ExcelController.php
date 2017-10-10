@@ -286,7 +286,9 @@ class ExcelController extends Controller
         $course_id = DB::table('thyroid_class_courses')->where(['site_id'=>$site_id,'is_show'=>1])->pluck('id');
         //dd($courses);
         //导出表的第一行
-        $cellData = [['手机号', '学员姓名', '大区', '省', '市', '区', '医院', '医院等级', '科室', '职称', '邮箱', '学员等级', '是否电话', '大区经理', '代表', '代表手机']];
+        $cellData = [['ID编号','手机号', '学员姓名', '大区', '省', '市', '区', '医院', '医院等级', '科室', '职称', '邮箱','注册时间', '学员等级', '是否电话', '大区经理', '代表', '代表手机']];
+        //基础数组的元素个数
+        $baseArrNum = count($cellData[0]);
         //占位数组
         $tmparr = [];
         foreach ($courses as $course) {
@@ -313,11 +315,12 @@ class ExcelController extends Controller
             ->leftjoin('kzkt_classes','doctors.id','=','kzkt_classes.doctor_id')
             ->leftjoin('volunteers','kzkt_classes.volunteer_id','=','volunteers.id')
             ->leftjoin('represent_info as r','volunteers.number','=','r.initial')
-            ->select('doctors.id','doctors.hospital_id','doctors.name as dname','doctors.phone as dp','doctors.email','doctors.office','doctors.title','doctors.rank','hospitals.hospital','hospitals.hospital_level','hospitals.province','hospitals.city','hospitals.country','volunteers.name','volunteers.phone','kzkt_classes.style','r.belong_area','r.belong_dbm')->get();
+            ->select('doctors.id','doctors.hospital_id','doctors.name as dname','doctors.phone as dp','doctors.email','doctors.created_at','doctors.office','doctors.title','doctors.rank','hospitals.hospital','hospitals.hospital_level','hospitals.province','hospitals.city','hospitals.country','volunteers.name','volunteers.phone','kzkt_classes.style','r.belong_area','r.belong_dbm')->get();
         //dd($doctors);
         foreach ($doctors as $doctor) {
             //dd($doctor);
             $item = [
+                $doctor->id,
                 ' '.$doctor->dp,
                 $doctor->dname,
                 $doctor->belong_area,
@@ -329,6 +332,7 @@ class ExcelController extends Controller
                 $doctor->office,
                 $doctor->title,
                 $doctor->email,
+                $doctor->created_at,
                 $doctor->rank,
                 $doctor->style && in_array('phone',explode(',',$doctor->style)) ?'是':'否',
                 $doctor->belong_dbm,
@@ -347,8 +351,8 @@ class ExcelController extends Controller
             foreach ($play_log as $play){
                 $lac = array_search($play->course_id,$course_id);
                 if($lac!==false){
-                    $item[16+$lac*2] = sprintf('%0.2f',$play->study_time);
-                    $item[17+$lac*2] = $play->study_num;
+                    $item[$baseArrNum+$lac*2] = sprintf('%0.2f',$play->study_time);
+                    $item[$baseArrNum+1+$lac*2] = $play->study_num;
                     //公开课
                     if($courses[$lac]->course_class_id==4){
                         //必修课
@@ -369,45 +373,15 @@ class ExcelController extends Controller
                 }
             }
 
-
-            /*foreach ($courses as $course){
-                //dd($course);
-                $play = DB::table('play_logs')->where(['student_id'=>$doctor->id,'thyroid_class_course_id'=>$course->id])->first();
-                if($play){
-                    $item[] = sprintf('%0.2f',$play->study_time/60);
-                    $item[] = $play->study_num;
-
-                    //公开课
-                    if($course->course_class_id==4){
-                        //必修课
-                        if($course->course_type==1){
-                            //必修课观看时长
-                            $rq_course += $play->study_time;
-                        }elseif($course->course_type==1){
-                            //选修课观看时长
-                            $op_course += $play->study_time;
-                        }
-                        //理论课点击次数
-                        $th_click += $play->study_num;
-
-                    }elseif($course->course_class_id==2){//答疑课
-                        $aq_course += $play->study_time;
-                        $aq_click += $play->study_num;
-                    }
-                }else{
-                    $item[] = 0;
-                    $item[] = 0;
-                }
-            }*/
             //dd($tmp);
-            $item[16+$course_num*2] = sprintf('%0.2f',$rq_course/60);//必修课时长
-            $item[17+$course_num*2] = sprintf('%0.2f',$op_course/60);//选修课时长
-            $item[18+$course_num*2] = sprintf('%0.2f',($op_course+$rq_course)/60);//理论课时长
-            $item[19+$course_num*2] = sprintf('%0.2f',$aq_course);//答疑课时长
-            $item[20+$course_num*2] = sprintf('%0.2f',($aq_course+$op_course+$rq_course)/60);//学习总时长
-            $item[21+$course_num*2] = $th_click;//理论课点击次数
-            $item[22+$course_num*2] = $aq_click;//答疑课点击次数
-            $item[23+$course_num*2] = $aq_click + $th_click;//总点击次数
+            $item[$baseArrNum+$course_num*2] = sprintf('%0.2f',$rq_course/60);//必修课时长
+            $item[$baseArrNum+1+$course_num*2] = sprintf('%0.2f',$op_course/60);//选修课时长
+            $item[$baseArrNum+2+$course_num*2] = sprintf('%0.2f',($op_course+$rq_course)/60);//理论课时长
+            $item[$baseArrNum+3+$course_num*2] = sprintf('%0.2f',$aq_course);//答疑课时长
+            $item[$baseArrNum+4+$course_num*2] = sprintf('%0.2f',($aq_course+$op_course+$rq_course)/60);//学习总时长
+            $item[$baseArrNum+5+$course_num*2] = $th_click;//理论课点击次数
+            $item[$baseArrNum+6+$course_num*2] = $aq_click;//答疑课点击次数
+            $item[$baseArrNum+7+$course_num*2] = $aq_click + $th_click;//总点击次数
             array_push($cellData, $item);
             //dd($cellData);
 

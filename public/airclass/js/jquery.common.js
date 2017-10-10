@@ -281,11 +281,11 @@ $(function () {
 
     $('.modal').on('show.bs.modal', function (e) {
         $('#id_video_container').attr('hidden','true');
-        console.log('show');
+        //console.log('show');
     });
 
     $('.modal').on('hide.bs.modal', function (e) {
         $('#id_video_container').removeAttr('hidden');
-        console.log('hide');
+        //console.log('hide');
     });
 });

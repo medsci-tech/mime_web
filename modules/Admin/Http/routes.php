@@ -32,6 +32,7 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
     Route::delete('course-class', 'CourseClassController@destroy');
     Route::resource('banner', 'BannerController');
     Route::resource('student', 'StudentController');
+    Route::get('playlog', 'StudentController@playlog');
     Route::group(['prefix' => 'statistic'], function () {
         Route::get('/area-map', 'StatisticController@areaMap');
         Route::get('/province-map', 'StatisticController@provinceMap');

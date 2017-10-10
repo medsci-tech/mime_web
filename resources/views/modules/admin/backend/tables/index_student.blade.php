@@ -5,6 +5,7 @@
 @section('css')
     <link rel="stylesheet" href="/css/backend-tables.css">
     <link rel="stylesheet" href="/vendor/bootstrap-wysihtml/bootstrap3-wysihtml5.css">
+
     <style>
         .table .success td, .table .success th {
             background-color: #dff0d8 !important;
@@ -47,11 +48,11 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">@yield('box_title')</h3>
-                            <a class="btn btn-xs btn-success" href="{{url('/excel/logs2excel')}}?site_id={{$_GET['site_id'] ?? ''}}">导出</a>
+                            <a class="btn btn-xs btn-success" href="{{url('/excel/logs2excel')}}?site_id={{$_GET['site_id'] ?:''}}">导出</a>
 
                             <div class="box-tools">
                                 <form action="{{url('/student')}}" method="get">
-                                    <input type="hidden" name="site_id" value="{{$_GET['site_id'] ?? ''}}">
+                                    <input type="hidden" name="site_id" value="{{$_GET['site_id'] ?:''}}">
                                     <div class="input-group" style="width: 270px;">
                                         <input name="search" class="form-control input-sm pull-right"
                                                placeholder="手机号、姓名、医院、城市、科室或职称"
@@ -80,7 +81,7 @@
                                 <tbody>
                                 <tr v-for="data in data" @click="set(data);">
                                 <td v-for="item in data.table_data" track-by="$index">
-                                    <div v-else>
+                                    <div>
                                         @{{ item }}
                                     </div>
                                 </td>
@@ -102,6 +103,11 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <div class="modal fade" id="modal-loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document" style="position: absolute;top:0;left:0;bottom: 0;right:0;margin: auto;width: 64px;height:64px;">
+                    <img src="{{ asset('/admin/images/loading.gif') }}" width="64px" height="64px"/>
+                </div>
+            </div>
 
             <!-- Modal -->
             @include('admin::backend.tables.list')
@@ -121,10 +127,16 @@
             data: data,
             methods: {
                 set: function (data) {
-                    tables.modal_data = data.log_data;
+                    //tables.modal_data = data.log_data;
                 },
                 show: function (e) {
-                    $('#modal-list').modal('show');
+                    $('#modal-loading').modal('show');
+                    $.get('/playlog', {id: e.table_data[0]}, function (datas) {
+                        tables.modal_data = datas;
+                        $('#modal-loading').modal('hide');
+                        $('#modal-list').modal('show');
+                    });
+
                 },
                 charge: function (e) {
                     $.get('/reset-pwd', {phone: e.table_data[1]}, function (data) {
