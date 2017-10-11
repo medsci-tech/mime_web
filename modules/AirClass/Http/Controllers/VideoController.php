@@ -198,12 +198,14 @@ class VideoController extends Controller
 				return $this->return_data_format(500, '未登陆');
 			}
 			// 已答题
-			$check_answer = AnswerLog::where([
-				'class_id' => $id,
-				'user_id' => $user['id'],
-			])->first();
-			if($id && $check_answer){//id不为0
-				return $this->return_data_format(555, '已答过题');
+            if($id){
+                $check_answer = AnswerLog::where([
+                    'class_id' => $id,
+                    'user_id' => $user['id'],
+                ])->first();
+                if( $check_answer){//id不为0
+                    return $this->return_data_format(555, '已答过题');
+                }
 			}
 			$result = [];
 			$right_ans =  0;//答对问题的总数
@@ -229,6 +231,7 @@ class VideoController extends Controller
                     if(($right_ans>=config('params')['question_num']*0.8) && ($user_rank<3)){
                         //正确率80%以上通过
                         Doctor::find($user['id'])->increment('rank');//晋升
+                        Doctor::find($user['id'])->increment('setupbyanswer');//答题晋升次数
                         session(['user_login_session_key.rank'=>$user_rank+1]);
                         return $this->return_data_format(200, '恭喜您，学员等级升级成功',['rank'=>$user_rank+1]);
                     }else{

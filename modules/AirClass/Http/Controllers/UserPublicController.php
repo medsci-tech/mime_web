@@ -3,6 +3,7 @@
 use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Office;
+use App\Models\Recommend;
 use App\Models\Volunteer;
 use App\Models\KZKTClass;
 use Hash;
@@ -16,12 +17,16 @@ class UserPublicController extends Controller
     /**
      * @return mixed
      */
-    public function register_view($phone=null)
+    public function register_view($uid=null)
     {
         $offices = Office::all();
+        if($uid){
+            $user = Doctor::findOrFail(base64_decode($uid));
+            $uid = $user->id;
+        }
         return view('airclass::user_public.register', [
             'offices' => $offices,
-            'phone'=>$phone
+            'uid'=>$uid
         ]);
     }
 
@@ -54,8 +59,8 @@ class UserPublicController extends Controller
         $req_title = $request->input('title'); //职称
         $name = $request->input('name'); //姓名
         $learnMode = $request->input('learn_mode'); //学习模式
-        $email = $request->input('email'); //学习模式
-        $qq = $request->input('qq'); //学习模式
+        $email = $request->input('email'); //邮箱
+        $qq = $request->input('qq'); //qq
 
         // 检测手机验证码有效性
         $sms = new SmsController();
@@ -68,10 +73,19 @@ class UserPublicController extends Controller
         if(Volunteer::where('phone', $req_phone)->first()){
             return $this->return_data_format(500, '代表用户无法完成注册!');
         }
+
         // 检验手机号是否注册
         $doctor = Doctor::where('phone', $req_phone)->first();
         if($doctor){
             return $this->return_data_format(422, ['phone' =>'手机号已注册']);
+        }
+
+        //推荐人必须存在
+        $rec_id = 0;
+        if($request->recom){
+            $rec_id = $request->recom;
+            if(!Doctor::whereId($rec_id)->first())
+                return $this->return_data_format(422, '推荐人不存在');
         }
         // 检查医院信息，如果不存在则添加医院信息
         $hospital_where = [
@@ -118,7 +132,6 @@ class UserPublicController extends Controller
             'hospital_id' => $hospital_id,
             'office' => $req_office,
             'title' => $req_title,
-
             'rank'=>1
 
         ];
@@ -146,6 +159,17 @@ class UserPublicController extends Controller
                 'status'=>1,
                 'style'=> $learnMode
             ]);
+            //有推荐人写入推荐人信息并赠送积分
+            if($request->recom){
+                Recommend::create([
+                    'doctor_id'=>$doctor_id,
+                    'recommend_id'=>$rec_id
+                ]);
+                $rec_doctor = Doctor::find($rec_id);
+                $rec_doctor->credit += config('params')['bean_rules']['recommend_credit'];
+                $rec_doctor->save();
+            }
+
             DB::commit();
             $this->save_session($add_doctor);
             $tempCookie = \Cookie::forever($this->user_login_code, $req_phone);

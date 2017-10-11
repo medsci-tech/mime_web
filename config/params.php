@@ -47,6 +47,7 @@ return [
         'ask_question_max' => 20, // 提问问题,每节课提问问题可获得积分上限：20积分
         'answer_question' => 15, // 回答问题,15积分/问题
         'rank_level' => 100, // 晋升一个阶段将获得100积分
+        'recommend_credit' => 100, // 推荐一个人获得100积分
     ],
 
     // 视频记录心跳时间

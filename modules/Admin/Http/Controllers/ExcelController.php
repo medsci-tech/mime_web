@@ -227,54 +227,6 @@ class ExcelController extends Controller
 //        return redirect('/admin/student');
 //    }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    /*public function logs2Excel(Request $request)
-    {
-
-        $site_id = $request->input('site_id');
-        $courses = ThyroidClassCourse::where('site_id',$site_id)->get();
-        $coursesArray = array();
-        foreach ($courses as $course) {
-            $coursesArray[$course->id] = [
-                'course' => $course->sequence . $course->title,
-                'phase' => $course->thyroid_class_phase_id?$course->thyroidClassPhase->title:''
-            ];
-            //dd($course->thyroidClassPhase->title);
-        }
-
-        $students = Student::where('site_id',$site_id)->get(['id', 'phone', 'name']);
-        $studentsArray = array();
-        foreach ($students as $student) {
-            $studentsArray[$student->id] = ['name' => $student->name, 'phone' => $student->phone];
-        }
-
-        $playLogs = PlayLog::where('updated_at', '>', '2016-10-01')->get();
-        $cellData = [['单元名称', '课程名称', '学员姓名', '学员电话', '起始观看时间', '观看时长(单位/秒)']];
-        foreach ($playLogs as $playLog) {
-            //echo $studentCourseId.'<hr />';
-            foreach ($playLog->details as $key => $value) {
-                $item = [
-                    $coursesArray[$playLog->thyroid_class_course_id]['phase'],
-                    $coursesArray[$playLog->thyroid_class_course_id]['course'],
-                    $studentsArray[$playLog->student_id]['name'],
-                    $studentsArray[$playLog->student_id]['phone'],
-                    $key,
-                    $value
-                ];
-                array_push($cellData, $item);
-            }
-        }
-        \Excel::create('公开课观看日志', function ($excel) use ($cellData) {
-            $excel->sheet(date('Y-m-d'), function ($sheet) use ($cellData) {
-                $sheet->rows($cellData);
-            });
-        })->export('xls');
-
-        return redirect('/admin/student');
-    }*/
 
     public function logs2Excel(Request $request)
     {
@@ -286,7 +238,7 @@ class ExcelController extends Controller
         $course_id = DB::table('thyroid_class_courses')->where(['site_id'=>$site_id,'is_show'=>1])->pluck('id');
         //dd($courses);
         //导出表的第一行
-        $cellData = [['ID编号','手机号', '学员姓名', '大区', '省', '市', '区', '医院', '医院等级', '科室', '职称', '邮箱','注册时间', '学员等级', '是否电话', '大区经理', '代表', '代表手机']];
+        $cellData = [['ID编号','手机号', '学员姓名', '大区', '省', '市', '区', '医院', '医院等级', '科室', '职称', '邮箱','注册时间', '学员等级','答题晋升次数', '是否电话', '大区经理', '代表', '代表手机']];
         //基础数组的元素个数
         $baseArrNum = count($cellData[0]);
         //占位数组
@@ -315,7 +267,7 @@ class ExcelController extends Controller
             ->leftjoin('kzkt_classes','doctors.id','=','kzkt_classes.doctor_id')
             ->leftjoin('volunteers','kzkt_classes.volunteer_id','=','volunteers.id')
             ->leftjoin('represent_info as r','volunteers.number','=','r.initial')
-            ->select('doctors.id','doctors.hospital_id','doctors.name as dname','doctors.phone as dp','doctors.email','doctors.created_at','doctors.office','doctors.title','doctors.rank','hospitals.hospital','hospitals.hospital_level','hospitals.province','hospitals.city','hospitals.country','volunteers.name','volunteers.phone','kzkt_classes.style','r.belong_area','r.belong_dbm')->get();
+            ->select('doctors.id','doctors.hospital_id','doctors.name as dname','doctors.phone as dp','doctors.email','doctors.created_at','doctors.office','doctors.title','doctors.rank','doctors.setupbyanswer','hospitals.hospital','hospitals.hospital_level','hospitals.province','hospitals.city','hospitals.country','volunteers.name','volunteers.phone','kzkt_classes.style','r.belong_area','r.belong_dbm')->get();
         //dd($doctors);
         foreach ($doctors as $doctor) {
             //dd($doctor);
@@ -334,6 +286,7 @@ class ExcelController extends Controller
                 $doctor->email,
                 $doctor->created_at,
                 $doctor->rank,
+                $doctor->setupbyanswer,
                 $doctor->style && in_array('phone',explode(',',$doctor->style)) ?'是':'否',
                 $doctor->belong_dbm,
                 $doctor->name,
@@ -372,7 +325,15 @@ class ExcelController extends Controller
                     }
                 }
             }
-
+            /*if($doctor->rank<2 && $rq_course/60>=180){
+                $rank_doc = Doctor::find($doctor->id);
+                $rank_doc->rank = 2;
+                $rank_doc->save();
+            }elseif ($doctor->rank==2 && $op_course/60>190){
+                $rank_doc = Doctor::find($doctor->id);
+                $rank_doc->rank = 3;
+                $rank_doc->save();
+            }*/
             //dd($tmp);
             $item[$baseArrNum+$course_num*2] = sprintf('%0.2f',$rq_course/60);//必修课时长
             $item[$baseArrNum+1+$course_num*2] = sprintf('%0.2f',$op_course/60);//选修课时长

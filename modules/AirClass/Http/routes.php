@@ -47,6 +47,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
     Route::post('/user/pwd_reset', 'UserController@pwdReset'); // 保存修改密码
     Route::get('/user/private_class', 'UserController@private_class');
     Route::get('/user/qrcode', 'UserController@qrcode');//个人二维码
+    Route::get('/user/recommend', 'UserController@recommend');//推荐人列表
     Route::post('/user/private_class/save', 'UserController@private_class_save'); // 保存修改密码
     Route::get('/user/study-rank/{id}', 'UserController@studyRank'); // 评论请求
     Route::get('/test', 'TestController@index'); // 清理乱数据

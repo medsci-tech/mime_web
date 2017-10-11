@@ -151,6 +151,9 @@
                     </div>
                     <p class="col-sm-2 tips">请选择学习方式</p>
                 </div>
+                @if($uid)
+                    <input type="hidden" class="form-control" name="recom" value="{{ $uid }}">
+                @endif
                 <div class="form-group checkbox_group">
                     <div class="col-sm-offset-3 col-sm-7">
                         <div class="checkbox">

@@ -409,10 +409,11 @@ class UserController extends Controller
      */
     public function qrcode(){
         //dd($this->user);
+        $user_id = base64_encode($this->user['id']);//用户id
         $phone = $this->user['phone'];//用户手机号
         if(!file_exists(public_path('airclass/qrcodes/'.$phone.'.png'))){
             if(!file_exists(public_path('airclass/qrcodes'))) mkdir(public_path('airclass/qrcodes'));
-            \QrCode::format('png')->size(500)->generate(url('/register',['phone'=>$phone]), public_path('airclass/qrcodes/'.$phone.'.png'));
+            \QrCode::format('png')->size(500)->generate(url('/register',['uid'=>$user_id]), public_path('airclass/qrcodes/'.$phone.'.png'));
         }
         $img = 'airclass/qrcodes/'.$phone.'.png';
 
@@ -422,6 +423,16 @@ class UserController extends Controller
             'img' => $img,
             'current_active' => 'qrcode',
         ]);
+    }
+
+    /**
+     *  我推荐的人
+     */
+    public function recommend(){
+        $uid = $this->user['id'];//个人id
+        $doctors = DB::table('recommends')->join('doctors','doctors.id','=','recommends.doctor_id')->where(['recommends.recommend_id'=>$uid,'recommends.deleted'=>0])->paginate(10);
+        $current_active = 'recommend';
+        return view('airclass::user.recommend',compact('doctors','current_active'));
     }
 
     public function private_class(){

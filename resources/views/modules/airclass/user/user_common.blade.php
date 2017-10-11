@@ -59,6 +59,7 @@
                             <li @if($current_active == 'pwd_edit') class="active" @endif ><a href="{{url('user/pwd_edit')}}">修改密码</a></li>
                             <li @if($current_active == 'private_class') class="active" @endif ><a href="{{url('user/private_class')}}">私教课</a></li>
                             <li @if($current_active == 'qrcode') class="active" @endif ><a href="{{url('user/qrcode')}}">个人二维码</a></li>
+                            <li @if($current_active == 'recommend') class="active" @endif ><a href="{{url('user/recommend')}}">我的推荐</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
