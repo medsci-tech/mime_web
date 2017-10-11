@@ -33,7 +33,7 @@ trait DoctorBean
             $this->bean = 0;
         try
         {
-            $this->user = \Session::get($this->user_login_session_key);
+            $this->user = Doctor::findORFail($params['id']);
             $this->bean = isset($this->user['credit']) ? $this->user['credit']: 0;
 //            $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/query-user-information?phone='.$params['phone'], null,0);
 //            if($response['httpCode']==200)// 服务器返回响应状态码,当电话存在时
