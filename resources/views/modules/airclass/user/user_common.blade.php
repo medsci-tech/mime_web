@@ -20,6 +20,7 @@
                             <span class="icon icon_level icon_level_two @if (Session::get('user_login_session_key')['rank'] >= 2) active @endif"  onclick="window.location.href='/user/study-rank/2';" style="cursor: pointer"></span>
                             <span class="icon icon_level icon_level_three @if (Session::get('user_login_session_key')['rank'] >= 3) active @endif" onclick="window.location.href='/user/study-rank/3';" style="cursor: pointer"></span>
                         </div>
+                        <div class="pull-left" style="padding-left:10px;color:#eee;"> 晋升到下一等级还需{{ Redis::get('user:'.Session::get('user_login_session_key')['id'].':setup') }}分钟</div>
                     </div>
                     <p>
                         <span class="location">{{ Session::get('user_login_session_key')['province'] }}{{ Session::get('user_login_session_key')['city'] }}{{ Session::get('user_login_session_key')['area'] }}</span>

@@ -19,6 +19,7 @@ trait DoctorRank
     protected $doctor_user;
     protected $rank;
     protected $site_id = 2; // airClass site_id
+    protected $setup_time_need = 0; // 晋升需要的课时
 
     /**
      * @description 用户信息
@@ -49,6 +50,7 @@ trait DoctorRank
         if(!isset($params['id']))
         {
             $this->rank=0;
+            $this->setup_time_need = config('params')['up_to_second'];
             return $this;
         }
 
@@ -111,8 +113,11 @@ trait DoctorRank
                         $this->rank =$this->getUser($params)->rank;
                     }
                 }
-                else
+                else{
+                    $this->setup_time_need = config('params')['up_to_second']-intval($study_time/60);
                     $this->rank =1;
+                }
+
             }
             if($this->getUser($params)->rank==2)
             {
@@ -148,8 +153,10 @@ trait DoctorRank
                         $this->rank =$this->getUser($params)->rank;
                     }
                 }
-                else
+                else{
+                    $this->setup_time_need = config('params')['up_to_third']-intval($study_time/60);
                     $this->rank =2;
+                }
             }
             if($this->getUser($params)->rank==3){
                 $this->rank = 3;

@@ -236,13 +236,12 @@ class ExcelController extends Controller
         $courses = DB::table('thyroid_class_courses')->where(['site_id'=>$site_id,'is_show'=>1])->select('title','id','course_class_id','course_type')->get();
         //所有课程的id
         $course_id = DB::table('thyroid_class_courses')->where(['site_id'=>$site_id,'is_show'=>1])->pluck('id');
-        //dd($courses);
+        //dd($course_id);
         //导出表的第一行
         $cellData = [['ID编号','手机号', '学员姓名', '大区', '省', '市', '区', '医院', '医院等级', '科室', '职称', '邮箱','注册时间', '学员等级','答题晋升次数', '是否电话', '大区经理', '代表', '代表手机']];
         //基础数组的元素个数
         $baseArrNum = count($cellData[0]);
-        //占位数组
-        $tmparr = [];
+
         foreach ($courses as $course) {
             $cellData[0][] = $course->title.'(学习时长/min)';
             $cellData[0][] = $course->title.'(点击次数/次)';
@@ -255,6 +254,8 @@ class ExcelController extends Controller
         $cellData[0][] = '理论课点击数';
         $cellData[0][] = '答疑课点击数';
         $cellData[0][] = '总点击数';
+        //占位数组,用于存储表格中所有的课程信息
+        $tmparr = [];
         //课程的总数
         $course_num = count($course_id);
         for ($i=0;$i<8+$course_num*2;$i++){
@@ -298,7 +299,7 @@ class ExcelController extends Controller
             //统计必修课观看时长、选修课时长、答疑课时长、总学习时长、理论课点击次数、答疑课点击次数
             $rq_course = $op_course = $aq_course = $total = $th_click = $aq_click = 0;
             //学员观看课程次数
-            $play_log = DB::table('study_logs')->select('course_id',DB::raw('sum(study_duration) as study_time,count(1) as study_num'))->where(['doctor_id'=>$doctor->id])->groupBy('doctor_id','course_id')->get();
+            $play_log = DB::table('study_logs')->select('course_id',DB::raw('sum(study_duration) as study_time,count(1) as study_num'))->where(['doctor_id'=>$doctor->id])->groupBy('course_id')->get();
             //dd($play_log);
             //如果存在观看记录，写入表中
             foreach ($play_log as $play){
@@ -312,7 +313,7 @@ class ExcelController extends Controller
                         if($courses[$lac]->course_type==1){
                             //必修课观看时长
                             $rq_course += $play->study_time;
-                        }elseif($courses[$lac]->course_type==1){
+                        }elseif($courses[$lac]->course_type==2){
                             //选修课观看时长
                             $op_course += $play->study_time;
                         }

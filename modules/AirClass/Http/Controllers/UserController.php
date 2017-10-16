@@ -31,6 +31,12 @@ class UserController extends Controller
         }
         else
             $this->bean =  \Redis::get($bean_key);
+        //获取学员晋升需要的课时
+        $setup_key = "user:".$this->user['id'].':setup';
+        if(!\Redis::exists($setup_key)){
+            \Redis::setex($setup_key,15,$this->setup_time_need);
+        }
+        //dd($this->setup_time_need);
     }
     /**
      * unstudy
