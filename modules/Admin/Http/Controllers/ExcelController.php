@@ -305,7 +305,7 @@ class ExcelController extends Controller
             foreach ($play_log as $play){
                 $lac = array_search($play->course_id,$course_id);
                 if($lac!==false){
-                    $item[$baseArrNum+$lac*2] = sprintf('%0.2f',$play->study_time);
+                    $item[$baseArrNum+$lac*2] = sprintf('%0.2f',$play->study_time/60);
                     $item[$baseArrNum+1+$lac*2] = $play->study_num;
                     //公开课
                     if($courses[$lac]->course_class_id==4){
@@ -339,7 +339,7 @@ class ExcelController extends Controller
             $item[$baseArrNum+$course_num*2] = sprintf('%0.2f',$rq_course/60);//必修课时长
             $item[$baseArrNum+1+$course_num*2] = sprintf('%0.2f',$op_course/60);//选修课时长
             $item[$baseArrNum+2+$course_num*2] = sprintf('%0.2f',($op_course+$rq_course)/60);//理论课时长
-            $item[$baseArrNum+3+$course_num*2] = sprintf('%0.2f',$aq_course);//答疑课时长
+            $item[$baseArrNum+3+$course_num*2] = sprintf('%0.2f',$aq_course/60);//答疑课时长
             $item[$baseArrNum+4+$course_num*2] = sprintf('%0.2f',($aq_course+$op_course+$rq_course)/60);//学习总时长
             $item[$baseArrNum+5+$course_num*2] = $th_click;//理论课点击次数
             $item[$baseArrNum+6+$course_num*2] = $aq_click;//答疑课点击次数
