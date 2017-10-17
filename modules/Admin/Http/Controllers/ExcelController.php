@@ -348,13 +348,23 @@ class ExcelController extends Controller
             //dd($cellData);
 
         }
-        \Excel::create('学员学习记录'.date('Y-m-d'), function ($excel) use ($cellData) {
+        $filename = 'studyLog'.date('YmdHis');
+        \Excel::create($filename, function ($excel) use ($cellData) {
             $excel->sheet(date('Y-m-d'), function ($sheet) use ($cellData) {
                 $sheet->rows($cellData);
             });
-        })->export('xls');
-
-        return redirect('/admin/student');
+        })->store('xls');
+        //echo storage_path('/exports/'.$filename),storage_path().'/exports/'.$filename;die;
+        $response = array(
+          'status'=>'success',
+          'file'=>$filename
+        );
+        return response()->json($response);
+        //return redirect('/admin/student');
+    }
+    public function download(Request $request){
+        $filepath = storage_path().'/exports/'.$request->excelname.'.xls';
+        return response()->download($filepath);
     }
 
     function exportPhone()

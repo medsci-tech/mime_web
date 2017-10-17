@@ -16,6 +16,7 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
         Route::any('/test_log_detail', 'ExcelController@getLogDetail');
         Route::any('/logs2excel', 'ExcelController@logs2Excel');
         Route::any('/export-phone', 'ExcelController@exportPhone');
+        Route::any('/download', 'ExcelController@download');
     });
 
     Route::get('/', 'SiteController@index');

@@ -48,7 +48,7 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">@yield('box_title')</h3>
-                            <a class="btn btn-xs btn-success" href="{{url('/excel/logs2excel')}}?site_id={{$_GET['site_id'] ?:''}}">导出</a>
+                            <a class="btn btn-xs btn-success" id="export" href="{{url('/excel/logs2excel')}}?site_id={{$_GET['site_id'] ?:''}}" @click="wait">导出</a>
 
                             <div class="box-tools">
                                 <form action="{{url('/student')}}" method="get">
@@ -135,6 +135,18 @@
                         tables.modal_data = datas;
                         $('#modal-loading').modal('hide');
                         $('#modal-list').modal('show');
+                    });
+
+                },
+                wait: function (e) {
+                    e.preventDefault();
+                    $('#modal-loading').modal('show');
+                    var url = $('#export').attr('href');
+                    $.get(url, function (datas) {
+                        console.log(datas);
+                        $('#modal-loading').modal('hide');
+                        location.href = "{{url('excel/download')}}"+'?excelname='+datas.file;
+                        //$('#modal-list').modal('show');
                     });
 
                 },
