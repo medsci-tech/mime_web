@@ -9,6 +9,7 @@ use App\Models\KZKTClass;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Redis;
 use Session;
 
 class UserPublicController extends Controller
@@ -314,6 +315,11 @@ class UserPublicController extends Controller
 //       $api = new ApiToUserCenterController();
 //       $res = $api->modify_beans($phone,$bean);
 //       dd($res);
+   }
+   public function incrTimes(){
+       $key = 'user:'.$this->user['id'].':activity';
+       Redis::incr($key);
+       echo 1;exit;
    }
 
 }

@@ -119,6 +119,19 @@
 	</div>
 </div>
 {{--答题试题 结束--}}
+
+{{--答题晋升活动 begin--}}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="activity_modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<img src="{{ asset('airclass/img/close.jpg') }}" style="max-width: 100%;position: relative;float: right;cursor: pointer;" id="activity_close">
+			<img src="{{ asset('airclass/img/activity.jpg') }}" style="max-width: 100%;">
+			<img src="{{ asset('airclass/img/unlock.png') }}" style="width: 36%;margin-top:-21%;margin-left: 30%;position: relative;display:block;cursor: pointer;" id="activity_img">
+		</div>
+	</div>
+</div>
+{{--答题晋升活动 end--}}
 @yield('container')
 
 		<!-- Modal -->
@@ -424,6 +437,18 @@
             $(this).parents('.question_container').find('.icon').removeClass('icon_question').addClass('icon_success');
         });
     })
+
+
+	//显示活动告示
+	var key = {{ Redis::get('user:'.Session::get('user_login_session_key')['id'].':activity')?:0}};
+    if(key===1){
+        $('#activity_modal').modal('show');
+        $.get("{{url('/incrTimes')}}",function(){});
+	}
+    //$('#activity_modal').modal('show');
+	$('#activity_img,#activity_close').click(function(){
+        $('#activity_modal').modal('hide');
+	})
 
 </script>
 @section('js')

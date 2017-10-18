@@ -2,6 +2,7 @@
 
 use App\Http\Requests\Interfaces\DoctorBean;
 use App\Models\Doctor;
+use Illuminate\Support\Facades\Redis;
 use Pingpong\Modules\Routing\Controller as BaseController;
 use Validator;
 use App\Http\Requests\Interfaces\DoctorRank;
@@ -100,6 +101,16 @@ class Controller extends BaseController
             $save_data['hospital_level'] = '';
         }
         \Session::set($this->user_login_session_key, $save_data);
+        //记录用户登入显示活动图片
+        $key = 'user:'.$user->id.':activity';
+        $timestamp = strtotime('2017-11-01');
+        if(time()<$timestamp){//活动未结束
+            if(!Redis::exists($key)){
+                Redis::set($key,1);
+            }else{
+                Redis::incr($key);
+            }
+        }
         return $save_data;
     }
 

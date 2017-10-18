@@ -28,6 +28,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/login_phone/post', 'UserPublicController@login_phone_post'); // 短信登陆请求
 	Route::get('/logout', 'UserPublicController@logout'); // 登出
 	Route::post('/pwd_recover/post', 'UserPublicController@pwd_recover_post'); // 找回密码请求
+	Route::get('/incrTimes', 'UserPublicController@incrTimes'); // 找回密码请求
 
 	// 医院
 	Route::post('/hospital/get_lists', 'HospitalController@get_lists'); // 获取医院请求
