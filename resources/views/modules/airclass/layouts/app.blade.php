@@ -445,7 +445,7 @@
         $('#activity_modal').modal('show');
         $.get("{{url('/incrTimes')}}",function(){});
 	}
-    $('#activity_modal').modal('show');
+    //$('#activity_modal').modal('show');
 	$('#activity_img,#activity_close').click(function(){
         $('#activity_modal').modal('hide');
 	})
