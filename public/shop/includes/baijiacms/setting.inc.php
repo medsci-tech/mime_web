@@ -90,7 +90,8 @@ function globalBeSetting($beid,$groupkey)
 			{
 			$configdata = mysqld_selectall('SELECT * FROM '.table('config')." where `beid`=:beid and `group`=:group",array(":beid"=>$beid,':group'=>$groupkey));
 			foreach ($configdata as $item) {
-				$config[$item['name']]=$item['value'];
+				$config[$item['name']]=$item['value']
+                ;
 			}
 				if(!empty($system_config_cache['name']))
 				{
