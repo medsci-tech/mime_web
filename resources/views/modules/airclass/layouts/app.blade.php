@@ -393,7 +393,7 @@
     $(function () {
         var question_action = '{{url('video/answer',['id'=>0])}}';
 
-        $('#btn_upgrade').click(function () {
+        $('#btn_upgrade,#activity_img').click(function () {
             $.ajax({
                 type:'post',
                 url:'{{url('video/questions')}}',
@@ -445,7 +445,7 @@
         $('#activity_modal').modal('show');
         $.get("{{url('/incrTimes')}}",function(){});
 	}
-    //$('#activity_modal').modal('show');
+    $('#activity_modal').modal('show');
 	$('#activity_img,#activity_close').click(function(){
         $('#activity_modal').modal('hide');
 	})

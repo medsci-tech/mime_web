@@ -228,8 +228,8 @@ class VideoController extends Controller
 				//$api_result = $api->modify_beans($user['phone'], config('params')['bean_rules']['answer_question']);
                 if(!$id){
                     $user_rank = $user['rank'];
-                    if(($right_ans>=config('params')['question_num']*0.8) && ($user_rank<3)){
-                        //正确率80%以上通过
+                    if(($right_ans>=config('params')['question_num']*0.6) && ($user_rank<3)){
+                        //正确率60%以上通过
                         Doctor::find($user['id'])->increment('rank');//晋升
                         Doctor::find($user['id'])->increment('setupbyanswer');//答题晋升次数
                         session(['user_login_session_key.rank'=>$user_rank+1]);
