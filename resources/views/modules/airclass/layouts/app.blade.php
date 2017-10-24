@@ -442,7 +442,7 @@
 	//显示活动告示
 	var key = {{ Redis::get('user:'.Session::get('user_login_session_key')['id'].':activity')?:0}};
 	var rank = {{ Session::get('user_login_session_key')['rank']}};
-    if(key===1 && rank<3{
+    if(key===1 && rank<3){
         $('#activity_modal').modal('show');
         $.get("{{url('/incrTimes')}}",function(){});
 	}
