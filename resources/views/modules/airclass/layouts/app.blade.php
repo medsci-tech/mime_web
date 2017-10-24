@@ -100,7 +100,7 @@
 	<!-- /.container-fluid -->
 </nav>
 @if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
-	<img src="{{ asset('airclass/img/upgrade.png') }}" style="position: fixed;bottom:0;right: 0;width: 30%;z-index: 1000;" id="btn_upgrade">
+	<img src="{{ asset('airclass/img/upgrade1.png') }}" style="position: fixed;bottom:0;right: 0;width: 40%;z-index: 1000;" id="btn_upgrade">
 @endif
 
 {{--答题试题 开始--}}
