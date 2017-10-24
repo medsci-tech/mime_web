@@ -100,7 +100,7 @@
 	<!-- /.container-fluid -->
 </nav>
 @if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
-	<img src="{{ asset('airclass/img/upgrade1.png') }}" style="position: fixed;bottom:0;right: 0;width: 20%;z-index: 1000;" id="btn_upgrade">
+	<img src="{{ asset('airclass/img/upgrade.png') }}" style="position: fixed;bottom:0;right: 0;width: 30%;z-index: 1000;" id="btn_upgrade">
 @endif
 
 {{--答题试题 开始--}}
@@ -441,7 +441,8 @@
 
 	//显示活动告示
 	var key = {{ Redis::get('user:'.Session::get('user_login_session_key')['id'].':activity')?:0}};
-    if(key===1){
+	var rank = {{ Session::get('user_login_session_key')['rank']}};
+    if(key===1 && rank<3{
         $('#activity_modal').modal('show');
         $.get("{{url('/incrTimes')}}",function(){});
 	}
