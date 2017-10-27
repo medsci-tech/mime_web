@@ -3,7 +3,11 @@
 namespace App\Http\Requests\Interfaces;
 
 use App\Http\Requests\Request;
-use App\Models\{Doctor,StudyLog};
+use App\Models\Doctor;
+use App\Models\StudyLog;
+use App\Models\KZKTClass;
+use App\Models\Volunteer;
+use Carbon\Carbon;
 use Modules\Admin\Entities\ThyroidClassCourse;
 
 /**
@@ -98,9 +102,20 @@ trait DoctorRank
                 {
                     try{
                         //赠送迈豆积分
-                        $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
+                        $post_data = config('params')['bean_rules']['rank_level'];
+                        //限时活动 ：
+                        //1.学员晋升后，获得1000迈豆（已升级的不管，每晋升一次给1000）
+                        //2.学员晋升后，相应的代表获得迈豆（已升级的不管，晋升合格500，晋升优秀300)
+                        if(Carbon::createFromDate(2017,11,30)->gte(Carbon::now())){
+                            $post_data = 1000;
+                            //代表获取迈豆
+                            $volunteer = KZKTClass::where('doctor_id',$params['id'])->first()->volunteer;
+                            if($volunteer){
+                                Volunteer::where('id',$volunteer->id)->increment('credit',500);
+                            }
+                        }
                         //$response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
-                        $this->getUser($params)->increment('credit', $post_data['bean'], array('rank' => 2));
+                        $this->getUser($params)->increment('credit', $post_data, array('rank' => 2));
                         //Doctor::where('id', $params['id'])->update(['rank' => 2]); // 升级为二级
                         $this->rank =2;
 //                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
@@ -140,8 +155,19 @@ trait DoctorRank
                     try
                     {
                         //赠送迈豆积分
-                        $post_data = array('phone'=> $params['phone'],'bean'=>config('params')['bean_rules']['rank_level']);
-                        $this->getUser($params)->increment('credit', $post_data['bean'], array('rank' => 3));
+                        $post_data = config('params')['bean_rules']['rank_level'];
+                        //限时活动 ：
+                        //1.学员晋升后，获得1000迈豆（已升级的不管，每晋升一次给1000）
+                        //2.学员晋升后，相应的代表获得迈豆（已升级的不管，晋升合格500，晋升优秀300)
+                        if(Carbon::createFromDate(2017,11,30)->gte(Carbon::now())){
+                            $post_data = 1000;
+                            //代表获取迈豆
+                            $volunteer = KZKTClass::where('doctor_id',$params['id'])->first()->volunteer;
+                            if($volunteer){
+                                Volunteer::where('id',$volunteer->id)->increment('credit',300);
+                            }
+                        }
+                        $this->getUser($params)->increment('credit', $post_data, array('rank' => 3));
                         $this->rank =3;
 //                        $response = \Helper::tocurl(env('MD_USER_API_URL'). '/v2/modify-bean', $post_data,1);
 //                        if(array_key_exists('status', $response))// 服务器返回响应状态码,当电话存在时
@@ -168,4 +194,9 @@ trait DoctorRank
         return $this;
     }
 
+
+    public function activity()
+    {
+        
+    }
 }

@@ -230,10 +230,26 @@ class VideoController extends Controller
                     $user_rank = $user['rank'];
                     if(($right_ans>=config('params')['question_num']*0.6) && ($user_rank<3)){
                         //正确率60%以上通过
-                        Doctor::find($user['id'])->increment('rank');//晋升
-                        Doctor::find($user['id'])->increment('setupbyanswer');//答题晋升次数
-                        session(['user_login_session_key.rank'=>$user_rank+1]);
-                        return $this->return_data_format(200, '恭喜您，学员等级升级成功',['rank'=>$user_rank+1]);
+                        //限时活动 ：
+                        //1.学员晋升后，获得1000迈豆（已升级的不管，每晋升一次给1000）
+                        //2.学员晋升后，相应的代表获得迈豆（已升级的不管，晋升合格500，晋升优秀300)
+                        $vol_credit = $user_rank==2?300:500;//推荐人获取的奖励积分
+                        $doc_credit = config('params')['bean_rules']['rank_level'];
+                        if(Carbon::createFromDate(2017,11,30)->gte(Carbon::now())){
+                            $doc_credit = 1000;
+                            //代表获取迈豆
+                            $volunteer = KZKTClass::where('doctor_id',$user['id'])->first()->volunteer;
+                            if($volunteer){
+                                Volunteer::where('id',$volunteer->id)->increment('credit',$vol_credit);
+                            }
+                        }
+                        $doctor = Doctor::find($user['id']);
+                        $doctor->rank +=1;//晋升
+                        $doctor->setupbyanswer +=1;//答题晋升次数
+                        $doctor->credit +=$doc_credit;//晋升奖励迈豆
+                        $doctor->save();
+                        session(['user_login_session_key.rank'=> ($user_rank+1)]);
+                        return $this->return_data_format(200, '恭喜您，学员等级升级成功',['rank'=>($user_rank+1)]);
                     }else{
                         //未达标
                         return $this->return_data_format(200, '晋升失败！请再次尝试');
