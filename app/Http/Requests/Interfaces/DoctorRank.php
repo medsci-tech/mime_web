@@ -195,8 +195,4 @@ trait DoctorRank
     }
 
 
-    public function activity()
-    {
-        
-    }
 }
