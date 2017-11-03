@@ -15,7 +15,8 @@
         "nesbot/carbon": "^1.22",
         "curl/curl": "^1.6",
         "zgldh/qiniu-laravel-storage": "^0.6.5",
-        "simplesoftwareio/simple-qrcode": "^1.5"
+        "simplesoftwareio/simple-qrcode": "^1.5",
+        "genealabs/laravel-caffeine": "~0.2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
