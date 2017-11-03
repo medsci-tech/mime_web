@@ -207,12 +207,18 @@
                 "stretch_patch": true
             };
             /*调用播放器进行播放*/
-            new qcVideo.Player(
+            var player = new qcVideo.Player(
                     /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
                 "id_video_container",
                 option
             );
-            
+
+            function setVolume(e) {
+                var volume = e.target.value;
+                //console.log(volume);
+                player.volume = volume;
+            }
+
             $('.btn_project_sign').click(function () {
                 //showAlertModal('请联系空课志愿者进行报名');
                 window.open("/register","_self");
