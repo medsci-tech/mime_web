@@ -5,6 +5,7 @@ use App\Models\AnswerLog;
 use App\Models\Comment;
 use App\Models\KZKTClass;
 use App\Models\StudyLog;
+use App\Models\Volunteer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\Exercise;
@@ -326,8 +327,8 @@ class VideoController extends Controller
 				'site_id' => $this->site_id,
 				'course_id' => $class_id,
 			];
+            $course = ThyroidClassCourse::find($class_id);
 			if($user){
-				$course = ThyroidClassCourse::find($class_id);
 				$save_data['video_duration'] = $course->video_duration;
 				$save_data['doctor_id'] = $user['id'];
 				StudyLog::create($save_data);
