@@ -193,7 +193,7 @@
 
 
 @section('js')
-    <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
+    <script src="{{asset('airclass/js/html5.js')}}"></script>
     <script type="text/javascript">
         $(function () {
             // 腾讯视频

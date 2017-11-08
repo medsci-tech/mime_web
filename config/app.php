@@ -168,8 +168,7 @@ return [
         zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
         //二维码
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-        //csrf token过期问题
-        GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
+
 
     ],
 
