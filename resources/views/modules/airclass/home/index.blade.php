@@ -193,6 +193,11 @@
 
 
 @section('js')
+    <script LANGUAGE="JavaScript">
+        window.alert = function(str){
+            return ;
+        }
+    </script>
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript">
         $(function () {
