@@ -43,12 +43,12 @@ class UserPublicController extends Controller
             $private = new PrivateStudent();
             $private->name = $data['name'];
             $private->phone = $data['phone'];
-            $private->province = $data['save-province'];
+            /*$private->province = $data['save-province'];
             $private->city = $data['save-city'];
             $private->area = $data['save-area'];
             $private->province_code = $data['province'];
             $private->city_code = $data['city'];
-            $private->area_code = $request->input('area',0);
+            $private->area_code = $request->input('area',0);*/
             $private->hospital = $data['hospital_name'];
             $private->office = $data['office'];
             $private->title = $data['title'];

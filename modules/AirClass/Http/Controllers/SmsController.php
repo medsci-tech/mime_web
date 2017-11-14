@@ -37,7 +37,7 @@ class SmsController extends Controller
                 $res_data = '手机号'.$data['phone'].'的用户，你的密码为：'.$data['password'].'。';break;
             // 报名成功
             case 'apply':
-                $res_data = '欢迎报名甲状腺私教课，病例模板下载链接 http://pan.baidu.com/s/1i5xjHGT';break;
+                $res_data = '恭喜您已成功报名课程，与权威专家面对面线上交流。点击链接http://pan.baidu.com/s/1i5xjHGT，下载病例模板。填写内容后，请发回至邮箱tougao@medsci-tech.com';break;
             default:
                 $res_data = '空的空的空的';break;
         }

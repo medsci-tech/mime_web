@@ -3,11 +3,13 @@
 //定时器
 function time(o,wait) {
     if (wait == 0) {
-        o.removeClass("disabled");
+        o.removeClass("disabled weui-btn_plain-disabled");
+        o.attr('disabled',false);
         o.text("获取验证码");
         wait = 60;
     } else {
-        o.addClass("disabled");
+        o.addClass("disabled weui-btn_plain-disabled");
+        o.attr('disabled',true);
         o.text("重新发送(" + wait + ")");
         wait--;
         setTimeout(function() {
