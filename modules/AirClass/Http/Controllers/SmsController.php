@@ -35,6 +35,9 @@ class SmsController extends Controller
             // 找回密码
             case 'password':
                 $res_data = '手机号'.$data['phone'].'的用户，你的密码为：'.$data['password'].'。';break;
+            // 报名成功
+            case 'apply':
+                $res_data = '欢迎报名甲状腺私教课，病例模板下载链接 http://pan.baidu.com/s/1i5xjHGT';break;
             default:
                 $res_data = '空的空的空的';break;
         }
@@ -65,6 +68,15 @@ class SmsController extends Controller
         return $res;
     }
 
+    /**
+     * 私教课报名成功 发送短信
+     * @param $phone
+     */
+    public function send_apply_link($phone)
+    {
+        $sms_model = $this->sms_model('apply');
+        $this->curl($phone, $sms_model,'私教课');
+    }
     /**
      * 发送手机验证码
      * @param $phone

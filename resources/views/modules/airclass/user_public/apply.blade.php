@@ -184,6 +184,7 @@
             var phone_val = phone_dom.val();
             if(!phone_val){
                 showdialog('请输入手机号');
+                return false;
             }
             if (checkPhone(phone_val)) {
                 // ajax获取验证码
@@ -242,7 +243,7 @@
                         $('#loadingToast').fadeOut(10);
                         $('#mask').fadeOut(10);
                         if(res.code == 200){
-                            location.href = "{{ url('/apply_success') }}";
+                            location.href = "{{ url('/apply_success') }}"+'?phone='+phone_dom.val();
                         }else{
                             showAlertModal(res.msg);
                             return false;

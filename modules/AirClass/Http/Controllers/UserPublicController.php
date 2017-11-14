@@ -64,7 +64,9 @@ class UserPublicController extends Controller
         return view('airclass::user_public.apply',['offices' => $offices]);
     }
 
-    public function apply_success(){
+    public function apply_success(Request $request){
+        $sms = new SmsController();
+        $sms->send_apply_link($request->phone);
         return view('airclass::user_public.applySuccess');
     }
 
