@@ -3,6 +3,7 @@
 use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Office;
+use App\Models\PrivateStudent;
 use App\Models\Recommend;
 use App\Models\Volunteer;
 use App\Models\KZKTClass;
@@ -29,6 +30,42 @@ class UserPublicController extends Controller
             'offices' => $offices,
             'uid'=>$uid
         ]);
+    }
+
+    public function apply(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $sms = new SmsController();
+            $verify = $sms->verify_code($data['phone'],$data['code']);
+            if($verify['code']==422){
+                return response()->json(['code'=>422,'msg'=>'验证码错误']);
+            }
+            $private = new PrivateStudent();
+            $private->name = $data['name'];
+            $private->phone = $data['phone'];
+            $private->province = $data['save-province'];
+            $private->city = $data['save-city'];
+            $private->area = $data['save-area'];
+            $private->province_code = $data['province'];
+            $private->city_code = $data['city'];
+            $private->area_code = $request->input('area',0);
+            $private->hospital = $data['hospital_name'];
+            $private->office = $data['office'];
+            $private->title = $data['title'];
+            $private->email = $data['email'];
+            $res = $private->save();
+            if($res){
+                return response()->json(['code'=>200,'msg'=>'报名成功']);
+            }else{
+                return response()->json(['code'=>422,'msg'=>'报名失败，请稍后再试']);
+            }
+        }
+        $offices = Office::all();
+        return view('airclass::user_public.apply',['offices' => $offices]);
+    }
+
+    public function apply_success(){
+        return view('airclass::user_public.applySuccess');
     }
 
     /**

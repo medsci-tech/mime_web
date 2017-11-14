@@ -1,6 +1,7 @@
 <?php namespace Modules\AirClass\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\PrivateStudent;
 use App\Models\Volunteer;
 use Cache;
 use Illuminate\Http\Request;
@@ -70,7 +71,7 @@ class SmsController extends Controller
      * @param $required ：1，必须有；-1，必须无；0，随意
      * @return array
      */
-    public function send_sms($phone, $required = 0)
+    public function send_sms($phone, $required = 0,$title)
     {
         if($phone){
             $code   = $this->create_code();
@@ -79,13 +80,16 @@ class SmsController extends Controller
             if($required != 0){
                 $user = Doctor::where('phone', $phone)->first();
             }
-            if(($required == 1 && $user) || ($required == -1 && !$user) || $required == 0){
+            if($required != -2){
+                $user = PrivateStudent::where('phone',$phone)->first();
+            }
+            if(($required == 1 && $user) || ($required == -1 && !$user) || ($required == -2 && !$user) || $required == 0){
                 Cache::forget($this->code_prefix . $phone);
                 Cache::add($this->code_prefix . $phone, $code, $this->code_times);
                 $session_res = Cache::get($this->code_prefix . $phone);
                 if($session_res == $code){
                     $sms_model = $this->sms_model('code',['code' => $code]); // 选择验证码模板
-                    $res = $this->curl($phone, $sms_model); // 发送curl请求短信api
+                    $res = $this->curl($phone, $sms_model,$title); // 发送curl请求短信api
                     if(json_decode($res)->error == 0){
                         return ['code' => 200, 'msg'=>'success'];
                     }else{
@@ -95,6 +99,7 @@ class SmsController extends Controller
                     return ['code' => 500, 'msg'=>'service error'];
                 }
             }else if($user){
+                if($required==-2){ return ['code' => 422, 'msg'=>'该手机号已经报名'];}
                 return ['code' => 422, 'msg'=>'手机号已存在'];
             }else{
                 return ['code' => 422, 'msg'=>'手机号不存在'];
@@ -118,14 +123,15 @@ class SmsController extends Controller
         }
         $phone = $request->input('phone');
         $exist = $request->input('exist');
+        $title = $request->input('title','空中课堂');
         $sms = new SmsController();
-        $res = $sms->send_sms($phone, $exist);
+        $res = $sms->send_sms($phone,$exist,$title);
         if($res['code'] == 200){
             return $this->return_data_format(200, '发送成功');
         }else if($res['code'] == 422 || $res['code'] == 444){
             return $this->return_data_format($res['code'], $res['msg']);
         }else{
-            return $this->return_data_format($res['code'], '发送失败');
+            return $this->return_data_format($res['code'], $res['msg']);
         }
     }
 

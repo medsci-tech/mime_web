@@ -17,6 +17,8 @@ class PrivateClassController extends Controller
 		$this->term = config('params')['private_class_term'];
 	}
 
+
+
 	public function index(){
 		$sign_check = $this->private_sign_check();
 		$exists_ids = PrivateClass::select('teacher_id')->get()->toArray();

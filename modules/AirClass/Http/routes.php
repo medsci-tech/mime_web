@@ -30,6 +30,9 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/pwd_recover/post', 'UserPublicController@pwd_recover_post'); // 找回密码请求
 	Route::get('/incrTimes', 'UserPublicController@incrTimes'); // 找回密码请求
 
+	Route::any('/apply', 'UserPublicController@apply'); //
+	Route::any('/apply_success', 'UserPublicController@apply_success'); //
+
 	// 医院
 	Route::post('/hospital/get_lists', 'HospitalController@get_lists'); // 获取医院请求
 
@@ -62,6 +65,7 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	// 私教课报名
 	Route::get('/private_class/index', 'PrivateClassController@index');
 	Route::post('/private_class/sign', 'PrivateClassController@sign');
+
 
 	// test
 //	Route::get('/test', 'UserPublicController@test');
