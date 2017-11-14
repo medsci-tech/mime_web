@@ -92,7 +92,7 @@ class SmsController extends Controller
             if($required != 0){
                 $user = Doctor::where('phone', $phone)->first();
             }
-            if($required != -2){
+            if($required == -2){
                 $user = PrivateStudent::where('phone',$phone)->first();
             }
             if(($required == 1 && $user) || ($required == -1 && !$user) || ($required == -2 && !$user) || $required == 0){
