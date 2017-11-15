@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>报名成功</title>
+    <title>甲状腺私教课</title>
     <style>
         img{
             width:100%;
