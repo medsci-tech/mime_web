@@ -4,29 +4,28 @@
         @endsection
     @section('container')
 
-    <!-- slider -->
-    <div class="slider_container">
-        <div id="slider" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                @for($ol = 0; $ol < $banners->count(); $ol++)
-                    <li data-target="#slider" data-slide-to="{{$ol}}" @if($ol == 0) class="active" @endif></li>
-                @endfor
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                @foreach($banners as $key => $banner)
-                <div class="item @if($key == 0) active @endif">
-                    <img width="100%" src="{{$banner->image_url}}" alt="">
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
     <!-- main body -->
     <div class="main_body">
+        <!-- slider -->
+        <div class="slider_container">
+            <div id="slider" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    @for($ol = 0; $ol < $banners->count(); $ol++)
+                        <li data-target="#slider" data-slide-to="{{$ol}}" @if($ol == 0) class="active" @endif></li>
+                    @endfor
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    @foreach($banners as $key => $banner)
+                        <div class="item @if($key == 0) active @endif">
+                            <img width="100%" src="{{$banner->image_url}}" alt="">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
         <!-- project -->
         <div class="project clearfix">
             <div id="id_video_container" class="project_video pull-left" ></div>
@@ -228,6 +227,16 @@
                 //showAlertModal('请联系空课志愿者进行报名');
                 window.open("/register","_self");
             });
+
+            //banner图片点击显示答题
+            var se_uid = "{{session('user_login_session_key')['id']}}";
+            $('.carousel-inner .active img').click(function(){
+                if(se_uid){
+                    $('#btn_upgrade').click();
+                }else{
+                    $('.navbar-right .btn_login').click();
+                }
+            })
         });
     </script>
 @endsection
