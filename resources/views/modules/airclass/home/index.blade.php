@@ -20,7 +20,7 @@
                 <div class="carousel-inner" role="listbox">
                     @foreach($banners as $key => $banner)
                         <div class="item @if($key == 0) active @endif">
-                            <img width="100%" src="{{$banner->image_url}}" alt="">
+                            <a href="{{ /*strpos($banner->href_url,'http') === 0 ?$banner->href_url : 'http://'.*/$banner->href_url}}"><img width="100%" src="{{$banner->image_url}}" alt=""></a>
                         </div>
                     @endforeach
                 </div>
@@ -229,14 +229,14 @@
             });
 
             //banner图片点击显示答题
-            var se_uid = "{{session('user_login_session_key')['id']}}";
+            /*var se_uid = "{{session('user_login_session_key')['id']}}";
             $('.carousel-inner .active img').click(function(){
                 if(se_uid){
                     $('#btn_upgrade').click();
                 }else{
                     $('.navbar-right .btn_login').click();
                 }
-            })
+            })*/
         });
     </script>
 @endsection
