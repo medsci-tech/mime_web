@@ -157,13 +157,17 @@ var subMsgAjax2 = function (action, data) {
     });
 };
 
-var subLoginAjax = function (action, data) {
+var subLoginAjax = function (action,data) {
+
     $.ajax({
         type: 'post',
         url: action,
         data: data,
         success: function(res){
             if(res.code == 200){
+                if(!res.status){
+                    window.location.href = '/wenjuan';return ;
+                }
                 window.location.href = window.location.href +'?v=' + Math.random();
             }else if(res.code == 444) {
                 showAlertModal(res.msg['phone'][0]);

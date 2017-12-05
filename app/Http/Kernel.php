@@ -15,7 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \GeneaLabs\LaravelCaffeine\Http\Middleware\LaravelCaffeineDripMiddleware::class,
+        // \GeneaLabs\LaravelCaffeine\Http\Middleware\LaravelCaffeineDripMiddleware::class,
     ];
 
     /**

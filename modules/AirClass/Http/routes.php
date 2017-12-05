@@ -67,6 +67,9 @@ Route::group(['domain' => env('AIR_DOMAIN'),'middleware' => 'web', 'prefix' => '
 	Route::post('/private_class/sign', 'PrivateClassController@sign');
 
 
+	Route::any('/wenjuan', 'ActivityController@questionNaire');
+
+
 	// test
 //	Route::get('/test', 'UserPublicController@test');
 });

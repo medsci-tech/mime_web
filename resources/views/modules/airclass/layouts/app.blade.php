@@ -23,6 +23,8 @@
 	@show
 </head>
 <body>
+{{--<iframe src="https://www.wjx.cn/m/18876815.aspx" style="position: absolute;margin: auto;width: 100%;height:auto;top: 0;left: 0;right: 0;z-index:1000;min-height:600px;border: none;overflow-y:hidden;">
+</iframe>--}}
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -99,12 +101,12 @@
 	</div>
 	<!-- /.container-fluid -->
 </nav>
-@if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
+{{--@if(session('user_login_session_key') && session('user_login_session_key')['rank']<3)
 	<img src="{{ asset('airclass/img/upgrade.png') }}" style="position: fixed;bottom:0;right: 0;width: 230px;z-index: 1000;" id="btn_upgrade">
-@endif
+@endif--}}
 
 {{--答题试题 开始--}}
-<div class="questions_modal modal fade" id="upgradeModal" tabindex="-1" role="dialog"
+{{--<div class="questions_modal modal fade" id="upgradeModal" tabindex="-1" role="dialog"
 	 aria-labelledby="successModal" style="overflow: scroll;">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -117,12 +119,12 @@
 			<button type="button" class="btn btn-block btn_ans_modal_confirm">提交</button>
 		</div>
 	</div>
-</div>
+</div>--}}
 {{--答题试题 结束--}}
 
 {{--答题晋升活动 begin--}}
 
-<div class="modal fade" tabindex="-1" role="dialog" id="activity_modal">
+{{--<div class="modal fade" tabindex="-1" role="dialog" id="activity_modal">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<img src="{{ asset('airclass/img/close.jpg') }}" style="max-width: 100%;position: relative;float: right;cursor: pointer;" id="activity_close">
@@ -130,11 +132,12 @@
 			<img src="{{ asset('airclass/img/unlock.png') }}" style="width: 36%;margin-top:-21%;margin-left: 30%;position: relative;display:block;cursor: pointer;" id="activity_img">
 		</div>
 	</div>
-</div>
+</div>--}}
 {{--答题晋升活动 end--}}
 @yield('container')
 
 		<!-- Modal -->
+
 <!-- login modal -->
 <div class="login_modal modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
 	<div class="modal-dialog" role="document">
@@ -247,6 +250,7 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{asset('airclass/js/jquery-1.11.1.min.js')}}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+
 <script src="{{asset('airclass/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('airclass/js/jquery.common.js')}}"></script>
 <!-- video5 -->
@@ -387,8 +391,13 @@
             return false
 		}
     }
+
+
+    /*$('#ctlNext').click(function(){
+	   console.log(1222);
+	});*/
 </script>
-<script>
+{{--<script>
     // 答题
     $(function () {
         var question_action = '{{url('video/answer',['id'=>0])}}';
@@ -441,17 +450,17 @@
 
 	//显示活动告示
 	var key = {{ Redis::get('user:'.Session::get('user_login_session_key')['id'].':activity')?:0}};
-	var rank = {{ Session::get('user_login_session_key')['rank']?:0}};
+    var rank = {{ Session::get('user_login_session_key')['rank']?:0}};
     if(key===1 && rank<3){
         $('#activity_modal').modal('show');
         $.get("{{url('/incrTimes')}}",function(){});
-	}
+    }
     //$('#activity_modal').modal('show');
-	$('#activity_img,#activity_close').click(function(){
+    $('#activity_img,#activity_close').click(function(){
         $('#activity_modal').modal('hide');
-	})
+    })
 
-</script>
+</script>--}}
 @section('js')
 @show
 @section('js_child')

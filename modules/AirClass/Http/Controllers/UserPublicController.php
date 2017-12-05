@@ -251,11 +251,17 @@ class UserPublicController extends Controller
         if($user){
             if (Hash::check($password, $user['password'])) {
                 $save_data = $this->save_session($user);
+                //echo 'wenjuan_'.$user['id'];die;
+                if(\Redis::get('wenjuan_'.$user['id'])){
+                    $status = 1;
+                }else{
+                    $status = 0;
+                }
                 if($remember){
                     $tempCookie = \Cookie::forever($this->user_login_code, $phone);
-                    return \Response::make(['code' => 200, 'msg' => '登陆成功','data' => $save_data])->withCookie($tempCookie);
+                    return \Response::make(['code' => 200, 'msg' => '登陆成功','data' => $save_data,"status"=>$status])->withCookie($tempCookie);
                 }else{
-                    return $this->return_data_format(200,'登陆成功', $save_data);
+                    return \Response::make(['code' => 200, 'msg' => '登陆成功','data' => $save_data,"status"=>$status]);
                 }
             } else {
                 return $this->return_data_format(422, '用户名或密码错误');
