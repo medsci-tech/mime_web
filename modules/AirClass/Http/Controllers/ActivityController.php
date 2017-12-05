@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Airclass\Http\Controllers;
+namespace Modules\AirClass\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\AirClass\Entities\Wenjuan;
