@@ -116,18 +116,18 @@ class HomeController extends Controller
     public function private_class()
     {
         $class_info  = CourseClass::find($this->private_class_id);
-        $sign_count = PrivateClass::where([
-            ['status', '>=', 0], 
-            'term' => config('params')['private_class_term'],
-        ])->count();
+//        $sign_count = PrivateClass::where([
+//            ['status', '>=', 0],
+//            'term' => config('params')['private_class_term'],
+//        ])->count();
 
         // 点击报名提示
         $sign_check = (new PrivateClassController())->private_sign_check();
 
         return view('airclass::home.private_class',[
             'class_info' => $class_info,
-            'sign_count' => $sign_count,
-            'count' => config('params')['private_class_count'],
+            'sign_count' => 33,//$sign_count,
+            'count' => 33,//config('params')['private_class_count'],
             'sign_check' => $sign_check,
         ]);
     }
