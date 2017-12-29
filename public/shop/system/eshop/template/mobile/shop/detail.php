@@ -336,13 +336,20 @@ div.flicking_con a.on{background-position:0 -9px}
         <div class="like" >
             <i class="fa <%if isfavorite%>fa-star<%else%>fa-star-o<%/if%>" <%if isfavorite==1%>style="color:#f90"<%/if%>></i>
             <br><span>收藏</span>
-        </div><?php }else{?><div class="like" onclick="location.href='<?php  echo create_url('mobile',array('do'=>'shop','act'=>'index','m'=>'eshop'))?>'"> <i class="fa fa-home"></i><br><span>首页</span></div><?php }?>
+        </div>
+     <?php }else{?>
+        <div class="like" onclick="location.href='<?php  echo create_url('mobile',array('do'=>'shop','act'=>'index','m'=>'eshop'))?>'"> <i class="fa fa-home"></i><br><span>首页</span></div>
+     <?php }?>
+    <?php if(time()>strtotime('2017-12-30')){ ?>
+        <div style="line-height: 50px;color:#bbb;text-align: center;font-size: 20px;">积分兑换通道已关闭</div>
+    <?php }else{ ?>
          <%if goods.canaddcart%>
         <div class="cart" onclick="location.href='<?php  echo $this->createMobileUrl('shop/cart')?>'"><i class="fa fa-shopping-cart"></i><br><span>购物车</span>
             <%if cartcount>0%><b><%cartcount%></b><%/if%>
         </div>
         <div class="add" onclick="choose('cart')">加入购物车</div><%/if%>
       <div class="buy" onclick="choose('buy')"  <%if goods.canaddcart%><%else%> style="width:85%"<%/if%>>立即购买</div>
+    <?php } ?>
 
 <%else%>
      <div class="buy" style='width:100%;background:#777'>
@@ -880,7 +887,7 @@ div.flicking_con a.on{background-position:0 -9px}
 						
                          var specselected  = '';
                  if( action=='cart'){
-		    
+
 			 $('.good_choose_layer').fadeIn(200);
 							 $('.good_choose_layer').unbind('click').click(function(){
 								   closechoose();

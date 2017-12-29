@@ -24,7 +24,7 @@
         </div>
         <div class="apply">
             <div class="form-group col-xs-7">
-                <button id="sign_btn" class="btn btn-primary form-control">我要报名</button>
+                <button id="sign_btn" class="btn btn-primary form-control" disabled>我要报名</button>
             </div>
             <div class="form-group col-xs-5">
                 <a href="{{url('private_class/default')}}" class="btn btn-default form-control">下载病例模板</a>

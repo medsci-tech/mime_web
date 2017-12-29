@@ -62,7 +62,7 @@ function tocurl($url, $data,$method =0){
 					}
 					$verify =strtolower($verify);
                     $url = 'http://'.$_SERVER['HTTP_HOST'].'/sms/check-code';
-                    $result = tocurl('http://airclass.mime.org.cn/sms/check-code', array('phone'=>$mobile,'code'=>$verify),$method =1);
+                    $result = tocurl($url, array('phone'=>$mobile,'code'=>$verify),$method =1);
 
                     if($result['code']!==200)
 					{
