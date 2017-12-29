@@ -25,7 +25,7 @@
                                 <p class="introduction">{{ str_limit($val->comment, $limit = 100, $end = '...') }}</p>
                                 <p class="price_and_persons">
                                     {{--<span class="price">&yen;198.00</span>--}}
-                                    @if($val->course_type == 2)<span class="class_list_lock_icon pull-right"></span>@endif
+{{--                                    @if($val->course_type == 2)<span class="class_list_lock_icon pull-right"></span>@endif--}}
                                     <span class="persons pull-right">{{ $val->play_count }}人在学</span>
                                 </p>
                             </div>
