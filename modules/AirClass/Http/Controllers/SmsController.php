@@ -59,7 +59,7 @@ class SmsController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_USERPWD, 'api:key-' . env('SMS_KEY'));
+        curl_setopt($ch, CURLOPT_USERPWD, 'api:key-' . env('LUOSIMAO_API_KEY'));
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
             ['mobile' => $phone, 'message' => $message . '【'.$inscribed.'】']);
