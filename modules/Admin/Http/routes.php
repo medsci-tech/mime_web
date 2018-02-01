@@ -67,5 +67,6 @@ Route::group(['domain' =>env('ADMIN_DOMAIN'),'middleware' => ['web','auth'], 'pr
 
     Route::get('/private-class', 'PrivateClassController@index');
     Route::post('/private-class/save', 'PrivateClassController@save');
+    Route::get('/getHospital','ExcelController@getHospital');
 
 });

@@ -3,6 +3,7 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Hospital;
 use Illuminate\Support\Facades\DB;
 use Modules\Admin\Entities\PlayLog;
 use Modules\Admin\Entities\Student;
@@ -376,4 +377,18 @@ class ExcelController extends Controller
         }
         dd(json_encode($array));
     }
+
+
+    function getHospital(){
+    	$hospitals = Hospital::select('province','city','country','hospital_level','hospital')->get();
+    	$str = '';
+    	foreach ($hospitals as $hos){
+    		if($hos->province == $hos->city)
+				$str .= $hos->province . '		' . $hos->country .'		' . $hos->hospital . '		'. $hos->hospital_level . "\r\n";
+			else
+				$str .= $hos->province . '		' . $hos->city .'		' . $hos->hospital . '		'. $hos->hospital_level . "\r\n";
+		}
+		echo $str;
+		file_put_contents('hospital.txt',$str);
+	}
 }
