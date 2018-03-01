@@ -124,7 +124,20 @@
 
 {{--答题晋升活动 begin--}}
 
-{{--<div class="modal fade" tabindex="-1" role="dialog" id="activity_modal">
+<div class="modal fade" tabindex="-1" role="dialog" id="activity_modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+			<div class="modal-body">
+			<img src="{{ asset('airclass/img/close.jpg') }}" style="max-width: 100%;position: relative;float: right;cursor: pointer;" id="activity_close">
+			<img src="{{ asset('airclass/img/20180301210516-kk.png') }}" style="max-width: 90%;">
+			{{--<img src="{{ asset('airclass/img/unlock.png') }}" style="width: 36%;margin-top:-21%;margin-left: 30%;position: relative;display:block;cursor: pointer;" id="activity_img">--}}
+			<a class="btn btn-lg btn-primary" href="http://wechat.mime.org.cn/register?from=2" style="position: absolute;bottom:10%;left:37%;">立即跳转</a>
+			</div>
+		</div>
+	</div>
+</div>
+{{--<div class="modal show" tabindex="-1" role="dialog" id="activity_modal">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<img src="{{ asset('airclass/img/close.jpg') }}" style="max-width: 100%;position: relative;float: right;cursor: pointer;" id="activity_close">
@@ -392,6 +405,16 @@
 		}
     }
 
+    var key = {{ Redis::get('user:'.Session::get('user_login_session_key')['id'].':mime')?:0}};
+
+    if(key===1 ){
+        $('#activity_modal').modal('show');
+        $.get("{{url('/incrTimes')}}",function(){});
+    }
+    //$('#activity_modal').modal('show');
+    $('#activity_img,#activity_close').click(function(){
+        $('#activity_modal').modal('hide');
+    })
 
     /*$('#ctlNext').click(function(){
 	   console.log(1222);

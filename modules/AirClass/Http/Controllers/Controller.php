@@ -102,15 +102,22 @@ class Controller extends BaseController
         }
         \Session::set($this->user_login_session_key, $save_data);
         //记录用户登入显示活动图片
-        $key = 'user:'.$user->id.':activity';
-        $timestamp = strtotime('2017-11-01');
+//        $key = 'user:'.$user->id.':activity';
+        $key = 'user:'.$user->id.':mime';
+        /*$timestamp = strtotime('2017-11-01');
         if(time()<$timestamp){//活动未结束
             if(!Redis::exists($key)){
                 Redis::set($key,1);
             }else{
                 Redis::incr($key);
             }
-        }
+        }*/
+		Redis::set($key,1);
+		/*if(!Redis::exists($key)){
+			Redis::set($key,1);
+		}else{
+			Redis::set($key,0);
+		}*/
         return $save_data;
     }
 

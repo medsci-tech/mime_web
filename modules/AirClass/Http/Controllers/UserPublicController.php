@@ -362,8 +362,8 @@ class UserPublicController extends Controller
 //       dd($res);
    }
    public function incrTimes(){
-       $key = 'user:'.$this->user['id'].':activity';
-       Redis::incr($key);
+       $key = 'user:'.$this->user['id'].':mime';
+       Redis::set($key,0);
        echo 1;exit;
    }
 
