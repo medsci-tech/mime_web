@@ -3,7 +3,19 @@
         <link rel="stylesheet" type="text/css" href="{{asset('airclass/css/index.css')}}" />
         @endsection
     @section('container')
+        <div class="modal fade" tabindex="-1" role="dialog" id="activity_modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
 
+                    <div class="modal-body">
+                        <img src="{{ asset('airclass/img/close.jpg') }}" style="max-width: 100%;position: relative;float: right;cursor: pointer;" id="activity_close">
+                        <img src="{{ asset('airclass/img/20180301210516-kk.png') }}" style="max-width: 90%;">
+                        {{--<img src="{{ asset('airclass/img/unlock.png') }}" style="width: 36%;margin-top:-21%;margin-left: 30%;position: relative;display:block;cursor: pointer;" id="activity_img">--}}
+                        <a class="btn btn-lg btn-primary" href="http://wechat.mime.org.cn/register?from=2" style="position: absolute;bottom:10%;left:37%;">立即登入</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- main body -->
     <div class="main_body">
         <!-- slider -->
@@ -200,6 +212,10 @@
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
     <script type="text/javascript">
         $(function () {
+            $('#activity_modal').modal('show');
+            $('#activity_close').click(function(){
+                $('#activity_modal').modal('hide');
+            })
             // 腾讯视频
             var option = {
                 "auto_play": "0",
